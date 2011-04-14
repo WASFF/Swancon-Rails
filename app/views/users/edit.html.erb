@@ -1,0 +1,10 @@
+<% if @user == current_user %>
+<h1>Editing Profile</h1>
+<% else %>
+<h1>Editing Member</h1>
+<% end %>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @user %> |
+<%= link_to 'Back', users_path %>

@@ -1,0 +1,31 @@
+h2. Swancon Rails websystem
+
+For doing swancon website stuffs.
+
+Membership Details:
+	Receipt Number
+	Name
+	Address
+	Name on Badge
+	Phone Number
+	Email (send temp password to email!)
+	Email opt-in
+	Membership Type (Concession/Full)
+		- Eventually, Day etc.
+		- Group Bookings
+		- Supporting? With provision to convert.
+	Disclaimer
+	Payment?
+
+T-Shirt stuffs! 
+	Name (can be linked to above)
+	Style
+	Size
+	Payment?
+	
+Ticketing for Events
+	Event Name
+	User
+	Payment?
+	
+We need a Printer!
