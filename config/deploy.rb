@@ -9,7 +9,7 @@ set :default_environment, {
 }
 
 set :application, "Swancon Rails App"
-set :repository,  "git@github.com:lordmortis/Swancon-Rails.git"
+set :repository,  "git://github.com/lordmortis/Swancon-Rails.git"
 set :user, 'wasff'
 set :default_shell, 'bash'
 set :rake, 'rake'

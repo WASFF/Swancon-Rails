@@ -49,4 +49,14 @@ class User < ActiveRecord::Base
 		end
 	end
 
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["user_hash"]
+        user.email = data["email"]
+      elsif data = session["devise.twitter_data"] && session["devise.twitter_data"]["extra"]["user_hash"]
+				user.email = data["email"]
+			end
+    end
+  end
+
 end
