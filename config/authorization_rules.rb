@@ -14,6 +14,7 @@ authorization do
 
 	role :committee do
 		includes :member
+		has_permission_on :index, :to => :content_admin
 		has_permission_on [:users], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
 		has_permission_on [:content_blocks], :to => [:new, :index, :create, :edit, :update, :show, :preview]
 		has_permission_on [:content_tags], :to => [:new, :index, :create, :edit, :update, :show]

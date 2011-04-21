@@ -15,6 +15,10 @@
   <% permitted_to? :index, :users do -%>
   <%= link_to("Administer Users", users_path) %><br/>
   <% end %>
+  
+  <% permitted_to? :index, :content_admin do %>
+  <%= link_to("Administer Content", :controller => :index, :action => :content_admin) %>
+  <% end %>
 
   <%= link_to("Log out", destroy_user_session_path) %>
 <% else %>
