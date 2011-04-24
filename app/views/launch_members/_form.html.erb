@@ -1,0 +1,68 @@
+<%= form_for(@launch_member) do |f| %>
+  <% if @launch_member.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@launch_member.errors.count, "error") %> prohibited this launch_member from being saved:</h2>
+
+      <ul>
+      <% @launch_member.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<strong>Bold</strong> fields are required<br/>
+
+  <div class="field">
+    <strong><%= f.label :name_first, "First Name" %></strong><br />
+    <%= f.text_field :name_first %>
+  </div>
+  <div class="field">
+    <%= f.label :name_last, "Last Name" %><br />
+    <%= f.text_field :name_last %>
+  </div>
+  <div class="field">
+    <%= f.label :name_badge, "Badge Name" %><br />
+    <%= f.text_field :name_badge %>
+  </div>
+  <div class="field">
+    <%= f.label :phoneno, "Phone Number"%><br />
+    <%= f.text_field :phoneno %>
+  </div>
+	Address:
+  <div class="field">
+    <strong><%= f.label :address_street1, "Line 1" %></strong><br />
+    <%= f.text_field :address_street1 %>
+  </div>
+  <div class="field">
+    <%= f.label :address_street2, "Line 2" %><br />
+    <%= f.text_field :address_street2 %>
+  </div>
+  <div class="field">
+    <strong><%= f.label :address_street3, "Suburb/City" %></strong><br />
+    <%= f.text_field :address_street3 %>
+  </div>
+  <div class="field">
+    <strong><%= f.label :address_postcode, "Postcode" %></strong><br />
+    <%= f.text_field :address_postcode %>
+  </div>
+  <div class="field">
+    <strong><%= f.label :address_state, "State" %></strong><br />
+    <%= f.text_field :address_state %>
+  </div>
+  <div class="field">
+    <strong><%= f.label :address_country, "Country" %></strong><br />
+    <%= f.text_field :address_country %>
+  </div>
+  <div class="field">
+    <%= f.label :email, "Email Address" %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :email_optin, "Send me Email" %><br />
+    <%= f.check_box :email_optin %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

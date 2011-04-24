@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @ticket_set.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_ticket_set_path(@ticket_set) %> |
+<%= link_to 'Back', ticket_sets_path %>

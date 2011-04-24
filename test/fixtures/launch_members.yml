@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  reciept_number: 1
+  name_first: MyString
+  name_last: MyString
+  name_badge: MyString
+  phoneno: MyString
+  email: MyString
+  email_optin: false
+  disclaimer_signed: false
+
+two:
+  reciept_number: 1
+  name_first: MyString
+  name_last: MyString
+  name_badge: MyString
+  phoneno: MyString
+  email: MyString
+  email_optin: false
+  disclaimer_signed: false

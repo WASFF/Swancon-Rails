@@ -1,0 +1,36 @@
+<h1>Listing launch_members</h1>
+
+<table>
+  <tr>
+    <th>Name first</th>
+    <th>Name last</th>
+    <th>Name badge</th>
+    <th>Phoneno</th>
+    <th>Email</th>
+    <th>Email optin</th>
+    <th>Disclaimer signed</th>
+		<th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @launch_members.each do |launch_member| %>
+  <tr>
+		<td><%= launch_member.name_first %></td>
+		<td><%= launch_member.name_last %></td>
+		<td><%= launch_member.name_badge %></td>
+		<td><%= launch_member.phoneno %></td>
+		<td><%= launch_member.email %></td>
+		<td><%= launch_member.email_optin %></td>
+		<td><%= launch_member.disclaimer_signed %></td>
+		<td><%= link_to 'Show', launch_member %></td>
+		<td><%= link_to 'Edit', edit_launch_member_path(launch_member) %></td>
+		<td><%= link_to 'Destroy', launch_member, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Launch member', new_launch_member_path %>

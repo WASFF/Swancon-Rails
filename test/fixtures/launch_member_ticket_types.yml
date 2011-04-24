@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  launch_member_id: 1
+  ticket_type_id: 1
+  ticket_payment_id: 1
+
+two:
+  launch_member_id: 1
+  ticket_type_id: 1
+  ticket_payment_id: 1

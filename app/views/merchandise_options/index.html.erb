@@ -1,0 +1,27 @@
+<h1>Listing merchandise_options</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Merchandise type</th>
+    <th>Option set number</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @merchandise_options.each do |merchandise_option| %>
+  <tr>
+    <td><%= merchandise_option.name %></td>
+    <td><%= merchandise_option.merchandise_type_id %></td>
+    <td><%= merchandise_option.option_set_number %></td>
+    <td><%= link_to 'Show', merchandise_option %></td>
+    <td><%= link_to 'Edit', edit_merchandise_option_path(merchandise_option) %></td>
+    <td><%= link_to 'Destroy', merchandise_option, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Merchandise option', new_merchandise_option_path %>

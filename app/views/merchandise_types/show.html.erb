@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @merchandise_type.name %>
+</p>
+
+<p>
+  <b>Merchandise set:</b>
+  <%= @merchandise_type.merchandise_set_id %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @merchandise_type.price %>
+</p>
+
+<p>
+	<b>Options</b><br/>
+	<% @merchandise_type.option_sets.all.each do |set| -%>
+	<% if @merchandise_type.options.where(:merchandise_option_set_id => set.id).count > 0 %>
+	<%= set.name %><br/>
+	<blockquote>
+	<% @merchandise_type.options.where(:merchandise_option_set_id => set.id).all.each do |option| %>
+	<%= option.name %> | <%= link_to 'Edit', edit_merchandise_type_merchandise_option_path(@merchandise_type, option) %><br/>
+	<% end %>
+	</blockquote>
+	<% end %>
+	<% end -%>
+</p>
+
+<%= link_to 'Add Option', new_merchandise_type_merchandise_option_path(@merchandise_type) %><br/>
+
+<%= link_to 'Edit', edit_merchandise_type_path(@merchandise_type) %> |
+<%= link_to 'Back', merchandise_types_path %>

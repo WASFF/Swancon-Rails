@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  integer: 
+  float: 
+  boolean: 
+  string: 
+
+two:
+  integer: 
+  float: 
+  boolean: 
+  string: 

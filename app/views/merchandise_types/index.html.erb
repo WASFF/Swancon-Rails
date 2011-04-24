@@ -1,0 +1,27 @@
+<h1>Listing merchandise_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Merchandise set</th>
+    <th>Price</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @merchandise_types.each do |merchandise_type| %>
+  <tr>
+    <td><%= merchandise_type.name %></td>
+    <td><%= merchandise_type.merchandise_set_id %></td>
+    <td><%= merchandise_type.price %></td>
+    <td><%= link_to 'Show', merchandise_type %></td>
+    <td><%= link_to 'Edit', edit_merchandise_type_path(merchandise_type) %></td>
+    <td><%= link_to 'Destroy', merchandise_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Merchandise type', new_merchandise_type_path %>

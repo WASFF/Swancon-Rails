@@ -1,0 +1,23 @@
+<h1>Listing ticket_sets</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ticket_sets.each do |ticket_set| %>
+  <tr>
+    <td><%= ticket_set.name %></td>
+    <td><%= link_to 'Show', ticket_set %></td>
+    <td><%= link_to 'Edit', edit_ticket_set_path(ticket_set) %></td>
+    <td><%= link_to 'Destroy', ticket_set, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ticket set', new_ticket_set_path %>

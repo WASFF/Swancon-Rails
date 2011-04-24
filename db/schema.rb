@@ -54,11 +54,116 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.datetime "updated_at"
   end
 
+  create_table "launch_member_merchandise_types", :force => true do |t|
+    t.integer  "launch_member_id"
+    t.integer  "merchandise_type_id"
+    t.string   "merchandise_options_hash"
+    t.integer  "payment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "launch_member_ticket_types", :force => true do |t|
+    t.integer  "launch_member_id"
+    t.integer  "ticket_type_id"
+    t.integer  "payment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "launch_members", :force => true do |t|
+    t.string   "name_first",                           :null => false
+    t.string   "name_last"
+    t.string   "name_badge"
+    t.string   "address_street1",                      :null => false
+    t.string   "address_street2"
+    t.string   "address_street3",                      :null => false
+    t.string   "address_postcode",                     :null => false
+    t.string   "address_state",                        :null => false
+    t.string   "address_country",                      :null => false
+    t.string   "phoneno"
+    t.string   "email"
+    t.boolean  "email_optin",       :default => false, :null => false
+    t.boolean  "disclaimer_signed", :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "merchandise_option_sets", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "merchandise_options", :force => true do |t|
+    t.string   "name"
+    t.integer  "merchandise_type_id"
+    t.integer  "merchandise_option_set_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "merchandise_sets", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "merchandise_types", :force => true do |t|
+    t.string   "name"
+    t.integer  "merchandise_set_id"
+    t.float    "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payment_types", :force => true do |t|
+    t.string   "name"
+    t.boolean  "requires_reconciliation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payments", :force => true do |t|
+    t.integer  "payment_type_id"
+    t.float    "amount"
+    t.boolean  "reconciled"
+    t.string   "verification_string"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "ticket_sets", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ticket_types", :force => true do |t|
+    t.string   "name"
+    t.float    "price"
+    t.integer  "ticket_set_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_omni_auths", :force => true do |t|
+    t.string   "authtype"
+    t.integer  "idvalue"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_omni_auths", ["authtype"], :name => "index_user_omni_auths_on_authtype"
+  add_index "user_omni_auths", ["idvalue"], :name => "index_user_omni_auths_on_idvalue"
+  add_index "user_omni_auths", ["user_id"], :name => "index_user_omni_auths_on_user_id"
 
   create_table "user_roles", :force => true do |t|
     t.integer  "user_id"

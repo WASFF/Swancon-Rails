@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  merchandise_type_id: 1
+  option_set_number: 1
+
+two:
+  name: MyString
+  merchandise_type_id: 1
+  option_set_number: 1

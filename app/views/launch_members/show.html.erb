@@ -1,0 +1,86 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name first:</b>
+  <%= @launch_member.name_first %>
+</p>
+
+<p>
+  <b>Name last:</b>
+  <%= @launch_member.name_last %>
+</p>
+
+<p>
+  <b>Name badge:</b>
+  <%= @launch_member.name_badge %>
+</p>
+
+<p>
+  <b>Phoneno:</b>
+  <%= @launch_member.phoneno %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @launch_member.email %>
+</p>
+
+<p>
+  <b>Email optin:</b>
+  <%= @launch_member.email_optin %>
+</p>
+
+<p>
+  <b>Disclaimer signed:</b>
+  <%= @launch_member.disclaimer_signed %>
+</p>
+
+<% if @launch_member.launch_member_merchandise_types.count > 0 -%>
+Merchandise:
+<blockquote>
+<% @launch_member.launch_member_merchandise_types.all.each do |lmmt| -%>	
+<%= lmmt.merchandise_type.name -%> - Options: <% lmmt.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %><br/>
+<% end %>
+</blockquote>
+<% end -%>
+
+<% if @launch_member.launch_member_ticket_types.count > 0 -%>
+Tickets:
+<blockquote>
+<% @launch_member.launch_member_ticket_types.all.each do |lmtt| -%>	
+<%= lmtt.ticket_type.name %> - Paid Via: <%= lmtt.payment.type.name %><br/>
+<% end %>
+</blockquote>
+<% end -%>
+
+<%= form_for(@launch_member, :url => purchase_launch_member_url, :method => :put) do |f| %>
+Merchandise<br/>
+<% MerchandiseSet.all.each do |set| %>
+<%= set.name %> - 
+<blockquote>
+<% set.merchandise_types.all.each do |type| %>
+<%= type.name %>
+<% type.option_sets.all.each do |set| -%>
+<% if type.options.where(:merchandise_option_set_id => set.id).count > 0 %>
+<%= set.name %>: <%= select("merchandise_type[#{type.id}]", "option[#{set.id}]", type.options.where(:merchandise_option_set_id => set.id).all.collect {|item| [item.name, item.id]}) %>
+<% end %>
+<% end %>
+
+ - <%= BigDecimal.new(type.price.to_s).round(2) -%> <%= check_box_tag("buy_merchandise_type[#{type.id}]") %>
+<% end %>
+</blockquote>
+<% end %>
+
+Tickets:
+<blockquote>
+<% @launch_member.purchasable_tickets.all.each do |type| %>
+<%= type.ticket_set.name %> - <%= type.name %> - <%= BigDecimal.new(type.price.to_s).round(2) %> <%= check_box_tag("buy_ticket_type[#{type.id}]", true) %><br/>
+<% end %>
+</blockquote>
+
+<%= select("payment_type", "id", PaymentType.all.collect {|item| [item.name, item.id]}) %>
+<%= f.submit("Buy", :confirm => "Ensure the values on the page are correct and you have calculated the correct value!") %>
+<% end -%>
+
+<%= link_to 'Edit', edit_launch_member_path(@launch_member) %> |
+<%= link_to 'Back', launch_members_path %>

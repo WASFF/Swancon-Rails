@@ -39,11 +39,12 @@ class User < ActiveRecord::Base
 		if user = User.find_by_omniauth("facebook",data["id"].to_i)
 			user
 		else # Create an user with a stub password. 
-			user = User.create(:username => data["username"], :email => data["email"], :password => Devise.friendly_token[0,20]) 
+			user = User.new(:username => data["username"], :email => data["email"], :password => Devise.friendly_token[0,20])
+			user.skip_confirmation!
 			user.confirm!
 			user.save
 
-			temp = UserOmniAuth.create!(:authtype => "facebook", :idvalue => data["id"].to_i, :user => user)			
+			temp = UserOmniAuth.create!(:authtype => "facebook", :idvalue => data["id"].to_i, :user_id => user.id)			
 			
 			user
 		end
@@ -54,11 +55,16 @@ class User < ActiveRecord::Base
 		if user = User.find_by_omniauth("twitter",data["id"].to_i)
 			user
 		else # Create an user with a stub password. 
-			user = User.create(:username => data["screen_name"], :email => "#{data["screen_name"]}@twitter.com", :password => Devise.friendly_token[0,20]) 
+			user = User.new
+			user.username = data["screen_name"]
+			user.email = "#{data["screen_name"]}@twitter.com"
+			user.password = Devise.friendly_token[0,20]
+			user.password_confirmation = user.password
+			user.skip_confirmation!
 			user.confirm!
 			user.save
 			
-			temp = UserOmniAuth.create!(:authtype => "twitter", :idvalue => data["id"].to_i, :user => user)
+			temp = UserOmniAuth.create!(:authtype => "twitter", :idvalue => data["id"].to_i, :user_id => user.id)
 			
 			user
 		end

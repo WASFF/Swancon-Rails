@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @ticket_type.name %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @ticket_type.price %>
+</p>
+
+<p>
+  <b>Ticket set:</b>
+  <%= @ticket_type.ticket_set_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_ticket_type_path(@ticket_type) %> |
+<%= link_to 'Back', ticket_types_path %>
