@@ -1,0 +1,17 @@
+<h1>Listing payments</h1>
+
+<table>
+  <tr>
+    <th>Reciept No.</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @payments.each do |payment| %>
+  <tr>
+    <td>DOOMCON-<%= payment.id %></td>
+    <td><%= link_to 'Show', payment %></td>
+  </tr>
+<% end %>
+</table>

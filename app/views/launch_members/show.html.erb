@@ -63,15 +63,6 @@
 
 
 <h2>New Purchase</h2>
-<% if @launch_member.launch_member_ticket_types.count > 0 -%>
-Tickets:
-<blockquote>
-<% @launch_member.launch_member_ticket_types.all.each do |lmtt| -%>	
-Reciept: DOOMCON-<%= lmtt.payment.id %> - <%= lmtt.ticket_type.name %> - Paid Via: <%= lmtt.payment.type.name %><br/>
-<% end %>
-</blockquote>
-<% end -%>
-
 <%= form_for(@launch_member, :url => purchase_launch_member_url, :method => :put) do |f| %>
 Merchandise<br/>
 <% MerchandiseSet.all.each do |set| %>

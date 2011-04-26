@@ -8,6 +8,8 @@ DoomCon::Application.routes.draw do
 
   resources :merchandise_sets
 
+	resources :payments
+
   resources :payment_types
 
   resources :ticket_sets

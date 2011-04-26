@@ -15,6 +15,16 @@
   <%= @ticket_type.ticket_set_id %>
 </p>
 
+<p>
+	<b>Orders</b>
+	<% order = 1 %>
+	<blockquote>
+	<% @ticket_type.launch_member_ticket_types.each do |lmtt| %>
+	<%= order %>. <%= lmtt.launch_member.name %><br/>
+	<% order += 1%>
+	<% end %>
+	</blockquote>
+</p>
 
 <%= link_to 'Edit', edit_ticket_type_path(@ticket_type) %> |
 <%= link_to 'Back', ticket_types_path %>

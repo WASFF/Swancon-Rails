@@ -29,6 +29,17 @@
 	<% end -%>
 </p>
 
+<p>
+	<b>Orders</b>
+	<% order = 1 %>
+	<blockquote>
+	<% @merchandise_type.launch_member_merchandise_types.each do |lmmt| %>
+	<%= order %>. <%= lmmt.launch_member.name %><br/>
+	<% order += 1%>
+	<% end %>
+	</blockquote>
+</p>
+
 <%= link_to 'Add Option', new_merchandise_type_merchandise_option_path(@merchandise_type) %><br/>
 
 <%= link_to 'Edit', edit_merchandise_type_path(@merchandise_type) %> |

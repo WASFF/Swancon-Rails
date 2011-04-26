@@ -16,7 +16,7 @@ authorization do
 		includes :member
 		has_permission_on :index, :to => :content_admin
 		has_permission_on [:launch_members], :to => [:new, :index, :create, :edit, :update, :show, :destroy, :purchase, :viewpurchase]
-		has_permission_on [:ticket_sets, :ticket_types, :payment_types, :merchandise_sets, :merchandise_types],
+		has_permission_on [:ticket_sets, :ticket_types, :payment_types, :merchandise_sets, :merchandise_types, :payments],
 			:to => [:new, :index, :create, :edit, :update, :show, :destroy]
 		has_permission_on [:users], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
 		has_permission_on [:content_blocks], :to => [:new, :index, :create, :edit, :update, :show, :preview]
