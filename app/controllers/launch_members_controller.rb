@@ -129,4 +129,20 @@ class LaunchMembersController < ApplicationController
 		
 		@payment = payment
 	end
+	
+	def viewpurchase
+		@launch_member = LaunchMember.where(:id => params[:id]).first
+		if @launch_member == nil
+			redirect_to(:action => "index")
+			return
+		end
+		
+		@payment = Payment.where(:id => params[:payment_id]).first
+		if @payment == nil
+			redirect_to(@launch_member)
+			return
+		end
+		
+		render :action => "purchase"
+	end
 end

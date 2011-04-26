@@ -25,14 +25,21 @@ class LaunchMember < ActiveRecord::Base
 		end
 	end
 
-
+	def payments
+		ids = launch_member_ticket_types.collect {|item| item.payment_id}
+		ids.concat(launch_member_merchandise_types.collect {|item| item.payment_id})
+		ids.uniq!
 		
-	def payment_type_id
-		nil
+		paymentarel = Payment.arel_table
+		Payment.where(paymentarel[:id].in(ids))
 	end
-	
+		
 	def name
-		"#{name_first} #{name_last}"
+		if name_badge == nil
+			"#{name_first} #{name_last}"
+		else
+			name_badge
+		end
 	end
 	
 	def purchasable_tickets

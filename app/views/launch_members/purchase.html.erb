@@ -31,12 +31,13 @@ RECIEPT NUMBER: DOOMCON-<%= @payment.id %><br/>
 </p>
 
 <table width="100%" border="1">
-	<tr><th>Description</th><th width="10%">Price</th>
+	<tr><th>Description</th><th width="10%">For</th><th width="5%">Price</th>
 <% if @launch_member.launch_member_merchandise_types.count > 0 -%>
 <% @launch_member.launch_member_merchandise_types.all.each do |lmmt| -%>	
 <% if lmmt.payment == @payment %>
 <tr>
 	<td><%= lmmt.merchandise_type.name -%> - Options: <% lmmt.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %></td>
+	<td><%= @launch_member.name %></td>
 	<td><%= lmmt.merchandise_type.price %></td>
 </tr>
 <% end %>
@@ -55,10 +56,10 @@ RECIEPT NUMBER: DOOMCON-<%= @payment.id %><br/>
 <% end %>
 <% end %>
 <% end -%>
-</table>
+</table><br/>
 
-Paid Via: <%= @payment.type.name %><br/>
-Total Paid: <%= @payment.amount %>
+<h2>Paid Via: <%= @payment.type.name %></h2>
+<h2>Total Paid: <%= @payment.amount %></h2>
 
 <% if disclaimer %>
 <strong>REQUIRED TO BE COMPLETED BY MEMBER OR PARENT/GUARDIAN IF MEMBER IS UNDER 18</strong><br/>
@@ -77,4 +78,4 @@ I make this declaration AS A DEED, on my own behalf, and on behalf of any Releva
 <h1>Witness full name and address:______________________________________</h1>
 <% end %>
 
-<%= link_to 'Back', launch_members_path %>
+<%= link_to 'Back', @launch_member %>

@@ -35,20 +35,39 @@
   <%= @launch_member.disclaimer_signed %>
 </p>
 
-<% if @launch_member.launch_member_merchandise_types.count > 0 -%>
-Merchandise:
-<blockquote>
-<% @launch_member.launch_member_merchandise_types.all.each do |lmmt| -%>	
-<%= lmmt.merchandise_type.name -%> - Options: <% lmmt.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %><br/>
-<% end %>
-</blockquote>
+<h2>Existing Purchases</h2>
+<% @launch_member.payments.each do |payment|  %>
+<%= link_to "DOOMCON-#{payment.id}", viewpurchase_launch_member_path(@launch_member, :payment_id => payment.id) %><br/>
+<table width="100%" border="1">
+<tr>
+	<th>Description</th>
+	<th width="10%">For</th>
+	<th width="5%">Price</th>
+</tr>
+<% payment.launch_member_merchandise_types.each do |lmmt| -%>
+<tr>
+	<td><%= lmmt.merchandise_type.name -%> - Options: <% lmmt.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %></td>
+	<td><%= lmmt.launch_member.name %></td>
+	<td><%= lmmt.merchandise_type.price %></td>
+</tr>
 <% end -%>
+<% payment.launch_member_ticket_types.each do |lmtt| -%>
+<tr>
+	<td><%= lmtt.ticket_type.name -%></td>
+	<td><%= lmtt.launch_member.name %></td>
+	<td><%= lmtt.ticket_type.price %></td>
+</tr>
+<% end -%>
+</table>
+<% end %>
 
+
+<h2>New Purchase</h2>
 <% if @launch_member.launch_member_ticket_types.count > 0 -%>
 Tickets:
 <blockquote>
 <% @launch_member.launch_member_ticket_types.all.each do |lmtt| -%>	
-<%= lmtt.ticket_type.name %> - Paid Via: <%= lmtt.payment.type.name %><br/>
+Reciept: DOOMCON-<%= lmtt.payment.id %> - <%= lmtt.ticket_type.name %> - Paid Via: <%= lmtt.payment.type.name %><br/>
 <% end %>
 </blockquote>
 <% end -%>
@@ -66,7 +85,7 @@ Merchandise<br/>
 <% end %>
 <% end %>
 
- - <%= BigDecimal.new(type.price.to_s).round(2) -%> <%= check_box_tag("buy_merchandise_type[#{type.id}]") %>
+ - <%= BigDecimal.new(type.price.to_s).round(2) -%> <%= check_box_tag("buy_merchandise_type[#{type.id}]") %><br/>
 <% end %>
 </blockquote>
 <% end %>
