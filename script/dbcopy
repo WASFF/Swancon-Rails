@@ -1,0 +1,3 @@
+#!/bin/sh
+
+scp wasff@clientweb.sektorseven.net:/home/wasff/swanconapp/shared/privateconfig/production.sqlite3 db/development.sqlite3
