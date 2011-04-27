@@ -52,9 +52,8 @@ class User < ActiveRecord::Base
 
 	def self.find_for_twitter_oauth(access_token, signed_in_resource=nil)
 		data = access_token['extra']['user_hash']
-		if user = User.find_by_omniauth("twitter",data["id"].to_i)
-			user
-		else # Create an user with a stub password. 
+		user = User.find_by_omniauth("twitter",data["id"])
+		if user == nil
 			user = User.new
 			user.username = data["screen_name"]
 			user.email = "#{data["screen_name"]}@twitter.com"
@@ -65,9 +64,9 @@ class User < ActiveRecord::Base
 			user.save
 			
 			temp = UserOmniAuth.create!(:authtype => "twitter", :idvalue => data["id"].to_i, :user_id => user.id)
-			
-			user
 		end
+		
+		user
 	end
 
   def self.new_with_session(params, session)
@@ -81,7 +80,8 @@ class User < ActiveRecord::Base
   end
 
 	def self.find_by_omniauth(type, id)
-		omniauth = UserOmniAuth.where(:type => type).where(:id => id).first
+		omniauth = UserOmniAuth.where(:authtype => type).where(:id => id.to_i).first
+		print "Omniauth: #{type}, #{id.to_i}"
 		if omniauth == nil
 			return nil
 		end
