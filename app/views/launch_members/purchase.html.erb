@@ -53,17 +53,18 @@ Last Updated:<%= @payment.updated_at.in_time_zone %>
 <% if lmtt.payment == @payment %>
 <% disclaimer = true %>
 <tr>
-	<td><%= lmtt.ticket_type.name %></td><td><%= lmtt.ticket_type.price %></td>
+	<td><%= lmtt.ticket_type.name %></td><td><%= lmtt.launch_member.name %></td><td><%= lmtt.ticket_type.price %></td>
 </tr>
 <% end %>
 <% end %>
 <% end -%>
+<tr><td></td><td>Total:</td><td><%= @payment.amount %></td></tr>
 </table><br/>
 
-<h2>Paid Via: <%= @payment.type.name %></h2>
-<h2>Total Paid: <%= @payment.amount %></h2>
-
+<h2>Total Paid: <%= @payment.amount %> via <%= @payment.type.name %></h2>
 <% if disclaimer %>
+<br/>
+<br/>
 <strong>REQUIRED TO BE COMPLETED BY MEMBER OR PARENT/GUARDIAN IF MEMBER IS UNDER 18</strong><br/>
 <p>While the WASFF Crew make reasonable efforts to protect your wellbeing whilst attending WASFF Events, they cannot afford to be sued, they accept no liability if you or your property get hurt or damaged when attending a WASFF Event and so you, as the purchaser of a membership, agree to the following conditions of entry to any WASFF Event, on your own behalf, and as the parent or guardian of any minor and on behalf of any other person for whom this ticket is purchased (a “Relevant 3rd Party”), by signing below:</p>
 <ol>
@@ -79,7 +80,7 @@ I make this declaration AS A DEED, on my own behalf, and on behalf of any Releva
 <h1>Witness Signature:______________________________________</h1>	
 <h1>Witness full name and address:______________________________________</h1>
 <% end %>
-
-For any queries regarding this receipt, please email memberships-2012@swancon.com.au
+<br/>
+For any queries regarding this receipt, please email memberships-2012@swancon.com.au<br/>
 
 <%= link_to 'Back', @launch_member %>
