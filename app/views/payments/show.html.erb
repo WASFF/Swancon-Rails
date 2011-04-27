@@ -1,6 +1,6 @@
 RECEIPT: <%= @payment.receipt_number %><br/>
-Issued: <%= @payment.created_at.in_time_zone %><br/>
-Last Updated:<%= @payment.updated_at.in_time_zone %>
+Issued: <%= @payment.created_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
+Last Updated:<%= @payment.updated_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 
 <table width="100%" border="1">
 	<tr><th>Description</th><th width="10%">For</th><th width="5%">Price</th>
