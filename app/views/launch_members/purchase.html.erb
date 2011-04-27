@@ -1,4 +1,6 @@
 RECEIPT: <%= @payment.receipt_number %><br/>
+Issued: <%= @payment.created_at.in_time_zone %><br/>
+Last Updated:<%= @payment.updated_at.in_time_zone %>
 
 <p>
   <b>Name first:</b>
@@ -77,5 +79,7 @@ I make this declaration AS A DEED, on my own behalf, and on behalf of any Releva
 <h1>Witness Signature:______________________________________</h1>	
 <h1>Witness full name and address:______________________________________</h1>
 <% end %>
+
+For any queries regarding this receipt, please email memberships-2012@swancon.com.au
 
 <%= link_to 'Back', @launch_member %>
