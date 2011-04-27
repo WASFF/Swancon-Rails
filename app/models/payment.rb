@@ -3,6 +3,14 @@ class Payment < ActiveRecord::Base
 	has_many :launch_member_merchandise_types
 	has_many :launch_member_ticket_types
 	
+	def receipt_number
+		sprintf "DOOMCON-%05d", id
+	end
+	
+	def receipt
+		sprintf "DOOMCON-%05d", id		
+	end
+	
 	def type
 		payment_type
 	end

@@ -10,7 +10,7 @@
 
 <% @payments.each do |payment| %>
   <tr>
-    <td>DOOMCON-<%= payment.id %></td>
+    <td><%= @payment.receipt_number %></td>
     <td><%= link_to 'Show', payment %></td>
   </tr>
 <% end %>

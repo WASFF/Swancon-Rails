@@ -34,7 +34,7 @@
 	<% order = 1 %>
 	<blockquote>
 	<% @merchandise_type.launch_member_merchandise_types.each do |lmmt| %>
-	<%= order %>. <%= lmmt.launch_member.name %><br/>
+	<%= order %>. <%= lmmt.launch_member.name %> Options: <% lmmt.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %><br/>
 	<% order += 1%>
 	<% end %>
 	</blockquote>

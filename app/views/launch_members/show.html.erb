@@ -37,7 +37,7 @@
 
 <h2>Existing Purchases</h2>
 <% @launch_member.payments.each do |payment|  %>
-<%= link_to "DOOMCON-#{payment.id}", viewpurchase_launch_member_path(@launch_member, :payment_id => payment.id) %><br/>
+<%= link_to payment.receipt_number, viewpurchase_launch_member_path(@launch_member, :payment_id => payment.id) %><br/>
 <table width="100%" border="1">
 <tr>
 	<th>Description</th>
