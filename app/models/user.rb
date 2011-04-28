@@ -43,8 +43,9 @@ class User < ActiveRecord::Base
 	
 	def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
 		data = access_token['extra']['user_hash']
-		if signed_in_recourse == nil
-			user = User.find_by_omniauth("facebook",data["id"].to_i)
+		user = User.find_by_omniauth("facebook",data["id"].to_i)
+		if signed_in_resource == nil
+
 			if user == nil
 				username = data["username"]
 				email = data["email"]
@@ -65,14 +66,23 @@ class User < ActiveRecord::Base
 		
 			user
 		else
-
+			if user == signed_in_resource
+				user
+			elsif user == nil
+				UserOmniAuth.create!(:authtype => "facebook", :idvalue => data["id"].to_i, :user_id => user.id)
+				user
+			else
+				# ERROR - already associated with a different account!?
+				logger.error("Facebook ID: #{data["id"].to_i} associated with User ID #{user.id}")
+				nil
+			end
 		end
 	end
 
 	def self.find_for_twitter_oauth(access_token, signed_in_resource=nil)
 		data = access_token['extra']['user_hash']
+		user = User.find_by_omniauth("twitter",data["id"])
 		if signed_in_resource == nil
-			user = User.find_by_omniauth("twitter",data["id"])
 			if user == nil
 				username = data["screen_name"]
 				email = "#{data["screen_name"]}@twitter.com"
@@ -95,7 +105,16 @@ class User < ActiveRecord::Base
 		
 			user
 		else
-			
+			if user == signed_in_resource
+				user
+			elsif user == nil
+				UserOmniAuth.create!(:authtype => "facebook", :idvalue => data["id"].to_i, :user_id => user.id)
+				user
+			else
+				# ERROR - already associated with a different account!?
+				logger.error("Facebook ID: #{data["id"].to_i} associated with User ID #{user.id}")
+				nil
+			end
 		end
 	end
 
