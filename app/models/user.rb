@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
 			if user == signed_in_resource
 				user
 			elsif user == nil
-				UserOmniAuth.create!(:authtype => "facebook", :idvalue => data["id"].to_i, :user_id => user.id)
+				UserOmniAuth.create!(:authtype => "facebook", :idvalue => data["id"].to_i, :user_id => signed_in_resource.id)
 				user
 			else
 				# ERROR - already associated with a different account!?
@@ -108,7 +108,7 @@ class User < ActiveRecord::Base
 			if user == signed_in_resource
 				user
 			elsif user == nil
-				UserOmniAuth.create!(:authtype => "facebook", :idvalue => data["id"].to_i, :user_id => user.id)
+				UserOmniAuth.create!(:authtype => "twitter", :idvalue => data["id"].to_i, :user_id => signed_in_resource.id)
 				user
 			else
 				# ERROR - already associated with a different account!?
