@@ -38,7 +38,8 @@ class UserOrdersController < ApplicationController
 		payment.amount = params[:user_order][:amount]
 		payment.verification_string = params[:user_order][:verification_string]
 		payment.save
-		
+
+		StoreMailer.receipt(payment).deliver		
 		render :action => :show
 	end
 

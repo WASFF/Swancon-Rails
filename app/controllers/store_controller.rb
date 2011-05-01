@@ -90,6 +90,7 @@ class StoreController < ApplicationController
 			session[:cart] = nil
 			@cart = nil
 			flash[:notice] = "Order Placed"
+			StoreMailer.invoice(order).deliver
 			redirect_to order_path(order)
 		end
 	end
