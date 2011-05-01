@@ -1,6 +1,10 @@
 RECEIPT: <%= @payment.receipt_number %><br/>
 Issued: <%= @payment.created_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 Last Updated:<%= @payment.updated_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
+<% if @payment.isvoid? %>
+Voided: <%= @payment.voided_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
+Voided By: <%= @payment.voiding_user.name %><br/>
+<% end %>
 
 <table width="100%" border="1">
 	<tr><th>Description</th><th width="10%">For</th><th width="5%">Price</th>

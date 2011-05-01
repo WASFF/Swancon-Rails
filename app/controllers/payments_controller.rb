@@ -23,8 +23,7 @@ class PaymentsController < ApplicationController
 	def void
 		payment = Payment.find(params[:id])
 		order = payment.user_order
-		order.payment = nil
-		order.save
+		payment.void(current_user)
 		
 		redirect_to order_url(order)		
 	end

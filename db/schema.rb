@@ -151,6 +151,8 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.string   "verification_string"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "voiding_user_id"
+    t.datetime "voided_at"
   end
 
   create_table "roles", :force => true do |t|

@@ -3,6 +3,7 @@ class Payment < ActiveRecord::Base
 	has_many :launch_member_merchandise_types
 	has_many :launch_member_ticket_types
 	has_one :user_order
+	belongs_to :voiding_user, :class_name => "User"
 	
 	def receipt_number
 		sprintf "DOOMCON-%05d", id
@@ -26,5 +27,16 @@ class Payment < ActiveRecord::Base
 	
 	def type=(value)
 		self.payment_type = value
+	end
+	
+	def void(user)
+		self.voiding_user = user
+		self.voided_at = Time.now
+		self.user_order = nil
+		self.save
+	end
+	
+	def isvoid?
+		self.voiding_user != nil or self.voided_at != nil
 	end
 end

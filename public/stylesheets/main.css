@@ -6,3 +6,7 @@
 #rightpanel {
 	float: right;
 }
+
+.strike {
+	text-decoration: line-through;
+}

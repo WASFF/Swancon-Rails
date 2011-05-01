@@ -10,7 +10,7 @@
 
 <% @payments.each do |payment| %>
   <tr>
-    <td><%= payment.receipt_number %></td>
+    <td><% if payment.isvoid? %> <span class="strike"><%= payment.receipt_number %></span><% else %><%= payment.receipt_number %><% end %></td>
     <td><%= link_to 'Show', payment %></td>
   </tr>
 <% end %>

@@ -42,10 +42,6 @@ class UserOrdersController < ApplicationController
 		render :action => :show
 	end
 
-	def mark_unpaid
-		# TODO: VOID PAYMENT!
-	end
-
   # DELETE /payment_types/1
   # DELETE /payment_types/1.xml
   def destroy
