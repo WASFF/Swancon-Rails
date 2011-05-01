@@ -1,0 +1,57 @@
+Invoice: <%= @order.invoice_number %> <% if @order.payment != nil %> Receipt: <%= @order.payment.receipt_number %> <% end %><br/>
+Issued: <%= @order.created_at.strftime("%d/%m/%Y %H:%M %Z") %> <% if @order.payment != nil %> Paid: <%= @order.payment.created_at %> <% end %><br/>
+Last Updated:<%= @order.updated_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
+
+<table width="100%" border="1">
+	<tr><th>Description</th><th width="10%">For</th><th width="5%">Price</th>
+<% @order.merchandise.all.each do |merchorder| -%>	
+<tr>
+	<td><%= merchorder.merchandise_type.name -%><% merchorder.options.each do |option| %> <%= option.set.name %>: <%= option.name %> <% end %></td>
+	<td>n/a</td>
+	<td><%= merchorder.merchandise_type.price %></td>
+</tr>
+<% end %>
+
+<% @order.tickets.all.each do |ticketorder| -%>	
+<tr>
+	<td><%= ticketorder.ticket_type.name %></td><td><%= ticketorder.user.name %></td><td><%= ticketorder.ticket_type.price %></td>
+</tr>
+<tr>
+	<td></td><td>Sub Total</td><td><%= @order.subtotal %></td>
+</tr>
+<% end %>
+<% if @order.surcharge > 0.0 %>
+<tr>
+	<td><%= @order.payment_type.name %> surcharge</td><td></td><td><%= @order.surcharge %></td>
+</tr>
+<% end %>
+</table><br/>
+
+<% if @order.payment != nil %>
+Paid Via: <%= @order.payment.payment_type.name %><br/>
+Total Paid: <%= @order.payment.amount %><br/>
+<% else %>
+Total: <%= @order.total %><br/>
+<br/>
+
+<%= render :partial => "#{@order.payment_type.name.downcase.gsub(" ", "_")}_details" %>
+
+<% end %>
+
+<% if current_user.role_symbols.include?(:admin) %>
+Administration<br/>
+<% if @order.payment == nil%>
+Mark Paid:
+<blockquote>
+<%= form_for(@order, :url => mark_paid_order_url, :method => :put) do |f| %>
+Amount Paid: <%= f.text_field :amount, :value => @order.total %><br/>
+Verification String: <%= f.text_field :verification_string, :value => "" %><br/>
+<%= f.submit("Mark Paid") -%>
+<% end %>
+</blockquote>
+<% else %>
+Payment: <%= link_to @order.payment.reciept_number, @order.payment %> <%= button_to "Void", void_payment_url(@order.payment) %><br/>
+<% end %>
+<% end %>
+
+<%= link_to 'Back', orders_path %>

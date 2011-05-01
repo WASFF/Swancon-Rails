@@ -18,7 +18,10 @@ authorization do
 		has_permission_on [:launch_members], :to => [:new, :index, :create, :edit, :update, :show, :destroy, :purchase, :viewpurchase]
 		has_permission_on [:ticket_sets, :ticket_types, :payment_types, :merchandise_sets, :merchandise_types, :payments],
 			:to => [:new, :index, :create, :edit, :update, :show, :destroy]
+		
+		
 		has_permission_on [:users], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
+		has_permission_on [:member_details], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
 		has_permission_on [:content_blocks], :to => [:new, :index, :create, :edit, :update, :show, :preview]
 		has_permission_on [:content_tags], :to => [:new, :index, :create, :edit, :update, :show]
 		has_permission_on [:content_pages], :to => [:new, :index, :create, :edit, :update, :show]
@@ -26,6 +29,7 @@ authorization do
 
 	role :admin do
 		includes :committee
+		has_permission_on [:payments], :to => [:void]
 		has_permission_on [:users], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
 		has_permission_on [:content_blocks], :to => [:new, :index, :create, :edit, :update, :show, :destroy, :preview, :publish, :unpublish]
 	end

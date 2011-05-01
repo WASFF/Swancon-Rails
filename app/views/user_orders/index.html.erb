@@ -1,0 +1,32 @@
+<% if @allorders %>
+<h1>Listing Orders</h1>
+<% else %>
+<h1>Your Orders</h1>
+<% end%>
+
+
+<table width="80%" border="1">
+  <tr>
+    <th>Order/Invoice No.</th>
+		<% if @allorders %>
+		<th>User</th>
+		<% end %>
+		<th>Items</th>
+		<th>Placed</th>		
+    <th></th>
+		<th></th>
+  </tr>
+
+<% @orders.each do |order| %>
+  <tr>
+    <td><%= order.invoice_number %></td>
+		<% if @allorders %>
+		<td><%= order.user.name %></td>
+		<% end %>
+    <td><%= order.merchandise.count + order.tickets.count %></td>
+    <td><%= order.created_at.strftime("%d/%m/%Y %H:%M %Z") %></td>
+		<td><%= link_to 'Show', order_path(order) %></td>
+		<td><% if order.cancellable %><%= link_to 'Remove', order_path(order), :confirm => "Are you sure?", :method => :delete %><% end %></td>
+  </tr>
+<% end %>
+</table>

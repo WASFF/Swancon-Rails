@@ -6,8 +6,21 @@
 </p>
 
 <% if @payment_type.requires_reconciliation %>
-Requires Reconciliation
+Requires Reconciliation<br/>
 <% end %>
+
+<% if @payment_type.available_online %>
+Available Online<br/>
+<% end %>
+
+<% if @payment_type.surcharge_percent -%>
+Surcharge Percentage: <%= @payment_type.surcharge_percent %>%<br/>
+<% end -%>
+
+<% if @payment_type.surcharge_value -%>
+Surcharge Value: $<%= @payment_type.surcharge_value %><br/>
+<% end -%>
+
 
 <%= link_to 'Edit', edit_payment_type_path(@payment_type) %> |
 <%= link_to 'Back', payment_types_path %>

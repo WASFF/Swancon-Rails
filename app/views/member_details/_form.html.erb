@@ -1,0 +1,65 @@
+<%= form_for(@member_detail) do |f| %>
+  <% if @member_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@member_detail.errors.count, "error") %> prohibited this member_detail from being saved:</h2>
+
+      <ul>
+      <% @member_detail.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :name_first %><br />
+    <%= f.text_field :name_first %>
+  </div>
+  <div class="field">
+    <%= f.label :name_last %><br />
+    <%= f.text_field :name_last %>
+  </div>
+  <div class="field">
+    <%= f.label :name_badge %><br />
+    <%= f.text_field :name_badge %>
+  </div>
+  <div class="field">
+    <%= f.label :address_1 %><br />
+    <%= f.text_field :address_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :address_2 %><br />
+    <%= f.text_field :address_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :address_3 %><br />
+    <%= f.text_field :address_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :address_postcode %><br />
+    <%= f.text_field :address_postcode %>
+  </div>
+  <div class="field">
+    <%= f.label :address_state %><br />
+    <%= f.text_field :address_state %>
+  </div>
+  <div class="field">
+    <%= f.label :address_country %><br />
+    <%= f.text_field :address_country %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :email_optin %><br />
+    <%= f.check_box :email_optin %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

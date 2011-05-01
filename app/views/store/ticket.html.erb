@@ -1,0 +1,6 @@
+<h1><%= @ticket.name %></h1>
+
+Price: $<%= @ticket.price %><br/>
+<%= button_to "add to cart", :action => "ticket_add", :id => @ticket.id %>
+
+<%= render :partial => "cart" %>

@@ -15,20 +15,30 @@
 <% if user_signed_in? %>
   Welcome <%= current_user.username %><br/>
   <%= link_to("Profile", edit_user_registration_path) %><br/>
-
+  <%= link_to "Orders", orders_path %><br/>
+  
   <% permitted_to? :index, :users do -%>
   <%= link_to("Administer Users", users_path) %><br/>
   <% end %>
-  
-  <% permitted_to? :index, :content_admin do %>
-  <%= link_to("Administer Content", :controller => :index, :action => :content_admin) %>
+
+  <% if current_user.role_symbols.include?(:committee) -%>
+  <%= link_to("Show All Orders", orders_path(:all => true)) %><br/>
   <% end %>
 
+  
+  <% permitted_to? :index, :content_admin do %>
+  <%= link_to("Administer Content", :controller => :index, :action => :content_admin) %><br/>
+  <% end %>
+<% end %>
+  <%= link_to("Store", store_path)%><br/>
+
+<% if user_signed_in? %>
   <%= link_to("Log out", destroy_user_session_path) %>
 <% else %>
-  <%# link_to("Log in", new_user_session_path) %><br/>
-  <%# link_to("Sign Up", new_user_registration_path) %>
+  <%= link_to("Log in", new_user_session_path) %><br/>
+  <%= link_to("Sign Up", new_user_registration_path) %>
 <% end %>
+
 </div>
 
 

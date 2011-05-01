@@ -1,0 +1,22 @@
+<h1><%= @merch.name %></h1>
+
+Price: $<%= @merch.price %><br/>
+
+<%= form_tag({:action => "merchandise_add", :id => @merch.id}) do %>
+
+<% @merch.option_sets.all.each do |set| %>
+<%= set.name %> options
+<blockquote>
+<% checked = true %>
+<% @merch.options.where(:merchandise_option_set_id => set.id).all.each do |option| %>
+<%= option.name %> <%= radio_button_tag "option_set[#{set.id}]", option.id, checked %><br/>
+<% checked = false %>
+<% end -%>
+</blockquote>
+<% end -%>
+
+<%= submit_tag "add to cart"%>
+
+<% end -%>
+
+<%= render :partial => "cart" %>

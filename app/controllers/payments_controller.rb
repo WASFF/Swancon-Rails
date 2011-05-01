@@ -18,5 +18,14 @@ class PaymentsController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @payment }
     end
-  end	
+  end
+
+	def void
+		payment = Payment.find(params[:id])
+		order = payment.user_order
+		order.payment = nil
+		order.save
+		
+		redirect_to order_url(order)		
+	end
 end

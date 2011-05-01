@@ -21,6 +21,21 @@
     <%= f.check_box :requires_reconciliation %>
   </div>
 
+  <div class="field">
+    <%= f.label :available_online %><br />
+    <%= f.check_box :available_online %>
+  </div>
+
+  <div class="field">
+    <%= f.label :surcharge_percent %><br />
+    <%= f.text_field :surcharge_percent %>
+  </div>
+
+  <div class="field">
+    <%= f.label :surcharge_value %><br />
+    <%= f.text_field :surcharge_value %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

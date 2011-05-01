@@ -1,0 +1,7 @@
+<%= render :partial => "cart" %>
+<br/>
+
+<%= form_tag(:action => :purchase, :confirm => true) do |f| %>
+Purchase With: <%= select("purchase", "payment_type_id", PaymentType.onlineTypes.all.collect {|item| [item.form_display, item.id]}, :include_blank => true) %><br/>
+<%= submit_tag "Order" %>
+<% end -%>

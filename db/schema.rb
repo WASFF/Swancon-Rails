@@ -89,6 +89,23 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.datetime "updated_at"
   end
 
+  create_table "member_details", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name_first",                          :null => false
+    t.string   "name_last"
+    t.string   "name_badge"
+    t.string   "address_1",                           :null => false
+    t.string   "address_2"
+    t.string   "address_3",                           :null => false
+    t.string   "address_postcode",                    :null => false
+    t.string   "address_state",                       :null => false
+    t.string   "address_country",                     :null => false
+    t.string   "phone"
+    t.boolean  "email_optin",      :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "merchandise_option_sets", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -122,6 +139,9 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.boolean  "requires_reconciliation"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "available_online",        :default => false, :null => false
+    t.float    "surcharge_percent"
+    t.float    "surcharge_value"
   end
 
   create_table "payments", :force => true do |t|
@@ -174,6 +194,36 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
   add_index "user_omni_auths", ["authtype"], :name => "index_user_omni_auths_on_authtype"
   add_index "user_omni_auths", ["idvalue"], :name => "index_user_omni_auths_on_idvalue"
   add_index "user_omni_auths", ["user_id"], :name => "index_user_omni_auths_on_user_id"
+
+  create_table "user_order_merchandise_options", :force => true do |t|
+    t.integer  "user_order_merchandise_id"
+    t.integer  "merchandise_option_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_order_merchandises", :force => true do |t|
+    t.integer  "user_order_id"
+    t.integer  "merchandise_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_order_tickets", :force => true do |t|
+    t.integer  "user_order_id"
+    t.integer  "ticket_type_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_orders", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "payment_id"
+    t.integer  "payment_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_roles", :force => true do |t|
     t.integer  "user_id"

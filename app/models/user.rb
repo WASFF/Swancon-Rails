@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
 	has_many :user_roles, :dependent => :destroy
 	has_many :user_omni_auths, :dependent => :destroy
-	has_many :roles, :through => :user_roles	
+	has_many :roles, :through => :user_roles
+	has_one :member_detail
+	has_many :user_orders
 	
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
@@ -117,6 +119,11 @@ class User < ActiveRecord::Base
 			end
 		end
 	end
+
+	def name
+		username
+	end
+
 
   def self.new_with_session(params, session)
     super.tap do |user|

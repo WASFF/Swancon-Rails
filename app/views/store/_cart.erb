@@ -1,0 +1,24 @@
+Cart:<br/>
+<% price = 0.0 -%>
+<% index = 0 -%>
+<blockquote>
+<% @cart[:tickets].each do |ticket| -%>
+<% tickettype =  TicketType.find(ticket) -%>
+<%= tickettype.name %> - $<%= tickettype.price %> <%= button_to "Remove", :action => "ticket_remove", :index => index %><br/>
+<% price += tickettype.price -%>
+<% index += 1 -%>
+<% end -%>
+
+<% index = 0 %>
+<% @cart[:merch].each do |merch| -%>
+<% merchtype = MerchandiseType.find(merch[:id]) -%>
+<%= merchtype.name %> - <% merch[:options].each do |option_id| %> <% option = MerchandiseOption.find(option_id) %> <%= option.set.name%>: <%= option.name %> - <% end -%> <%= merchtype.price %> <%= button_to "Remove", :action => "merchandise_remove", :index => index %>
+<% index += 1 -%>
+<% price += merchtype.price %>
+<% end -%>
+</blockquote>
+
+Total: $<%= price %>
+<% if controller.action_name != "purchase" -%>
+<%= button_to "Check out", :action => "purchase" %>
+<% end -%>

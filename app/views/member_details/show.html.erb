@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @member_detail.user_id %>
+</p>
+
+<p>
+  <b>Name first:</b>
+  <%= @member_detail.name_first %>
+</p>
+
+<p>
+  <b>Name last:</b>
+  <%= @member_detail.name_last %>
+</p>
+
+<p>
+  <b>Name badge:</b>
+  <%= @member_detail.name_badge %>
+</p>
+
+<p>
+  <b>Address 1:</b>
+  <%= @member_detail.address_1 %>
+</p>
+
+<p>
+  <b>Address 2:</b>
+  <%= @member_detail.address_2 %>
+</p>
+
+<p>
+  <b>Address 3:</b>
+  <%= @member_detail.address_3 %>
+</p>
+
+<p>
+  <b>Address postcode:</b>
+  <%= @member_detail.address_postcode %>
+</p>
+
+<p>
+  <b>Address state:</b>
+  <%= @member_detail.address_state %>
+</p>
+
+<p>
+  <b>Address country:</b>
+  <%= @member_detail.address_country %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @member_detail.phone %>
+</p>
+
+<p>
+  <b>Email optin:</b>
+  <%= @member_detail.email_optin %>
+</p>
+
+
+<%= link_to 'Edit', edit_member_detail_path(@member_detail) %> |
+<%= link_to 'Back', member_details_path %>
