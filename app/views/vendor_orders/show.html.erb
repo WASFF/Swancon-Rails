@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Vendor:</b>
+  <%= @vendor_order.vendor_id %>
+</p>
+
+<%= form_for(@vendor_order, :url => mark_arrivals_vendor_order_url, :method => :put) do |f| %>
+<b>Merchandise</b>
+<blockquote>
+<% @vendor_order.merchandise.each do |uom| -%>
+<%= uom.name %> Options: <% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end -%>
+<% if uom.arrived_at == nil %><%= check_box_tag "user_order_merchandise[]", uom.id %> Arrived <% else -%>
+Arrived at: <%= render_time(uom.arrived_at) %> <% end -%>
+<br/>
+<% end -%>	
+</blockquote>
+<%= f.submit("Mark Arrived") %>
+<% end %>
+
+<%= link_to 'Back', vendor_orders_path %>

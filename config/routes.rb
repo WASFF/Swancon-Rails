@@ -1,14 +1,17 @@
 DoomCon::Application.routes.draw do
-  resources :member_details
-
   resources :merchandise_option_sets
 
   resources :merchandise_types do
+		post 'mark_shipped', :on => :member
 		resources :merchandise_options do
 		end	
 	end
 
   resources :merchandise_sets
+
+  resources :vendor_orders do 
+		put 'mark_arrivals', :on => :member
+	end
 
 	resources :payments do
 		post 'void', :on => :member
@@ -19,6 +22,10 @@ DoomCon::Application.routes.draw do
   resources :ticket_sets
 
   resources :ticket_types
+
+  resources :member_details do
+		get 'edit_my', :on => :collection
+	end
 
   resources :launch_members do
 		put 'purchase', :on => :member

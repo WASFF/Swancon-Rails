@@ -34,6 +34,14 @@ class User < ActiveRecord::Base
 	def add_user_role
 		self.roles << Role.where(:name => "user").first
 	end
+	
+	def order_name
+		if member_detail != nil
+			member_detail.name_real
+		else
+			username
+		end
+	end
 
 	# Class Functions
   def self.find_by_username_or_email(username, email)

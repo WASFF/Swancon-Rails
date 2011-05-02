@@ -11,6 +11,14 @@ class TicketType < ActiveRecord::Base
 		user_order_tickets
 	end
 
+	def set
+		ticket_set
+	end
+	
+	def set=(value)
+		self.ticket_set = value
+	end
+
 	def available?
 		if (available_from == nil) and (available_to == nil)
 			true

@@ -31,6 +31,8 @@ authorization do
 		includes :committee
 		has_permission_on [:payments], :to => [:void]
 		has_permission_on [:users], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
+		has_permission_on [:vendor_orders], :to => [:index, :create, :show, :destroy, :mark_arrivals]
+		has_permission_on [:merchandise_types], :to => [:mark_shipped]
 		has_permission_on [:content_blocks], :to => [:new, :index, :create, :edit, :update, :show, :destroy, :preview, :publish, :unpublish]
 	end
 end

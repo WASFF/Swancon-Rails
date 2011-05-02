@@ -1,26 +1,19 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @ticket_type.name %>
-</p>
-
-<p>
-  <b>Price:</b>
-  <%= @ticket_type.price %>
-</p>
+<div class="title"><%= @ticket_type.name %></div>
+<p class="olive">$<%= @ticket_type.price %></p>
 
 <p>
   <b>Ticket set:</b>
-  <%= @ticket_type.ticket_set_id %>
+  <%= link_to @ticket_type.set.name, @ticket_type.set %>
 </p>
 
 <p>
-	<b>Available From:</b> <%= render_time(@ticket_type.available_from) %><br/>
-	<b>Available To:</b> <%= render_time(@ticket_type.available_to) %>
-	<% if @ticket_type.available? %>
-	Available Now!
-	<% end %>
+	Available <% -%>
+	<% if @ticket_type.available_from != nil -%>
+	from <%= render_time(@ticket_type.available_from) -%>
+	<% end -%>
+	<% if @ticket_type.available_to != nil -%>
+	to <%= render_time(@ticket_type.available_to) %>
+	<% end -%>
 </p>
 
 <p>

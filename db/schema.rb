@@ -91,17 +91,18 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
 
   create_table "member_details", :force => true do |t|
     t.integer  "user_id"
-    t.string   "name_first",                          :null => false
+    t.string   "name_first",                           :null => false
     t.string   "name_last"
     t.string   "name_badge"
-    t.string   "address_1",                           :null => false
+    t.string   "address_1",                            :null => false
     t.string   "address_2"
-    t.string   "address_3",                           :null => false
-    t.string   "address_postcode",                    :null => false
-    t.string   "address_state",                       :null => false
-    t.string   "address_country",                     :null => false
+    t.string   "address_3",                            :null => false
+    t.string   "address_postcode",                     :null => false
+    t.string   "address_state",                        :null => false
+    t.string   "address_country",                      :null => false
     t.string   "phone"
-    t.boolean  "email_optin",      :default => false, :null => false
+    t.boolean  "email_optin",       :default => false, :null => false
+    t.boolean  "disclaimer_signed", :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -214,6 +215,9 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.integer  "merchandise_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "vendor_order_id"
+    t.datetime "arrived_at"
+    t.datetime "shipped_at"
   end
 
   create_table "user_order_tickets", :force => true do |t|
@@ -261,5 +265,12 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
+
+  create_table "vendor_orders", :force => true do |t|
+    t.integer  "vendor_id"
+    t.datetime "placed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

@@ -41,6 +41,14 @@ class LaunchMember < ActiveRecord::Base
 			name_badge
 		end
 	end
+
+	def username
+		if name_badge == nil
+			"#{name_first}"
+		else
+			name_badge
+		end
+	end
 	
 	def purchasable_tickets
 		if (launch_member_ticket_types.count > 0)

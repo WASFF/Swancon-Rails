@@ -1,0 +1,23 @@
+<h1>Listing vendor_orders</h1>
+
+<table>
+  <tr>
+    <th>Vendor</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @vendor_orders.each do |vendor_order| %>
+  <tr>
+    <td><%= vendor_order.vendor_id %></td>
+    <td><%= link_to 'Show', vendor_order %></td>
+    <td><%= link_to 'Edit', edit_vendor_order_path(vendor_order) %></td>
+    <td><%= link_to 'Destroy', vendor_order, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Vendor order', new_vendor_order_path %>

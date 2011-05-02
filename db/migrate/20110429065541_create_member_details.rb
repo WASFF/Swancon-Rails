@@ -13,6 +13,7 @@ class CreateMemberDetails < ActiveRecord::Migration
       t.string :address_country, :null => false
       t.string :phone
       t.boolean :email_optin, :null => false, :default => false
+			t.boolean :disclaimer_signed, :default => false, :null => false
       t.timestamps
     end
   end

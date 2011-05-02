@@ -37,6 +37,19 @@ class MemberDetailsController < ApplicationController
     @member_detail = MemberDetail.find(params[:id])
   end
 
+	def edit_my
+		if (current_user == nil)
+			redirect_to new_user_session_path
+			return
+		end
+		
+		if current_user.member_detail == nil
+			@member_detail = MemberDetail.new
+		else
+			@member_detail = current_user.member_detail
+		end
+	end
+
   # POST /member_details
   # POST /member_details.xml
   def create

@@ -32,67 +32,41 @@
 </p>
 
 <p>
-	<% order = @merchandise_type.orders.unpaid %>
-	<b>Unpaid Orders - <%= order.count %></b>
-	<% rank = 1 %>
-	<blockquote>
-	<% order.each do |uom| %>
-	<%= rank %>. <%= uom.name %> Options: <% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %><br/>
-	<% rank += 1%>
-	<% end %>
-	</blockquote>
+	<% @order = @merchandise_type.orders.unpaid %>
+	<b>Unpaid Orders - <%= @order.count %></b>
+	<%= render :partial => "order_list" %>
 </p>
 
 <p>
-	<% order = @merchandise_type.orders.outstanding %>
-	<b>Outstanding Orders (paid, not ordered from supplier)- <%= order.count %></b>
-	<% rank = 1 %>
+	<% @order = @merchandise_type.orders.outstanding %>
+	<% @include_check_box = true %>
+	<% @include_shipped = true %>
+	<b>Outstanding Orders (paid, not ordered from supplier)- <%= @order.count %></b>
 	<%= form_for(VendorOrder.new) do |f| %>
-	<blockquote>
-	<% order.each do |uom| %>
-	<%# PUT FIRSTNAME LASTNAME HERE IF AVAILABLE, OTHERWISE USERNAME - WE ALSO NEED TO REQUIRE USERS TO CREATE THEIR MEMBER_DETAILS BEFORE ORDERING! %>
-	<%= rank %>. <%= uom.user_order.user.name %> - <%= uom.name %> Options: <% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %> <%= check_box_tag "user_order_merchandise[]", uom.id %> - Order <%= link_to "Shipped", mark_shipped_merchandise_type_path(@merchandise_type, :user_order_merchandise_id => uom.id), :confirm => "This really has shipped?" %><br/>
-	<% rank += 1%>
-	<% end %>
-	</blockquote>
+	<%= render :partial => "order_list" %>
 	<%= f.submit("Create Vendor Order")%>
 	<% end %>
 </p>
 
 <p>
-	<% order = @merchandise_type.orders.placed %>
-	<b>Orders placed, not arrived from vendor - <%= order.count %></b>
-	<% rank = 1 %>
-	<blockquote>
-	<% order.each do |uom| %>
-	<%= rank %>. <%= uom.name %> Options: <% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %><br/>
-	<% rank += 1%>
-	<% end %>
-	</blockquote>
+	<% @order = @merchandise_type.orders.placed %>
+	<% @include_check_box = false %>
+	<% @include_shipped = true %>
+	<b>Orders placed, not arrived from vendor - <%= @order.count %></b>
+	<%= render :partial => "order_list" %>
 </p>
 
 <p>
-	<% order = @merchandise_type.orders.arrived %>
-	<b>Orders placed and arrived, not shipped - <%= order.count %></b>
-	<% rank = 1 %>
-	<blockquote>
-	<% order.each do |uom| %>
-	<%= rank %>. <%= uom.name %> Options: <% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %> <%= link_to "Shipped", mark_shipped_merchandise_type_path(@merchandise_type, :user_order_merchandise_id => uom.id), :confirm => "This really has shipped?" %><br/>
-	<% rank += 1%>
-	<% end %>
-	</blockquote>
+	<% @order = @merchandise_type.orders.arrived %>
+	<b>Orders placed and arrived, not shipped - <%= @order.count %></b>
+	<%= render :partial => "order_list" %>
 </p>
 
 <p>
-	<% order = @merchandise_type.orders.completed %>
-	<b>Completed Orders - <%= order.count %></b>
-	<% rank = 1 %>
-	<blockquote>
-	<% order.each do |uom| %>
-	<%= rank %>. <%= uom.name %> Options: <% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %><br/>
-	<% rank += 1%>
-	<% end %>
-	</blockquote>
+	<% @order = @merchandise_type.orders.completed %>
+	<% @include_shipped = false %>
+	<b>Completed Orders - <%= @order.count %></b>
+	<%= render :partial => "order_list" %>
 </p>
 
 <p>

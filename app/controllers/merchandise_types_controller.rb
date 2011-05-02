@@ -70,6 +70,15 @@ class MerchandiseTypesController < ApplicationController
     end
   end
 
+	def mark_shipped
+		@merchandise_type = MerchandiseType.find(params[:id])
+		user_order_merchandise = @merchandise_type.orders.find(params[:user_order_merchandise_id])
+		user_order_merchandise.shipped_at = Time.now
+		user_order_merchandise.save
+		
+		render :action => :show
+	end
+
   # DELETE /merchandise_types/1
   # DELETE /merchandise_types/1.xml
   def destroy

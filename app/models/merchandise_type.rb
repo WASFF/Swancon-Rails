@@ -20,6 +20,14 @@ class MerchandiseType < ActiveRecord::Base
 			user_order_merchandise
 		end
 		
+		def set
+			merchandise_set
+		end
+		
+		def set=(value)
+			self.merchandise_set = value
+		end
+		
 		def available?
 			if (available_from == nil) and (available_to == nil)
 				true
