@@ -2,6 +2,8 @@ class StoreController < ApplicationController
 	before_filter :init_cart
 
 	def index
+		@ticketsets = TicketSet.available.all
+		@merchsets = MerchandiseSet.available.all
 	end
 	
 	def merchandise

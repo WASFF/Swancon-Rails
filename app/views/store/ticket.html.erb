@@ -1,6 +1,14 @@
 <h1><%= @ticket.name %></h1>
 
 Price: $<%= @ticket.price %><br/>
+
+<% if @ticket.available? %>
+<% if @ticket.available_to != nil %>
+Available until: <%= render_time(@ticket.available_to) %><br/>
+<% end %>
 <%= button_to "add to cart", :action => "ticket_add", :id => @ticket.id %>
+<% else %>
+This item is not available!
+<% end %>
 
 <%= render :partial => "cart" %>

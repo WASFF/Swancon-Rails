@@ -1,18 +1,18 @@
 Welcome to the Store!<br/>
 
-<% TicketSet.all.each do |set| -%>
+<% @ticketsets.each do |set| -%>
 <strong><%= set.name %> Tickets</strong>
 <blockquote>
-<% set.tickets.all.each do |ticket| -%>
+<% set.tickets.available.all.each do |ticket| -%>
 <%= link_to "#{ticket.name} $#{ticket.price}", :action => "ticket", :id => ticket.id %> <br/>
 <% end %>
 </blockquote>
 <% end -%>
 
-<% MerchandiseSet.all.each do |set| -%>
+<% @merchsets.each do |set| -%>
 <strong><%= set.name %></strong>
 <blockquote>
-<% set.merchandise.all.each do |merch| -%>
+<% set.merchandise.available.all.each do |merch| -%>
 <%= link_to "#{merch.name} $#{merch.price}", :action => "merchandise", :id => merch.id %> <br/>
 <% end %>
 </blockquote>

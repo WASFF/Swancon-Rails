@@ -15,8 +15,14 @@ Price: $<%= @merch.price %><br/>
 </blockquote>
 <% end -%>
 
+<% if @merch.available? %>
+<% if @merch.available_to != nil %>
+Available until: <%= render_time(@merch.available_to) %><br/>
+<% end %>
 <%= submit_tag "add to cart"%>
-
+<% else %>
+This item is not available!
+<% end %>
 <% end -%>
 
 <%= render :partial => "cart" %>

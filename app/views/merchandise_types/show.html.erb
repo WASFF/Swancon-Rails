@@ -16,6 +16,14 @@
 </p>
 
 <p>
+	<b>Available From:</b> <%= render_time(@merchandise_type.available_from) %><br/>
+	<b>Available To:</b> <%= render_time(@merchandise_type.available_to) %>
+	<% if @merchandise_type.available? %>
+	Available Now!
+	<% end %>
+</p>
+
+<p>
 	<b>Options</b><br/>
 	<% @merchandise_type.option_sets.all.each do |set| -%>
 	<% if @merchandise_type.options.where(:merchandise_option_set_id => set.id).count > 0 %>
@@ -30,7 +38,31 @@
 </p>
 
 <p>
-	<b>Orders</b>
+	<% order = @merchandise_type.orders.unpaid %>
+	<b>Unpaid Orders - <%= order.count %></b>
+	<% rank = 1 %>
+	<blockquote>
+	<% order.each do |uom| %>
+	<%= rank %>. <%= uom.name %> Options: <% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %><br/>
+	<% rank += 1%>
+	<% end %>
+	</blockquote>
+</p>
+
+<p>
+	<% order = @merchandise_type.orders.outstanding %>
+	<b>Outstanding Orders (paid, not ordered from supplier)- <%= order.count %></b>
+	<% rank = 1 %>
+	<blockquote>
+	<% order.each do |uom| %>
+	<%= rank %>. <%= uom.name %> Options: <% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %><br/>
+	<% rank += 1%>
+	<% end %>
+	</blockquote>
+</p>
+
+<p>
+	<b>Orders (old system)</b>
 	<% order = 1 %>
 	<blockquote>
 	<% @merchandise_type.launch_member_merchandise_types.each do |lmmt| %>

@@ -132,6 +132,8 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.float    "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "available_from"
+    t.datetime "available_to"
   end
 
   create_table "payment_types", :force => true do |t|
@@ -183,6 +185,9 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.integer  "ticket_set_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "available_from"
+    t.datetime "available_to"
+    t.integer  "target",         :default => 0, :null => false
   end
 
   create_table "user_omni_auths", :force => true do |t|

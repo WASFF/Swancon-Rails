@@ -5,6 +5,10 @@ class UserOrder < ActiveRecord::Base
 	belongs_to :payment
 	belongs_to :payment_type
 
+	scope :paid, lambda {
+		where(self.paidarel)
+	}
+
 	def invoice_number
 		sprintf "DOOMCON-ORDER-%05d", id
 	end
@@ -62,5 +66,15 @@ class UserOrder < ActiveRecord::Base
 	
 	def cancellable
 		payment == nil	
+	end
+	
+	def self.paidarel
+		uoarel = UserOrder.arel_table
+		uoarel[:payment_id].eq(nil).not()
+	end
+
+	def self.unpaidarel
+		uoarel = UserOrder.arel_table
+		uoarel[:payment_id].eq(nil)
 	end
 end

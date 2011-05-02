@@ -16,7 +16,42 @@
 </p>
 
 <p>
-	<b>Orders</b>
+	<b>Available From:</b> <%= render_time(@ticket_type.available_from) %><br/>
+	<b>Available To:</b> <%= render_time(@ticket_type.available_to) %>
+	<% if @ticket_type.available? %>
+	Available Now!
+	<% end %>
+</p>
+
+<p>
+	<b>Target:</b> <%= @ticket_type.target %>
+	<b>Remaining: </b> <%= @ticket_type.target - @ticket_type.orders.count %>
+</p>
+
+<p>
+	<b>Unpaid Orders - <%= @ticket_type.orders.unpaid.count %> - <%= @ticket_type.orders.unpaid.count * @ticket_type.price %></b>
+	<% order = 1 %>
+	<blockquote>
+	<% @ticket_type.orders.unpaid.each do |uot| %>
+	<%= order %>. <%= uot.user.name %><br/>
+	<% order += 1%>
+	<% end %>
+	</blockquote>
+</p>
+
+<p>
+	<b>Paid Orders - <%= @ticket_type.orders.paid.count %> - <%= @ticket_type.orders.paid.count * @ticket_type.price %></b>
+	<% order = 1 %>
+	<blockquote>
+	<% @ticket_type.orders.paid.each do |uot| %>
+	<%= order %>. <%= uot.user.name %><br/>
+	<% order += 1%>
+	<% end %>
+	</blockquote>
+</p>
+
+<p>
+	<b>Orders (old system)</b>
 	<% order = 1 %>
 	<blockquote>
 	<% @ticket_type.launch_member_ticket_types.each do |lmtt| %>
