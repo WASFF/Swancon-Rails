@@ -1,26 +1,20 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @merchandise_type.name %>
-</p>
+<div class="title"><%= @merchandise_type.name %></div>
+<p class="olive">$<%= @merchandise_type.price %></p>
 
 <p>
   <b>Merchandise set:</b>
-  <%= @merchandise_type.merchandise_set_id %>
+  <%= link_to @merchandise_type.set.name, @merchandise_type.set %>
 </p>
 
-<p>
-  <b>Price:</b>
-  <%= @merchandise_type.price %>
-</p>
 
 <p>
-	<b>Available From:</b> <%= render_time(@merchandise_type.available_from) %><br/>
-	<b>Available To:</b> <%= render_time(@merchandise_type.available_to) %>
-	<% if @merchandise_type.available? %>
-	Available Now!
-	<% end %>
+	Available <% -%>
+	<% if @merchandise_type.available_from != nil -%>
+	from <%= render_time(@merchandise_type.available_from) -%>
+	<% end -%>
+	<% if @merchandise_type.available_to != nil -%>
+	to <%= render_time(@merchandise_type.available_to) %>
+	<% end -%>
 </p>
 
 <p>
@@ -52,6 +46,46 @@
 <p>
 	<% order = @merchandise_type.orders.outstanding %>
 	<b>Outstanding Orders (paid, not ordered from supplier)- <%= order.count %></b>
+	<% rank = 1 %>
+	<%= form_for(VendorOrder.new) do |f| %>
+	<blockquote>
+	<% order.each do |uom| %>
+	<%# PUT FIRSTNAME LASTNAME HERE IF AVAILABLE, OTHERWISE USERNAME - WE ALSO NEED TO REQUIRE USERS TO CREATE THEIR MEMBER_DETAILS BEFORE ORDERING! %>
+	<%= rank %>. <%= uom.user_order.user.name %> - <%= uom.name %> Options: <% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %> <%= check_box_tag "user_order_merchandise[]", uom.id %> - Order <%= link_to "Shipped", mark_shipped_merchandise_type_path(@merchandise_type, :user_order_merchandise_id => uom.id), :confirm => "This really has shipped?" %><br/>
+	<% rank += 1%>
+	<% end %>
+	</blockquote>
+	<%= f.submit("Create Vendor Order")%>
+	<% end %>
+</p>
+
+<p>
+	<% order = @merchandise_type.orders.placed %>
+	<b>Orders placed, not arrived from vendor - <%= order.count %></b>
+	<% rank = 1 %>
+	<blockquote>
+	<% order.each do |uom| %>
+	<%= rank %>. <%= uom.name %> Options: <% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %><br/>
+	<% rank += 1%>
+	<% end %>
+	</blockquote>
+</p>
+
+<p>
+	<% order = @merchandise_type.orders.arrived %>
+	<b>Orders placed and arrived, not shipped - <%= order.count %></b>
+	<% rank = 1 %>
+	<blockquote>
+	<% order.each do |uom| %>
+	<%= rank %>. <%= uom.name %> Options: <% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %> <%= link_to "Shipped", mark_shipped_merchandise_type_path(@merchandise_type, :user_order_merchandise_id => uom.id), :confirm => "This really has shipped?" %><br/>
+	<% rank += 1%>
+	<% end %>
+	</blockquote>
+</p>
+
+<p>
+	<% order = @merchandise_type.orders.completed %>
+	<b>Completed Orders - <%= order.count %></b>
 	<% rank = 1 %>
 	<blockquote>
 	<% order.each do |uom| %>

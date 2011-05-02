@@ -1,25 +1,28 @@
-<h1><%= @merch.name %></h1>
-
-Price: $<%= @merch.price %><br/>
+<div class="title"><%= @merch.name %></div>
+<p class="olive"><%= render_money(@merch.price) %></p>
 
 <%= form_tag({:action => "merchandise_add", :id => @merch.id}) do %>
 
 <% @merch.option_sets.all.each do |set| %>
-<%= set.name %> options
-<blockquote>
+<h2><%= set.name %> options</h2>
+<ul>
 <% checked = true %>
 <% @merch.options.where(:merchandise_option_set_id => set.id).all.each do |option| %>
-<%= option.name %> <%= radio_button_tag "option_set[#{set.id}]", option.id, checked %><br/>
+<li><%= option.name %> <%= radio_button_tag "option_set[#{set.id}]", option.id, checked %></li>
 <% checked = false %>
 <% end -%>
-</blockquote>
+</ul>
 <% end -%>
 
 <% if @merch.available? %>
 <% if @merch.available_to != nil %>
 Available until: <%= render_time(@merch.available_to) %><br/>
 <% end %>
-<%= submit_tag "add to cart"%>
+<% if current_user != nil -%>
+<%= submit_tag "add to cart" -%>
+<% else -%>
+Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to place an order
+<% end -%>
 <% else %>
 This item is not available!
 <% end %>

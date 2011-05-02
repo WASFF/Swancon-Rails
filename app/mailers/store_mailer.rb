@@ -1,5 +1,6 @@
 class StoreMailer < ActionMailer::Base
   default :from => "tickets-2012@swancon.com.au"
+	helper :application
 
 	def invoice(order)
 		@order = order

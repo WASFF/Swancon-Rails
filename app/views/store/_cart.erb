@@ -1,10 +1,14 @@
-Cart:<br/>
+<% if current_user == nil -%>
+<h2>Your Cart</h2>
+Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to place an order
+<% else -%>
+<h2>Your Cart</h2>
 <% price = 0.0 -%>
 <% index = 0 -%>
-<blockquote>
+<ul>
 <% @cart[:tickets].each do |ticket| -%>
 <% tickettype =  TicketType.find(ticket) -%>
-<%= tickettype.name %> - $<%= tickettype.price %> <%= button_to "Remove", :action => "ticket_remove", :index => index %><br/>
+<li><%= tickettype.name %> - <%= render_money(tickettype.price) %> <%= button_to "Remove", :action => "ticket_remove", :index => index %></li>
 <% price += tickettype.price -%>
 <% index += 1 -%>
 <% end -%>
@@ -12,13 +16,15 @@ Cart:<br/>
 <% index = 0 %>
 <% @cart[:merch].each do |merch| -%>
 <% merchtype = MerchandiseType.find(merch[:id]) -%>
-<%= merchtype.name %> - <% merch[:options].each do |option_id| %> <% option = MerchandiseOption.find(option_id) %> <%= option.set.name%>: <%= option.name %> - <% end -%> <%= merchtype.price %> <%= button_to "Remove", :action => "merchandise_remove", :index => index %>
+<li><%= merchtype.name %> - <% merch[:options].each do |option_id| %> <% option = MerchandiseOption.find(option_id) %> <%= option.set.name%>: <%= option.name %> - <% end -%> <%= render_money(merchtype.price) %> <%= button_to "Remove", :action => "merchandise_remove", :index => index %></ul>
 <% index += 1 -%>
 <% price += merchtype.price %>
 <% end -%>
-</blockquote>
+</ul>
 
-Total: $<%= price %>
+Total: <%= render_money(price) %>
 <% if controller.action_name != "purchase" -%>
 <%= button_to "Check out", :action => "purchase" %>
+<% end -%>
+
 <% end -%>

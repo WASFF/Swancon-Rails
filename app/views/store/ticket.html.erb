@@ -1,12 +1,15 @@
-<h1><%= @ticket.name %></h1>
-
-Price: $<%= @ticket.price %><br/>
+<div class="title"><%= @ticket.set.name %> Ticket</div>
+<p class="olive"><%= @ticket.name %> - <%= render_money(@ticket.price) %></p>
 
 <% if @ticket.available? %>
 <% if @ticket.available_to != nil %>
 Available until: <%= render_time(@ticket.available_to) %><br/>
 <% end %>
+<% if current_user != nil -%>
 <%= button_to "add to cart", :action => "ticket_add", :id => @ticket.id %>
+<% else -%>
+Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to place an order
+<% end -%>
 <% else %>
 This item is not available!
 <% end %>

@@ -7,4 +7,7 @@ module ApplicationHelper
 		end
 	end
 
+	def render_money(value)
+		number_to_currency(value)
+	end
 end

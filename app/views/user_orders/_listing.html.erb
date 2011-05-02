@@ -1,0 +1,24 @@
+<table width="100%" border="1">
+	<tr><th>Description</th><th width="10%">For</th><th width="5%">Price</th>
+<% @order.merchandise.all.each do |merchorder| -%>	
+<tr>
+	<td><%= merchorder.merchandise_type.name -%><% merchorder.options.each do |option| %> <%= option.set.name %>: <%= option.name %> <% end %></td>
+	<td>n/a</td>
+	<td><%= render_money(merchorder.merchandise_type.price) %></td>
+</tr>
+<% end %>
+
+<% @order.tickets.all.each do |ticketorder| -%>	
+<tr>
+	<td><%= ticketorder.ticket_type.name %></td><td><%= ticketorder.user.name %></td><td><%= render_money(ticketorder.ticket_type.price) %></td>
+</tr>
+<tr>
+	<td></td><td>Sub Total</td><td><%= render_money(@order.subtotal) %></td>
+</tr>
+<% end %>
+<% if @order.surcharge > 0.0 %>
+<tr>
+	<td><%= @order.payment_type.name %> surcharge</td><td></td><td><%= render_money(@order.surcharge) %></td>
+</tr>
+<% end %>
+</table><br/>

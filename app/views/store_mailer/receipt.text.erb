@@ -1,11 +1,6 @@
 Receipt: <%= @payment.receipt_number %>
 Issued: <%= @payment.created_at.strftime("%d/%m/%Y %H:%M %Z") %>
 
-<% @payment.user_order.merchandise.all.each do |merchorder| -%>	
-<%= merchorder.merchandise_type.name -%><% merchorder.options.each do |option| %> <%= option.set.name %>: <%= option.name %> <% end %>	<%= merchorder.merchandise_type.price %>
-<% end -%>
-<% @payment.user_order.tickets.all.each do |ticketorder| -%>	
-<%= ticketorder.ticket_type.name %>		<%= ticketorder.user.name %>		<%= ticketorder.ticket_type.price %>
-<% end -%>
-Paid Via: <%= @payment.payment_type.name %>
-Total Paid: <%= @payment.amount %>
+<% @order = @payment.user_order %>
+
+<%= render :partial => "/user_orders/listing" %>

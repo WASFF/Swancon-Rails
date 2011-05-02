@@ -1,21 +1,21 @@
-Welcome to the Store!<br/>
+<div class="title">Doom-Store&trade;</div>
 
 <% @ticketsets.each do |set| -%>
-<strong><%= set.name %> Tickets</strong>
-<blockquote>
+<h2><%= set.name %> Tickets</h2>
+<ul>
 <% set.tickets.available.all.each do |ticket| -%>
-<%= link_to "#{ticket.name} $#{ticket.price}", :action => "ticket", :id => ticket.id %> <br/>
+<li><%= link_to "#{ticket.name} #{render_money(ticket.price)}", :action => "ticket", :id => ticket.id %></li>
 <% end %>
-</blockquote>
+</ul>
 <% end -%>
 
 <% @merchsets.each do |set| -%>
-<strong><%= set.name %></strong>
-<blockquote>
+<h2><%= set.name %></h2>
+<ul>
 <% set.merchandise.available.all.each do |merch| -%>
-<%= link_to "#{merch.name} $#{merch.price}", :action => "merchandise", :id => merch.id %> <br/>
+<li><%= link_to "#{merch.name} #{render_money(merch.price)}", :action => "merchandise", :id => merch.id %></li>
 <% end %>
-</blockquote>
+</ul>
 <% end -%>
 
 <%= render :partial => "cart" %>

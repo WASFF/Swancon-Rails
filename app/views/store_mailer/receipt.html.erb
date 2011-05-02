@@ -7,30 +7,9 @@
 Receipt: <%= @payment.receipt_number %><br/>
 Issued: <%= @payment.created_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 
-<table width="100%" border="1">
-	<tr><th>Description</th><th width="10%">For</th><th width="5%">Price</th>
-<% @payment.user_order.merchandise.all.each do |merchorder| -%>	
-<tr>
-	<td><%= merchorder.merchandise_type.name -%><% merchorder.options.each do |option| %> <%= option.set.name %>: <%= option.name %> <% end %></td>
-	<td>n/a</td>
-	<td><%= merchorder.merchandise_type.price %></td>
-</tr>
-<% end %>
+<% @order = @payment.user_order %>
 
-<% @payment.user_order.tickets.all.each do |ticketorder| -%>	
-<tr>
-	<td><%= ticketorder.ticket_type.name %></td><td><%= ticketorder.user.name %></td><td><%= ticketorder.ticket_type.price %></td>
-</tr>
-<tr>
-	<td></td><td>Sub Total</td><td><%= @payment.user_order.subtotal %></td>
-</tr>
-<% end %>
-<% if @payment.user_order.surcharge > 0.0 %>
-<tr>
-	<td><%= @payment.user_order.payment_type.name %> surcharge</td><td></td><td><%= @payment.user_order.surcharge %></td>
-</tr>
-<% end %>
-</table>
+<%= render :partial => "/user_orders/listing" %>
 
 Paid Via: <%= @payment.payment_type.name %><br/>
 Total Paid: <%= @payment.amount %>

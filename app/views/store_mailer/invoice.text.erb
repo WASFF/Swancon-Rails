@@ -1,13 +1,6 @@
 Invoice: <%= @order.invoice_number %>
 Issued: <%= @order.created_at.strftime("%d/%m/%Y %H:%M %Z") %>
 
-<% @order.merchandise.all.each do |merchorder| -%>	
-<%= merchorder.merchandise_type.name -%><% merchorder.options.each do |option| %> <%= option.set.name %>: <%= option.name %> <% end %>	<%= merchorder.merchandise_type.price %>
-<% end -%>
-<% @order.tickets.all.each do |ticketorder| -%>	
-<%= ticketorder.ticket_type.name %>		<%= ticketorder.user.name %>		<%= ticketorder.ticket_type.price %>
-Sub Total: $<%= @order.subtotal %>
-<% end -%>
-<% if @order.surcharge > 0.0 %>
-<%= @order.payment_type.name %> surcharge: <%= @order.surcharge %>
-<% end %>
+<%= render :partial => "/user_orders/listing" %>
+
+<%= render :partial => "user_orders/#{@order.payment_type.name.downcase.gsub(" ", "_")}_details" %>
