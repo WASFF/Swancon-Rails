@@ -1,5 +1,7 @@
 .wrapper {
-	font-size: 1.3em;
-	margin: 0 auto;
 	width: 95%;
+}
+
+.content {
+	width: 540px;
 }

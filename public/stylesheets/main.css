@@ -97,7 +97,7 @@ h1,h2 {padding-top: 6px;}
 	float: left;
 	margin: 10px 0;
 	padding-top: 32px;
-	width: 775px;
+	width: 700px;
 }
 .content .descr {
 	color: #8DC63F;
@@ -129,4 +129,13 @@ h1,h2 {padding-top: 6px;}
 
 .strike {
 	text-decoration: line-through;
+}
+
+.text-right {
+	text-align: right;
+}
+
+span.superstrong {
+	font-size: 1.5em;
+	font-weight: bold;
 }

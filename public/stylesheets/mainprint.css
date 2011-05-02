@@ -5,3 +5,16 @@
 .footer {
 	display: none;
 }
+
+.noprint {
+	display: none;
+}
+
+.text-right {
+	text-align: right;
+}
+
+span.superstrong {
+	font-size: 1.5em;
+	font-weight: bold;
+}
