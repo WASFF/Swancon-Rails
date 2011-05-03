@@ -6,15 +6,17 @@
 </p>
 
 <%= form_for(@vendor_order, :url => mark_arrivals_vendor_order_url, :method => :put) do |f| %>
-<b>Merchandise</b>
+<% @vendor_order.merchandise.types.each do |merch_type| %>
+<h2><%= merch_type.name %></h2>
 <blockquote>
-<% @vendor_order.merchandise.each do |uom| -%>
-<%= uom.name %> Options: <% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end -%>
+<% @vendor_order.merchandise.sorted_option_list(@vendor_order.merchandise, merch_type.merchandise_type_id).each do |uom| -%>
+<% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end -%>
 <% if uom.arrived_at == nil %><%= check_box_tag "user_order_merchandise[]", uom.id %> Arrived <% else -%>
-Arrived at: <%= render_time(uom.arrived_at) %> <% end -%>
+- Arrived at: <%= render_time(uom.arrived_at) %> <% end -%>
 <br/>
 <% end -%>	
 </blockquote>
+<% end %>
 <%= f.submit("Mark Arrived") %>
 <% end %>
 
