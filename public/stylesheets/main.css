@@ -135,6 +135,11 @@ h1,h2 {padding-top: 6px;}
 	text-align: right;
 }
 
+.merchandise-image > .caption {
+	text-align: center;
+	font-size: 90%;
+}
+
 span.superstrong {
 	font-size: 1.5em;
 	font-weight: bold;

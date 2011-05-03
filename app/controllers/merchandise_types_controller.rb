@@ -1,5 +1,5 @@
 class MerchandiseTypesController < ApplicationController
-	filter_resource_access
+	filter_resource_access :additional_member => [:mark_shipped, :add_image, :remove_image, :update_image_description]
   # GET /merchandise_types
   # GET /merchandise_types.xml
   def index
@@ -72,7 +72,7 @@ class MerchandiseTypesController < ApplicationController
 
 	def add_image
 		@merchandise_type = MerchandiseType.find(params[:id])
-		image = MerchandiseImage.new(:merchandise_type => @merchandise_type, :image => params[:image][:image])
+		image = MerchandiseImage.new(:merchandise_type => @merchandise_type, :image => params[:image][:image], :description => params[:image][:description])
 		image.save
 		render :action => "edit"
 	end
@@ -81,6 +81,14 @@ class MerchandiseTypesController < ApplicationController
 		@merchandise_type = MerchandiseType.find(params[:id])
 		image = @merchandise_type.images.find(params[:image_id])
 		image.destroy
+		render :action => "edit"
+	end
+	
+	def update_image_description
+		@merchandise_type = MerchandiseType.find(params[:id])
+		image = @merchandise_type.images.find(params[:image_id])
+		image.description = params[:image][:description]
+		image.save
 		render :action => "edit"
 	end
 

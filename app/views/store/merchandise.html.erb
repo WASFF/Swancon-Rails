@@ -9,7 +9,7 @@ You are buying for <%= link_to(@store_user.order_name, users_admin_path(@store_u
 Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to place an order<br/>
 <% end %>
 <% @merch.images.each do |image| -%>
-<img src="<%= image.url %>" />
+<div class="merchandise-image" style="width: <%= image.width %>px;"><img src="<%= image.url %>" height="<%= image.height %>" width="<%= image.width %>"/><div class="caption"><%= image.description %></div></div>
 <% end -%>
 <%= form_tag({:action => "merchandise_add", :id => @merch.id}) do %>
 <% @merch.option_sets.all.each do |set| %>

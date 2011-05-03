@@ -5,6 +5,7 @@ DoomCon::Application.routes.draw do
 		post 'mark_shipped', :on => :member
 		post 'add_image', :on => :member
 		post 'remove_image', :on => :member
+		post 'update_image_description', :on => :member		
 		resources :merchandise_options do
 		end	
 	end
