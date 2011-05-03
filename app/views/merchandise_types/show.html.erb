@@ -24,7 +24,7 @@
 	<%= set.name %><br/>
 	<blockquote>
 	<% @merchandise_type.options.where(:merchandise_option_set_id => set.id).all.each do |option| %>
-	<%= option.name %> | <%= link_to 'Edit', edit_merchandise_type_merchandise_option_path(@merchandise_type, option) %> <% if option.deletable? %> <%= link_to 'Destroy', [@merchandise_type, option], :confirm => "Really delete option?", :method => :delete %> <% end %> <br/>
+	<%= option.name %> - <%= option.description %> | <%= link_to 'Edit', edit_merchandise_type_merchandise_option_path(@merchandise_type, option) %> <% if option.deletable? %> <%= link_to 'Destroy', [@merchandise_type, option], :confirm => "Really delete option?", :method => :delete %> <% end %> <br/>
 	<% end %>
 	</blockquote>
 	<% end %>

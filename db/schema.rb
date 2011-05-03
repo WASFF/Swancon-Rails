@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.integer  "merchandise_option_set_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "description"
   end
 
   create_table "merchandise_sets", :force => true do |t|

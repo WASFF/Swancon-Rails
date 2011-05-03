@@ -7,6 +7,14 @@ class MerchandiseOption < ActiveRecord::Base
 		merchandise_option_set
 	end
 
+	def displayfull
+		if description == nil
+			name
+		else
+			"#{name} - #{description}"
+		end
+	end
+
 	def deletable?
 		user_order_merchandise_options.count == 0
 	end

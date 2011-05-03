@@ -12,12 +12,17 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :merchandise_type_id %> <%= @merchandise_option.merchandise_type.name %>
+  </div>
+
+  <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :merchandise_type_id %> <%= @merchandise_option.merchandise_type.name %>
-  </div>
+	<div>
+		<%= f.label :description %><br/>
+		<%= f.text_field :description %>
+	</div>
   <div class="field">
     <%= f.label :merchandise_option_set_id, "Merchandise Option Set" %><br />
 		<%= f.select(:merchandise_option_set_id, MerchandiseOptionSet.order(:name).all.collect {|item| [item.name, item.id]}) %>
