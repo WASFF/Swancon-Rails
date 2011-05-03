@@ -1,16 +1,16 @@
 <h1>Listing payments</h1>
 
-<table>
+<table width="100%" border="1">
   <tr>
     <th>Reciept No.</th>
-    <th></th>
-    <th></th>
+		<th>Amount</th>
     <th></th>
   </tr>
 
 <% @payments.each do |payment| %>
   <tr>
     <td><% if payment.isvoid? %> <span class="strike"><%= payment.receipt_number %></span><% else %><%= payment.receipt_number %><% end %></td>
+		<td><%= render_money(payment.amount) %></td>
     <td><%= link_to 'Show', payment %></td>
   </tr>
 <% end %>

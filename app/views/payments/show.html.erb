@@ -1,4 +1,4 @@
-Receipt: <%= @payment.receipt_number %> for Invoice <%= @payment.user_order.invoice_number %><br/>
+Receipt: <%= @payment.receipt_number %> for Invoice <%= link_to @payment.user_order.invoice_number, order_path(@payment.user_order) %><br/>
 Issued: <%= @payment.created_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 Last Updated:<%= @payment.updated_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 <%- if @payment.operator != nil %>
@@ -8,6 +8,7 @@ Operator: <%= @payment.operator.username %>
 Voided: <%= @payment.voided_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 Voided By: <%= @payment.voiding_user.name %><br/>
 <% end %>
+
 
 <% @order = @payment.user_order %>
 <%= render :partial => "user_orders/listing" %>

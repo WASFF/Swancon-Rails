@@ -13,6 +13,7 @@
 		<% end %>
 		<th>Items</th>
 		<th>Placed</th>		
+		<th>Amount</th>
     <th></th>
 		<th></th>
   </tr>
@@ -25,6 +26,7 @@
 		<% end %>
     <td><%= order.merchandise.count + order.tickets.count %></td>
     <td><%= order.created_at.strftime("%d/%m/%Y %H:%M %Z") %></td>
+		<td><%= render_money(order.total) %></td>
 		<td><%= link_to 'Show', order_path(order) %></td>
 		<td><% if order.cancellable %><%= link_to 'Remove', order_path(order), :confirm => "Are you sure?", :method => :delete %><% end %></td>
   </tr>
