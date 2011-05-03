@@ -13,7 +13,7 @@
     <td><%= ticket_set.name %></td>
     <td><%= link_to 'Show', ticket_set %></td>
     <td><%= link_to 'Edit', edit_ticket_set_path(ticket_set) %></td>
-    <td><%= link_to 'Destroy', ticket_set, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><% if ticket_set.deletable? %><%= link_to 'Destroy', ticket_set, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
   </tr>
 <% end %>
 </table>

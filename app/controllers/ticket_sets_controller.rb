@@ -74,7 +74,11 @@ class TicketSetsController < ApplicationController
   # DELETE /ticket_sets/1.xml
   def destroy
     @ticket_set = TicketSet.find(params[:id])
-    @ticket_set.destroy
+		if @ticket_set.deletable?
+    	@ticket_set.destroy
+		else
+			flash[:error] = "Cannot delete ticket set that has tickets!"
+		end
 
     respond_to do |format|
       format.html { redirect_to(ticket_sets_url) }

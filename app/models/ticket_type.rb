@@ -31,6 +31,10 @@ class TicketType < ActiveRecord::Base
 		end
 	end
 	
+	def deletable?
+		user_order_tickets.count == 0
+	end	
+	
 	def self.availablearel
 		ticketarel = TicketType.arel_table
 		arelquery = Arel::Nodes::Grouping.new(ticketarel[:available_from].eq(nil).and(ticketarel[:available_to].eq(nil)))

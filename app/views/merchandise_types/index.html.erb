@@ -13,11 +13,11 @@
 <% @merchandise_types.each do |merchandise_type| %>
   <tr>
     <td><%= merchandise_type.name %></td>
-    <td><%= merchandise_type.merchandise_set_id %></td>
-    <td><%= merchandise_type.price %></td>
+    <td><%= link_to merchandise_type.merchandise_set.name, merchandise_type.merchandise_set %></td>
+    <td><%= render_money(merchandise_type.price) %></td>
     <td><%= link_to 'Show', merchandise_type %></td>
     <td><%= link_to 'Edit', edit_merchandise_type_path(merchandise_type) %></td>
-    <td><%= link_to 'Destroy', merchandise_type, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><% if merchandise_type.deletable? %><%= link_to 'Destroy', merchandise_type, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
   </tr>
 <% end %>
 </table>

@@ -1,16 +1,5 @@
 class MerchandiseOptionsController < ApplicationController
 	filter_resource_access
-  # GET /merchandise_options
-  # GET /merchandise_options.xml
-  def index
-    @merchandise_options = MerchandiseOption.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @merchandise_options }
-    end
-  end
-
   # GET /merchandise_options/1
   # GET /merchandise_options/1.xml
   def show
@@ -78,11 +67,16 @@ class MerchandiseOptionsController < ApplicationController
   # DELETE /merchandise_options/1.xml
   def destroy
     @merchandise_option = MerchandiseOption.find(params[:id])
-    @merchandise_option.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(merchandise_options_url) }
-      format.xml  { head :ok }
-    end
+		if @merchandise_option.deletable?
+    	@merchandise_option.destroy
+	    respond_to do |format|
+	      format.html { redirect_to(MerchandiseType.find(params[:merchandise_type_id])) }
+	      format.xml  { head :ok }
+	    end
+			return
+		else
+			flash[:error] = "Cannot delete an option that has an order attached!"
+			redirect_to @merchandise_option
+		end
   end
 end

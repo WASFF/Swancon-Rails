@@ -74,7 +74,11 @@ class TicketTypesController < ApplicationController
   # DELETE /ticket_types/1.xml
   def destroy
     @ticket_type = TicketType.find(params[:id])
-    @ticket_type.destroy
+		if @ticket_type.deletable?
+    	@ticket_type.destroy
+		else
+			flash[:error] = "Cannot delete ticket that has orders!"
+		end
 
     respond_to do |format|
       format.html { redirect_to(ticket_types_url) }

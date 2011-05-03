@@ -6,6 +6,10 @@ class TicketSet < ActiveRecord::Base
 	scope :available, lambda {
 		joins(:ticket_types).where(TicketType.availablearel).group(:id)
 	}
+	
+	def deletable?
+		ticket_types.count == 0
+	end
 
 	def tickets
 		ticket_types		

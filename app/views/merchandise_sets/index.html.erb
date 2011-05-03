@@ -13,7 +13,7 @@
     <td><%= merchandise_set.name %></td>
     <td><%= link_to 'Show', merchandise_set %></td>
     <td><%= link_to 'Edit', edit_merchandise_set_path(merchandise_set) %></td>
-    <td><%= link_to 'Destroy', merchandise_set, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><% if merchandise_set.deletable? %><%= link_to 'Destroy', merchandise_set, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
   </tr>
 <% end %>
 </table>

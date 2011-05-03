@@ -97,7 +97,11 @@ class MerchandiseTypesController < ApplicationController
   # DELETE /merchandise_types/1.xml
   def destroy
     @merchandise_type = MerchandiseType.find(params[:id])
-    @merchandise_type.destroy
+		if @merchandise_type.deletable?
+    	@merchandise_type.destroy
+		else
+			flash[:error] = "Cannot delete merchandise that has orders!"
+		end
 
     respond_to do |format|
       format.html { redirect_to(merchandise_types_url) }

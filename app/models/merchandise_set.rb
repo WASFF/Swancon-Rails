@@ -8,4 +8,8 @@ class MerchandiseSet < ActiveRecord::Base
 	def merchandise
 		merchandise_types
 	end
+
+	def deletable?
+		merchandise_types.count == 0
+	end
 end

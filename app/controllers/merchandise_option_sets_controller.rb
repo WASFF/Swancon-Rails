@@ -74,7 +74,11 @@ class MerchandiseOptionSetsController < ApplicationController
   # DELETE /merchandise_option_sets/1.xml
   def destroy
     @merchandise_option_set = MerchandiseOptionSet.find(params[:id])
-    @merchandise_option_set.destroy
+		if @merchandise_option_set.deletable?
+    	@merchandise_option_set.destroy
+		else
+			flash[:error] = "Cannot delete a set that has members!"
+		end
 
     respond_to do |format|
       format.html { redirect_to(merchandise_option_sets_url) }

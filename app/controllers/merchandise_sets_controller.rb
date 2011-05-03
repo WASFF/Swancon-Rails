@@ -74,7 +74,11 @@ class MerchandiseSetsController < ApplicationController
   # DELETE /merchandise_sets/1.xml
   def destroy
     @merchandise_set = MerchandiseSet.find(params[:id])
-    @merchandise_set.destroy
+		if @merchandise_set.deletable?
+    	@merchandise_set.destroy
+		else
+			flash[:error] = "Cannot delete a set that has members!"
+		end
 
     respond_to do |format|
       format.html { redirect_to(merchandise_sets_url) }

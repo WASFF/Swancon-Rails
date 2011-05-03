@@ -45,6 +45,10 @@ class MerchandiseType < ActiveRecord::Base
 			merchandise_images
 		end
 		
+		def deletable?
+			user_order_merchandise.count == 0
+		end
+		
 		def self.availablearel
 			mercharel = MerchandiseType.arel_table
 			arelquery = Arel::Nodes::Grouping.new(mercharel[:available_from].eq(nil).and(mercharel[:available_to].eq(nil)))

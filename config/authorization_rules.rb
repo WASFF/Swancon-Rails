@@ -20,7 +20,7 @@ authorization do
 		has_permission_on [:launch_members], :to => [:new, :index, :create, :edit, :update, :show, :destroy, :purchase, :viewpurchase]
 		has_permission_on [:ticket_sets, :ticket_types, :payment_types, :merchandise_sets, :merchandise_types],
 			:to => [:new, :index, :create, :edit, :update, :show, :destroy]
-		has_permission_on [:merchandise_types], :to => [:add_image, :remove_image]
+		has_permission_on [:merchandise_types], :to => [:add_image, :remove_image, :update_image_description]
 
 		has_permission_on [:payments], :to => [:index, :show]
 		has_permission_on [:users], :to => [:index, :show, :purchase_for]
@@ -38,6 +38,8 @@ authorization do
 		has_permission_on [:users], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
 		has_permission_on [:vendor_orders], :to => [:index, :create, :show, :destroy, :mark_arrivals]
 		has_permission_on [:merchandise_types], :to => [:mark_shipped]
+		has_permission_on [:merchandise_options], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
+		has_permission_on [:merchandise_option_sets], :to => [:new, :index, :create, :edit, :update, :show, :destroy]		
 		has_permission_on [:content_blocks], :to => [:new, :index, :create, :edit, :update, :show, :destroy, :preview, :publish, :unpublish]
 		has_permission_on [:user_orders], :to => [:index, :show, :destroy, :mark_paid]
 		has_permission_on [:payments], :to => [:void]
