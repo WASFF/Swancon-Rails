@@ -1,0 +1,49 @@
+<% if @order.payment != nil %>
+Receipt: <%= @order.payment.receipt_number %> for Invoice <%= @order.invoice_number %><br/>
+Issued: <%= render_time(@order.created_at) %><br/>
+Paid: <%= render_time(@order.payment.created_at) %><br/>
+<%- if @order.payment.operator != nil %>
+Marked Paid By: <%= @order.payment.operator.username %><br/>
+<%- end %>
+<% else -%>
+Invoice <%= @order.invoice_number %><br/>
+Issued: <%= render_time(@order.created_at) %><br/>
+<%- if @order.operator != nil %>
+Ordered By: <%= @payment.operator.username %><br/>
+<%- end %>
+<% end -%>
+Last Updated: <%= render_time(@order.updated_at) %><br/>
+<br/>
+
+<%= render :partial => "listing" %>
+
+<% if @order.payment != nil %>
+<div class="text-right">Total Paid: <%= render_money(@order.payment.amount) %></div>
+Paid Via: <%= @order.payment.payment_type.name %><br/>
+<% else %>
+<div class="text-right">Total: <%= render_money(@order.total) %></div>
+<br/>
+
+<%= render :partial => "#{@order.payment_type.name.downcase.gsub(" ", "_")}_details" %>
+
+<% end %>
+
+<div class="noprint">
+<% if current_user.role_symbols.include?(:admin) %>
+Administration<br/>
+<% if @order.payment == nil%>
+Mark Paid:
+<blockquote>
+<%= form_for(@order, :url => mark_paid_order_url, :method => :put) do |f| %>
+Amount Paid: <%= f.text_field :amount, :value => @order.total %><br/>
+Verification String: <%= f.text_field :verification_string, :value => "" %><br/>
+<%= f.submit("Mark Paid") -%>
+<% end %>
+</blockquote>
+<% else %>
+Payment: <%= link_to @order.payment.reciept_number, @order.payment %> <%= button_to "Void", void_payment_url(@order.payment) %><br/>
+<% end %>
+<% end %>
+
+<%= link_to 'Back', orders_path %>
+</div>

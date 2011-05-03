@@ -1,0 +1,6 @@
+#wrapper-top {
+	background: black url('/images/mobile-theme/toplogo-retina.png') no-repeat center center;
+	background-size: 320px; 
+	position: relative;
+	height: 160px;
+}

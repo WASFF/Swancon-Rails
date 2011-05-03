@@ -1,0 +1,26 @@
+<div class="title">Doom-Store&trade;</div>
+<% if @store_user != nil%>
+You are buying for <%= link_to(@store_user.order_name, users_admin_path(@store_user)) %>
+<% end %>
+<% if current_user == nil -%>
+Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to place an order
+<% end -%>
+<% @ticketsets.each do |set| -%>
+<h2><%= set.name %> Tickets</h2>
+<ul>
+<% set.tickets.available.all.each do |ticket| -%>
+<li><%= link_to "#{ticket.name} #{render_money(ticket.price)}", :action => "ticket", :id => ticket.id %></li>
+<% end %>
+</ul>
+<% end -%>
+
+<% @merchsets.each do |set| -%>
+<h2><%= set.name %></h2>
+<ul>
+<% set.merchandise.available.all.each do |merch| -%>
+<li><%= link_to "#{merch.name} #{render_money(merch.price)}", :action => "merchandise", :id => merch.id %></li>
+<% end %>
+</ul>
+<% end -%>
+
+<%= render :partial => "cart" %>

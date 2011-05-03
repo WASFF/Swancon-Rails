@@ -1,0 +1,38 @@
+<div class="title"><%= @merch.name %></div>
+<p class="olive"><%= render_money(@merch.price) %></p>
+
+<% if @store_user != nil%>
+You are buying for <%= link_to(@store_user.order_name, users_admin_path(@store_user)) %>
+<% end %>
+
+<% if current_user == nil%>
+Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to place an order<br/>
+<% end %>
+<% @merch.images.each do |image| -%>
+<div class="merchandise-image" style="width: <%= image.width %>px;"><img src="<%= image.url %>" height="<%= image.height %>" width="<%= image.width %>"/><div class="caption"><%= image.description %></div></div>
+<% end -%>
+<%= form_tag({:action => "merchandise_add", :id => @merch.id}) do %>
+<% @merch.option_sets.all.each do |set| %>
+<h2><%= set.name %> options</h2>
+<ul>
+<% checked = true %>
+<% @merch.options.where(:merchandise_option_set_id => set.id).all.each do |option| %>
+<li><%= option.name %> <%= radio_button_tag "option_set[#{set.id}]", option.id, checked %></li>
+<% checked = false %>
+<% end -%>
+</ul>
+<% end -%>
+
+<% if @merch.available? %>
+<% if @merch.available_to != nil %>
+Available until: <%= render_time(@merch.available_to) %><br/>
+<% end %>
+<% if current_user != nil -%>
+<%= submit_tag "add to cart" -%>
+<% end -%>
+<% else %>
+This item is not available!
+<% end %>
+<% end -%>
+
+<%= render :partial => "cart" %>

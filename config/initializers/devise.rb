@@ -141,3 +141,7 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :twitter_oauth
   # end
 end
+
+ActionController::Responder.class_eval do
+  alias :to_mobile :to_html
+end
