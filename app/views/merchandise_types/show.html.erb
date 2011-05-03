@@ -1,5 +1,5 @@
 <div class="title"><%= @merchandise_type.name %></div>
-<p class="olive">$<%= @merchandise_type.price %></p>
+<p class="olive">$<%= render_money(@merchandise_type.price) %></p>
 
 <p>
   <b>Merchandise set:</b>
@@ -24,16 +24,21 @@
 	<%= set.name %><br/>
 	<blockquote>
 	<% @merchandise_type.options.where(:merchandise_option_set_id => set.id).all.each do |option| %>
-	<%= option.name %> | <%= link_to 'Edit', edit_merchandise_type_merchandise_option_path(@merchandise_type, option) %><br/>
+	<%= option.name %> | <%= link_to 'Edit', edit_merchandise_type_merchandise_option_path(@merchandise_type, option) %> <% if option.deletable? %> <%= link_to 'Destroy', [@merchandise_type, option], :confirm => "Really delete option?", :method => :delete %> <% end %> <br/>
 	<% end %>
 	</blockquote>
 	<% end %>
 	<% end -%>
 </p>
 
+<%= link_to 'Add Option', new_merchandise_type_merchandise_option_path(@merchandise_type) %><br/>
+
+<%= link_to 'Edit', edit_merchandise_type_path(@merchandise_type) %> |
+<%= link_to 'Back', merchandise_types_path %>
+
 <p>
 	<% @order = @merchandise_type.orders.unpaid %>
-	<b>Unpaid Orders - <%= @order.count %></b>
+	<b>Unpaid Orders - <%= @order.count %> - <%= render_money(@order.count * @merchandise_type.price) %></b>
 	<%= render :partial => "order_list" %>
 </p>
 
@@ -41,7 +46,7 @@
 	<% @order = @merchandise_type.orders.outstanding %>
 	<% @include_check_box = true %>
 	<% @include_shipped = true %>
-	<b>Outstanding Orders (paid, not ordered from supplier)- <%= @order.count %></b>
+	<b>Outstanding Orders (paid, not ordered from supplier)- <%= @order.count %> - <%= render_money(@order.count * @merchandise_type.price) %></b>
 	<%= form_for(VendorOrder.new) do |f| %>
 	<%= render :partial => "order_list" %>
 	<%= f.submit("Create Vendor Order")%>
@@ -51,21 +56,22 @@
 <p>
 	<% @order = @merchandise_type.orders.placed %>
 	<% @include_check_box = false %>
-	<% @include_shipped = true %>
-	<b>Orders placed, not arrived from vendor - <%= @order.count %></b>
+	<% @include_shipped = false %>
+	<b>Orders placed, not arrived from vendor - <%= @order.count %> - <%= render_money(@order.count * @merchandise_type.price) %></b>
 	<%= render :partial => "order_list" %>
 </p>
 
 <p>
 	<% @order = @merchandise_type.orders.arrived %>
-	<b>Orders placed and arrived, not shipped - <%= @order.count %></b>
+	<% @include_shipped = true %>	
+	<b>Orders placed and arrived, not shipped - <%= @order.count %> - <%= render_money(@order.count * @merchandise_type.price) %></b>
 	<%= render :partial => "order_list" %>
 </p>
 
 <p>
 	<% @order = @merchandise_type.orders.completed %>
 	<% @include_shipped = false %>
-	<b>Completed Orders - <%= @order.count %></b>
+	<b>Completed Orders - <%= @order.count %> - <%= render_money(@order.count * @merchandise_type.price) %></b></b>
 	<%= render :partial => "order_list" %>
 </p>
 
@@ -79,8 +85,3 @@
 	<% end %>
 	</blockquote>
 </p>
-
-<%= link_to 'Add Option', new_merchandise_type_merchandise_option_path(@merchandise_type) %><br/>
-
-<%= link_to 'Edit', edit_merchandise_type_path(@merchandise_type) %> |
-<%= link_to 'Back', merchandise_types_path %>

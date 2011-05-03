@@ -22,7 +22,7 @@
 </p>
 
 <p>
-	<b>Unpaid Orders - <%= @ticket_type.orders.unpaid.count %> - <%= @ticket_type.orders.unpaid.count * @ticket_type.price %></b>
+	<b>Unpaid Orders - <%= @ticket_type.orders.unpaid.count %> - <%= render_money(@ticket_type.orders.unpaid.count * @ticket_type.price) %></b>
 	<% order = 1 %>
 	<blockquote>
 	<% @ticket_type.orders.unpaid.each do |uot| %>
@@ -33,7 +33,7 @@
 </p>
 
 <p>
-	<b>Paid Orders - <%= @ticket_type.orders.paid.count %> - <%= @ticket_type.orders.paid.count * @ticket_type.price %></b>
+	<b>Paid Orders - <%= @ticket_type.orders.paid.count %> - <%= render_money(@ticket_type.orders.paid.count * @ticket_type.price) %></b>
 	<% order = 1 %>
 	<blockquote>
 	<% @ticket_type.orders.paid.each do |uot| %>

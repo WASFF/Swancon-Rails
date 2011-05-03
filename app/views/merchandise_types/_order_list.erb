@@ -1,7 +1,7 @@
 <% rank = 1 %>
 <blockquote>
 <% @order.each do |uom| %>
-<%= rank %>. <%= uom.user_order.user.order_name %> - <%= uom.name %> Options: <% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %> <% if @include_check_box %><%= check_box_tag "user_order_merchandise[]", uom.id %><% end %> - Order <% if @include_shipped %><%= link_to "Shipped", mark_shipped_merchandise_type_path(@merchandise_type, :user_order_merchandise_id => uom.id), :confirm => "This really has shipped?" %><% end %><br/>
+<%= rank %>. <%= uom.user_order.user.order_name %> - <%= uom.name %> Options: <% uom.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %> <% if @include_check_box %> - Order <%= check_box_tag "user_order_merchandise[]", uom.id %><% end %> <% if @include_shipped %><%= link_to "Shipped", mark_shipped_merchandise_type_path(@merchandise_type, :user_order_merchandise_id => uom.id), :confirm => "This really has shipped?" , :method => :post %><% end %><br/>
 <% rank += 1%>
 <% end %>
 </blockquote>

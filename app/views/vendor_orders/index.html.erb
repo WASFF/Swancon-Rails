@@ -1,8 +1,10 @@
-<h1>Listing vendor_orders</h1>
+<div class="title">Vendor Orders</div>
 
 <table>
   <tr>
     <th>Vendor</th>
+		<th>Created at</th>
+		<th>Items</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,6 +13,8 @@
 <% @vendor_orders.each do |vendor_order| %>
   <tr>
     <td><%= vendor_order.vendor_id %></td>
+    <td><%= render_time(vendor_order.created_at) %></td>
+		<td><%= vendor_order.merchandise.count %></td>
     <td><%= link_to 'Show', vendor_order %></td>
     <td><%= link_to 'Edit', edit_vendor_order_path(vendor_order) %></td>
     <td><%= link_to 'Destroy', vendor_order, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -19,5 +23,3 @@
 </table>
 
 <br />
-
-<%= link_to 'New Vendor order', new_vendor_order_path %>

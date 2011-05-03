@@ -58,6 +58,12 @@
             <% permitted_to? :edit, :ticket_types do -%>
             <li><%= link_to("Manage Tickets", ticket_types_path)%></li>
             <% end %>
+            <% permitted_to? :index, :users do -%>
+            <li><%= link_to("Show Vendor Orders", vendor_orders_path) %></li>
+            <% end %>
+            <% permitted_to? :index, :payments do -%>
+            <li><%= link_to("Show Payments", payments_path) %></li>
+            <% end %>
             <li><%= link_to("Show All Orders", orders_path(:all => true)) %></li>
             </ul>
 
