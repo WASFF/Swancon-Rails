@@ -44,7 +44,7 @@
             <h2>Admin</h2>
             <ul>
             <% permitted_to? :index, :users do -%>
-            <li><%= link_to("Administer Users", users_path) %></li>
+            <li><%= link_to("Administer Users", users_admin_index_path) %></li>
             <% end %>
             <% permitted_to? :edit, :merchandise_sets do -%>
             <li><%= link_to("Manage Merchandise Sets", merchandise_sets_path)%></li>

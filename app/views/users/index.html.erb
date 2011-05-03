@@ -20,9 +20,9 @@
 		<td><%= user.username %></td>
 		<td><%= user.displayRoles %></td>
     <td><%= user.email %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Show', users_admin_path(user) %></td>
+    <td><%= link_to 'Edit', edit_users_admin_path(user) %></td>
+    <td><%= link_to 'Destroy', users_admin_path(user), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
@@ -39,14 +39,14 @@
 	<tr>
 		<td><%= role.name %></td>
 		<td><%= role.users.count %></td>
-		<td><%= link_to "List", users_path(:roles => "#{role.name}") -%>
+		<td><%= link_to "List", users_admin_index_path(:roles => "#{role.name}") -%>
 	</tr>
 <% end -%>
 	<tr>
 		<td>Users without Roles</td>
 		<td></td>
-		<td><%= link_to "List", users_path(:norole => true) -%>
+		<td><%= link_to "List", users_admin_index_path(:norole => true) -%>
 	</tr>
 </table>
 <% end -%>
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'New User', new_users_admin_path %>

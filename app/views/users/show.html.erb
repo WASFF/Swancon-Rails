@@ -10,5 +10,9 @@
   <%= @user.email %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%- if @user.member_detail != nil %>
+<%= link_to "More member details available", @user.member_detail %><br/>
+<%- end %>
+
+<%= link_to 'Edit', edit_users_admin_path(@user) %> |
+<%= link_to 'Back', users_admin_path %>

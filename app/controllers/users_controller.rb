@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 				@rolename = "#{@rolename}#{rolename}, "
 			end
 			@rolename = @rolename[0..-2]		
-			@users = @users.all
+			@users = @users.includes(:roles).all
 		end
 
 	  respond_to do |format|
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
 	def new
 	  @user = User.new
-
+#		@member_detail = MemberDetail.new
 	  respond_to do |format|
 	    format.html # new.html.erb
 	    format.xml  { render :xml => @user }
@@ -57,10 +57,11 @@ class UsersController < ApplicationController
 
 	def create
 	  @user = User.new(params[:user])
-
+		user.skip_confirmation!
+		user.confirm!
 	  respond_to do |format|
 	    if @user.save
-	      format.html { redirect_to(@user, :notice => 'User was successfully created.') }
+	      format.html { redirect_to(users_admin_path(@user), :notice => 'User was successfully created.') }
 	      format.xml  { render :xml => @user, :status => :created, :location => @user }
 	    else
 	      format.html { render :action => "new" }
@@ -87,7 +88,7 @@ class UsersController < ApplicationController
 
 	  respond_to do |format|
 	    if @user.update_attributes(params[:user])
-	      format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+	      format.html { redirect_to(users_admin_path(@user), :notice => 'User was successfully updated.') }
 	      format.xml  { head :ok }
 	    else
 	      format.html { render :action => "edit" }
@@ -101,7 +102,7 @@ class UsersController < ApplicationController
 	  @user.destroy
 
 	  respond_to do |format|
-	    format.html { redirect_to(users_url) }
+	    format.html { redirect_to(users_admin_index_url) }
 	    format.xml  { head :ok }
 	  end
 	end
