@@ -3,6 +3,8 @@ DoomCon::Application.routes.draw do
 
   resources :merchandise_types do
 		post 'mark_shipped', :on => :member
+		post 'add_image', :on => :member
+		post 'remove_image', :on => :member
 		resources :merchandise_options do
 		end	
 	end

@@ -18,7 +18,7 @@ authorization do
 		has_permission_on [:launch_members], :to => [:new, :index, :create, :edit, :update, :show, :destroy, :purchase, :viewpurchase]
 		has_permission_on [:ticket_sets, :ticket_types, :payment_types, :merchandise_sets, :merchandise_types, :payments],
 			:to => [:new, :index, :create, :edit, :update, :show, :destroy]
-		
+		has_permission_on [:merchandise_types], :to => [:add_image, :remove_image]
 		
 		has_permission_on [:users], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
 		has_permission_on [:member_details], :to => [:new, :index, :create, :edit, :update, :show, :destroy]

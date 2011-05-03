@@ -70,6 +70,20 @@ class MerchandiseTypesController < ApplicationController
     end
   end
 
+	def add_image
+		@merchandise_type = MerchandiseType.find(params[:id])
+		image = MerchandiseImage.new(:merchandise_type => @merchandise_type, :image => params[:image][:image])
+		image.save
+		render :action => "edit"
+	end
+	
+	def remove_image
+		@merchandise_type = MerchandiseType.find(params[:id])
+		image = @merchandise_type.images.find(params[:image_id])
+		image.destroy
+		render :action => "edit"
+	end
+
 	def mark_shipped
 		@merchandise_type = MerchandiseType.find(params[:id])
 		user_order_merchandise = @merchandise_type.orders.find(params[:user_order_merchandise_id])

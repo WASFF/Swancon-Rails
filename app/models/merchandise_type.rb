@@ -3,6 +3,7 @@ class MerchandiseType < ActiveRecord::Base
 		has_many :merchandise_options
 		has_many :launch_member_merchandise_types
 		has_many :user_order_merchandise
+		has_many :merchandise_images
 		
 		scope :available, lambda {
 			where(self.availablearel)
@@ -38,7 +39,11 @@ class MerchandiseType < ActiveRecord::Base
 			else
 				(available_from <= Time.now) and (Time.now <= available_to)
 			end
-		end	
+		end
+		
+		def images
+			merchandise_images
+		end
 		
 		def self.availablearel
 			mercharel = MerchandiseType.arel_table

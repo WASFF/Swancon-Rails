@@ -2,5 +2,15 @@
 
 <%= render 'form' %>
 
+<h2>Images</h2>
+<% @merchandise_type.images.each do |image| %>
+<img src="<%= image.image.url %>"/><br/>
+<%= link_to "Remove", remove_image_merchandise_type_path(@merchandise_type, :image_id => image.id), :confirm => "Really Remove image?", :method => :post %><br/>
+<% end %>
+<%= form_tag(add_image_merchandise_type_url(@merchandise_type), {:multipart => true}) do %>
+Add Image: <%= file_field :image, :image %><br/>
+<%= submit_tag "Add" %>
+<% end %>
+
 <%= link_to 'Show', @merchandise_type %> |
 <%= link_to 'Back', merchandise_types_path %>
