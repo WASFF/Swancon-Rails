@@ -13,7 +13,7 @@ Available until: <%= render_time(@ticket.available_to) %><br/>
 <% end %>
 <% if current_user != nil and current_user.member_detail != nil -%>
 <%= button_to "add to cart", :action => "ticket_add", :id => @ticket.id %>
-<% elsif current_user.member_detail == nil -%>
+<% elsif current_user != nil and current_user.member_detail == nil -%>
 Please fill out your <%= link_to("member details", edit_my_member_details_path) %> before buying a ticket
 <% end %>
 <% else %>

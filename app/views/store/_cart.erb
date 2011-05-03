@@ -1,8 +1,7 @@
-<% if current_user == nil -%>
 <h2>Your Cart</h2>
+<% if current_user == nil -%>
 Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to place an order
 <% else -%>
-<h2>Your Cart</h2>
 <% price = 0.0 -%>
 <% index = 0 -%>
 <ul>
