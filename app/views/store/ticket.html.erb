@@ -1,6 +1,8 @@
 <div class="title"><%= @ticket.set.name %> Ticket</div>
 <p class="olive"><%= @ticket.name %> - <%= render_money(@ticket.price) %></p>
-
+<% if current_user == nil%>
+Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to place an order<br/>
+<% end %>
 <% if @ticket.available? %>
 <% if @ticket.available_to != nil %>
 Available until: <%= render_time(@ticket.available_to) %><br/>
@@ -9,9 +11,7 @@ Available until: <%= render_time(@ticket.available_to) %><br/>
 <%= button_to "add to cart", :action => "ticket_add", :id => @ticket.id %>
 <% elsif current_user.member_detail == nil -%>
 Please fill out your <%= link_to("member details", edit_my_member_details_path) %> before buying a ticket
-<% else %>
-Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to place an order
-<% end -%>
+<% end %>
 <% else %>
 This item is not available!
 <% end %>
