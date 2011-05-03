@@ -1,4 +1,5 @@
 class MerchandiseOptionSetsController < ApplicationController
+	filter_resource_access
   # GET /merchandise_option_sets
   # GET /merchandise_option_sets.xml
   def index

@@ -1,4 +1,5 @@
 class UserOrdersController < ApplicationController
+	filter_resource_access
   # GET /payment_types
   # GET /payment_types.xml
   def index
@@ -47,7 +48,16 @@ class UserOrdersController < ApplicationController
   # DELETE /payment_types/1.xml
   def destroy
     @order = UserOrder.find(params[:id])
-    @order.destroy
+		if !current_user.role_symbols.include?(:admin) and @order.user != current_user
+			flash[:error] = "Don't try to remove other people's orders!"
+		else
+			if @order.payment == nil
+				@order.destroy
+				flash[:notice] = "Your order has been removed"
+			else
+	    	flash[:error] = "You cannot remove an order you've paid for!"
+			end
+		end
 
     respond_to do |format|
       format.html { redirect_to(orders_url) }

@@ -1,4 +1,5 @@
 class MemberDetailsController < ApplicationController
+	filter_resource_access
   # GET /member_details
   # GET /member_details.xml
   def index
