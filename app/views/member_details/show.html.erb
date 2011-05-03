@@ -60,6 +60,10 @@
   <%= @member_detail.email_optin %>
 </p>
 
+<p>
+	<b>Disclaimer signed?</b> <%= @member_detail.disclaimer_signed %>
+</p>
+
 
 <%= link_to 'Edit', edit_member_detail_path(@member_detail) %> |
 <%= link_to 'Back', member_details_path %>

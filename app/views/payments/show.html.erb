@@ -13,7 +13,12 @@ Voided By: <%= @payment.voiding_user.name %><br/>
 <% @order = @payment.user_order %>
 <%= render :partial => "user_orders/listing" %>
 
-<div class="text-right">Total Paid: <%= @payment.amount %></div
-<h2>Paid Via: <%= @payment.type.name %></h2>
+<div class="text-right">Total Paid: <%= @payment.amount %></div>
+Paid Via: <%= @payment.type.name %></br>
 
-<%= link_to 'Back', @launch_member %>
+<%- if @order.tickets.count > 0 and (@order.user.member_detail == nil or !@order.user.member_detail.disclaimer_signed) %>
+<br/>
+<%= render :partial => "/member_details/disclaimer"%>
+<%- end %>
+
+<%= link_to 'Back', @launch_member, :class => "noprint" %>

@@ -28,6 +28,11 @@ Paid Via: <%= @order.payment.payment_type.name %><br/>
 
 <% end %>
 
+<%- if @order.tickets.count > 0 and (@order.user.member_detail == nil or !@order.user.member_detail.disclaimer_signed) %>
+<br/>
+<%= render :partial => "/member_details/disclaimer"%>
+<%- end %>
+
 <div class="noprint">
 <% if current_user.role_symbols.include?(:admin) %>
 Administration<br/>

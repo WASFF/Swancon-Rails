@@ -4,3 +4,8 @@ Issued: <%= @payment.created_at.strftime("%d/%m/%Y %H:%M %Z") %>
 <% @order = @payment.user_order %>
 
 <%= render :partial => "/user_orders/listing" %>
+
+<%- if @order.tickets.count > 0 and (@order.user.member_detail == nil or !@order.user.member_detail.disclaimer_signed) %>
+<br/>
+<%= render :partial => "/member_details/disclaimer"%>
+<%- end %>

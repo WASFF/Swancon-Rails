@@ -57,16 +57,7 @@
     <%= f.label :email_optin %><br />
     <%= f.check_box :email_optin %>
   </div>
-
-<strong>REQUIRED TO BE COMPLETED BY MEMBER OR PARENT/GUARDIAN IF MEMBER IS UNDER 18</strong><br/>
-<p>While the WASFF Crew make reasonable efforts to protect your wellbeing whilst attending WASFF Events, they cannot afford to be sued, they accept no liability if you or your property get hurt or damaged when attending a WASFF Event and so you, as the purchaser of a membership, agree to the following conditions of entry to any WASFF Event, on your own behalf, and as the parent or guardian of any minor and on behalf of any other person for whom this ticket is purchased (a “Relevant 3rd Party”), by signing below:</p>
-<ol>
-	<li>While participating at each WASFF Event we attend We may partake in dangerous or risky activities, and if so, We VOLUNTARILY ASSUME ALL ASSOCIATED RISKS.</li>
-	<li>We WILL ABIDE BY ANY RULES of the WASFF Event e.g. those published at swancon.com/conventionrules or wasff.sf.org.au/convention_rules and with the constitution and by-laws of WASFF, published at wasff.sf.org.au/constitution and which are all available on request.</li>
-	<li>We hereby ABSOLVE THE WASFF CREW FROM ALL LIABILITY in relation to any injury We may receive, either directly or indirectly from attending the WASFF Event and We HEREBY INDEMNIFY the WASFF Crew from, and hold the WASFF Crew harmless against, all claims of any kind that may be brought by Us against any of the WASFF Crew, which directly or indirectly relates to, arises from, is pursuant to, or is in connection with Our attendance at the WASFF Event, including any act or omission of any kind by the WASFF Crew.</li>
-	<li>We permit the release of Our membership information to organisations similar WASFF, but only in accordance with, and only for purposes provided in, the WASFF constitution and by-laws, including, but not limited to providing information for checking validity of voting eligibility for Ditmar awards.</li>
-	<li>“WASFF” means the Western Australian Science Fiction Foundation Inc.; “WASFF Crew” means  WASFF, its officers, its subcommittee members, its staff, its contractors and its volunteers; “WASFF Event” means any event held by or organised by WASFF and “We” means me and any Relevant Third Party and “Us” and “Our” have the corresponding meanings.</li>
-</ol>
+<%= render :partial => "/member_details/disclaimer"%>
 <% if @member_detail.disclaimer_signed -%>
 I HAVE AGREED TO THE ABOVE
 <% else -%>
