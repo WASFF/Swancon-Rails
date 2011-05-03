@@ -15,6 +15,7 @@
   <%= stylesheet_link_tag "mainprint", :media => "print" %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
+	<%= yield :head %>
 </head>
 <body>
 
@@ -46,6 +47,9 @@
             <% permitted_to? :index, :users do -%>
             <li><%= link_to("Administer Users", users_admin_index_path) %></li>
             <% end %>
+            <% permitted_to? :index, :member_details do -%>
+            <li><%= link_to("Member Details List", member_details_path) %></li>
+            <% end %>
             <% permitted_to? :edit, :merchandise_sets do -%>
             <li><%= link_to("Manage Merchandise Sets", merchandise_sets_path)%></li>
             <% end %>
@@ -58,7 +62,7 @@
             <% permitted_to? :edit, :ticket_types do -%>
             <li><%= link_to("Manage Tickets", ticket_types_path)%></li>
             <% end %>
-            <% permitted_to? :index, :users do -%>
+            <% permitted_to? :index, :vendor_orders do -%>
             <li><%= link_to("Show Vendor Orders", vendor_orders_path) %></li>
             <% end %>
             <% permitted_to? :index, :payments do -%>

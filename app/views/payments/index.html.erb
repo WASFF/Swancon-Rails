@@ -1,8 +1,11 @@
-<h1>Listing payments</h1>
+<div class="title">Payments</div>
 
 <table width="100%" border="1">
   <tr>
     <th>Reciept No.</th>
+		<th>User</th>
+		<th>Items</th>
+		<th>Issued</th>
 		<th>Amount</th>
     <th></th>
   </tr>
@@ -10,6 +13,9 @@
 <% @payments.each do |payment| %>
   <tr>
     <td><% if payment.isvoid? %> <span class="strike"><%= payment.receipt_number %></span><% else %><%= payment.receipt_number %><% end %></td>
+		<td><% if payment.order != nil %><%= link_to payment.order.user.order_name, users_admin_path(payment.order.user) %><% else %>n/a<% end %></td>
+    <td><% if payment.order != nil %><%= payment.order.merchandise.count + payment.order.tickets.count %><% else %>n/a<% end %></td>
+		<td><%= render_time(payment.created_at ) %></td>
 		<td><%= render_money(payment.amount) %></td>
     <td><%= link_to 'Show', payment %></td>
   </tr>

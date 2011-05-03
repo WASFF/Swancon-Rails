@@ -42,6 +42,10 @@ class User < ActiveRecord::Base
 			username
 		end
 	end
+	
+	def orders
+		user_orders
+	end
 
 	# Class Functions
   def self.find_by_username_or_email(username, email)

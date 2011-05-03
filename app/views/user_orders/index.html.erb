@@ -1,11 +1,11 @@
 <% if @allorders %>
-<h1>Listing Orders</h1>
+<div class="title">Listing Orders</div>
 <% else %>
-<h1>Your Orders</h1>
+<div class="title">Your Orders</div>
 <% end%>
 
 
-<table width="80%" border="1">
+<table width="100%" border="1">
   <tr>
     <th>Order/Invoice No.</th>
 		<% if @allorders %>
@@ -22,7 +22,7 @@
   <tr>
     <td><%= order.invoice_number %></td>
 		<% if @allorders %>
-		<td><%= order.user.name %></td>
+		<td><%= link_to order.user.order_name, users_admin_path(order.user) %></td>
 		<% end %>
     <td><%= order.merchandise.count + order.tickets.count %></td>
     <td><%= order.created_at.strftime("%d/%m/%Y %H:%M %Z") %></td>

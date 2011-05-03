@@ -10,6 +10,13 @@
   <%= @user.email %>
 </p>
 
+<h2>Orders</h2>
+<ul>
+	<% @user.orders.each do |order| %>
+	<li><%= link_to order.invoice_number, order_path(order) %><% if order.payment != nil %>Receipt: <%= link_to order.payment.receipt, order.payment %><% end %></li>
+	<% end %>
+</ul>
+
 <%- if @user.member_detail != nil %>
 <%= link_to "More member details available", @user.member_detail %><br/>
 <%- else %>

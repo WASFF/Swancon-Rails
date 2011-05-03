@@ -17,7 +17,7 @@ Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register",
 <ul>
 <% checked = true %>
 <% @merch.options.where(:merchandise_option_set_id => set.id).all.each do |option| %>
-<li><%= option.name %> <%= radio_button_tag "option_set[#{set.id}]", option.id, checked %></li>
+<li><%= radio_button_tag "option_set[#{set.id}]", option.id, checked %><%= option.displayfull %></li>
 <% checked = false %>
 <% end -%>
 </ul>

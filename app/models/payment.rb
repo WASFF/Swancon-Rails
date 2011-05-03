@@ -22,6 +22,14 @@ class Payment < ActiveRecord::Base
 		sprintf "DOOMCON-%05d", id		
 	end
 	
+	def order
+		user_order
+	end
+	
+	def order=(value)
+		self.user_order = value
+	end
+	
 	def type
 		payment_type
 	end

@@ -13,4 +13,9 @@ Issued: <%= @payment.created_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 
 Paid Via: <%= @payment.payment_type.name %><br/>
 Total Paid: <%= @payment.amount %>
+
+<%- if @order.tickets.count > 0 and (@order.user.member_detail == nil or !@order.user.member_detail.disclaimer_signed) %>
+<br/>
+<%= render :partial => "/member_details/disclaimer"%>
+<%- end %>
 </body>

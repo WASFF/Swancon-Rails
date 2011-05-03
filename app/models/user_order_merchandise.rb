@@ -26,6 +26,7 @@ class UserOrderMerchandise < ActiveRecord::Base
 	}
 	
 	scope :optionsort, lambda {
+		
 	}
 		
 	def price

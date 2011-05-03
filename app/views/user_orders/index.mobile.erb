@@ -21,7 +21,7 @@
   <tr>
     <td><%= order.invoice_number %></td>
 		<% if @allorders %>
-		<td><%= link_to order.user.username, users_admin_path(order.user) %></td>
+		<td><%= link_to order.user.order_name, users_admin_path(order.user) %></td>
 		<% end %>
     <td><%= order.merchandise.count + order.tickets.count %></td>
     <td><%= order.created_at.strftime("%d/%m/%Y %H:%M %Z") %></td>

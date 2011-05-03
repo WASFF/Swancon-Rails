@@ -2,7 +2,7 @@
 <%= merchorder.merchandise_type.name -%><% merchorder.options.each do |option| %> <%= option.set.name %>: <%= option.name %> <% end %>	<%= render_money(merchorder.merchandise_type.price) %>
 <% end -%>
 <% @order.tickets.all.each do |ticketorder| -%>	
-<%= ticketorder.ticket_type.name %>		<%= ticketorder.user.name %>		<%= render_money(ticketorder.ticket_type.price) %>
+<%= ticketorder.ticket_type.name %>		<%= ticketorder.user.order_name %>		<%= render_money(ticketorder.ticket_type.price) %>
 Sub Total: $<%= render_money(@order.subtotal) %>
 <% end -%>
 <% if @order.surcharge > 0.0 %>

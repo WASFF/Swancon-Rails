@@ -1,19 +1,13 @@
-<h1>Listing member_details</h1>
+<div class="title">Member Details</div>
 
-<table>
+<table width="100%" border="1">
   <tr>
-    <th>User</th>
-    <th>Name first</th>
-    <th>Name last</th>
+    <th>Name</th>
     <th>Name badge</th>
-    <th>Address 1</th>
-    <th>Address 2</th>
-    <th>Address 3</th>
-    <th>Address postcode</th>
-    <th>Address state</th>
-    <th>Address country</th>
     <th>Phone</th>
-    <th>Email optin</th>
+		<th>Email</th>
+    <th>Emailable</th>
+		<th>Disclaimer</th>
     <th></th>
     <th></th>
     <th></th>
@@ -21,18 +15,12 @@
 
 <% @member_details.each do |member_detail| %>
   <tr>
-    <td><%= member_detail.user_id %></td>
-    <td><%= member_detail.name_first %></td>
-    <td><%= member_detail.name_last %></td>
+    <td><%= member_detail.name_real %></td>
     <td><%= member_detail.name_badge %></td>
-    <td><%= member_detail.address_1 %></td>
-    <td><%= member_detail.address_2 %></td>
-    <td><%= member_detail.address_3 %></td>
-    <td><%= member_detail.address_postcode %></td>
-    <td><%= member_detail.address_state %></td>
-    <td><%= member_detail.address_country %></td>
     <td><%= member_detail.phone %></td>
+		<td><%= member_detail.user.email %></td>
     <td><%= member_detail.email_optin %></td>
+    <td><%= member_detail.disclaimer_signed %></td>
     <td><%= link_to 'Show', member_detail %></td>
     <td><%= link_to 'Edit', edit_member_detail_path(member_detail) %></td>
     <td><%= link_to 'Destroy', member_detail, :confirm => 'Are you sure?', :method => :delete %></td>
