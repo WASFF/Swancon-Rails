@@ -1,29 +1,18 @@
-RECEIPT: <%= @payment.receipt_number %><br/>
+Receipt: <%= @payment.receipt_number %> for Invoice <%= @payment.user_order.invoice_number %><br/>
 Issued: <%= @payment.created_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 Last Updated:<%= @payment.updated_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
+<%- if @payment.operator != nil %>
+Operator: <%= @payment.operator.username %>
+<%- end %>
 <% if @payment.isvoid? %>
 Voided: <%= @payment.voided_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 Voided By: <%= @payment.voiding_user.name %><br/>
 <% end %>
 
-<table width="100%" border="1">
-	<tr><th>Description</th><th width="10%">For</th><th width="5%">Price</th>
-<% @payment.launch_member_merchandise_types.all.each do |lmmt| -%>	
-<tr>
-	<td><%= lmmt.merchandise_type.name -%> - Options: <% lmmt.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %></td>
-	<td><%= link_to lmmt.launch_member.name, lmmt.launch_member %></td>
-	<td><%= lmmt.merchandise_type.price %></td>
-</tr>
-<% end %>
+<% @order = @payment.user_order %>
+<%= render :partial => "user_orders/listing" %>
 
-<% @payment.launch_member_ticket_types.all.each do |lmtt| -%>	
-<tr>
-	<td><%= lmtt.ticket_type.name %></td><td><%= link_to lmtt.launch_member.name, lmtt.launch_member %></td><td><%= lmtt.ticket_type.price %></td>
-</tr>
-<% end %>
-</table><br/>
-
+<div class="text-right">Total Paid: <%= @payment.amount %></div
 <h2>Paid Via: <%= @payment.type.name %></h2>
-<h2>Total Paid: <%= @payment.amount %></h2>
 
 <%= link_to 'Back', @launch_member %>

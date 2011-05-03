@@ -57,8 +57,8 @@ class UsersController < ApplicationController
 
 	def create
 	  @user = User.new(params[:user])
-		user.skip_confirmation!
-		user.confirm!
+		@user.skip_confirmation!
+		@user.confirm!
 	  respond_to do |format|
 	    if @user.save
 	      format.html { redirect_to(users_admin_path(@user), :notice => 'User was successfully created.') }
@@ -95,6 +95,12 @@ class UsersController < ApplicationController
 	      format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
 	    end
 	  end
+	end
+	
+	def purchase_for
+		@user = User.find(params[:id])
+		session[:store_user_id] = @user.id
+		redirect_to :controller => :store, :action => :index
 	end
 
 	def destroy

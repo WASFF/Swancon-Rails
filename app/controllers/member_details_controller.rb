@@ -1,5 +1,5 @@
 class MemberDetailsController < ApplicationController
-	filter_resource_access
+	filter_resource_access :additional_collection => [:edit_my]
   # GET /member_details
   # GET /member_details.xml
   def index
@@ -14,7 +14,12 @@ class MemberDetailsController < ApplicationController
   # GET /member_details/1
   # GET /member_details/1.xml
   def show
-    @member_detail = MemberDetail.find(params[:id])
+		if !permitted_to? :index
+			redirect_to :action => "edit_my"
+			return
+		end
+
+		@member_detail = MemberDetail.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +31,8 @@ class MemberDetailsController < ApplicationController
   # GET /member_details/new.xml
   def new
     @member_detail = MemberDetail.new
-
+		@member_detail.user_id = params[:user_id]
+		
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @member_detail }
@@ -55,7 +61,9 @@ class MemberDetailsController < ApplicationController
   # POST /member_details.xml
   def create
     @member_detail = MemberDetail.new(params[:member_detail])
-
+		if !permitted_to? :index
+			@member_detail.user = current_user
+		end
     respond_to do |format|
       if @member_detail.save
         format.html { redirect_to(@member_detail, :notice => 'Member detail was successfully created.') }
@@ -71,7 +79,11 @@ class MemberDetailsController < ApplicationController
   # PUT /member_details/1.xml
   def update
     @member_detail = MemberDetail.find(params[:id])
-
+		
+		if !permitted_to? :index
+			params[:member_detail].delete(:user_id)
+		end
+		
     respond_to do |format|
       if @member_detail.update_attributes(params[:member_detail])
         format.html { redirect_to(@member_detail, :notice => 'Member detail was successfully updated.') }

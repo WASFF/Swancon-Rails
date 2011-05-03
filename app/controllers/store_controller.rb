@@ -1,11 +1,11 @@
 class StoreController < ApplicationController
-	before_filter :init_cart
+	before_filter :init_cart, :init_user
 
 	def index
 		@ticketsets = TicketSet.available.all
 		@merchsets = MerchandiseSet.available.all
 	end
-	
+		
 	def merchandise
 		@merch = MerchandiseType.where(:id => params[:id]).first
 		if @merch == nil
@@ -73,7 +73,13 @@ class StoreController < ApplicationController
 				return
 			end
 			
-			order = UserOrder.new(:user => current_user, :payment_type_id => params[:purchase][:payment_type_id].to_i)
+			order = UserOrder.new(:payment_type_id => params[:purchase][:payment_type_id].to_i)
+			if @store_user != nil
+				order.user = @store_user
+			else
+				order.user = current_user
+			end
+			
 			order.save
 			@cart[:tickets].each do |ticket_id|
 				ticket = UserOrderTicket.new(:ticket_type_id => ticket_id, :user_order_id => order.id, :user_id => current_user.id)
@@ -90,9 +96,25 @@ class StoreController < ApplicationController
 			end
 			
 			session[:cart] = nil
+			session[:store_user_id] = nil
 			@cart = nil
 			flash[:notice] = "Order Placed"
-			StoreMailer.invoice(order).deliver
+			if @store_user != nil
+				order.operator = current_user
+				if order.payment_type.available_online
+					StoreMailer.invoice(order).deliver
+				else
+					payment = Payment.new(:user_order => order, :payment_type => order.payment_type)
+					payment.amount = order.total
+					payment.operator = current_user
+					payment.verification_string = "Point Of Sale"
+					payment.save
+					StoreMailer.receipt(payment).deliver					
+				end
+			else
+				StoreMailer.invoice(order).deliver
+			end
+			
 			redirect_to order_path(order)
 		end
 	end
@@ -108,6 +130,13 @@ class StoreController < ApplicationController
 		
 		@cart = session[:cart]	
 		true		
+	end
+	
+	def init_user
+		if session[:store_user_id] != nil
+			@store_user = User.find(session[:store_user_id])
+		end
+		true
 	end
 	
 end

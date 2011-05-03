@@ -1,5 +1,6 @@
 class Payment < ActiveRecord::Base
 	belongs_to :payment_type
+	belongs_to :operator, :class_name => "User"	
 	has_many :launch_member_merchandise_types
 	has_many :launch_member_ticket_types
 	has_one :user_order

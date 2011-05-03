@@ -12,7 +12,9 @@
 
 <%- if @user.member_detail != nil %>
 <%= link_to "More member details available", @user.member_detail %><br/>
+<%- else %>
+<%= link_to "Create Member Details", new_member_detail_path(:user_id => @user.id) %><br/>
 <%- end %>
-
+<%= link_to "Purchase For this User", purchase_for_users_admin_path(@user) %> |
 <%= link_to 'Edit', edit_users_admin_path(@user) %> |
 <%= link_to 'Back', users_admin_path %>

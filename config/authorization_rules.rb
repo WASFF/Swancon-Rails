@@ -7,6 +7,7 @@ authorization do
 		includes :guest
 		has_permission_on [:users], :to => [:update, :show, :destroy]		
 		has_permission_on [:user_orders], :to => [:index, :show, :destroy]
+		has_permission_on [:member_details], :to => [:edit_my, :update, :create, :show]
 	end
 
 	role :member do
@@ -22,10 +23,10 @@ authorization do
 		has_permission_on [:merchandise_types], :to => [:add_image, :remove_image]
 
 		has_permission_on [:payments], :to => [:index, :show]
-		has_permission_on [:users], :to => [:index, :show]
+		has_permission_on [:users], :to => [:index, :show, :purchase_for]
 		has_permission_on [:user_orders], :to => [:index, :show]
 		
-		has_permission_on [:member_details], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
+		has_permission_on [:member_details], :to => [:new, :index, :edit, :show, :destroy]
 		has_permission_on [:content_blocks], :to => [:new, :index, :create, :edit, :update, :show, :preview]
 		has_permission_on [:content_tags], :to => [:new, :index, :create, :edit, :update, :show]
 		has_permission_on [:content_pages], :to => [:new, :index, :create, :edit, :update, :show]

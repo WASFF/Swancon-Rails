@@ -38,6 +38,7 @@ class UserOrdersController < ApplicationController
 		payment = Payment.new(:user_order => @order, :payment_type => @order.payment_type)
 		payment.amount = params[:user_order][:amount]
 		payment.verification_string = params[:user_order][:verification_string]
+		payment.operator = current_user
 		payment.save
 
 		StoreMailer.receipt(payment).deliver		

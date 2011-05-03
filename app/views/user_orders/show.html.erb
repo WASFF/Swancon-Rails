@@ -2,9 +2,15 @@
 Receipt: <%= @order.payment.receipt_number %> for Invoice <%= @order.invoice_number %><br/>
 Issued: <%= render_time(@order.created_at) %><br/>
 Paid: <%= render_time(@order.payment.created_at) %><br/>
+<%- if @order.payment.operator != nil %>
+Marked Paid By: <%= @order.payment.operator.username %><br/>
+<%- end %>
 <% else -%>
 Invoice <%= @order.invoice_number %><br/>
 Issued: <%= render_time(@order.created_at) %><br/>
+<%- if @order.operator != nil %>
+Ordered By: <%= @payment.operator.username %><br/>
+<%- end %>
 <% end -%>
 Last Updated: <%= render_time(@order.updated_at) %><br/>
 <br/>

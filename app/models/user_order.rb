@@ -1,5 +1,6 @@
 class UserOrder < ActiveRecord::Base
 	belongs_to :user
+	belongs_to :operator, :class_name => "User"
 	has_many :user_order_merchandise, :dependent => :destroy
 	has_many :user_order_tickets, :dependent => :destroy
 	belongs_to :payment

@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.datetime "updated_at"
     t.integer  "voiding_user_id"
     t.datetime "voided_at"
+    t.integer  "operator_id"
   end
 
   create_table "roles", :force => true do |t|
@@ -244,6 +245,7 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.integer  "payment_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "operator_id"
   end
 
   create_table "user_roles", :force => true do |t|
