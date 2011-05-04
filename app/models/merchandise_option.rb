@@ -2,7 +2,8 @@ class MerchandiseOption < ActiveRecord::Base
 	belongs_to :merchandise_type
 	belongs_to :merchandise_option_set
 	has_many :user_order_merchandise_options
-
+	default_scope order(:order_index)
+	
 	def set
 		merchandise_option_set
 	end

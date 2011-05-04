@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description"
+    t.integer  "order_index",               :default => 0, :null => false
   end
 
   create_table "merchandise_sets", :force => true do |t|

@@ -23,6 +23,10 @@
 		<%= f.label :description %><br/>
 		<%= f.text_field :description %>
 	</div>
+	<div>
+		<%= f.label :order_index %><br/>
+		<%= f.text_field :order_index %><br/>
+	</div>
   <div class="field">
     <%= f.label :merchandise_option_set_id, "Merchandise Option Set" %><br />
 		<%= f.select(:merchandise_option_set_id, MerchandiseOptionSet.order(:name).all.collect {|item| [item.name, item.id]}) %>
