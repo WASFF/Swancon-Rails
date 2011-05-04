@@ -1,9 +1,11 @@
 class CopyOldData1 < ActiveRecord::Migration
   def self.up
 		badcathy = LaunchMember.find(29).destroy
+		goodhelen = LaunchMember.find(52)
 		badhelen = LaunchMember.find(55)
-		badhelen.launch_member_merchandise_types[0].launch_member_id = 52
-		badhelen.launch_member_merchandise_types[0].save
+		lmmt = badhelen.launch_member_merchandise_types[0]
+		lmmt.launch_member = goodhelen
+		lmmt.save
 		badhelen.destroy
 	
 		LaunchMember.all.each do |oldmember|			

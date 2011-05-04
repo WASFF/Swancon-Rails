@@ -1,6 +1,6 @@
 class LaunchMember < ActiveRecord::Base
-	has_many :launch_member_ticket_types, :dependent => :destroy
-	has_many :launch_member_merchandise_types, :dependent => :destroy
+	has_many :launch_member_ticket_types
+	has_many :launch_member_merchandise_types
 	
 	validates :name_first, :presence => true, :length => {:minimum => 1}
 	validates :address_street1, :presence => true, :length => {:minimum => 1}
