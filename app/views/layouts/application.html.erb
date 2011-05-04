@@ -32,7 +32,8 @@
   			</div>
 
   			<div class="sidenav">
-          <% if user_signed_in? %>
+  			  
+          <%- if user_signed_in? %>
             <h2>Welcome <%= current_user.username %></h2>
             <ul>
               <li><%= link_to("Profile", edit_user_registration_path) %></li>
@@ -40,6 +41,20 @@
               <li><%= link_to "Orders", orders_path %></li>
               <li><%= link_to("Log out", destroy_user_session_path) %></li>
             </ul>
+          <%- else %>
+          <h2>Registration</h2>
+            <ul>
+              <li><%= link_to("Log in", new_user_session_path) %></li>
+              <li><%= link_to("Register", new_user_registration_path) %></li>
+            </ul>
+          <%- end %>
+            <h2>Sections</h2>
+    				<ul>
+    					<li><%= link_to("Store", store_path)%></li>
+    					<% ContentPage.topbar.all.each do |page| %>
+    					<li><%= link_to page.name.capitalize, :controller=>"/content_viewer", :action=>"page", :id => page.name %></li>
+    					<% end %>
+    				</ul>
 
             <% if current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin) -%>
             <h2>Admin</h2>
@@ -78,27 +93,6 @@
             <li><%= link_to("Content Tags", content_tags_path ) %></li>
             </ul>
             <% end %>
-
-          <% end %>
-            
-
-          <% if user_signed_in? %>
-
-          <% else %>
-          <h2>Registration</h2>
-            <ul>
-            <li><%= link_to("Log in", new_user_session_path) %></li>
-            <li><%= link_to("Register", new_user_registration_path) %></li>
-            </ul>
-          <% end %>
-          
-  				<h2>Sections</h2>
-  				<ul>
-  					<li><%= link_to("Store", store_path)%></li>
-  					<% ContentPage.topbar.all.each do |page| %>
-  					<li><%= link_to page.name.capitalize, :controller=>"/content_viewer", :action=>"page", :id => page.name %></li>
-  					<% end %>
-  				</ul>
   			</div>
 
   			<div class="clearer"></div>
