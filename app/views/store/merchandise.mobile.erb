@@ -30,7 +30,10 @@ Available until: <%= render_time(@merch.available_to) %><br/>
 <% if current_user != nil -%>
 <%= submit_tag "add to cart" -%>
 <% end -%>
-<% else %>
+<%- elsif @store_user != nil %>
+Warning: Item is currently unavailable to normal users<br/>
+<%= submit_tag "add to cart" %>
+<%- else %>
 This item is not available!
 <% end %>
 <% end -%>

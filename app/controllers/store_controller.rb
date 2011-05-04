@@ -2,8 +2,13 @@ class StoreController < ApplicationController
 	before_filter :init_cart, :init_user
 
 	def index
-		@ticketsets = TicketSet.available.all
-		@merchsets = MerchandiseSet.available.all
+		if @store_user == nil
+			@ticketsets = TicketSet.available.all
+			@merchsets = MerchandiseSet.available.all
+		else
+			@ticketsets = TicketSet.all
+			@merchsets = MerchandiseSet.all
+		end
 	end
 		
 	def merchandise
@@ -15,12 +20,15 @@ class StoreController < ApplicationController
 	end
 	
 	def merchandise_add
-		options = Array.new
-		params[:option_set].keys.each do |option|
-			options << params[:option_set][option]
-		end
+		merch = MerchandiseType.where(:id => params[:id]).first
+		if merch.available? or @store_user != nil
+			options = Array.new
+			params[:option_set].keys.each do |option|
+				options << params[:option_set][option]
+			end
 		
-		session[:cart][:merch] << {:id => params[:id].to_i, :options => options}
+			session[:cart][:merch] << {:id => params[:id].to_i, :options => options}
+		end
 		redirect_to :back
 	end
 	
@@ -41,7 +49,11 @@ class StoreController < ApplicationController
 	end
 	
 	def ticket_add
-		session[:cart][:tickets] << params[:id].to_i
+		ticket = TicketType.where(:id => params[:id]).first
+		
+		if ticket.available? or @store_user != nil
+			session[:cart][:tickets] << params[:id].to_i
+		end
 		redirect_to :back
 	end
 	

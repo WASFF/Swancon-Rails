@@ -8,17 +8,33 @@ Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register",
 <% @ticketsets.each do |set| -%>
 <h2><%= set.name %> Tickets</h2>
 <ul>
-<% set.tickets.available.all.each do |ticket| -%>
+<%- ticketquery = set.tickets.available %>
+<%- if @store_user != nil %>
+<%- ticketquery = set.tickets %>
+<%- end %>
+<% ticketquery.all.each do |ticket| -%>
+<% if ticket.available? %>
 <li><%= link_to "#{ticket.name} #{render_money(ticket.price)}", :action => "ticket", :id => ticket.id %></li>
-<% end %>
+<%- else %>
+<li><%= link_to "#{ticket.name} #{render_money(ticket.price)}", :action => "ticket", :id => ticket.id %> (currently unlisted)</li>
+<%- end %>
+<%- end %>
 </ul>
 <% end -%>
 
 <% @merchsets.each do |set| -%>
 <h2><%= set.name %></h2>
 <ul>
-<% set.merchandise.available.all.each do |merch| -%>
+<%- merchquery = set.merchandise.available %>
+<%- if @store_user != nil %>
+<%- merchquery = set.merchandise %>
+<%- end %>
+<% merchquery.all.each do |merch| -%>
+<% if merch.available? %>
 <li><%= link_to "#{merch.name} #{render_money(merch.price)}", :action => "merchandise", :id => merch.id %></li>
+<% else %>
+<li><%= link_to "#{merch.name} #{render_money(merch.price)}", :action => "merchandise", :id => merch.id %> (currently unlisted)</li>
+<% end %>
 <% end %>
 </ul>
 <% end -%>
