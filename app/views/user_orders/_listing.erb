@@ -13,10 +13,10 @@
 	<td><%= ticketorder.ticket_type.name %></td><td><% if permitted_to? :index, :users -%>
 		<%= link_to ticketorder.user.order_name, users_admin_path(ticketorder.user) %><% else %> <%= ticketorder.user.order_name %><% end %></td><td><%= render_money(ticketorder.ticket_type.price) %></td>
 </tr>
+<% end %>
 <tr>
 	<td></td><td>Sub Total</td><td><%= render_money(@order.subtotal) %></td>
 </tr>
-<% end %>
 <% if @order.surcharge > 0.0 %>
 <tr>
 	<td><%= @order.payment_type.name %> surcharge</td><td></td><td><%= render_money(@order.surcharge) %></td>
