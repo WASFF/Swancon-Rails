@@ -52,7 +52,7 @@ Payment: <%= link_to @order.payment.reciept_number, @order.payment %> <%= button
 <% end %>
 
 <% permitted_to? :remail do %>
-<%= link_to "Send Email to #{@order.user.order_name} again", remail_order_path(@order), :class =>"noprint" %> | 
+<%= link_to "Send Email to #{@order.user.order_name} again", remail_order_path(@order), :method => :post, :class =>"noprint" %> | 
 <% end %>
 
 <%= link_to 'Back', orders_path %>
