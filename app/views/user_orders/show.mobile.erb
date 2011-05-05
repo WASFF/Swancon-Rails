@@ -12,6 +12,7 @@ Issued: <%= render_time(@order.created_at) %><br/>
 Ordered By: <%= @payment.operator.username %><br/>
 <%- end %>
 <% end -%>
+Ordered For: <%= link_to(@order.user.order_name, users_admin_path(@order.user)) %><br/>
 Last Updated: <%= render_time(@order.updated_at) %><br/>
 <br/>
 
