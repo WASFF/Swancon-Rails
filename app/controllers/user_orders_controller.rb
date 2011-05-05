@@ -32,12 +32,12 @@ class UserOrdersController < ApplicationController
 		@order = UserOrder.find(params[:id])
 		
 		if @order.payment == nil
-			StoreMailer.invoice(order).deliver
+			StoreMailer.invoice(@order).deliver
 		else
-			StoreMailer.receipt(order.payment).deliver
+			StoreMailer.receipt(@order.payment).deliver
 		end
 		
-		redirect_to :action => "show"
+		render :show
 	end
 
 	def mark_paid
