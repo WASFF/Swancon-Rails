@@ -1,0 +1,44 @@
+Dear <% if @detail != nil %><%= @detail.name_first%> <%= @detail.name_last %><% else %><%= @user.username %><% end %>,
+
+	At Swancon you pre-ordered some shirts from us, we have them recorded as the following:
+
+<% @shirtorders.includes(:user_order_merchandise_options).all.each do |uom| %>
+		<%= uom.merchandise_type.name %> <% uom.options.all.each do |option| %><%= option.set.name %>: <%= option.name %> <% end %><br/>
+<% end %>
+
+	As there was some confusion about shirt sizing at swancon, we'd like to give you this opportunity to ensure that we have gotten the correct sizing for you. The sizing of the various shirt options are as follows:
+
+	Black shirts (Mens: Boronia Clothing CTS02 - http://www.boroniaclothing.com.au/Products/TeeShirt/COTTON/CTS02/tabid/114/Default.aspx) (Womens: women link goes here)
+
+		Ladies 8 - 
+		Ladies 9 - 
+		Ladies 10 - 
+		Ladies 11 - 
+		Ladies 12 - 
+		Small (Mens) - 53.5CM Half Chest, 70CM CB Length
+		Medium (Mens) - 53.5CM Half Chest, 70CM CB Length
+		Large (Mens) - 53.5CM Half Chest, 70CM CB Length
+		Extra Large (Mens) - 53.5CM Half Chest, 70CM CB Length
+		Extra Extra Large (Mens) - 53.5CM Half Chest, 70CM CB Length
+		Extra Extra Extra Large (Mens) - 53.5CM Half Chest, 70CM CB Length
+
+	Chocolate brown shirts (Mens: ) (Womens: )
+
+		Ladies 8 - 
+		Ladies 9 - 
+		Ladies 10 - 
+		Ladies 11 - 
+		Ladies 12 - 
+		Small (Mens) - 53.5CM Half Chest, 70CM CB Length
+		Medium (Mens) - 53.5CM Half Chest, 70CM CB Length
+		Large (Mens) - 53.5CM Half Chest, 70CM CB Length
+		Extra Large (Mens) - 53.5CM Half Chest, 70CM CB Length
+		Extra Extra Large (Mens) - 53.5CM Half Chest, 70CM CB Length
+		Extra Extra Extra Large (Mens) - 53.5CM Half Chest, 70CM CB Length
+
+	Please reply to this email, including this message indicating if you wish to change your t-shirt sizing (or not) so we can process your order as soon as possible.
+
+
+Best Regards,
+
+Doom-Con 2012
