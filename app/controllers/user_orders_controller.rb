@@ -1,5 +1,5 @@
 class UserOrdersController < ApplicationController
-	filter_resource_access
+	filter_resource_access :additional_member => [:mark_paid, :remail]
   # GET /payment_types
   # GET /payment_types.xml
   def index
@@ -27,6 +27,18 @@ class UserOrdersController < ApplicationController
       format.xml  { render :xml => @order }
     end
   end
+
+	def remail
+		@order = UserOrder.find(params[:id])
+		
+		if @order.payment == nil
+			StoreMailer.invoice(order).deliver
+		else
+			StoreMailer.receipt(order.payment).deliver
+		end
+		
+		redirect_to :action => "show"
+	end
 
 	def mark_paid
 		if !current_user.role_symbols.include?(:admin)

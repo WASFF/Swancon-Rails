@@ -110,7 +110,7 @@ class StoreController < ApplicationController
 			session[:cart] = nil
 			session[:store_user_id] = nil
 			@cart = nil
-			flash[:notice] = "Order Placed"
+			flash[:notice] = "Order Placed, Email Sent"
 			if @store_user != nil
 				order.operator = current_user
 				if order.payment_type.available_online

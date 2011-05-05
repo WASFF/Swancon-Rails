@@ -24,7 +24,7 @@ authorization do
 
 		has_permission_on [:payments], :to => [:index, :show]
 		has_permission_on [:users], :to => [:index, :show, :purchase_for]
-		has_permission_on [:user_orders], :to => [:index, :show]
+		has_permission_on [:user_orders], :to => [:remail]
 		
 		has_permission_on [:member_details], :to => [:new, :index, :edit, :show, :destroy]
 		has_permission_on [:content_blocks], :to => [:new, :index, :create, :edit, :update, :show, :preview]
@@ -41,7 +41,7 @@ authorization do
 		has_permission_on [:merchandise_options], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
 		has_permission_on [:merchandise_option_sets], :to => [:new, :index, :create, :edit, :update, :show, :destroy]		
 		has_permission_on [:content_blocks], :to => [:new, :index, :create, :edit, :update, :show, :destroy, :preview, :publish, :unpublish]
-		has_permission_on [:user_orders], :to => [:index, :show, :destroy, :mark_paid]
+		has_permission_on [:user_orders], :to => [:mark_paid]
 		has_permission_on [:payments], :to => [:void]
 	end
 end
