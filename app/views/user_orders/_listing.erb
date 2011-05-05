@@ -10,7 +10,7 @@
 
 <% @order.tickets.all.each do |ticketorder| -%>	
 <tr>
-	<td><%= ticketorder.ticket_type.name %></td><td><% if permitted_to? :index, :users -%><%= link_to ticketorder.user.order_name, users_admin_path(ticketorder.user) %><% else %> <%= ticketorder.user.order_name %><% end %></td><td><%= render_money(ticketorder.ticket_type.price) %></td>
+	<td><%= ticketorder.ticket_type.name %></td><td><% if permitted_to? (:index, :users) -%><%= link_to ticketorder.user.order_name, users_admin_path(ticketorder.user) %><% else %> <%= ticketorder.user.order_name %><% end %></td><td><%= render_money(ticketorder.ticket_type.price) %></td>
 </tr>
 <tr>
 	<td></td><td>Sub Total</td><td><%= render_money(@order.subtotal) %></td>
