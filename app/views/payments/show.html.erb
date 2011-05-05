@@ -1,4 +1,4 @@
-Receipt: <%= @payment.receipt_number %> for Invoice <%= link_to @payment.user_order.invoice_number, order_path(@payment.user_order) %><br/>
+Receipt: <%= @payment.receipt_number %> <% if @payment.isvoid? %> VOIDED <% else %> for Invoice <%= link_to @payment.user_order.invoice_number, order_path(@payment.user_order) %> <% end %><br/>
 Issued: <%= @payment.created_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 Last Updated:<%= @payment.updated_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 <%- if @payment.operator != nil %>
