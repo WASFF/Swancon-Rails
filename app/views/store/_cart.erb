@@ -21,9 +21,15 @@ Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register",
 <% end -%>
 </ul>
 
+<%- if (@cart[:merch].length + @cart[:tickets].length) > 0 -%>
 Total: <%= render_money(price) %>
-<% if controller.action_name != "purchase" -%>
+<%- if controller.action_name != "purchase" %>
 <%= button_to "Check out", :action => "purchase" %>
-<% end -%>
+<%= button_to "Empty Cart", :action => "clear_cart" %>
+<%- end -%>
+
+<%- else %>
+Cart is Empty
+<%- end %>
 
 <% end -%>

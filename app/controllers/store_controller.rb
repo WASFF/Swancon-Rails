@@ -10,6 +10,13 @@ class StoreController < ApplicationController
 			@merchsets = MerchandiseSet.all
 		end
 	end
+	
+	def clear_cart
+		session[:cart] = nil
+		@cart = nil
+		
+		redirect_to :action => :index
+	end
 		
 	def merchandise
 		@merch = MerchandiseType.where(:id => params[:id]).first
