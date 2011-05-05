@@ -94,7 +94,12 @@ class StoreController < ApplicationController
 			
 			order.save
 			@cart[:tickets].each do |ticket_id|
-				ticket = UserOrderTicket.new(:ticket_type_id => ticket_id, :user_order_id => order.id, :user_id => current_user.id)
+				ticket = UserOrderTicket.new(:ticket_type_id => ticket_id, :user_order_id => order.id)
+				if @store_user == nil
+					 ticket.user_id = current_user.id
+				else
+					 ticket.user_id = @store_user.id					
+				end
 				ticket.save
 			end
 			
