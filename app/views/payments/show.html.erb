@@ -7,9 +7,9 @@ Operator: <%= @payment.operator.username %>
 <% if @payment.isvoid? %>
 Voided: <%= @payment.voided_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 Voided By: <%= @payment.voiding_user.name %><br/>
-<% end %>
+<% else %>
 Ordered For: <%= link_to(@payment.order.user.order_name, users_admin_path(@payment.order.user)) %><br/>
-
+<% end %>
 
 <% @order = @payment.user_order %>
 <%= render :partial => "user_orders/listing" %>
