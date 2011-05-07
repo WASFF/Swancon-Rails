@@ -99,6 +99,10 @@ class StoreController < ApplicationController
 				order.user = current_user
 			end
 			
+			if @store_user != nil
+				order.operator = current_user
+			end
+			
 			order.save
 			@cart[:tickets].each do |ticket_id|
 				ticket = UserOrderTicket.new(:ticket_type_id => ticket_id, :user_order_id => order.id)
@@ -124,7 +128,6 @@ class StoreController < ApplicationController
 			@cart = nil
 			flash[:notice] = "Order Placed, Email Sent"
 			if @store_user != nil
-				order.operator = current_user
 				if order.payment_type.available_online
 					StoreMailer.invoice(order).deliver
 				else

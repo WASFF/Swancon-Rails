@@ -6,6 +6,9 @@
 <body>
 Invoice: <%= @order.invoice_number %><br/>
 Issued: <%= @order.created_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
+<%- if @order.operator != nil %>
+Ordered By: <%= @order.operator.username %>
+<%- end %>
 
 <%= render :partial => "/user_orders/listing" %>
 

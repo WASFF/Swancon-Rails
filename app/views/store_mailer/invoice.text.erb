@@ -1,5 +1,8 @@
 Invoice: <%= @order.invoice_number %>
 Issued: <%= @order.created_at.strftime("%d/%m/%Y %H:%M %Z") %>
+<%- if @order.operator != nil %>
+Ordered By: <%= @order.operator.username %>
+<%- end %>
 
 <%= render :partial => "/user_orders/listing" %>
 

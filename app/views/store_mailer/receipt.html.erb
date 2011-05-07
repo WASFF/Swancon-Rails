@@ -6,6 +6,9 @@
 <body>
 Receipt: <%= @payment.receipt_number %><br/>
 Issued: <%= @payment.created_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
+<%- if @payment.operator != nil %>
+Operator: <%= @payment.operator.username %>
+<%- end %>
 
 <% @order = @payment.user_order %>
 

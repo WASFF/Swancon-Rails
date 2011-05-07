@@ -1,5 +1,8 @@
 Receipt: <%= @payment.receipt_number %>
 Issued: <%= @payment.created_at.strftime("%d/%m/%Y %H:%M %Z") %>
+<%- if @payment.operator != nil %>
+Operator: <%= @payment.operator.username %>
+<%- end %>
 
 <% @order = @payment.user_order %>
 

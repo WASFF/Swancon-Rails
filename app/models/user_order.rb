@@ -55,7 +55,7 @@ class UserOrder < ActiveRecord::Base
 		end
 		
 		if payment_type.surcharge_value != nil
-			total += surcharge_value
+			total += payment_type.surcharge_value
 		end
 	
 		total

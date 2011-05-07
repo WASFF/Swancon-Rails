@@ -9,7 +9,7 @@ Marked Paid By: <%= @order.payment.operator.username %><br/>
 Invoice <%= @order.invoice_number %><br/>
 Issued: <%= render_time(@order.created_at) %><br/>
 <%- if @order.operator != nil %>
-Ordered By: <%= @payment.operator.username %><br/>
+Ordered By: <%= @order.operator.username %><br/>
 <%- end %>
 <% end -%>
 Ordered For: <%= link_to(@order.user.order_name, users_admin_path(@order.user)) %><br/>
