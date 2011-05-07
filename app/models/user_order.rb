@@ -48,17 +48,19 @@ class UserOrder < ActiveRecord::Base
 	end
 	
 	def surcharge
-		total = 0.0
+		charge = 0.0
 		
 		if payment_type.surcharge_percent !=nil
-			total = subtotal * (payment_type.surcharge_percent / 100.0)
+			charge = subtotal * (payment_type.surcharge_percent / 100.0)
+			if payment_type.surcharge_value != nil
+				charge += payment_type.surcharge_value
+			end
+			charge = charge * (1 + payment_type.surcharge_percent / 100.0)
+		elsif payment_type.surcharge_value != nil
+			charge = surcharge_value
 		end
-		
-		if payment_type.surcharge_value != nil
-			total += payment_type.surcharge_value
-		end
-	
-		total
+			
+		charge
 	end
 	
 	def total
