@@ -74,14 +74,3 @@
 	<b>Completed Orders - <%= @order.count %> - <%= render_money(@order.count * @merchandise_type.price) %></b></b>
 	<%= render :partial => "order_list" %>
 </p>
-
-<p>
-	<b>Orders (old system)</b>
-	<% order = 1 %>
-	<blockquote>
-	<% @merchandise_type.launch_member_merchandise_types.each do |lmmt| %>
-	<%= order %>. <%= lmmt.launch_member.name %> Options: <% lmmt.options.each do |option| %><%= option.set.name %> - <%= option.name %> <% end %><br/>
-	<% order += 1%>
-	<% end %>
-	</blockquote>
-</p>
