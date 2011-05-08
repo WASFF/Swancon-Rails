@@ -136,7 +136,9 @@ class StoreController < ApplicationController
 					payment.operator = current_user
 					payment.verification_string = "Point Of Sale"
 					payment.save
-					StoreMailer.receipt(payment).deliver					
+					StoreMailer.receipt(payment).deliver		
+					redirect_to payment
+					return
 				end
 			else
 				StoreMailer.invoice(order).deliver

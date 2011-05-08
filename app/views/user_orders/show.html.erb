@@ -1,7 +1,10 @@
 <% if @order.payment != nil %>
-Receipt: <%= @order.payment.receipt_number %> for Invoice <%= @order.invoice_number %><br/>
+Invoice: <%= @order.invoice_number %> Paid in Receipt: <%= link_to @order.payment.receipt_number, @order.payment %><br/>
 Issued: <%= render_time(@order.created_at) %><br/>
 Paid: <%= render_time(@order.payment.created_at) %><br/>
+<%- if @order.operator != nil %>
+Ordered By: <%= @order.operator.username %><br/>
+<%- end %>
 <%- if @order.payment.operator != nil %>
 Marked Paid By: <%= @order.payment.operator.username %><br/>
 <%- end %>
@@ -32,6 +35,8 @@ Paid Via: <%= @order.payment.payment_type.name %><br/>
 <%- if @order.tickets.count > 0 and (@order.user.member_detail == nil or !@order.user.member_detail.disclaimer_signed) %>
 <br/>
 <%= render :partial => "/member_details/disclaimer"%>
+<%- elsif @order.tickets.count > 0  %>
+You have electronically agreed to the disclaimer available at: <%= link_to "http://wasff.sf.org.au/convention_rules", "http://wasff.sf.org.au/convention_rules "%><br/>
 <%- end %>
 
 <div class="noprint">

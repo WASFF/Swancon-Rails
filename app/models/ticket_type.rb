@@ -31,6 +31,10 @@ class TicketType < ActiveRecord::Base
 		end
 	end
 	
+	def order_name
+		"#{set.name} Ticket #{name}"
+	end
+	
 	def deletable?
 		user_order_tickets.count == 0
 	end	

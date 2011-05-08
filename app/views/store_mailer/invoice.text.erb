@@ -11,4 +11,7 @@ Ordered By: <%= @order.operator.username %>
 <%- if @order.tickets.count > 0 and (@order.user.member_detail == nil or !@order.user.member_detail.disclaimer_signed) %>
 <br/>
 <%= render :partial => "/member_details/disclaimer"%>
-<%- end %>
+<%- elsif @order.tickets.count > 0  %>
+You have electronically agreed to the disclaimer available at: http://wasff.sf.org.au/convention_rules
+<% - end %>
+
