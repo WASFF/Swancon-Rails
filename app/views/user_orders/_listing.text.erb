@@ -3,7 +3,7 @@
 <% end -%>
 <% @order.tickets.all.each do |ticketorder| -%>	
 <%= ticketorder.ticket_type.order_name %>		<%= ticketorder.user.order_name %>		<%= render_money(ticketorder.ticket_type.price) %>
-Sub Total: $<%= render_money(@order.subtotal) %>
+Sub Total: <%= render_money(@order.subtotal) %>
 <% end -%>
 <% if @order.surcharge > 0.0 %>
 <%= @order.payment_type.name %> surcharge: <%= render_money(@order.surcharge) %>
