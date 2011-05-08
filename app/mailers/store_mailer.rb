@@ -14,13 +14,20 @@ class StoreMailer < ActionMailer::Base
 		mail(:to => payment.user_order.user.email, :subject => "Receipt #{payment.receipt_number}")
 	end
 
-	def tshirtconfirm(user, shirtorders)
+	def tshirtconfirm(user, shirtorders, orders)
 		@user = user
 		@detail = user.member_detail
 		@shirtorders = shirtorders
+		@orders = orders
 		@email = true		
 		#mail(:to => user.email, :subject => "Confirming your t-shirt size")
-		mail(:to => "lordmortis@gmail.com", :subject => "Confirming your t-shirt size")
+		subject = "Swancon T-Shirt Order"
+		@orders.each do |order|
+			if order.payment != nil
+				subject += " [#{order.payment.reciept_number}]"
+			end
+		end
+		mail(:to => user.email, :subject => subject)
 	end
 	
 	def permitted_to?(*args)
