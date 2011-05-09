@@ -12,7 +12,7 @@
 
 <% @vendor_orders.each do |vendor_order| %>
   <tr>
-    <td><%= vendor_order.vendor_id %></td>
+    <td><%= vendor_order.vendor.name %></td>
     <td><%= render_time(vendor_order.created_at) %></td>
 		<td><%= vendor_order.merchandise.count %></td>
     <td><%= link_to 'Show', vendor_order %></td>

@@ -1,0 +1,25 @@
+<div class="title">Vendors</div>
+
+<table width="40%">
+  <tr>
+    <th>Name</th>
+		<th>Orders</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @vendors.each do |vendor| %>
+  <tr>
+    <td><%= vendor.name %></td>
+		<td><%= vendor.orders.count %></td>
+    <td><%= link_to 'Show', vendor %></td>
+    <td><%= link_to 'Edit', edit_vendor_path(vendor) %></td>
+    <td><% if vendor.deletable? %><%= link_to 'Destroy', vendor, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Vendor', new_vendor_path %>

@@ -1,0 +1,19 @@
+<div class="title"><%= @vendor.name %></div>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @vendor.name %>
+</p>
+
+<p>
+	<b>Orders</b>
+	<blockquote>
+	<% @vendor.orders.each do |order| %>
+	<%= order.id %> Opened: <%= order.created_at %> Closed: <%= order.closed_at %><br/>
+	<% end %>
+	<%= link_to "Open New Order", open_order_vendor_path(@vendor), :method => :post %>
+	</blockquote>
+</p>
+<%= link_to 'Edit', edit_vendor_path(@vendor) %> |
+<%= link_to 'Back', vendors_path %>

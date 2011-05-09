@@ -284,8 +284,15 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
   create_table "vendor_orders", :force => true do |t|
-    t.integer  "vendor_id"
+    t.integer  "vendor_id",  :null => false
     t.datetime "placed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "closed_at"
+  end
+
+  create_table "vendors", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

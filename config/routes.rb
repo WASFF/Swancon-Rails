@@ -1,4 +1,6 @@
 DoomCon::Application.routes.draw do
+
+
   resources :merchandise_option_sets
 
   resources :merchandise_types do
@@ -12,8 +14,13 @@ DoomCon::Application.routes.draw do
 
   resources :merchandise_sets
 
+  resources :vendors do
+		post 'open_order', :on => :member
+	end
+
   resources :vendor_orders do 
 		put 'mark_arrivals', :on => :member
+		post 'close', :on => :member
 	end
 
 	resources :payments do

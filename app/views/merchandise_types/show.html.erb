@@ -49,6 +49,12 @@
 	<b>Outstanding Orders (paid, not ordered from supplier)- <%= @order.count %> - <%= render_money(@order.count * @merchandise_type.price) %></b>
 	<%= form_for(VendorOrder.new) do |f| %>
 	<%= render :partial => "order_list" %>
+	<% if flash[:error] != nil %>
+	<p class="alert"><%= flash[:error] %></p>
+	<% end %>
+	Create New Order for Vendor: <%= f.select(:vendor_id, Vendor.list_for_order_create, :include_blank => true) %><br/>
+	OR <br/>
+	Select an existing open order: <%= f.select(:id, VendorOrder.list_for_order_create, :include_blank => true) %><br/>
 	<%= f.submit("Create Vendor Order")%>
 	<% end %>
 </p>

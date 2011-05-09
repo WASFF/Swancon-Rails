@@ -3,7 +3,7 @@ class VendorOrdersController < ApplicationController
   # GET /vendor_orders
   # GET /vendor_orders.xml
   def index
-    @vendor_orders = VendorOrder.all
+    @vendor_orders = VendorOrder.includes(:vendor).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,7 +25,24 @@ class VendorOrdersController < ApplicationController
   # POST /vendor_orders
   # POST /vendor_orders.xml
   def create
-    @vendor_order = VendorOrder.new(params[:vendor_order])
+		orderID = false
+		orderVendorID = false
+		if params[:vendor_order][:id] != nil and params[:vendor_order][:id].strip != ""
+			orderID = true
+		elsif params[:vendor_order][:vendor_id] != nil and params[:vendor_order][:vendor_id].strip != ""
+			orderVendorID = true
+		else
+			flash[:error] = "You must select either a vendor or an open order to add to"
+			redirect_to :back
+			return
+		end
+		@vendor_order = nil
+		if orderID
+			@vendor_order = VendorOrder.find(params[:vendor_order][:id].to_i)
+		elsif orderVendorID
+			@vendor_order = VendorOrder.new(params[:vendor_order])
+		end
+    
 		uomids = params[:user_order_merchandise]
 		uoms = UserOrderMerchandise.where(:id => uomids)
 		@vendor_order.merchandise << uoms
@@ -48,6 +65,14 @@ class VendorOrdersController < ApplicationController
 			uom.arrived_at = Time.now
 			uom.save
 		end
+		render :show
+	end
+	
+	def close
+		@vendor_order = VendorOrder.find(params[:id])
+		@vendor_order.closed_at = Time.now
+		@vendor_order.save
+		
 		render :show
 	end
 
