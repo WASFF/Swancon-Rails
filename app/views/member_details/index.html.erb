@@ -18,7 +18,7 @@
     <td><%= member_detail.name_real %></td>
     <td><%= member_detail.name_badge %></td>
     <td><%= member_detail.phone %></td>
-		<td><%= member_detail.user.email %></td>
+		<td><% if member_detail.user != nil %><%= member_detail.user.email %><% else %>ERROR<% end %></td>
     <td><%= member_detail.email_optin %></td>
     <td><%= member_detail.disclaimer_signed %></td>
     <td><%= link_to 'Show', member_detail %></td>
@@ -29,5 +29,3 @@
 </table>
 
 <br />
-
-<%= link_to 'New Member detail', new_member_detail_path %>
