@@ -16,7 +16,7 @@ Ordered For: <%= link_to(@payment.order.user.order_name, users_admin_path(@payme
 <%= render :partial => "user_orders/listing" %>
 <%- end %>
 <div class="text-right">Total Paid: <%= @payment.amount %></div>
-Paid Via: <%= @payment.type.name %><br/>
+<p>Paid Via: <%= @payment.type.name %></p>
 
 <%- if @order != nil and @order.tickets.count > 0 and (@order.user.member_detail == nil or !@order.user.member_detail.disclaimer_signed) %>
 <br/>
