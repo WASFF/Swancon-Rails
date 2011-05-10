@@ -32,6 +32,8 @@ Paid Via: <%= @order.payment.payment_type.name %><br/>
 <%- if @order.tickets.count > 0 and (@order.user.member_detail == nil or !@order.user.member_detail.disclaimer_signed) %>
 <br/>
 <%= render :partial => "/member_details/disclaimer"%>
+<%- elsif @order.tickets.count > 0  %>
+<p>You have electronically agreed to the disclaimer available at: <%= link_to "http://wasff.sf.org.au/convention_rules", "http://wasff.sf.org.au/convention_rules "%></p>
 <%- end %>
 
 <div class="noprint">

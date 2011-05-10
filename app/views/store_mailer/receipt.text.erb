@@ -12,5 +12,6 @@ Operator: <%= @payment.operator.username %>
 <br/>
 <%= render :partial => "/member_details/disclaimer"%>
 <%- elsif @order.tickets.count > 0  %>
-You have electronically agreed to the disclaimer available at: <%= link_to "http://wasff.sf.org.au/convention_rules", "http://wasff.sf.org.au/convention_rules "%><br/>
+You have electronically agreed to the disclaimer available at: <%= link_to "http://wasff.sf.org.au/convention_rules", "http://wasff.sf.org.au/convention_rules "%>
+	
 <%- end %>
