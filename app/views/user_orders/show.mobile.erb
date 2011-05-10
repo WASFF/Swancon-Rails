@@ -43,7 +43,7 @@ Mark Paid:
 <%= form_for(@order, :url => mark_paid_order_url, :method => :put) do |f| %>
 Amount Paid: <%= f.text_field :amount, :value => sprintf("%.2f", @order.total) %><br/>
 Verification String: <%= f.text_field :verification_string, :value => "" %><br/>
-<%= f.submit("Mark Paid") -%>
+<%= f.submit("Mark Paid") -%><br/>
 <% end %>
 </blockquote>
 <% else %>
