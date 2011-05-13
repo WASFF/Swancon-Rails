@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/lordmortis/MortisCMS.git
-  revision: 1a9894709eff544ec9127ace411594fa6cf4ff71
+  revision: e7f08720ae613b6cef9695265edae7910c577941
   specs:
-    MortisCMS (0.0.4)
+    MortisCMS (0.0.6)
 
 GIT
   remote: https://github.com/plataformatec/devise.git

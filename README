@@ -1,30 +1,30 @@
 h2. Swancon Rails websystem
 
-For doing swancon website stuffs.
+Change Babydoll small to 8 - delete babydoll small
+Babydoll medium to 10
+babydoll xl to 14
 
-Membership Details:
-	Name
-	Address
-	Name on Badge
-	Phone Number
-	Email (send temp password to email!)
-	Email opt-in
-	Membership Type (Concession/Full)
-		- Eventually, Day etc.
-		- Group Bookings
-		- Supporting? With provision to convert.
-	Disclaimer
-	Payment?
+UserOrderMerchandiseOption.where(:merchandise_option_id => 13).all.each do |item|
+item.merchandise_option_id = 15
+item.save
+end
 
-T-Shirt stuffs! 
-	Name (can be linked to above)
-	Style
-	Size
-	Payment?
-	
-Ticketing for Events
-	Event Name
-	User
-	Payment?
-	
-We need a Printer!
+UserOrderMerchandiseOption.where(:merchandise_option_id => 12).all.each do |item|
+item.merchandise_option_id = 14
+item.save
+end
+
+UserOrderMerchandiseOption.where(:merchandise_option_id => 11).all.each do |item|
+item.merchandise_option_id = 27
+item.save
+end
+
+Twitter registrations need to change their email address, or we'll get bounces.
+
+Features to implement:
+
+Blogging
+Panel suggestion system (Possibly as part of LiveCon)
+Store Purchase system
+This is Swancon
+Gallery

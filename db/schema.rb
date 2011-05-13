@@ -31,14 +31,16 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
   add_index "content_blocks", ["editor_id"], :name => "index_content_blocks_on_editor_id"
 
   create_table "content_pages", :force => true do |t|
-    t.string   "name",             :null => false
+    t.string   "name",                            :null => false
     t.integer  "content_block_id"
     t.integer  "content_tag_id"
-    t.integer  "order_index"
+    t.integer  "order_index",      :default => 0, :null => false
     t.boolean  "home"
     t.boolean  "navbar"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "controller"
+    t.string   "action"
   end
 
   create_table "content_tag_blocks", :force => true do |t|
@@ -134,6 +136,8 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.datetime "updated_at"
     t.string   "description"
     t.integer  "order_index",               :default => 0, :null => false
+    t.string   "controller"
+    t.string   "action"
   end
 
   create_table "merchandise_sets", :force => true do |t|

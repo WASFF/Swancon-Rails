@@ -50,7 +50,6 @@
           <%- end %>
             <h2>Sections</h2>
     				<ul>
-    					<li><%= link_to("Store", store_path)%></li>
     					<% ContentPage.topbar.all.each do |page| %>
     					<li><%= link_to page.name.capitalize, :controller=>"/content_viewer", :action=>"page", :id => page.name %></li>
     					<% end %>
