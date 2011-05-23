@@ -19,11 +19,11 @@ class UserOrder < ActiveRecord::Base
 	end
 	
 	def short_invoice
-		sprintf "DCO-%05d", id		
+		sprintf "DCO%05d", id		
 	end
 	
 	def short_invoice_number
-		sprintf "DCO-%05d", id
+		sprintf "DCO%05d", id
 	end
 
 	def merchandise
