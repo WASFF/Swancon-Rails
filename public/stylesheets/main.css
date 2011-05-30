@@ -24,8 +24,8 @@ a:hover {color: #AA3;}
 
 body {
 	background: #111 url(/images/desktop-theme/bg.jpg) repeat-x;
-	color: #DDD;
-	font: normal 62.5% "Trebuchet MS",Verdana,sans-serif;
+	color: #EEE;
+	font: normal 65.5% "Trebuchet MS",Verdana,sans-serif;
 }
 
 p,code,ul {padding-bottom: 1.2em;}
@@ -122,6 +122,7 @@ h1,h2 {padding-top: 6px;}
 .footer .left, .footer .right {padding: 10px 0;}
 .footer .right, .footer .right a {color: #555;}
 .footer .right a:hover {color: #999;}
+
 
 .error {
 	color: red;
