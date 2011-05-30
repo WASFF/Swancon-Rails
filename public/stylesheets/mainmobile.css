@@ -83,3 +83,7 @@ body {
 .linkbar li.selected {
 	background: #080808;
 }
+
+.nodisplay {
+	display: none;
+}

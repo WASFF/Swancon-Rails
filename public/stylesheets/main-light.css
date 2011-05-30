@@ -19,12 +19,12 @@ html {min-height: 100%;}
 	padding: 0;
 }
 
-a {color: #FF3;}
+a {color: #440;}
 a:hover {color: #AA3;}
 
 body {
-	background: #111 url(/images/desktop-theme/bg.jpg) repeat-x;
-	color: #EEE;
+	background: #FFF
+	color: #000;
 	font: normal 65.5% "Trebuchet MS",Verdana,sans-serif;
 }
 
@@ -35,10 +35,10 @@ h1 {
 	margin-bottom: 4px;
 }
 
-h2 {background: url(/images/desktop-theme/stripes.gif) repeat-x left bottom; color: #CCC; font: normal 2em Impact,sans-serif; margin-bottom: 8px; padding-bottom: 11px; letter-spacing: 1px;}
+h2 {background: url(/images/desktop-theme/stripes.gif) repeat-x left bottom; color: #666; font: normal 2em Impact,sans-serif; margin-bottom: 8px; padding-bottom: 11px; letter-spacing: 1px;}
 
 blockquote {
-	color: #CCA;
+	color: #225;
 	display: block;
 	font-weight: bold;
 	padding-left: 28px;
@@ -60,7 +60,8 @@ h1,h2 {padding-top: 6px;}
 	margin: 0 auto;
 	width: 1024px;
 }
-.container {background: url(/images/desktop-theme/header.gif) no-repeat center top;}
+
+//.container {background: url(/images/desktop-theme/header.gif) no-repeat center top;}
 
 /* title */
 .title {
@@ -71,7 +72,7 @@ h1,h2 {padding-top: 6px;}
 
 /* sub navigation */
 .sidenav {
-	background: url(/images/desktop-theme/sidenav-badge.png) no-repeat center top;
+//	background: url(/images/desktop-theme/sidenav-badge.png) no-repeat center top;
 	padding-top: 126px;
 	float: right;
 	width: 210px;
@@ -87,7 +88,7 @@ h1,h2 {padding-top: 6px;}
 .sidenav li a {
 	font-size: 1.1em;
 	line-height: 1.5em;
-	color: #777;
+	color: #444;
 	text-decoration: none;
 }
 .sidenav li a:hover {color: #8DCA3F;}
