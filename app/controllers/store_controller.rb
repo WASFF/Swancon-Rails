@@ -129,14 +129,18 @@ class StoreController < ApplicationController
 			flash[:notice] = "Order Placed, Email Sent"
 			if @store_user != nil
 				if order.payment_type.available_online
-					StoreMailer.invoice(order).deliver
+					if params[:send_email] == "true"
+						StoreMailer.invoice(order).deliver
+					end
 				else
 					payment = Payment.new(:user_order => order, :payment_type => order.payment_type)
 					payment.amount = order.total
 					payment.operator = current_user
 					payment.verification_string = "Point Of Sale"
 					payment.save
-					StoreMailer.receipt(payment).deliver		
+					if params[:send_email] == "true"
+						StoreMailer.receipt(payment).deliver
+					end
 					redirect_to payment
 					return
 				end
