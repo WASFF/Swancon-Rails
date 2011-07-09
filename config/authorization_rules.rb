@@ -1,6 +1,7 @@
 authorization do
   role :guest do
 		has_permission_on :index, :to => :index
+		has_permission_on [:panel_suggestions], :to => [:show, :index]
   end
 	
 	role :user do
@@ -8,6 +9,7 @@ authorization do
 		has_permission_on [:users], :to => [:update, :show, :destroy]		
 		has_permission_on [:user_orders], :to => [:index, :show, :destroy]
 		has_permission_on [:member_details], :to => [:edit_my, :update, :create, :show]
+		has_permission_on [:panel_suggestions], :to => [:update, :create, :edit, :new]
 	end
 
 	role :member do
@@ -30,6 +32,8 @@ authorization do
 		has_permission_on [:content_blocks], :to => [:new, :index, :create, :edit, :update, :show, :preview]
 		has_permission_on [:content_tags], :to => [:new, :index, :create, :edit, :update, :show]
 		has_permission_on [:content_pages], :to => [:new, :index, :create, :edit, :update, :show]
+
+		has_permission_on [:panel_suggestions], :to => [:destroy]
 	end
 
 	role :admin do

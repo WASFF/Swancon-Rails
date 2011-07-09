@@ -136,8 +136,6 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.datetime "updated_at"
     t.string   "description"
     t.integer  "order_index",               :default => 0, :null => false
-    t.string   "controller"
-    t.string   "action"
   end
 
   create_table "merchandise_sets", :force => true do |t|
@@ -154,6 +152,15 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.datetime "updated_at"
     t.datetime "available_from"
     t.datetime "available_to"
+  end
+
+  create_table "panel_suggestions", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "user_id"
+    t.boolean  "user_id_visible"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "payment_types", :force => true do |t|

@@ -1,5 +1,5 @@
 DoomCon::Application.routes.draw do
-
+  resources :panel_suggestions
 
   resources :merchandise_option_sets
 

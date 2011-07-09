@@ -1,0 +1,29 @@
+<%= form_for(@panel_suggestion) do |f| %>
+  <% if @panel_suggestion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@panel_suggestion.errors.count, "error") %> prohibited this panel_suggestion from being saved:</h2>
+
+      <ul>
+      <% @panel_suggestion.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id_visible, "Show panel as being suggested by me" %><br />
+    <%= f.check_box :user_id_visible %>
+  </div>
+  <div class="actions">
+    <%= f.submit(@panel_suggestion.submit_button_name) %>
+  </div>
+<% end %>

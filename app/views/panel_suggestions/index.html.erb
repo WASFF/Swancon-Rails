@@ -1,0 +1,21 @@
+<h1>Listing Suggested Panels</h1>
+
+<table width="80%">
+  <tr>
+    <th>Name</th>
+    <th>Submitted By</th>
+    <th></th>
+  </tr>
+
+<% @panel_suggestions.each do |panel_suggestion| %>
+  <tr>
+    <td><%= panel_suggestion.name %></td>
+    <td><% if panel_suggestion.user_id_visible %><%= panel_suggestion.user_id %><% else %>N/A<% end %></td>
+    <td><%= link_to 'Show', panel_suggestion %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if current_user != nil %><%= link_to 'Suggest a Panel!', new_panel_suggestion_path %><% else %>Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to suggest a panel<% end %>

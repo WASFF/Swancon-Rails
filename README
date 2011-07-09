@@ -1,24 +1,5 @@
 h2. Swancon Rails websystem
 
-Change Babydoll small to 8 - delete babydoll small
-Babydoll medium to 10
-babydoll xl to 14
-
-UserOrderMerchandiseOption.where(:merchandise_option_id => 13).all.each do |item|
-item.merchandise_option_id = 15
-item.save
-end
-
-UserOrderMerchandiseOption.where(:merchandise_option_id => 12).all.each do |item|
-item.merchandise_option_id = 14
-item.save
-end
-
-UserOrderMerchandiseOption.where(:merchandise_option_id => 11).all.each do |item|
-item.merchandise_option_id = 27
-item.save
-end
-
 Twitter registrations need to change their email address, or we'll get bounces.
 
 Features to implement:
