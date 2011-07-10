@@ -10,7 +10,7 @@
 <% @panel_suggestions.each do |panel_suggestion| %>
   <tr>
     <td><%= panel_suggestion.name %></td>
-    <td><% if panel_suggestion.user_id_visible %><%= panel_suggestion.user_id %><% else %>N/A<% end %></td>
+    <td><% if panel_suggestion.user_id_visible %><%= panel_suggestion.user.name %><% else %>N/A<% end %></td>
     <td><%= link_to 'Show', panel_suggestion %></td>
   </tr>
 <% end %>

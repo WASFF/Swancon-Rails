@@ -2,12 +2,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <%= @panel_suggestion.description %>
+  <%= raw RedCloth.new(@panel_suggestion.description).to_html %>
 </p>
 
 <%- if @panel_suggestion.user_id_visible %>
 <p><b>Suggested By:</b> <%= @panel_suggestion.user.name %></p>
 <%- end %>
-<%= link_to 'Edit', edit_panel_suggestion_path(@panel_suggestion) if @panel_suggestion.allowed_to_edit(current_user) -%>
+<%= link_to 'Edit', edit_panel_suggestion_path(@panel_suggestion) if @panel_suggestion.allowed_to_edit?(current_user) -%>
  <%= link_to 'Destroy', @panel_suggestion, :confirm => 'Are You Sure?', :method => :delete if permitted_to? :destroy, :panel_suggestions -%>
  <%= link_to 'Back', panel_suggestions_path %>

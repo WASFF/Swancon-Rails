@@ -37,6 +37,10 @@ class PanelSuggestionsController < ApplicationController
   # GET /panel_suggestions/1/edit
   def edit
     @panel_suggestion = PanelSuggestion.find(params[:id])
+		if !@panel_suggestion.allowed_to_edit?(current_user)
+			redirect_to @panel_suggestion
+			return
+		end
   end
 
   # POST /panel_suggestions
@@ -60,6 +64,10 @@ class PanelSuggestionsController < ApplicationController
   # PUT /panel_suggestions/1.xml
   def update
     @panel_suggestion = PanelSuggestion.find(params[:id])
+		if !@panel_suggestion.allowed_to_edit?(current_user)
+			redirect_to @panel_suggestion
+			return
+		end
 
     respond_to do |format|
       if @panel_suggestion.update_attributes(params[:panel_suggestion])

@@ -1,7 +1,7 @@
 class PanelSuggestion < ActiveRecord::Base
 	belongs_to :user
 
-	def allowed_to_edit(user)
+	def allowed_to_edit?(user)
 		if user == nil
 			return false
 		end
