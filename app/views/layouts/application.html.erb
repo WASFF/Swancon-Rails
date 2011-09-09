@@ -3,7 +3,7 @@
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1"/>
-  <title><%= yield :title %></title>
+  <title><% if content_for?(:title) %><%= yield :title %><% else %>DoomCon 2012<% end %></title>
   <link rel="shortcut icon" href="/images/favicon.png" />
   <link rel="apple-touch-icon-precomposed" href="/images/mobileicon57.png" />
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/mobileicon72.png" />
