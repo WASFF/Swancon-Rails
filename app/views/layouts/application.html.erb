@@ -3,7 +3,7 @@
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1"/>
-  <title>Doom-Con 2012</title>
+  <title><%= yield :title %></title>
   <link rel="shortcut icon" href="/images/favicon.png" />
   <link rel="apple-touch-icon-precomposed" href="/images/mobileicon57.png" />
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/mobileicon72.png" />
@@ -15,7 +15,7 @@
   <%= stylesheet_link_tag "mainprint", :media => "print" %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
-	<%= yield :head %>
+	<%= yield :header %>
 	<script>
 	$(document).ready(function() {
     var style = readCookie("style");
