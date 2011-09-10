@@ -131,6 +131,7 @@ class StoreController < ApplicationController
 				if order.payment_type.available_online
 					if params[:send_email] == "true"
 						StoreMailer.invoice(order).deliver
+						StoreMailer.confirmation_required(order).deliver
 					end
 				else
 					payment = Payment.new(:user_order => order, :payment_type => order.payment_type)
@@ -146,6 +147,7 @@ class StoreController < ApplicationController
 				end
 			else
 				StoreMailer.invoice(order).deliver
+				StoreMailer.confirmation_required(order).deliver
 			end
 			
 			redirect_to order_path(order)

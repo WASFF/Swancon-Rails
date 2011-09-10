@@ -14,6 +14,12 @@ class StoreMailer < ActionMailer::Base
 		mail(:to => payment.user_order.user.email, :subject => "Receipt #{payment.receipt_number}")
 	end
 
+	def confirmation_required(order)
+		@order = order
+		@email = true
+		mail(:to => "memberships-2012@swancon.com.au", :subject => "New Order Recieved: #{order.invoice_number}")
+	end
+
 	def tshirtconfirm(user, shirtorders, orders)
 		@user = user
 		@detail = user.member_detail
