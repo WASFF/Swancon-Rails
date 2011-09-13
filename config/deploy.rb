@@ -1,11 +1,11 @@
 require "bundler/capistrano"
 
 set :default_environment, {
-  'PATH' => "/usr/local/rvm/gems/ree-1.8.7-2011.03/bin:/usr/local/rvm/bin:$PATH",
-  'RUBY_VERSION' => 'ruby 1.8.7',
-  'GEM_HOME'     => '/usr/local/rvm/gems/ree-1.8.7-2011.03',
-  'GEM_PATH'     => '/usr/local/rvm/gems/ree-1.8.7-2011.03',
-  'BUNDLE_PATH'  => '/usr/local/rvm/gems/ree-1.8.7-2011.03'  # If you are using bundler.
+  'PATH' => "/usr/local/rvm/gems/ruby-1.9.2-p290/bin:/usr/local/rvm/bin:$PATH",
+  'RUBY_VERSION' => 'ruby 1.9.2',
+  'GEM_HOME'     => '/usr/local/rvm/gems/ruby-1.9.2-p290',
+  'GEM_PATH'     => '/usr/local/rvm/gems/ruby-1.9.2-p290',
+  'BUNDLE_PATH'  => '/usr/local/rvm/gems/ruby-1.9.2-p290'  # If you are using bundler.
 }
 
 set :application, "Swancon Rails App"
