@@ -38,5 +38,7 @@ module DoomCon
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    config.site_name = Mortiscms.config.site_name
   end
 end

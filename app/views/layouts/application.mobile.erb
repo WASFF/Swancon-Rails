@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>DoomCon - 2012</title>
+	<title><% if content_for?(:title) %><%= yield :title %><% else %>DoomCon 2012<% end %></title>
   <link rel="shortcut icon" href="/images/favicon.png" />
   <link rel="apple-touch-icon-precomposed" href="/images/mobileicon57.png" />
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/mobileicon72.png" />

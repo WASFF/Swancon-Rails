@@ -1,3 +1,4 @@
+<% content_for :title do %>Doom-Store&trade; - <%= @ticket.set.name %> Ticket<% end %>
 <div class="title"><%= @ticket.set.name %> Ticket</div>
 <p class="olive"><%= @ticket.name %> - <%= render_money(@ticket.price) %></p>
 <%- if @store_user != nil%>
