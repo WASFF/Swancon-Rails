@@ -70,5 +70,5 @@ DoomCon::Application.routes.draw do
 
 	match 'store/purchase' => 'store#purchase'
 
-	root :to => "index#index"
+	root :to => "content_viewer#page"
 end

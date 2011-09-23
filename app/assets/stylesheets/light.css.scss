@@ -1,0 +1,69 @@
+a {
+	color: #440;
+	&:hover {   
+		color: #AA3;
+	}
+}
+
+body {
+	background: #FFF;
+	color: #000;
+}
+
+h2 { 
+	background: image_url("desktop-theme/stripes.gif") repeat-x left bottom;
+	color: #666;
+}
+
+blockquote {
+	color: #225;
+}
+
+.container {
+	background: image_url("desktop-theme/header.gif") no-repeat center top;
+}
+
+.olive {color: #CCA;}
+
+.sidenav {
+	h2 {
+		color: #9A3;	
+	}
+
+	li {
+		a {
+			color: #444;
+
+			&:hover {
+				color: #8DCA3F;
+			}
+		}
+	}
+}
+
+.content {
+	.descr {
+		color: #8DC63F;
+	}
+}
+
+.footer {
+	color: #333;
+
+	a {
+		color: #784;
+
+		&:hover {
+			color: #AA3;
+		}
+
+		.left .right {
+			a {
+				color: #555;
+				&:hover {
+					color: #999;
+				}
+			}
+		}
+	}
+}

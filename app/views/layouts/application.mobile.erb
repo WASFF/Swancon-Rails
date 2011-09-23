@@ -2,44 +2,45 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title><% if content_for?(:title) %><%= yield :title %><% else %>DoomCon 2012<% end %></title>
-  <link rel="shortcut icon" href="/images/favicon.png" />
-  <link rel="apple-touch-icon-precomposed" href="/images/mobileicon57.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/mobileicon72.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/mobileicon114.png" />    
-  <meta name="viewport" content="width=device-width" />
-	<%= stylesheet_link_tag "mainmobile" %>
-	<%= stylesheet_link_tag "mainmobile-retina", :media => "only screen and (-webkit-min-device-pixel-ratio: 2)" %>	
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
+	<link rel="shortcut icon" href="<%= image_path "favicon.png" %>" />
+	<link rel="apple-touch-icon-precomposed" href="<%= image_path "mobileicon57.png" %>" />
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= image_path "mobileicon72.png" %>"/>
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= image_path "mobileicon114.png" %>"/>
+	<meta name="viewport" content="width=device-width" />
+	<%= stylesheet_link_tag "main-mobile" %>
+	<%= javascript_include_tag "mobile" %>
+	<%= csrf_meta_tag %>
 	<%= yield :header %>
 </head>
 <body>
-  <div id="wrapper-top">
-	<div class="linkbar linkbar-top">
-    <ul>
-  <% if user_signed_in? %>
-    <li><%= link_to("Profile", edit_user_registration_path) %></li>
-    <li><%= link_to("Membership Details", edit_my_member_details_path) %></li>              
-    <li><%= link_to "Orders", orders_path %></li>
-    <li><%= link_to("Log out", destroy_user_session_path) %></li>
-  <% else %>
-    <li><%= link_to("Log in", new_user_session_path) %></li>
-    <li><%= link_to("Register", new_user_registration_path) %></li>  
-  <% end %>
-    </ul>
+	<div id="wrapper-top"></div>
+
+	<div id="loginbar">
+		<div class="close">&gt;&gt;</div>
+		<div class="open">
+		<% if user_signed_in? %>
+			<%= link_to("Profile", edit_user_registration_path) %>
+			<%= link_to("Membership Details", edit_my_member_details_path) %>
+			<%= link_to "Orders", orders_path %>
+			<%= link_to("Log out", destroy_user_session_path) %>
+		<% else %>
+			<%= link_to("Log in", new_user_session_path) %>
+			<%= link_to("Register", new_user_registration_path) %>
+		<% end %>
+		</div>
 	</div>
-	<div class="linkbar linkbar-bottom">
-    <ul>
+	<div id="linkbar">
+		<div class="close">&gt;&gt;</div>
+		<div class="open">
 			<% ContentPage.topbar.all.each do |page| %>
-			<li><%= link_to page.name.capitalize, :controller=>"/content_viewer", :action=>"page", :id => page.name %></li>
+			<%= link_to page.name.capitalize, :controller=>"/content_viewer", :action=>"page", :id => page.name %>
 			<% end %>
-    </ul>	  
+		</div>
 	</div>
-	</div>
-  <div id="page">
-    <div id="content">
-	    <%= yield %>
-	  </div>
+	<div id="page">
+		<div id="content">
+			<%= yield %>
+		</div>
 	</div>	
 </body>
 </html>

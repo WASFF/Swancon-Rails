@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-DoomCon::Application.config.secret_token = '032223155fc1ff337a57d0f873ebb6fdfb6d7f4230418d49c8a91ba12e86eb1bba67e903e6a4aae946b4b748c8be852597d8b589e2005ead57fdd1fefffe2be6'
+DoomCon::Application.config.secret_token = '0a7d34889f6f6efe24ffd236d7f949adaca83df44fdc8d1407ae648b39790d5853c72047b85a4d68638d9cd4a02b1e1cd9994f2f15967fb946578dce1b6bdde6'

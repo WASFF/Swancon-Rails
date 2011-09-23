@@ -1,0 +1,95 @@
+body {
+	background: #CCCCCC;
+	font-family: Verdana;
+	font-size: 0.85em;
+	margin: 0px;
+	min-height: 480px;
+	width: device-width;
+}
+
+#wrapper-top {
+	background: black image_url("mobile-theme/toplogo.png") no-repeat center center;
+	
+	background-size: 320px;
+	height: 160px;
+
+	#content {
+		position: absolute;
+		bottom: 0px;
+		background-color: black;	
+	}
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+	#wrapper-top {
+		background: black image_url("mobile-theme/toplogo-retina.png") no-repeat center center;	
+	}
+}
+
+#page {
+	padding: 0px;
+
+	#content {
+		position: relative;
+		font-size: 0.85em;
+		padding: 1.0em;		
+	}
+}
+
+#loginbar {
+	position: absolute;
+	color: white;
+	left:0px;
+	top:40px;
+
+	
+	.closed {
+		width: 40px;
+		height: 40px;
+	}
+
+	.open {
+		position: absolute;
+		left: -162px;
+		width: 160px;
+		background: rgba(0,0,0,0.8);
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+		border: 1px solid rgba(180,180,180,0.8);
+
+		a {
+			color: grey;
+		}
+
+	}
+}
+
+#linkbar {
+	position: absolute;
+	color: white;
+	left:0px;
+	top:0px;
+
+	.closed {
+		width: 40px;
+		height: 40px;		
+	}
+
+	.open {
+		position: absolute;
+		left: -162px;
+		width: 160px;
+		background: rgba(0,0,0,0.8);;
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+		border: 1px solid rgba(180,180,180,0.8);
+
+		a {
+			color: grey;
+		}
+	}
+}
+
+.nodisplay {
+	display: none;
+}

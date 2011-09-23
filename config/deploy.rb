@@ -40,6 +40,16 @@ namespace :deploy do
 	end
 end
 
+before "deploy:symlink", "assets:precompile"
+
+namespace :assets do
+  desc "Compile assets"
+  task :precompile, :roles => :app do
+    run "ln -nfs #{shared_path}/assets #{release_path}/public/assets" 
+    run "cd #{release_path} && bundle exec rake RAILS_ENV=#{rails_env} precompile"
+  end
+end
+
 set :shared_assets, %w{privateconfig privatefiles}
 
 namespace :assets  do
@@ -47,6 +57,7 @@ namespace :assets  do
     desc "Setup application symlinks for shared assets"
     task :setup, :roles => [:app, :web] do
       shared_assets.each { |link| run "mkdir -p #{shared_path}/#{link}" }
+      run "mkdir -p #{shared_path}/assets"
     end
 
     desc "Link assets for current deploy to the shared location"
