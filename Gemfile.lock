@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/lordmortis/MortisCMS.git
-  revision: f6cee3cecb7188a0b310037e182bf50ab116caa8
-  specs:
-    MortisCMS (0.1.1)
-
-GIT
   remote: https://github.com/plataformatec/devise.git
   revision: f19955705fe2e988d917834e5eb77117d2851b44
   specs:
@@ -12,6 +6,11 @@ GIT
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       warden (~> 1.0.3)
+
+PATH
+  remote: /Users/lordmortis/Projects/MortisCMS
+  specs:
+    MortisCMS (0.1.1)
 
 GEM
   remote: http://rubygems.org/
