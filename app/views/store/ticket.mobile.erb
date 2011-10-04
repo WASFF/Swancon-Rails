@@ -8,14 +8,16 @@ You are buying for <%= link_to(@store_user.order_name, users_admin_path(@store_u
 Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to place an order<br/>
 <%- end %>
 <%- if @ticket.available? %>
-<%- if @ticket.available_to != nil %>
+	<%- if @ticket.available_to != nil %>
 Available until: <%= render_time(@ticket.available_to) %><br/>
-<%- end %>
-<%- if current_user != nil and current_user.member_detail != nil -%>
+	<%- end %>
+	<%- if (current_user != nil and current_user.member_detail) != nil or (@store_user != nil and @store_user.member_detail != nil) -%>
 <%= button_to "add to cart", :action => "ticket_add", :id => @ticket.id %>
-<%- elsif current_user != nil and current_user.member_detail == nil -%>
+	<%- elsif current_user != nil and current_user.member_detail == nil and @store_user == nil -%>
 Please fill out your <%= link_to("member details", edit_my_member_details_path) %> before buying a ticket
-<%- end %>
+	<%- elsif @store_user != nil and @store_user.member_detail != nil %>
+Please fill out the <%= link_to("member details", new_member_detail_path(user_id: @store_user.id)) %> for <%= @store_user.name %> before buying a ticket on their behalf
+	<%- end %>
 <%- elsif @store_user != nil %>
 Warning: Item is currently unavailable to normal users<br/>
 <%= button_to "add to cart", :action => "ticket_add", :id => @ticket.id %>
