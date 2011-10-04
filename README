@@ -1,11 +1,14 @@
 h2. Swancon Rails websystem
 
+Fixes: Edit screens are all broken!
+
 Twitter registrations need to change their email address, or we'll get bounces.
 
 Features to implement:
 
+
+
 Blogging
-Panel suggestion system (Possibly as part of LiveCon)
 Store Purchase system
 This is Swancon
 Gallery

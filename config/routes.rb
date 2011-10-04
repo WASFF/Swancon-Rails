@@ -1,9 +1,9 @@
 DoomCon::Application.routes.draw do
-  resources :panel_suggestions
+	resources :panel_suggestions
 
-  resources :merchandise_option_sets
+	resources :merchandise_option_sets
 
-  resources :merchandise_types do
+	resources :merchandise_types do
 		post 'mark_shipped', :on => :member
 		post 'add_image', :on => :member
 		post 'remove_image', :on => :member
@@ -12,13 +12,13 @@ DoomCon::Application.routes.draw do
 		end	
 	end
 
-  resources :merchandise_sets
+	resources :merchandise_sets
 
-  resources :vendors do
+	resources :vendors do
 		post 'open_order', :on => :member
 	end
 
-  resources :vendor_orders do 
+	resources :vendor_orders do 
 		put 'mark_arrivals', :on => :member
 		post 'close', :on => :member
 	end
@@ -27,22 +27,22 @@ DoomCon::Application.routes.draw do
 		post 'void', :on => :member
 	end
 
-  resources :payment_types
+	resources :payment_types
 
-  resources :ticket_sets
+	resources :ticket_sets
 
-  resources :ticket_types
+	resources :ticket_types
 
-  resources :member_details do
+	resources :member_details do
 		get 'edit_my', :on => :collection
 	end
 
-  resources :launch_members do
+	resources :launch_members do
 		put 'purchase', :on => :member
 		get 'viewpurchase', :on => :member
 	end
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
+	devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
 	resources :users_admin, :controller => "users" do
 		get 'purchase_for', :on => :member
 	end
@@ -70,5 +70,5 @@ DoomCon::Application.routes.draw do
 
 	match 'store/purchase' => 'store#purchase'
 
-	root :to => "content_viewer#page"
+	root :to => "content_viewer#homepage"
 end

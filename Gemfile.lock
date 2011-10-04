@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/lordmortis/MortisCMS.git
-  revision: b10b0f72df1a904ec9782fa5d631bd36bb11207b
+  revision: 58f5b97b22d29db5cfa12723aa0ac39a8755c77f
   specs:
     MortisCMS (0.1.2)
 
