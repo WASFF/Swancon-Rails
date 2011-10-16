@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -29,6 +30,31 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
 
   add_index "content_blocks", ["author_id"], :name => "index_content_blocks_on_author_id"
   add_index "content_blocks", ["editor_id"], :name => "index_content_blocks_on_editor_id"
+
+  create_table "content_files", :force => true do |t|
+    t.integer  "author_id"
+    t.string   "description"
+    t.string   "data_file_name"
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.datetime "data_updated_at"
+    t.string   "data_fingerprint"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "content_images", :force => true do |t|
+    t.integer  "author_id"
+    t.string   "description"
+    t.string   "data_file_name"
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.datetime "data_updated_at"
+    t.string   "data_fingerprint"
+    t.text     "data_meta"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "content_pages", :force => true do |t|
     t.string   "name",                            :null => false

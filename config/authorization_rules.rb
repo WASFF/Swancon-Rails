@@ -29,9 +29,12 @@ authorization do
 		has_permission_on [:user_orders], :to => [:remail]
 		
 		has_permission_on [:member_details], :to => [:new, :index, :edit, :show, :destroy]
+
 		has_permission_on [:content_blocks], :to => [:new, :index, :create, :edit, :update, :show, :preview]
 		has_permission_on [:content_tags], :to => [:new, :index, :create, :edit, :update, :show]
 		has_permission_on [:content_pages], :to => [:new, :index, :create, :edit, :update, :show]
+		has_permission_on [:content_files], :to => [:new, :index, :create, :edit, :update, :show]
+		has_permission_on [:content_images], :to => [:new, :index, :create, :edit, :update, :show]
 
 		has_permission_on [:panel_suggestions], :to => [:destroy]
 	end
@@ -43,8 +46,12 @@ authorization do
 
 		has_permission_on [:merchandise_types], :to => [:mark_shipped]
 		has_permission_on [:merchandise_options], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
-		has_permission_on [:merchandise_option_sets], :to => [:new, :index, :create, :edit, :update, :show, :destroy]		
-		has_permission_on [:content_blocks], :to => [:new, :index, :create, :edit, :update, :show, :destroy, :preview, :publish, :unpublish]
+		has_permission_on [:merchandise_option_sets], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
+			
+		has_permission_on [:content_blocks], :to => [:destroy, :publish, :unpublish]
+		has_permission_on [:content_files], :to => [:destroy]
+		has_permission_on [:content_images], :to => [:destroy]
+		
 		has_permission_on [:user_orders], :to => [:mark_paid]
 		has_permission_on [:payments], :to => [:void]
 		has_permission_on [:vendors], :to => [:new, :index, :create, :edit, :update, :show, :destroy, :open_order]
