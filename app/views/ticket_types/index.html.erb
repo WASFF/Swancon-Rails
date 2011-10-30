@@ -1,20 +1,24 @@
-<h1>Listing ticket_types</h1>
+<h1>Listing Tickets</h1>
+
+<%- @ticket_sets.each do |set| %>
+<%= link_to set.name, set %> Tickets<br/>
+<%- if set.requires_extended_details %>
+Requires Extended Details<br/>
+<%- end %>
 
 <table>
   <tr>
     <th>Name</th>
     <th>Price</th>
-    <th>Ticket set</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @ticket_types.each do |ticket_type| %>
+<% set.types.order(:price).each do |ticket_type| %>
   <tr>
     <td><%= ticket_type.name %></td>
     <td><%= ticket_type.price %></td>
-    <td><%= ticket_type.ticket_set_id %></td>
     <td><%= link_to 'Show', ticket_type %></td>
     <td><%= link_to 'Edit', edit_ticket_type_path(ticket_type) %></td>
     <td><% if ticket_type.deletable? %><%= link_to 'Destroy', ticket_type, :confirm => 'Are you sure?', :method => :delete %><% end %></td>
@@ -23,5 +27,7 @@
 </table>
 
 <br />
+
+<%- end %>
 
 <%= link_to 'New Ticket type', new_ticket_type_path %>

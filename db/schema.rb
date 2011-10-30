@@ -231,6 +231,7 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "requires_extended_details", :default => false
   end
 
   create_table "ticket_types", :force => true do |t|

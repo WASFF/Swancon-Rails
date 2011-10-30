@@ -19,6 +19,10 @@ class TicketType < ActiveRecord::Base
 		self.ticket_set = value
 	end
 
+	def requires_extended_details
+		ticket_set.requires_extended_details
+	end
+
 	def available?
 		if (available_from == nil) and (available_to == nil)
 			true

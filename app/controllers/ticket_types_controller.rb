@@ -3,7 +3,7 @@ class TicketTypesController < ApplicationController
   # GET /ticket_types
   # GET /ticket_types.xml
   def index
-    @ticket_types = TicketType.all
+    @ticket_sets = TicketSet.all
 
     respond_to do |format|
       format.html # index.html.erb

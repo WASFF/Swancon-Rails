@@ -5,6 +5,10 @@
   <%= @ticket_set.name %>
 </p>
 
+<%- if @ticket_set.requires_extended_details %>
+Requires Extended Details to be filled out<br/>
+<%- end %>
+
 
 <%= link_to 'Edit', edit_ticket_set_path(@ticket_set) %> |
 <%= link_to 'Back', ticket_sets_path %>

@@ -14,4 +14,8 @@ class UserOrderTicket < ActiveRecord::Base
 	def price
 		ticket_type.price
 	end
+
+	def requires_extended_details
+		ticket_type.requires_extended_details
+	end
 end

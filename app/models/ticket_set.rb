@@ -1,8 +1,6 @@
 class TicketSet < ActiveRecord::Base
 	has_many :ticket_types
 
-	#TODO: Requires Details. disclaimer signed.
-
 	scope :available, lambda {
 		joins(:ticket_types).where(TicketType.availablearel).group(:id)
 	}
@@ -13,5 +11,9 @@ class TicketSet < ActiveRecord::Base
 
 	def tickets
 		ticket_types		
+	end
+
+	def types
+		ticket_types
 	end
 end
