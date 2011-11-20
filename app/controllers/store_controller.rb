@@ -142,6 +142,7 @@ class StoreController < ApplicationController
 					if params[:send_email] == "true"
 						StoreMailer.receipt(payment).deliver
 					end
+					StoreMailer.confirmation_required(order).deliver
 					redirect_to payment
 					return
 				end
