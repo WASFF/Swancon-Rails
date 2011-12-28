@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<h2>Basic Details</h2>
 <p>
   <b>Username:</b>
   <%= @user.username %>
@@ -10,18 +10,54 @@
   <%= @user.email %>
 </p>
 
+<%- if @user.member_detail != nil %>
+<div class="hidden" id="member_details">
+<h2>Member Details</h2>
+<% detail = @user.member_detail %>
+<% if detail.name_first != nil or detail.name_last != nil %>
+Name: <%= detail.name_real %><br/>
+<% end %>
+<% if detail.name_badge != nil %>
+Badge Name: <%= detail.name_badge %><br/>
+<% end %>
+
+<% if detail.email_optin %>
+Wants emails from us.
+<% else %>
+<span style="color: red">DOES NOT WANT</span> emails from us.
+<% end %><br/>
+
+<% if detail.disclaimer_signed %>
+Has signed disclaimer.
+<% else %>
+<span style="color: red">HAS NOT SIGNED</span> disclaimer.
+<% end %><br/>
+
+Address:
+<blockquote>
+	<%= detail.address_1 %><br/>
+	<%= detail.address_2 %><br/>
+	<%= detail.address_3 %><br/>
+	<%= detail.address_postcode %>, <%= detail.address_state %><br/>
+	<%= detail.address_country %><br/>
+</blockquote>
+
+<% if detail.phone != nil %>
+Phone: <%= detail.phone %>
+<% end %>
+</div>
+<button class="hidden" id="hide_member_details_button" onClick="hide('member_details'); hide('hide_member_details_button'); show('show_member_details_button');">Hide Member Details</button>
+<button id="show_member_details_button"  onClick="show('member_details'); show('hide_member_details_button'); hide('show_member_details_button');">Show Member Details</button>
+<% end %>
+
 <h2>Orders</h2>
 <ul>
 	<% @user.orders.each do |order| %>
-	<li><%= link_to order.invoice_number, order_path(order) %><% if order.payment != nil %>Receipt: <%= link_to order.payment.receipt, order.payment %><% end %></li>
+	<li><%= link_to order.invoice_number, order_path(order) %><% if order.payment != nil %> Receipt: <%= link_to order.payment.receipt, order.payment %><% end %></li>
 	<% end %>
 </ul>
 
-<%- if @user.member_detail != nil %>
-<%= link_to "More member details available", @user.member_detail %><br/>
-<%- else %>
-<%= link_to "Create Member Details", new_member_detail_path(:user_id => @user.id) %><br/>
-<%- end %>
 <%= link_to "Purchase For this User", purchase_for_users_admin_path(@user) %> |
 <%= link_to 'Edit', edit_users_admin_path(@user) %> |
-<%= link_to 'Back', users_admin_path %>
+<% permitted_to? :destroy, :users do -%> <%= link_to 'Destroy', users_admin_path(@user), :confirm => 'Are you sure?', :method => :delete %> | <% end %>
+<%= link_to 'Back', users_admin_path %> 

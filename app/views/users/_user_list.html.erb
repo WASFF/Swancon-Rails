@@ -1,0 +1,33 @@
+<%= pluralize(users.count, 'User/Member', "Users/Members") %> found
+<table width="100%">
+<tr>
+	<th>Username</th>
+	<th>Valid Email?</th>
+	<th>Full Details?</th>
+	<th>Name</th>
+	<th>State</th>
+	<th>Actions</th>
+</tr>
+<% users.each do |user| %>
+<% if user.member_detail != nil %>
+<% detail = true %>
+<tr style="background-color: green;">
+<% else %>
+<% detail = false %>
+<tr style="background-color: red;">
+<% end %>
+	<td><%= user.username %></td>
+	<td><% if user.email_valid %>Yes<% else %>No<% end %></td>
+    <% if detail %>
+    <td>Yes</td>
+    <td><%= user.member_detail.name_real %></td>
+    <td><%= user.member_detail.address_state %></td>
+    <% else %>
+    <td>No</td><td>n/a</td><td>n/a</td>
+    <% end %>
+    <td><%= link_to 'S', users_admin_path(user) %>
+    <%= link_to 'E', edit_users_admin_path(user) %>
+	</td>
+</tr>
+<% end %>
+</table>

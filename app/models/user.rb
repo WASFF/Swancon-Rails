@@ -2,8 +2,10 @@ class User < ActiveRecord::Base
 	has_many :user_roles, :dependent => :destroy
 	has_many :user_omni_auths, :dependent => :destroy
 	has_many :roles, :through => :user_roles
-	has_one :member_detail
 	has_many :user_orders
+
+	has_one :member_detail, dependent: :destroy
+	accepts_nested_attributes_for :member_detail
 	
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
@@ -12,7 +14,7 @@ class User < ActiveRecord::Base
 					:omniauthable
 
   # Setup accessible (or protected) attributes for your model
-	attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :role_ids  
+	attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :role_ids, :member_detail_attributes 
 
 	after_create :add_user_role
 
@@ -45,6 +47,21 @@ class User < ActiveRecord::Base
 	
 	def orders
 		user_orders
+	end
+
+	def email_valid
+		return !self.email.end_with?("twitter.com")
+	end
+
+	def to_json
+		retval = {username: username, email: email, extended_details: (member_detail != nil)}
+		if (retval[:extended_details])
+			extended = {name_badge: member_detail.name_badge, name_first: member_detail.name_first, name_last: member_detail.name_last, state: member_detail.address_state}
+
+			retval[:extended_details] = extended
+		end
+
+		retval
 	end
 
 	# Class Functions

@@ -2,27 +2,37 @@ class UsersController < ApplicationController
 	filter_resource_access
 
 	def index
-		if params[:norole] == "true"
-			@rolename = "No Roles"
-			roleids = UserRole.group("user_id").all.collect {|item| item.user_id}
-			@users = User.where(["id NOT IN (?)", roleids])
-		elsif params.key?(:roles)
-			@rolename = ""
-			rolenames = params[:roles].split(",")
-			@users = User.joins(:user_roles)
-			rolenames.each do |rolename|
-				role = Role.where(:name => rolename.downcase).first
-				@users = @users.where("user_roles.role_id" => role.id)
-				@rolename = "#{@rolename}#{rolename}, "
+		@users = User.joins("LEFT OUTER JOIN member_details ON users.id = member_details.user_id").includes(:member_detail)
+		@search = false
+		if params[:role] != nil
+			if params[:role][:no_role] != nil
+				roleids = UserRole.group("user_id").all.collect {|item| item.user_id}
+				@users = @users.where(["users.id NOT IN (?)", roleids])
+				@search = true
+			else
+				@users = @users.joins(:user_roles)
+				params[:role].keys.each do |key|
+					role = Role.where(:name => key.downcase).first
+					if (role != nil)
+						@users = @users.where("user_roles.role_id" => role.id)
+						@search = true
+					end
+				end
 			end
-			@rolename = @rolename[0..-2]		
-			@users = @users.includes(:roles).all
 		end
 
-	  respond_to do |format|
-	    format.html # index.html.erb
-	    format.xml  { render :xml => @users }
-	  end
+		if params[:name_search] != nil
+			if params[:name_search].strip.length > 0
+				searchstring = "%#{params[:name_search].strip}%"
+				@search = true
+				@users = @users.where("member_details.name_first LIKE ? OR member_details.name_last LIKE ? OR member_details.name_badge LIKE ? or users.username LIKE ?", searchstring, searchstring, searchstring, searchstring)
+			end
+		end
+
+		respond_to do |format|
+			format.html # index.html.erb
+			format.js
+		end
 	end
 
 	def show
@@ -40,7 +50,6 @@ class UsersController < ApplicationController
 
 	def new
 	  @user = User.new
-#		@member_detail = MemberDetail.new
 	  respond_to do |format|
 	    format.html # new.html.erb
 	    format.xml  { render :xml => @user }
@@ -57,9 +66,19 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(params[:user])
+		if @user.password.strip == ""
+			@user.password = Devise.friendly_token[0,20]
+			@user.password_confirmation = @user.password
+		end
+
+		if params[:member_detail_attributes] != nil
+			details = MemberDetail.new(params[:member_detail_attributes])
+			@user.member_details = details
+		end
+
 		@user.skip_confirmation!
 		@user.confirm!
-		
+				
 		respond_to do |format|
 		if @user.save
 			format.html { redirect_to(users_admin_path(@user), :notice => 'User was successfully created.') }

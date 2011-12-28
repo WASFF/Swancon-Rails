@@ -1,43 +1,94 @@
-
- <% if @user.errors.any? %>
-   <div id="error_explanation">
-     <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-     <ul>
-     <% @user.errors.full_messages.each do |msg| %>
-       <li><%= msg %></li>
-     <% end %>
-     </ul>
-   </div>
- <% end %>
-<div class="field">
-	<%= @f.label :username, "Username" %>
-	<%= @f.text_field :username %>
-</div>
-
-<div class="field">
-	<%= @f.label :email, "Email" %>
-	<%= @f.text_field :email %>
-</div>
-
-<div class="field">
-	<%= @f.label :password, "Password" %>
-	<%= @f.password_field :password %>
-</div>
-
-<div class="field">
-	<%= @f.label :password_confirmation, "Password confirmation" %>
-	<%= @f.password_field :password_confirmation %>
-</div>
-
-<% if current_user.role_symbols.index(:admin) != nil %>
-<div class="roles">
-	<% Role.all.each do |role| %>
-	<%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %> <%= role.name %>
+<% if @user.errors.any? %>
+	<div id="error_explanation">
+	<h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+	<ul>
+	<% @user.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
 	<% end %>
-</div>
+	</ul>
+	</div>
 <% end %>
 
- <div class="actions">
-   <%= @f.submit %>
- </div>
+<div class="field">
+	<%= f.label :username, "Username" %>
+	<%= f.text_field :username %>
+</div>
+
+<div class="field">
+	<%= f.label :email, "Email" %>
+	<%= f.text_field :email %>
+</div>
+
+<div class="field">
+	<%= f.label :password, "Password" %>
+	<%= f.password_field :password %>
+</div>
+
+<div class="field">
+	<%= f.label :password_confirmation, "Password confirmation" %>
+	<%= f.password_field :password_confirmation %>
+</div>
+
+<% if quick %>
+(if password is left blank, a random one will be generated for the member. They can change this later)
+<% end %>
+
+<% if current_user.role_symbols.index(:admin) != nil and !quick %>
+	<div class="roles">
+	<% Role.all.each do |role| %>
+		<%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %> <%= role.name %>
+	<% end %>
+	</div>
+<% end %>
+
+<%= f.fields_for :member_detail do |detail| %>
+	  <div class="field">
+		<%= detail.label :name_first %><br />
+		<%= detail.text_field :name_first, :autocorrect => "off", :autocapitalize=> "off" %>
+	</div>
+	<div class="field">
+		<%= detail.label :name_last %><br />
+		<%= detail.text_field :name_last, :autocorrect => "off", :autocapitalize=> "off" %>
+	</div>
+	<div class="field">
+		<%= detail.label :name_badge %><br />
+		<%= detail.text_field :name_badge, :autocorrect => "off", :autocapitalize=> "off" %>
+	</div>
+	<div class="field">
+		<%= detail.label :address_1, "Address Line 1" %><br />
+		<%= detail.text_field :address_1, :autocorrect => "off", :autocapitalize=> "off" %>
+	</div>
+	<div class="field">
+		<%= detail.label :address_1, "Address Line 2" %><br />
+		<%= detail.text_field :address_2, :autocorrect => "off", :autocapitalize=> "off" %>
+	</div>
+	<div class="field">
+		<%= detail.label :address_3, "City/Suburb" %><br />
+		<%= detail.text_field :address_3, :autocorrect => "off", :autocapitalize=> "off" %>
+	</div>
+	<div class="field">
+		<%= detail.label :address_postcode %><br />
+		<%= detail.text_field :address_postcode, :autocorrect => "off", :autocapitalize=> "off" %>
+	</div>
+	<div class="field">
+		<%= detail.label :address_state %><br />
+		<%= detail.text_field :address_state, :autocorrect => "off", :autocapitalize=> "off" %>
+	</div>
+	<div class="field">
+		<%= detail.label :address_country %><br />
+		<%= detail.text_field :address_country, :autocorrect => "off", :autocapitalize=> "off" %>
+	</div>
+	<div class="field">
+		<%= detail.label :phone %><br />
+		<%= detail.text_field :phone, :autocorrect => "off", :autocapitalize=> "off" %>
+	</div>
+	<div class="field">
+		<%= detail.label :email_optin %><br />
+		<%= detail.check_box :email_optin %>
+	</div>
+	<%= render :partial => "/member_details/disclaimer"%>
+	I AGREE TO THE ABOVE: <%= detail.check_box :disclaimer_signed %>
+<% end %>
+<div class="actions">
+	<%= f.submit %>
+</div>

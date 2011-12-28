@@ -1,52 +1,29 @@
-<% if @rolename != nil%>
-<h1>Listing Users with <%= @rolename %></h1>
-<% else -%>
-<h1>User Counts</h1>
-<% end -%>
+<% content_for :title do %>User/Member Administration<% end %>
+<% content_for :header do %>
+<script>
+$().ready(function() {
 
-<% if @rolename != nil %>
-<table>
-  <tr>
-		<th>Username</th>	
-		<th>Roles</th>
-		<th>Email</th>		
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @users.each do |user| %>
-  <tr>
-		<td><%= user.username %></td>
-		<td><%= user.displayRoles %></td>
-    <td><%= user.email %></td>
-    <td><%= link_to 'Show', users_admin_path(user) %></td>
-    <td><%= link_to 'Edit', edit_users_admin_path(user) %></td>
-    <td><%= link_to 'Destroy', users_admin_path(user), :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+});
+</script>
 <% end %>
-</table>
+<h1>User/Member Administration</h1>
+<%= form_tag(users_admin_index_path, remote: true, method: "get") do %>
+<h2>Search</h2>
+ <%= label_tag(:name_search, "Name") %> <%= text_field_tag(:name_search) %><br/>
+ Roles: <%- Role.all.each do |role| %>
+ <%= check_box_tag("role[#{role.name}]") %><%= label_tag("role[#{role.name}]", role.name.capitalize) %>
+ <%- end %><%= check_box_tag("role[no_role]") %><%= label_tag("role[no_role]", "No Role") %><br/>
+<%= submit_tag("Search") %>
+<% end %>
 
-<br />
-<% else -%>
-<table>
-	<tr>
-		<th>Role</th>
-		<th>Users</th>
-		<th></th>
-	</tr>
-<% Role.all.each do |role| -%>
-	<tr>
-		<td><%= role.name %></td>
-		<td><%= role.users.count %></td>
-		<td><%= link_to "List", users_admin_index_path(:roles => "#{role.name}") -%>
-	</tr>
-<% end -%>
-	<tr>
-		<td>Users without Roles</td>
-		<td></td>
-		<td><%= link_to "List", users_admin_index_path(:norole => true) -%>
-	</tr>
-</table>
-<% end -%>
-<%= link_to 'New User', new_users_admin_path %>
+<h2>Results</h2>
+<div id="results">
+<%= render partial: "noresults" %>
+</div>
+<h2>New Member</h2>
+<% @user = User.new %>
+<% @user.build_member_detail %>
+<% @quickform = true %>
+<%= form_for(@user, :url => users_admin_index_url(@user, quickform: true), :method => :post) do |form| %>
+<%= render partial: 'form', locals: {quick: true, f: form} %>
+<% end %>

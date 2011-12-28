@@ -60,3 +60,15 @@ function styleChange(style) {
 	);
   $(".stylechange").each(styleLinkDisable);
 }
+
+function show(id) {
+	$("#" + id).show();
+}
+
+function hide(id) {
+	$("#" + id).hide();
+}
+
+$().ready(function() {
+	$(".hidden").hide();
+});

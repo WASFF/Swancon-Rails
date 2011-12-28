@@ -1,0 +1,5 @@
+<% if @search %>
+$("#results").html("<%= escape_javascript(render(partial: "user_list", locals: {users: @users})) %>");
+<% else %>
+$("#results").html("<%= escape_javascript(render(partial: "noresults")) %>");
+<% end %>
