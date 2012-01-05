@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 					:recoverable, :rememberable, :trackable, :validatable,
 					:omniauthable
 
+	validates :username, :presence => true, :length => {:minimum => 3}
+
   # Setup accessible (or protected) attributes for your model
 	attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :role_ids, :member_detail_attributes 
 
@@ -35,6 +37,14 @@ class User < ActiveRecord::Base
 	
 	def add_user_role
 		self.roles << Role.where(:name => "user").first
+	end
+
+	def details
+		member_detail
+	end
+
+	def details=(value)
+		self.member_detail = value
 	end
 	
 	def order_name

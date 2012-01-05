@@ -71,9 +71,16 @@ class UsersController < ApplicationController
 			@user.password_confirmation = @user.password
 		end
 
-		if params[:member_detail_attributes] != nil
-			details = MemberDetail.new(params[:member_detail_attributes])
-			@user.member_details = details
+		if params[:user][:member_detail_attributes] != nil
+			print "Username is: '#{@user.username.strip}'\n"
+			if @user.username.strip == ""
+				print "USERNAME IS BLANK!\n"
+				if @user.details.name_badge.strip != ""
+					@user.username = @user.details.name_badge
+				else
+					@user.username = "#{@user.details.name_first}-#{@user.details.name_last}"
+				end
+			end
 		end
 
 		@user.skip_confirmation!

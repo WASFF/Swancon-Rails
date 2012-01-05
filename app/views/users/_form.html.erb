@@ -12,7 +12,11 @@
 <div class="field">
 	<%= f.label :username, "Username" %>
 	<%= f.text_field :username %>
+	<% if quick %>
+	<br/>(if username is left blank, one will be generated from the member's badge name and/or firstname / lastname)
+	<% end %>
 </div>
+
 
 <div class="field">
 	<%= f.label :email, "Email" %>
@@ -21,17 +25,13 @@
 
 <div class="field">
 	<%= f.label :password, "Password" %>
-	<%= f.password_field :password %>
-</div>
-
-<div class="field">
+	<%= f.password_field :password %><br/>
 	<%= f.label :password_confirmation, "Password confirmation" %>
 	<%= f.password_field :password_confirmation %>
+	<% if quick %>
+	<br/>(if password is left blank, a random one will be generated for the member. They can change this later)
+	<% end %>
 </div>
-
-<% if quick %>
-(if password is left blank, a random one will be generated for the member. They can change this later)
-<% end %>
 
 <% if current_user.role_symbols.index(:admin) != nil and !quick %>
 	<div class="roles">
