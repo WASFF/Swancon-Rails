@@ -13,6 +13,7 @@ $().ready(function() {
  Roles: <%- Role.all.each do |role| %>
  <%= check_box_tag("role[#{role.name}]") %><%= label_tag("role[#{role.name}]", role.name.capitalize) %>
  <%- end %><%= check_box_tag("role[no_role]") %><%= label_tag("role[no_role]", "No Role") %><br/>
+ Disclaimer: <%= radio_button_tag("disclaimer", "true") %> Signed <%= radio_button_tag("disclaimer", "false") %> Unsigned <%= radio_button_tag("disclaimer", "null") %> Don't Care<br/>
 <%= submit_tag("Search") %>
 <% end %>
 

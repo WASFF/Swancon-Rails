@@ -19,7 +19,7 @@
 	<td><%= user.username %></td>
 	<td><% if user.email_valid %>Yes<% else %>No<% end %></td>
     <% if detail %>
-    <td>Yes</td>
+    <td>Yes <% if user.member_detail.disclaimer_signed %>(disclaimer)<% end %></td>
     <td><%= user.member_detail.name_real %></td>
     <td><%= user.member_detail.address_state %></td>
     <% else %>

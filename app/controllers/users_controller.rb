@@ -21,6 +21,15 @@ class UsersController < ApplicationController
 			end
 		end
 
+		if params[:disclaimer] != nil and params[:disclaimer] != "null"
+			@search = true
+			if params[:disclaimer] == "true"
+				@users = @users.where("member_details.disclaimer_signed = 't'")
+			else
+				@users = @users.where("member_details.disclaimer_signed = 'f'")
+			end
+		end
+
 		if params[:name_search] != nil
 			if params[:name_search].strip.length > 0
 				searchstring = "%#{params[:name_search].strip}%"
