@@ -6,9 +6,8 @@ authorization do
 	
 	role :user do
 		includes :guest
-		has_permission_on [:users], :to => [:update, :show, :destroy]		
 		has_permission_on [:user_orders], :to => [:index, :show, :destroy]
-		has_permission_on [:member_details], :to => [:edit_my, :update, :create, :show]
+		has_permission_on [:member_details], :to => [:edit_my]
 		has_permission_on [:panel_suggestions], :to => [:update, :create, :edit, :new]
 	end
 
@@ -16,9 +15,14 @@ authorization do
 		includes :user
 	end
 
+	role :"ticket seller" do
+		has_permission_on :seller, to: [:index, :select, :create]
+	end
+
 	role :committee do
 		includes :member
-		has_permission_on :index, :to => :content_admin
+		includes :"ticket seller"
+		has_permission_on [:users], :to => [:update, :show, :destroy]
 		has_permission_on [:launch_members], :to => [:new, :index, :create, :edit, :update, :show, :destroy, :purchase, :viewpurchase]
 		has_permission_on [:ticket_sets, :ticket_types, :payment_types, :merchandise_sets, :merchandise_types],
 			:to => [:new, :index, :create, :edit, :update, :show, :destroy]
@@ -35,7 +39,6 @@ authorization do
 		has_permission_on [:content_pages], :to => [:new, :index, :create, :edit, :update, :show]
 		has_permission_on [:content_files], :to => [:new, :index, :create, :edit, :update, :show]
 		has_permission_on [:content_images], :to => [:new, :index, :create, :edit, :update, :show]
-
 		has_permission_on [:panel_suggestions], :to => [:destroy]
 	end
 
