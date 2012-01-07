@@ -1,0 +1,11 @@
+<% if @saved %>
+You have created <%= @user.order_name %>'s Record.
+<%= link_to "Store", controller: :store %>
+<% else %>
+<h2>Create New Member</h2>
+<p>(after creating, you will be able to sell something to this member)</p>
+<% @quickform = true %>
+<%= form_for(@user, url: {action: :create}, :method => :post) do |form| %>
+<%= render partial: 'users/form', locals: {quick: true, f: form} %>
+<% end %>
+<% end %>

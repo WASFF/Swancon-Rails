@@ -62,6 +62,23 @@
 							<li><%= link_to("Register", new_user_registration_path) %></li>
 						</ul>
 					<%- end %>
+						<% permitted_to? :index, :seller do -%>
+						<h2>Seller Actions</h2>
+						<ul>
+						<% if session[:store_user_id] != nil %>
+							<% storeuser = User.find(session[:store_user_id]) %>
+							<% if storeuser != nil %>
+								<li>Buying for: <%= storeuser.order_name %></li>
+							<% end %>
+						<% end %>
+						<% permitted_to? :select, :seller do -%>
+						<li><%= link_to("Select Member", controller: :seller, action: :select) %></li>
+						<% end %>
+						<% permitted_to? :create, :seller do -%>
+						<li><%= link_to("New Member", controller: :seller, action: :create) %></li>
+						<% end %>
+						</ul>
+						<% end %>
 						<h2>Sections</h2>
 						<ul>
 							<% ContentPage.topbar.all.each do |page| %>

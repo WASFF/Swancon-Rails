@@ -41,53 +41,55 @@
 	</div>
 <% end %>
 
-<%= f.fields_for :member_detail do |detail| %>
-	  <div class="field">
-		<%= detail.label :name_first %><br />
-		<%= detail.text_field :name_first, :autocorrect => "off", :autocapitalize=> "off" %>
-	</div>
-	<div class="field">
-		<%= detail.label :name_last %><br />
-		<%= detail.text_field :name_last, :autocorrect => "off", :autocapitalize=> "off" %>
-	</div>
-	<div class="field">
-		<%= detail.label :name_badge %><br />
-		<%= detail.text_field :name_badge, :autocorrect => "off", :autocapitalize=> "off" %>
-	</div>
-	<div class="field">
-		<%= detail.label :address_1, "Address Line 1" %><br />
-		<%= detail.text_field :address_1, :autocorrect => "off", :autocapitalize=> "off" %>
-	</div>
-	<div class="field">
-		<%= detail.label :address_1, "Address Line 2" %><br />
-		<%= detail.text_field :address_2, :autocorrect => "off", :autocapitalize=> "off" %>
-	</div>
-	<div class="field">
-		<%= detail.label :address_3, "City/Suburb" %><br />
-		<%= detail.text_field :address_3, :autocorrect => "off", :autocapitalize=> "off" %>
-	</div>
-	<div class="field">
-		<%= detail.label :address_postcode %><br />
-		<%= detail.text_field :address_postcode, :autocorrect => "off", :autocapitalize=> "off" %>
-	</div>
-	<div class="field">
-		<%= detail.label :address_state %><br />
-		<%= detail.text_field :address_state, :autocorrect => "off", :autocapitalize=> "off" %>
-	</div>
-	<div class="field">
-		<%= detail.label :address_country %><br />
-		<%= detail.text_field :address_country, :autocorrect => "off", :autocapitalize=> "off" %>
-	</div>
-	<div class="field">
-		<%= detail.label :phone %><br />
-		<%= detail.text_field :phone, :autocorrect => "off", :autocapitalize=> "off" %>
-	</div>
-	<div class="field">
-		<%= detail.label :email_optin %><br />
-		<%= detail.check_box :email_optin %>
-	</div>
-	<%= render :partial => "/member_details/disclaimer"%>
-	I AGREE TO THE ABOVE: <%= detail.check_box :disclaimer_signed %>
+<% if quick %>
+	<%= f.fields_for :member_detail do |detail| %>
+		  <div class="field">
+			<%= detail.label :name_first %><br />
+			<%= detail.text_field :name_first, :autocorrect => "off", :autocapitalize=> "off" %>
+		</div>
+		<div class="field">
+			<%= detail.label :name_last %><br />
+			<%= detail.text_field :name_last, :autocorrect => "off", :autocapitalize=> "off" %>
+		</div>
+		<div class="field">
+			<%= detail.label :name_badge %><br />
+			<%= detail.text_field :name_badge, :autocorrect => "off", :autocapitalize=> "off" %>
+		</div>
+		<div class="field">
+			<%= detail.label :address_1, "Address Line 1" %><br />
+			<%= detail.text_field :address_1, :autocorrect => "off", :autocapitalize=> "off" %>
+		</div>
+		<div class="field">
+			<%= detail.label :address_1, "Address Line 2" %><br />
+			<%= detail.text_field :address_2, :autocorrect => "off", :autocapitalize=> "off" %>
+		</div>
+		<div class="field">
+			<%= detail.label :address_3, "City/Suburb" %><br />
+			<%= detail.text_field :address_3, :autocorrect => "off", :autocapitalize=> "off" %>
+		</div>
+		<div class="field">
+			<%= detail.label :address_postcode %><br />
+			<%= detail.text_field :address_postcode, :autocorrect => "off", :autocapitalize=> "off" %>
+		</div>
+		<div class="field">
+			<%= detail.label :address_state %><br />
+			<%= detail.text_field :address_state, :autocorrect => "off", :autocapitalize=> "off" %>
+		</div>
+		<div class="field">
+			<%= detail.label :address_country %><br />
+			<%= detail.text_field :address_country, :autocorrect => "off", :autocapitalize=> "off" %>
+		</div>
+		<div class="field">
+			<%= detail.label :phone %><br />
+			<%= detail.text_field :phone, :autocorrect => "off", :autocapitalize=> "off" %>
+		</div>
+		<div class="field">
+			<%= detail.label :email_optin %><br />
+			<%= detail.check_box :email_optin %>
+		</div>
+		<%= render :partial => "/member_details/disclaimer"%>
+		I AGREE TO THE ABOVE: <%= detail.check_box :disclaimer_signed %>
+	<% end %>
 <% end %>
 <div class="actions">
 	<%= f.submit %>

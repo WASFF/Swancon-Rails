@@ -1,8 +1,7 @@
 <h1>Editing User</h1>
 
-<%= form_for(@user, :url => users_admin_url(@user), :method => :put) do |f| %>
-<% @f = f%>
-<%= render 'form' %>
+<%= form_for(@user, :url => users_admin_url(@user), :method => :post) do |form| %>
+<%= render partial: 'form', locals: {quick: false, f: form} %>
 <% end %>
 
 <%= link_to 'Show', users_admin_path(@user) %> |

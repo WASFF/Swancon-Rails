@@ -56,6 +56,10 @@ DoomCon::Application.routes.draw do
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
   
+	match 'seller' => 'seller#index'
+  	match 'seller/:action' => 'seller'
+	match 'seller/:action/:id' => 'seller'
+	
 	match 'store' => 'store#index'
 	
 	match 'store/empty_cart' => 'store#clear_cart'
