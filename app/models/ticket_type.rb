@@ -3,10 +3,6 @@ class TicketType < ActiveRecord::Base
 	has_many :launch_member_ticket_types
 	has_many :user_order_tickets
 
-	scope :available, lambda {
-		where(self.availablearel)
-	}
-
 	def orders
 		user_order_tickets
 	end
@@ -43,6 +39,14 @@ class TicketType < ActiveRecord::Base
 		user_order_tickets.count == 0
 	end	
 	
+	def self.available(user = nil)
+		if (user == nil) || (!user.full_store_visible?)
+			where(self.availablearel)
+		else
+			where("1 = 1")
+		end
+	end
+
 	def self.availablearel
 		ticketarel = TicketType.arel_table
 		arelquery = Arel::Nodes::Grouping.new(ticketarel[:available_from].eq(nil).and(ticketarel[:available_to].eq(nil)))

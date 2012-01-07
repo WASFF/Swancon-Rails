@@ -1,10 +1,6 @@
 class TicketSet < ActiveRecord::Base
 	has_many :ticket_types
 
-	scope :available, lambda {
-		joins(:ticket_types).where(TicketType.availablearel).group(:id)
-	}
-	
 	def deletable?
 		ticket_types.count == 0
 	end
@@ -16,4 +12,13 @@ class TicketSet < ActiveRecord::Base
 	def types
 		ticket_types
 	end
+
+	def self.available(user = nil)
+		if (user == nil) || (!user.full_store_visible?)
+			joins(:ticket_types).where(TicketType.availablearel).group(:id)
+		else
+			where("1 = 1")
+		end
+	end
+
 end

@@ -1,18 +1,10 @@
 <% content_for :title do %>Doom-Store&trade;<% end %>
 <div class="title">Doom-Store&trade;</div>
-<% if @store_user != nil%>
-You are buying for <%= link_to(@store_user.order_name, users_admin_path(@store_user)) %>
-<% end %>
-<% if current_user == nil -%>
-Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to place an order
-<% end -%>
+<%= render partial: "header" %>
 <% @ticketsets.each do |set| -%>
 <h2><%= set.name %> Tickets</h2>
 <ul>
-<%- ticketquery = set.tickets.available %>
-<%- if @store_user != nil %>
-<%- ticketquery = set.tickets %>
-<%- end %>
+<%- ticketquery = set.tickets.available(current_user) %>
 <% ticketquery.all.each do |ticket| -%>
 <% if ticket.available? %>
 <li><%= link_to "#{ticket.name} #{render_money(ticket.price)}", :action => "ticket", :id => ticket.id %></li>
@@ -26,10 +18,7 @@ Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register",
 <% @merchsets.each do |set| -%>
 <h2><%= set.name %></h2>
 <ul>
-<%- merchquery = set.merchandise.available %>
-<%- if @store_user != nil %>
-<%- merchquery = set.merchandise %>
-<%- end %>
+<%- merchquery = set.merchandise.available(current_user) %>
 <% merchquery.all.each do |merch| -%>
 <% if merch.available? %>
 <li><%= link_to "#{merch.name} #{render_money(merch.price)}", :action => "merchandise", :id => merch.id %></li>

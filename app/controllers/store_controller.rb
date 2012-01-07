@@ -2,13 +2,8 @@ class StoreController < ApplicationController
 	before_filter :init_cart, :init_user
 
 	def index
-		if @store_user == nil
-			@ticketsets = TicketSet.available.all
-			@merchsets = MerchandiseSet.available.all
-		else
-			@ticketsets = TicketSet.all
-			@merchsets = MerchandiseSet.all
-		end
+		@ticketsets = TicketSet.available(current_user).all
+		@merchsets = MerchandiseSet.available(current_user).all
 	end
 	
 	def clear_cart

@@ -4,11 +4,7 @@ class MerchandiseType < ActiveRecord::Base
 		has_many :launch_member_merchandise_types
 		has_many :user_order_merchandise
 		has_many :merchandise_images
-		
-		scope :available, lambda {
-			where(self.availablearel)
-		}
-				
+						
 		def option_sets
 			MerchandiseOptionSet
 		end
@@ -49,6 +45,14 @@ class MerchandiseType < ActiveRecord::Base
 			user_order_merchandise.count == 0
 		end
 		
+		def self.available(user = nil)
+			if (user == nil) || (!user.full_store_visible?)
+				where(self.availablearel)
+			else
+				where("1 = 1")
+			end
+		end
+
 		def self.availablearel
 			mercharel = MerchandiseType.arel_table
 			arelquery = Arel::Nodes::Grouping.new(mercharel[:available_from].eq(nil).and(mercharel[:available_to].eq(nil)))
