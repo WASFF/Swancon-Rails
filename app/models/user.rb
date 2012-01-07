@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
 			role.name.underscore.to_sym
 		end
 	end
+
+	def email_required? 
+		false 
+	end 
 	
 	def add_user_role
 		self.roles << Role.where(:name => "user").first
@@ -60,7 +64,11 @@ class User < ActiveRecord::Base
 	end
 
 	def email_valid
-		return !self.email.end_with?("twitter.com")
+		return (!self.email.end_with?("twitter.com")) && (self.email != nil) && (self.email != "")
+	end
+
+	def full_store_visible?
+		return roles.where(name: "admin").count == 1
 	end
 
 	def to_json
