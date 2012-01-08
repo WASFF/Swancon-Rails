@@ -69,6 +69,7 @@
 							<% storeuser = User.find(session[:store_user_id]) %>
 							<% if storeuser != nil %>
 								<li>Buying for: <%= storeuser.order_name %></li>
+								<li><%= link_to("Clear", controller: :seller, action: :clear) %></li>
 							<% end %>
 						<% end %>
 						<% permitted_to? :select, :seller do -%>
