@@ -21,4 +21,9 @@ class ApplicationController < ActionController::Base
 		session[:mobile_param] = params[:mobile] if params[:mobile]
 		request.format = :mobile if mobile_device? and request.format != "json"
 	end
+
+	def prepare_backlink
+		session[:back] = {controller: controller_name, action: action_name}
+		session[:back].merge!(params)
+	end
 end
