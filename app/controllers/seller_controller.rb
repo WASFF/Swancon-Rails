@@ -2,6 +2,22 @@ class SellerController < ApplicationController
 	filter_access_to :all
 
 	def select
+		@users = User.joins("LEFT OUTER JOIN member_details ON users.id = member_details.user_id").includes(:member_detail)
+		if params[:name_search] != nil
+			if params[:name_search].strip.length > 0
+				searchstring = "%#{params[:name_search].strip}%"
+				@search = true
+				@users = @users.where("member_details.name_first LIKE ? OR member_details.name_last LIKE ? OR member_details.name_badge LIKE ? or users.username LIKE ?", searchstring, searchstring, searchstring, searchstring)
+			end
+		elsif params[:id] != nil
+			@user = User.where(id: params[:id].to_i).first
+			session[:store_user_id] = @user.id
+		end
+
+		respond_to do |format|
+			format.html # index.html.erb
+			format.js
+		end
 	end
 
 	def create
@@ -38,5 +54,10 @@ class SellerController < ApplicationController
 			@user.build_member_detail
 			@saved = false
 		end
+	end
+
+	def clear
+		session[:store_user_id] = nil
+		render "select"
 	end
 end

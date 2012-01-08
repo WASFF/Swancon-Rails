@@ -1,0 +1,17 @@
+<% if @user %>
+You have selected <%= @user.order_name %>
+<%= link_to "Store", controller: :store %>
+<% else %>
+<h2>Select Member</h2>
+<%= form_tag({action: :select, controller: :seller}, remote: true, method: "get") do %>
+<h2>Search</h2>
+ <%= label_tag(:name_search, "Name") %> <%= text_field_tag(:name_search) %><br/>
+ (can use firstname, lastname or username for above)<br/>
+<%= submit_tag("Search") %>
+<% end %>
+
+<h2>Results</h2>
+<div id="results">
+<%= render partial: "noresults" %>
+</div>
+<% end %>
