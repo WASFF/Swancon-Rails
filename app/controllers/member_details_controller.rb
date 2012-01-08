@@ -31,7 +31,12 @@ class MemberDetailsController < ApplicationController
 	# GET /member_details/new.xml
 	def new
 		@member_detail = MemberDetail.new
-		@member_detail.user_id = params[:user_id]
+		if params[:user_id]
+			@member_detail.user = User.where(id: params[:user_id].to_i).first
+			if @member_detail.user != nil
+				@member_detail.name_badge = @member_detail.user.username
+			end
+		end
 		@website = true
 		
 		respond_to do |format|
