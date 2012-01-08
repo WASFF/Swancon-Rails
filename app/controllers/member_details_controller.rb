@@ -70,7 +70,7 @@ class MemberDetailsController < ApplicationController
 	# POST /member_details.xml
 	def create
 		@member_detail = MemberDetail.new(params[:member_detail])
-		if !permitted_to? :index or @member_detail.user == nil
+		if !permitted_to? :new or @member_detail.user == nil
 			@member_detail.user = current_user
 		end
 		respond_to do |format|
@@ -79,7 +79,13 @@ class MemberDetailsController < ApplicationController
 					if @member_detail.user == current_user
 						redirect_to(edit_member_detail_path(@member_detail), :notice => 'Your details were saved!')
 					else
-						redirect_to(@member_detail, :notice => 'Member detail was successfully created.')
+						if permitted_to? :show
+							redirect_to(@member_detail, :notice => 'Member detail was successfully created.')
+						elsif session[:back] != nil
+							redirect_to(session[:back], :notice => 'Member detail was successfully created.')
+						else
+							redirect_to(controller: :store, :notice => 'Member detail was successfully created.')
+						end
 					end
 				}
 				format.xml  { render :xml => @member_detail, :status => :created, :location => @member_detail }
