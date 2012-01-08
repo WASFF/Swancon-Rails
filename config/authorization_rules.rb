@@ -7,7 +7,7 @@ authorization do
 	role :user do
 		includes :guest
 		has_permission_on [:user_orders], :to => [:index, :show, :destroy]
-		has_permission_on [:member_details], :to => [:edit_my]
+		has_permission_on [:member_details], :to => [:edit_my, :update, :create]
 		has_permission_on [:panel_suggestions], :to => [:update, :create, :edit, :new]
 	end
 
@@ -16,7 +16,8 @@ authorization do
 	end
 
 	role :"ticket seller" do
-		has_permission_on :seller, to: [:index, :select, :create]
+		has_permission_on [:member_details], :to => [:new, :create]
+		has_permission_on :seller, to: [:index, :select, :create, :clear]
 	end
 
 	role :committee do
