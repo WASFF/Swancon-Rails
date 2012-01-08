@@ -1,5 +1,5 @@
 class StoreController < ApplicationController
-	before_filter :init_cart, :init_user
+	before_filter :init_cart, :init_user, :prepare_backlink
 
 	def index
 		@ticketsets = TicketSet.available(current_user).all
