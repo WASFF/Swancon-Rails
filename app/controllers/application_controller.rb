@@ -26,4 +26,16 @@ class ApplicationController < ActionController::Base
 		session[:back] = {controller: controller_name, action: action_name}
 		session[:back].merge!(params)
 	end
+
+	def stored_location_for(resource_or_scope)
+		nil
+	end
+
+	def after_sign_in_path_for(resource_or_scope)
+		if permitted_to? :index, :seller
+			{action: :sales, controller: "/seller"}
+		else
+			root_path
+		end
+	end
 end
