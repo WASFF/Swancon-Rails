@@ -60,5 +60,9 @@ Payment: <%= link_to @order.payment.reciept_number, @order.payment %> <%= button
 <%= link_to "Send Email to #{@order.user.order_name} again", remail_order_path(@order), :method => :post, :class =>"noprint" %> | 
 <% end %>
 
-<%= link_to 'Back', orders_path, :class => "noprint" %>
+<% if permitted_to? :index %>
+	<%= link_to 'Back', orders_path, :class => "noprint" %>
+<% else %>
+	<%= link_to 'Back', {action: :sales, controller: :seller}, :class => "noprint" %>
+<% end %>
 </div>
