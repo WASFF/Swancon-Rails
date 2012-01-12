@@ -17,7 +17,8 @@ authorization do
 
 	role :"ticket seller" do
 		has_permission_on [:member_details], :to => [:new, :create]
-		has_permission_on :seller, to: [:index, :select, :create, :clear]
+		has_permission_on :user_orders, to: [:show]
+		has_permission_on :seller, to: [:index, :select, :create, :clear, :sales]
 	end
 
 	role :committee do
