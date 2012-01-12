@@ -25,6 +25,7 @@ Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register",
 Total: <%= render_money(price) %>
 <%- if controller.action_name != "purchase" %>
 <%= button_to "Check out", :action => "purchase" %>
+<%= button_to "Continue Shopping", :action => "index" %>
 <%= button_to "Empty Cart", :action => "clear_cart" %>
 <%- end -%>
 
