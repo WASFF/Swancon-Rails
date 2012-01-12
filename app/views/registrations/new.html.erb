@@ -6,16 +6,16 @@
   <%= devise_error_messages! %>
 
   <p><%= f.label :username %><br />
-  <%= f.text_field :username, :autocorrect => "off", :autocapitalize=> "off" %></p>
+  <%= f.text_field :username, :autocorrect => "off", :autocapitalize=> "off" %> (case sensitive)</p>
 
   <p><%= f.label :email %><br />
-  <%= f.email_field :email, :autocorrect => "off", :autocapitalize=> "off" %></p>
+  <%= f.email_field :email, :autocorrect => "off", :autocapitalize=> "off" %> (case sensitive)</p>
 
   <p><%= f.label :password %><br />
-  <%= f.password_field :password %></p>
+  <%= f.password_field :password %> (case sensitive)</p>
 
   <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></p>
+  <%= f.password_field :password_confirmation %> (case sensitive)</p>
 
   <p><%= f.submit "Sign up" %></p>
 <% end %>

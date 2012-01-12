@@ -3,10 +3,10 @@
 <h2>Details</h2>
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   <p><%= f.label :username %><br />
-  <%= f.text_field :username, :autocorrect => "off", :autocapitalize=> "off" %></p>
+  <%= f.text_field :username, :autocorrect => "off", :autocapitalize=> "off" %> (case sensitive)</p>
 
   <p><%= f.label :password %><br />
-  <%= f.password_field :password %></p>
+  <%= f.password_field :password %> (case sensitive)</p>
 
   <% if devise_mapping.rememberable? -%>
     <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>
