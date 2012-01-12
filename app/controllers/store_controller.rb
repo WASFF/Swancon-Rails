@@ -80,14 +80,31 @@ class StoreController < ApplicationController
 			return
 		end
 		
+		@payment_types = PaymentType.onlineTypes
+		@can_disable_email = false
+
+		if (permitted_to? :index, :seller) && @store_user != nil
+			if current_user.role_symbols.include?(:committee)
+				@payment_types = PaymentType.all
+				@can_disable_email = true
+			else
+				@payment_types = PaymentType.resellerTypes
+			end
+		end
 		
 		if params[:confirm] == "true"
 			if params[:purchase][:payment_type_id].strip == "" 
 				flash[:notice] = "Please select how you'd like to pay."
 				return
 			end
-			
+
 			order = UserOrder.new(:payment_type_id => params[:purchase][:payment_type_id].to_i)
+
+			if !(@payment_types.include?(order.payment_type))
+				flash[:notice] = "Please select how you'd like to pay."
+				return
+			end
+
 			if @store_user != nil
 				order.user = @store_user
 			else
@@ -121,12 +138,17 @@ class StoreController < ApplicationController
 			session[:cart] = nil
 			session[:store_user_id] = nil
 			@cart = nil
-			flash[:notice] = "Order Placed, Email Sent"
+			flash[:notice] = "Order Placed"
 			if @store_user != nil
-				if order.payment_type.available_online
-					if params[:send_email] == "true"
-						StoreMailer.invoice(order).deliver
-						StoreMailer.confirmation_required(order).deliver
+				if order.payment_type.requires_reconciliation
+					if params[:send_email] == "true" or !@can_disable_email
+						if order.user.email_valid
+							StoreMailer.invoice(order).deliver
+							StoreMailer.confirmation_required(order).deliver
+							flash[:notice] += ", Email Sent"
+						else
+							flash[:notice] += ", User has no email address. Ensure they take their reciept print out (print this page)!"
+						end
 					end
 				else
 					payment = Payment.new(:user_order => order, :payment_type => order.payment_type)
