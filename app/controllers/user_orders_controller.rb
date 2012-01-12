@@ -21,6 +21,10 @@ class UserOrdersController < ApplicationController
   # GET /payment_types/1.xml
   def show
     @order = UserOrder.find(params[:id])
+    if @order.user != current_user and @order.operator != current_user and !current_user.role_symbols.include?(:committee)
+    	redirect_to action: :index, controller: :store
+    	return
+    end
 
     respond_to do |format|
       format.html # show.html.erb
