@@ -1,0 +1,5 @@
+<% if @search %>
+$("#results").html("<%= escape_javascript(render(partial: "order_list", locals: {orders: @orders})) %>");
+<% else %>
+$("#results").html("<%= escape_javascript(render(partial: "noresults")) %>");
+<% end %>

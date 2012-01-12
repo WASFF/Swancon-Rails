@@ -1,0 +1,15 @@
+<h2>My Sales</h2>
+<%= form_tag({action: :sales, controller: :seller}, remote: true, method: "get") do %>
+<h2>Search</h2>
+<%= radio_button_tag("paid", "no") %> Not paid to WASFF<br/>
+<%= radio_button_tag("paid", "yes") %> Paid to WASFF<br/>
+<%= submit_tag("Search") %>
+<% end %>
+
+<h2>Results</h2>
+<div id="results">
+<%= render partial: "noresults" %>
+</div>
+<h2>Other Links</h2>
+<%= link_to "Sell to Existing Member", action: :select %><br/>
+<%= link_to "Create New Member", action: :create %>

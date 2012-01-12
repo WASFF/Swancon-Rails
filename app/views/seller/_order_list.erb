@@ -1,0 +1,18 @@
+<%= pluralize(orders.count, "Orders") %> found
+<table width="100%">
+<tr>
+	<th>Number</th>
+	<th>Date</th>
+	<th>Total</th>
+</tr>
+<% total = 0 %>
+<% orders.each do |order| %>
+<tr>
+    <td><%= link_to order.invoice_number, order_path(order) %></td>
+    <td><%= order.created_at.strftime("%d/%m/%Y %H:%M %Z") %></td>
+    <td><%= render_money(order.total) %></td>
+    <% total += order.total %>
+</tr>
+<% end %>
+</table>
+Grand Total: <%= render_money(total) %><br/>

@@ -65,4 +65,23 @@ class SellerController < ApplicationController
 		session[:cart] = nil
 		render "select"
 	end
+
+	def sales
+		@orders = UserOrder.where(operator_id: current_user.id)
+		@search = false
+
+		if params[:paid] != nil
+			@search = true
+			if params[:paid] == "no"
+				@orders = @orders.where(payment_id: nil)
+			elsif params[:paid] == "yes"
+				@orders = @orders.where(UserOrder.arel_table[:payment_id].not_eq(nil))
+			end
+		end
+
+		respond_to do |format|
+			format.html # index.html.erb
+			format.js
+		end
+	end
 end
