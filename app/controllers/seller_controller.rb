@@ -12,6 +12,8 @@ class SellerController < ApplicationController
 		elsif params[:id] != nil
 			@user = User.where(id: params[:id].to_i).first
 			session[:store_user_id] = @user.id
+			redirect_to controller: :store
+			return
 		end
 
 		respond_to do |format|
@@ -46,6 +48,8 @@ class SellerController < ApplicationController
 			if @user.save
 				@saved = true
 				session[:store_user_id] = @user.id
+				redirect_to controller: :store
+				return
 			else
 				@saved = false
 			end				
