@@ -3,8 +3,8 @@
 <% if @user.member_detail == nil %>
 	<% @user.build_member_detail %>
 <% end %>
-<%= form_for(@user, :url => users_admin_index_url(@user, quickform: true), :method => :post) do |form| %>
-<%= render partial: 'form', locals: {quick: true, f: form} %>
+<%= form_for(@user, :url => users_admin_index_url(@user, quickform: params[:quickform] == "true"), :method => :post) do |form| %>
+<%= render partial: 'form', locals: {quick: params[:quickform] == "true", f: form} %>
 <% end %>
 
 <%= link_to 'Back', :back %>

@@ -21,13 +21,6 @@ $().ready(function() {
 <div id="results">
 <%= render partial: "noresults" %>
 </div>
-<h2>New Member</h2>
-<% @user = User.new %>
-<% @user.build_member_detail %>
-<% @quickform = true %>
-<%= form_for(@user, :url => users_admin_index_url(@user, quickform: true), :method => :post) do |form| %>
-<%= render partial: 'form', locals: {quick: true, f: form} %>
-<% end %>
 <h2>New User</h2>
 <% @user = User.new %>
 <%= form_for(@user, :url => users_admin_index_url(@user, quickform: false), :method => :post) do |form| %>
