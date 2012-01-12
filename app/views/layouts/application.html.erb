@@ -73,14 +73,18 @@
 							<% storeuser = User.find(session[:store_user_id]) %>
 							<% if storeuser != nil %>
 								<li>Buying for: <%= storeuser.order_name %></li>
-								<li><%= link_to("Clear", controller: :seller, action: :clear) %></li>
+								<li><%= link_to("Cancel Sale", controller: :seller, action: :clear) %></li>
+								<li><%= link_to("Store", controller: :store) %></li>							
 							<% end %>
 						<% end %>
 						<% permitted_to? :select, :seller do -%>
-						<li><%= link_to("Select Member", controller: :seller, action: :select) %></li>
+						<li><%= link_to("Existing Member", controller: :seller, action: :select) %></li>
 						<% end %>
 						<% permitted_to? :create, :seller do -%>
 						<li><%= link_to("New Member", controller: :seller, action: :create) %></li>
+						<% end %>
+						<% permitted_to? :sales, :seller do -%>
+						<li><%= link_to("My Sales", controller: :seller, action: :sales) %></li>
 						<% end %>
 						</ul>
 						<% end %>
