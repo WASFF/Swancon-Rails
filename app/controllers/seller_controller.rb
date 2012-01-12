@@ -62,6 +62,7 @@ class SellerController < ApplicationController
 
 	def clear
 		session[:store_user_id] = nil
+		session[:cart] = nil
 		render "select"
 	end
 end
