@@ -194,9 +194,10 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.boolean  "requires_reconciliation"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "available_online",        :default => false, :null => false
+    t.boolean  "available_online",           :default => false, :null => false
     t.float    "surcharge_percent"
     t.float    "surcharge_value"
+    t.boolean  "available_to_ticket_seller", :default => false, :null => false
   end
 
   create_table "payments", :force => true do |t|
