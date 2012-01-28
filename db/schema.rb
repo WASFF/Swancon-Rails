@@ -319,8 +319,9 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
+  add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
+  add_index "users", ["username"], :name => "index_users_on_username"
 
   create_table "vendor_orders", :force => true do |t|
     t.integer  "vendor_id",  :null => false
