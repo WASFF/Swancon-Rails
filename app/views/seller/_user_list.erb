@@ -1,0 +1,27 @@
+<%= pluralize(users.count, 'User/Member', "Users/Members") %> found
+<table width="100%">
+	<tr>
+		<th>Username</th>
+		<th>Full Details?</th>
+		<th>Name</th>
+		<th></th>
+	</tr>
+	<% users.each do |user| %>
+		<% if user.member_detail != nil %>
+		<% detail = true %>
+		<tr style="background-color: green;">
+		<% else %>
+		<% detail = false %>
+		<tr style="background-color: red;">
+		<% end %>
+			<td><%= link_to user.username, id: user.id, action: :select, controller: :seller %></td>
+			<% if detail %>
+				<td>Yes</td>
+				<td><%= link_to user.member_detail.name_real, id: user.id, action: :select, controller: :seller %></td>
+			<% else %>
+				<td>No</td><td>n/a</td>
+			<% end %>
+			<td><%= link_to "select", id: user.id, action: :select, controller: :seller %></td>
+		</tr>
+	<% end %>
+</table>
