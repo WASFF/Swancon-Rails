@@ -4,8 +4,9 @@ class SellerController < ApplicationController
 	def select
 		@users = User.joins("LEFT OUTER JOIN member_details ON users.id = member_details.user_id").includes(:member_detail)
 		if params[:name_search] != nil
-			if params[:name_search].strip.length > 0
-				searchstring = "%#{params[:name_search].strip}%"
+			search = params[:name_search].gsub(/[^([a-z]|[A-Z]|[0-9])]/, "").strip
+			if search.length > 0
+				searchstring = "%#{search}%"
 				@search = true
 				@users = @users.where("member_details.name_first LIKE ? OR member_details.name_last LIKE ? OR member_details.name_badge LIKE ? or users.username LIKE ?", searchstring, searchstring, searchstring, searchstring)
 			end
