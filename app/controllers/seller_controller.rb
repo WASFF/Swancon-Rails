@@ -5,10 +5,12 @@ class SellerController < ApplicationController
 		@users = User.joins("LEFT OUTER JOIN member_details ON users.id = member_details.user_id").includes(:member_detail)
 		if params[:name_search] != nil
 			search = params[:name_search].gsub(/[^([a-z]|[A-Z]|[0-9])]/, "").strip
-			if search.length > 0
+			if search.length > 3
 				searchstring = "%#{search}%"
+				emailsearch = "#{search}%"
 				@search = true
-				@users = @users.where("member_details.name_first LIKE ? OR member_details.name_last LIKE ? OR member_details.name_badge LIKE ? or users.username LIKE ?", searchstring, searchstring, searchstring, searchstring)
+				wherestring = "member_details.name_first LIKE ? OR member_details.name_last LIKE ? OR member_details.name_badge LIKE ? or users.username LIKE ? or users.email LIKE ?"
+				@users = @users.where(wherestring, searchstring, searchstring, searchstring, searchstring, emailsearch)
 			end
 		elsif params[:id] != nil
 			@user = User.where(id: params[:id].to_i).first
