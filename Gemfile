@@ -15,10 +15,7 @@ gem 'sqlite3'
 gem 'devise', :git => "https://github.com/plataformatec/devise.git"
 gem "oa-oauth", :require => "omniauth/oauth"
 gem 'declarative_authorization'
-gem 'RedCloth'
 gem 'capistrano'
-gem "paperclip", "~> 2.3"
-gem "paperclip-meta"
 
 #gem 'MortisCMS', :require => 'mortiscms', :path => '/Users/lordmortis/Projects/MortisCMS'
 gem 'MortisCMS', :require => 'mortiscms', :git => 'git://github.com/lordmortis/MortisCMS.git'

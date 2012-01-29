@@ -3,4 +3,5 @@ Mortiscms.config do |config|
 	config.site_name = "DoomCon 2012"
 	config.show_titles_in_pages = true
 	config.show_titles_in_tags = true
+	config.routes_enabled = true
 end
