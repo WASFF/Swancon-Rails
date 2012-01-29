@@ -9,5 +9,5 @@ Purchase With: <%= select("purchase", "payment_type_id", @payment_types.collect 
 <% if @can_disable_email %>
 Send Email: <%= check_box_tag("send_email", "true", true) %><br/>
 <% end %>
-<%= submit_tag "Order" %>
+<%= submit_tag "Confirm" %>
 <% end -%>
