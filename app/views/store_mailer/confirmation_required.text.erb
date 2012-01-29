@@ -1,3 +1,5 @@
 A new order <%= @order.invoice_number %> requiring confirmation has been received! 
 
 To check it out go to: <%= url_for order_path(@order) %>
+
+<%= render :partial => "/user_orders/listing" %>
