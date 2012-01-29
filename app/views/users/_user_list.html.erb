@@ -16,7 +16,7 @@
 <% detail = false %>
 <tr style="background-color: red;">
 <% end %>
-	<td><%= user.username %></td>
+	<td><%= link_to user.username, users_admin_path(user) %></td>
 	<td><% if user.email_valid %>Yes<% else %>No<% end %></td>
     <% if detail %>
     <td>Yes <% if user.member_detail.disclaimer_signed %>(disclaimer)<% end %></td>
@@ -25,8 +25,7 @@
     <% else %>
     <td>No</td><td>n/a</td><td>n/a</td>
     <% end %>
-    <td><%= link_to 'S', users_admin_path(user) %>
-    <%= link_to 'E', edit_users_admin_path(user) %>
+    <td><%= link_to 'Edit', edit_users_admin_path(user) %>
 	</td>
 </tr>
 <% end %>
