@@ -2,7 +2,7 @@ Receipt: <%= @payment.receipt_number %> <% if @payment.isvoid? %> VOIDED <% else
 Issued: <%= @payment.created_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 Last Updated:<%= @payment.updated_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 <%- if @payment.operator != nil %>
-Operator: <%= @payment.operator.username %>
+Operator: <%= @payment.operator.username %><br/>
 <%- end %>
 <% if @payment.isvoid? %>
 Voided: <%= @payment.voided_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
@@ -21,7 +21,7 @@ Ordered For: <%= link_to(@payment.order.user.order_name, users_admin_path(@payme
 <%- if @order != nil and @order.tickets.count > 0 and (@order.user.member_detail == nil or !@order.user.member_detail.disclaimer_signed) %>
 <br/>
 <%= render :partial => "/member_details/disclaimer"%>
-<%- elsif @order.tickets.count > 0  %>
+<%- elsif @order != nil and @order.tickets.count > 0  %>
 <p>You have electronically agreed to the disclaimer available at: <%= link_to "http://wasff.sf.org.au/convention_rules", "http://wasff.sf.org.au/convention_rules "%></p>
 <%- end %>
 
