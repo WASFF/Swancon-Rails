@@ -3,7 +3,8 @@
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender = "please-change-me@config-initializers-devise.com"
+  config.mailer_sender = "tickets-2012@swancon.com.au"
+  config.case_insensitive_keys = [:email, :username]
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -38,8 +39,6 @@ Devise.setup do |config|
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
   # using other encryptors, it sets how many times you want the password re-encrypted.
   config.stretches = 10
-
-	config.mailer_sender = "tickets-2012@swancon.com.au"
 
   # Define which will be the encryption algorithm. Devise also supports encryptors
   # from others authentication tools as :clearance_sha1, :authlogic_sha512 (then
@@ -140,6 +139,8 @@ Devise.setup do |config|
   #   end
   #   manager.default_strategies(:scope => :user).unshift :twitter_oauth
   # end
+  config.use_salt_as_remember_token = true
+  config.reset_password_within = 2.hours
 end
 
 ActionController::Responder.class_eval do

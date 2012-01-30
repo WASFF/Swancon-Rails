@@ -13,6 +13,9 @@ end
 gem 'jquery-rails', '>= 1.0.14'
 gem 'sqlite3'
 gem 'devise', :git => "https://github.com/plataformatec/devise.git"
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 gem "oa-oauth", :require => "omniauth/oauth"
 gem 'declarative_authorization'
 gem 'capistrano'

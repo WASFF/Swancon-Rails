@@ -1,5 +1,7 @@
 h2. Swancon Rails websystem
 
+Point Of Sale payment types - should have some sort of confirmation "You have processed this transaction?"
+
 Fixes: Edit screens are all broken!
 
 Twitter registrations need to change their email address, or we'll get bounces.
@@ -11,6 +13,5 @@ Single Page Order
 
 
 Blogging
-Store Purchase system
 This is Swancon
 Gallery
