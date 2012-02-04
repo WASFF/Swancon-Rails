@@ -1,0 +1,13 @@
+<% content_for :title do %>DoomCon 2012 - Nomination list for <%= @award.name %><% end %>
+<% if @nomination.user != nil %>
+<h1><%= @nomination.user.order_name %>'s nomination for <%= @award.name %></h1>
+<% else %>
+<h1><%= @nomination.name %>'s nomination for <%= @award.name %></h1>
+<% end %>
+
+<% @nomination.categories.each do |category| %>
+<%= category.award_category.name %>: <%= category.nominee %> for <%= category.work %><br/>
+<% end %>
+
+<%= link_to 'Change', edit_award_nomination_path(@nomination) %>
+<%= link_to 'Back', award_nominations_path %>

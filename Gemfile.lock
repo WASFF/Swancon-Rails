@@ -8,6 +8,12 @@ GIT
       paperclip-meta
 
 GIT
+  remote: git://github.com/ryanb/nested_form.git
+  revision: 54da3123d9f1b14b37df608794508adccd6ac5ba
+  specs:
+    nested_form (0.1.1)
+
+GIT
   remote: https://github.com/plataformatec/devise.git
   revision: b061f985cfedec0b28b302eaf8e347630a5c9ff7
   specs:
@@ -196,6 +202,7 @@ DEPENDENCIES
   declarative_authorization
   devise!
   jquery-rails (>= 1.0.14)
+  nested_form!
   oa-oauth
   omniauth
   omniauth-facebook

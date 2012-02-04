@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  award_nomination_id: 1
+  award_category_id: 1
+  nominee: MyString
+  work: MyString
+
+two:
+  award_nomination_id: 1
+  award_category_id: 1
+  nominee: MyString
+  work: MyString

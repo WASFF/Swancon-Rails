@@ -58,6 +58,10 @@ class User < ActiveRecord::Base
 			username
 		end
 	end
+
+	def display_name
+		order_name
+	end
 	
 	def orders
 		user_orders

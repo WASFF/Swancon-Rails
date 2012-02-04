@@ -1,0 +1,24 @@
+<% content_for :title do %>DoomCon 2012 - Awards Admin<% end %>
+<h1>Listing Available Awards</h1>
+
+<table width="80%">
+  <tr>
+    <th>Name</th>
+    <th>Active</th>
+    <th></th>
+  </tr>
+
+<% @awards.each do |award| %>
+  <% if award.active %>
+  <tr style="background-color: green">
+  <% else %>
+  <tr>
+  <% end %>
+    <td><%= award.name %></td>
+    <td><% if award.active %>Active<% else %>Inactive<% end %></td>
+    <td><%= link_to 'Show', award %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to "Add New Award Type", new_award_path %>

@@ -1,0 +1,2 @@
+class AwardNominationCategoriesController < ApplicationController
+end

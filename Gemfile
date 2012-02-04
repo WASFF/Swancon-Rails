@@ -20,6 +20,8 @@ gem "oa-oauth", :require => "omniauth/oauth"
 gem 'declarative_authorization'
 gem 'capistrano'
 
+gem "nested_form", :git => "git://github.com/ryanb/nested_form.git"
+
 #gem 'MortisCMS', :require => 'mortiscms', :path => '/Users/lordmortis/Projects/MortisCMS'
 gem 'MortisCMS', :require => 'mortiscms', :git => 'git://github.com/lordmortis/MortisCMS.git'
 

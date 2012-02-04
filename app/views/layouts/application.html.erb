@@ -125,6 +125,9 @@
 						<li><%= link_to("Show Payments", payments_path) %></li>
 						<% end %>
 						<li><%= link_to("Show All Orders", orders_path(:all => true)) %></li>
+						<% permitted_to? :index, :awards do -%>
+						<li><%= link_to("Awards Administration", awards_path) %></li>
+						<% end %>
 						</ul>
 
 						<h2>Content</h2>

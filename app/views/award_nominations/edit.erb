@@ -1,0 +1,17 @@
+<% content_for :title do %>DoomCon 2012 - Editing Nomination list for <%= @award.name %><% end %>
+<h1>Editing Nomination list for <%= @award.name %></h1>
+
+<%= redcloth_render(@award.description) %>
+
+<h2>Categories</h2>
+<% @award.categories.each do |category| %>
+<h3><%= category.name %></h3>
+<blockquote>
+<%= redcloth_render(category.description) %>
+</blockquote>
+<% end %>
+
+<h2>Nomination Form</h2>
+<%= render 'form' %>
+
+<%= link_to 'Back', award_nominations_path %>

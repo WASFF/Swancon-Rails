@@ -13,6 +13,40 @@
 
 ActiveRecord::Schema.define(:version => 201103230827024) do
 
+  create_table "award_categories", :force => true do |t|
+    t.string   "name",        :null => false
+    t.string   "description", :null => false
+    t.integer  "award_id",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "award_nomination_categories", :force => true do |t|
+    t.integer  "award_nomination_id", :null => false
+    t.integer  "award_category_id",   :null => false
+    t.string   "nominee",             :null => false
+    t.string   "work",                :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "award_nominations", :force => true do |t|
+    t.integer  "award_id",   :null => false
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "awards", :force => true do |t|
+    t.string   "name",                           :null => false
+    t.string   "description",                    :null => false
+    t.boolean  "active",      :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "content_blocks", :force => true do |t|
     t.string   "title"
     t.text     "summary"

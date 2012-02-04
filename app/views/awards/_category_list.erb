@@ -1,0 +1,15 @@
+<% if award.categories.count > 0 %>
+<% award.categories.each do |category| %>
+<h3><%= category.name %></h3>
+<%= link_to "Edit", edit_award_award_category_path(award, category, div_id: "new_category_form"), remote: true %><br/>
+<blockquote>
+<%= redcloth_render(category.description) %>
+</blockquote>
+<% end %>
+<% else %>
+No categories currently available.<br/>
+<% end %>
+
+<div id="new_category_form">
+</div>
+<%= link_to "Add new Category", new_award_award_category_path(award, div_id: "new_category_form"), remote: true %>

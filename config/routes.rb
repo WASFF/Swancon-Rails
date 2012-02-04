@@ -1,4 +1,15 @@
 DoomCon::Application.routes.draw do
+	resources :awards do
+		resources :award_categories do
+		end
+	end
+
+	resources :award_nominations do
+		resources :award_nomination_categories do
+		end
+	end
+
+
 	resources :panel_suggestions
 
 	resources :merchandise_option_sets

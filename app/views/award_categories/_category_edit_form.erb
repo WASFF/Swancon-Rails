@@ -1,0 +1,61 @@
+<script>
+var lastedit = null;
+var lastpreview = false;
+
+function updatepreview(object, data, textStatus, XMLHttpRequest) {
+	$("#preview_box").html(object);
+}
+
+function dopreview() {
+	lasteditdelay = ((new Date() - lastedit) > 1000) || (lastedit == null);
+	if ( lasteditdelay && ( !lastpreview ) ) {
+		lastpreview = true;
+		$.ajax({
+			data: {
+					'redcloth': $("#award_category_description").val(),
+				},
+			dataType: "text",
+			type: 'POST',
+			success: updatepreview,
+			url: "<%= preview_content_blocks_url %>"
+		});
+	}
+}
+
+$(document).ready(function() {
+	setInterval("dopreview()", 100);
+	$("#award_category_description").keyup(function() { lastedit = new Date(); lastpreview = false;});
+	dopreview();
+});
+
+</script>
+
+<%= form_for([award, category], remote: true) do |f| %>
+	<% if category.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(category.errors.count, "error") %> prohibited this Category type from being saved:</h2>
+
+			<ul>
+			<% category.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<input type="hidden" id="div_id" name="div_id" value="<%= div_id %>" />
+	
+	<div class="field">
+		<%= f.label :name %><br />
+		<%= f.text_field :name %>
+	</div>
+	<div class="rightside" style="float:right; width: 60%;" id="preview_box"></div>
+	
+	<div class="field">
+		<%= f.label :description %><br />
+		<%= link_to("Layout Reference", "http://redcloth.org/textile/", target: "_new") %><br/>
+		<%= f.text_area :description %>
+	</div>
+	<div class="actions">
+		<%= f.submit(category.submit_button_name) %>
+	</div>
+<% end %>

@@ -1,0 +1,51 @@
+<%= nested_form_for(@nomination) do |f| %>
+	<% if @nomination.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@nomination.errors.count, "error") %> prohibited this award nomination from being saved:</h2>
+
+			<ul>
+			<% @nomination.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<%= f.hidden_field :award_id %>
+
+	<% if current_user == nil %>
+	<div class="field">
+		<%= f.label :name %><br />
+		<%= f.text_field :name %>
+	</div>
+	<div class="field">
+		<%= f.label :email %><br />
+		<%= f.text_field :email %>
+	</div>
+	If you have an account, or a swancon membership - please <%= link_to("Log in", new_user_session_path) %><br/>
+	With an account you will be able to continue modifying your nomination up to the closing date.<br/>
+	<br/>
+	I am Nominating the list below for the <%= @nomination.award.name %>
+	<% else %>
+	<%= current_user.order_name %> is Nominating the list below for the <%= @nomination.award.name %>
+	<% end %>
+	<%= f.fields_for :award_nomination_categories do |builder| %>
+	<div class="field">
+	<%= builder.label :award_category_id, "Category" %>
+	<%= builder.select :award_category_id, @nomination.award.categories.collect {|x| [x.name, x.id]} %>
+	</div>
+	<div class="field">
+		<%= builder.label :nominee, "Nominee" %>
+		<%= builder.text_field :nominee %>  
+	</div>
+	<div class="field">
+		<%= builder.label :work, "Work" %>
+		<%= builder.text_field :work %>
+	</div>
+	<%= builder.link_to_remove "Remove this Nomination" %>
+	<% end %>
+	<p><%= f.link_to_add "Add a Nomination", :award_nomination_categories %></p>
+
+	<div class="actions">
+		<%= f.submit(@nomination.submit_button_name) %>
+	</div>
+<% end %>

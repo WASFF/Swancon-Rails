@@ -2,6 +2,7 @@ authorization do
   role :guest do
 		has_permission_on :index, :to => :index
 		has_permission_on [:panel_suggestions], :to => [:show, :index]
+		has_permission_on [:award_nomination], to: [:new, :index, :create, :edit, :update, :show]
   end
 	
 	role :user do
@@ -24,8 +25,6 @@ authorization do
 	role :committee do
 		includes :member
 		includes :"ticket seller"
-		has_permission_on [:users], :to => [:update, :show, :destroy]
-		has_permission_on [:launch_members], :to => [:new, :index, :create, :edit, :update, :show, :destroy, :purchase, :viewpurchase]
 		has_permission_on [:ticket_sets, :ticket_types, :payment_types, :merchandise_sets, :merchandise_types],
 			:to => [:new, :index, :create, :edit, :update, :show, :destroy]
 		has_permission_on [:merchandise_types], :to => [:add_image, :remove_image, :update_image_description]
@@ -42,6 +41,10 @@ authorization do
 		has_permission_on [:content_files], :to => [:new, :index, :create, :edit, :update, :show]
 		has_permission_on [:content_images], :to => [:new, :index, :create, :edit, :update, :show]
 		has_permission_on [:panel_suggestions], :to => [:destroy]
+	end
+
+	role :"awards administrator" do
+
 	end
 
 	role :admin do

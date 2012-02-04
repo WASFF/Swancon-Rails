@@ -1,0 +1,21 @@
+<% content_for :title do %>DoomCon 2012 - Awards Nomination<% end %>
+<h1>Listing Available Awards</h1>
+
+<table width="80%">
+  <tr>
+    <th>Name</th>
+    <th>Edit/Create Nomination</th>
+  </tr>
+
+<% @awards.each do |award| %>
+  <tr>
+    <td><%= award.name %></td>
+    <td><% if current_user == nil or award.nominations.where(user_id: current_user.id).count == 0 %>
+          <%= link_to 'Nominate for this Award',  new_award_nomination_path(award_id: award.id) %>
+        <% else %>
+          <%= link_to 'Edit your Nomination', edit_award_nomination_path(award.nominations.where(user_id: current_user.id).first) %>
+        <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
