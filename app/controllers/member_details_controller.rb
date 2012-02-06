@@ -70,9 +70,17 @@ class MemberDetailsController < ApplicationController
 	# POST /member_details.xml
 	def create
 		@member_detail = MemberDetail.new(params[:member_detail])
+		
 		if !permitted_to? :new or @member_detail.user == nil
 			@member_detail.user = current_user
 		end
+
+		if @member_detail.user.member_detail != @member_detail
+			params[:id] = current_user.member_detail.id
+			update
+			return
+		end
+
 		respond_to do |format|
 			if @member_detail.save
 				format.html {
