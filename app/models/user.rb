@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
 
 		retval
 	end
-
+	
 	# Class Functions
   def self.find_by_username_or_email(username, email)
 		userarel = User.arel_table
@@ -173,6 +173,14 @@ class User < ActiveRecord::Base
 
 	def name
 		username
+	end
+
+	def is_writer?
+		roles.where(name: "committee").count == 1
+	end
+
+	def is_editor?
+		roles.where(name: "admin").count == 1
 	end
 
 

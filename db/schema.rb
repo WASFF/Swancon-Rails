@@ -54,12 +54,12 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.boolean  "autosummarize", :default => false, :null => false
     t.integer  "editor_id"
     t.integer  "author_id"
-    t.boolean  "published",     :default => false, :null => false
     t.integer  "tweet_id"
     t.string   "short_url"
     t.boolean  "preview",       :default => true,  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "published_at"
   end
 
   add_index "content_blocks", ["author_id"], :name => "index_content_blocks_on_author_id"

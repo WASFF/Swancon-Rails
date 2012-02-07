@@ -26,6 +26,10 @@ class MemberDetail < ActiveRecord::Base
 	
 	def name_real
 		"#{name_first} #{name_last}"
+	end	
+
+	def email
+		user.email
 	end
 	
 	def name
@@ -36,4 +40,7 @@ class MemberDetail < ActiveRecord::Base
 		end
 	end
 	
+	def self.email_list
+		includes(:user).where(email_optin: true)
+	end	
 end
