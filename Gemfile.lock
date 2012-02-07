@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/lordmortis/MortisCMS.git
-  revision: 2350851df3d82beb3d2616dca44985cafb72b19b
+  revision: 85a9532b0ee03b1e02b64edb3b2528a64092feaf
   specs:
     MortisCMS (0.1.7)
       RedCloth
