@@ -1,7 +1,7 @@
 class AddResetPasswordAtToUser < ActiveRecord::Migration
 	def up
 		change_table :users do |t|
-			t.datetime :reset_password_sent_at, null: true, default: nil
+			t.datetime :reset_password_sent_at
 		end
 	end
 

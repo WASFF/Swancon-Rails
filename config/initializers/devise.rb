@@ -140,7 +140,7 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :twitter_oauth
   # end
   config.use_salt_as_remember_token = true
-  config.reset_password_within = 2.hours
+  config.reset_password_within = 12.hours
 end
 
 ActionController::Responder.class_eval do
