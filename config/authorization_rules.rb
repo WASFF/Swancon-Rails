@@ -45,6 +45,7 @@ authorization do
 
 	role :"awards administrator" do
 		has_permission_on [:awards, :award_categories], to: [:new, :index, :create, :edit, :update, :show, :destroy]
+		has_permission_on [:awards], to: [:nominations]
 	end
 
 	role :admin do

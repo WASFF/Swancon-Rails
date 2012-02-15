@@ -1,0 +1,13 @@
+if @include_category_name
+	csv << [ 'category', 'nominator', 'nominee', 'work', 'created', 'updated' ]
+else
+	csv << [ 'nominator', 'nominee', 'work', 'created', 'updated' ]
+end
+
+@list.each do |nom| 
+	if @include_category_name
+		csv << [ nom.category.name, nom.parent.display_name, nom.nominee, nom.work, nom.created_at, nom.updated_at ]
+	else
+		csv << [ nom.parent.display_name, nom.nominee, nom.work, nom.created_at, nom.updated_at ]
+	end
+end

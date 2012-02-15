@@ -1,5 +1,6 @@
 DoomCon::Application.routes.draw do
 	resources :awards do
+		get :nominations, on: :member
 		resources :award_categories do
 		end
 	end

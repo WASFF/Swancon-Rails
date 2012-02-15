@@ -17,8 +17,18 @@
 <br/>
 <br/>
 
+<div class="right"><%= link_to "(CSV)", nominations_award_path(@award, format: :csv) %></div>
 <h2>Nominations</h2>
-<% @award.category_nominations.each do |nom| %>
-<%= nom.parent.display_name %> Nominated '<%= nom.work %>' by <%= nom.nominee%><br/>
+<% @award.categories.each do |category| %>
+<div class="right"><%= link_to "(CSV)", nominations_award_path(@award, format: :csv, category_id: category.id) %></div>
+<h3><%= category.name %></h3>
+<br/>
+<table width="100%">
+<tr><th>Nominator</th><th>Work</th><th>Nominee</th></tr>
+<% category.award_nomination_categories.each do |nom| %>
+<tr><td><%= nom.parent.display_name %></td><td><%= nom.work %></td><td><%= nom.nominee%></td></tr>
+<% end %>
+</table>
+<br/>
 <% end %>
 <%= link_to 'Back', awards_path %>

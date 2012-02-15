@@ -9,4 +9,13 @@ class AwardNominationCategory < ActiveRecord::Base
 	def parent=(value)
 		self.award_nomination = value
 	end	
+
+	def category
+		award_category
+	end
+
+	def category=(value)
+		self.award_category = value
+	end
+
 end

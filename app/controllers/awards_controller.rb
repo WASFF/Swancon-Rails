@@ -20,6 +20,27 @@ class AwardsController < ApplicationController
 		end
 	end
 
+	def nominations
+		@award = Award.find(params[:id])
+		
+
+		if params[:category_id] == nil
+			@list = @award.category_nominations
+			@include_category_name = true
+			@filename = "Nominations_for_award-#{@award.id}.csv"
+		else
+			@list = @award.categories.where(id: params[:category_id].to_i).first.award_nomination_categories
+			@include_category_name = false
+			@filename = "Nominations_for_award-#{@award.id}_category-#{params[:category_id]}.csv"
+		end
+
+		headers.merge!({
+			'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+			'Content-Type' => 'text/csv',
+			'Content-Transfer-Encoding' => 'binary'
+		})
+	end
+
 	# GET /payment_types/new
 	# GET /payment_types/new.xml
 	def new
