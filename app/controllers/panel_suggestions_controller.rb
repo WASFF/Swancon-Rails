@@ -12,6 +12,7 @@ class PanelSuggestionsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
+      format.mobile
       format.xml  { render :xml => @panel_suggestions }
     end
   end
@@ -61,6 +62,7 @@ class PanelSuggestionsController < ApplicationController
     respond_to do |format|
       if @panel_suggestion.save
         format.html { redirect_to(@panel_suggestion, :notice => 'Panel suggestion was successfully created.') }
+        format.mobile { redirect_to(@panel_suggestion, :notice => 'Panel suggestion was successfully created.') }
         format.xml  { render :xml => @panel_suggestion, :status => :created, :location => @panel_suggestion }
       else
         format.html { render :action => "new" }
@@ -81,6 +83,7 @@ class PanelSuggestionsController < ApplicationController
     respond_to do |format|
       if @panel_suggestion.update_attributes(params[:panel_suggestion])
         format.html { redirect_to(@panel_suggestion, :notice => 'Panel suggestion was successfully updated.') }
+        format.mobile { redirect_to(@panel_suggestion, :notice => 'Panel suggestion was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
