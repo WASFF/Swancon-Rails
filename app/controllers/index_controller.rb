@@ -2,6 +2,6 @@ class IndexController < ApplicationController
 	filter_access_to :all
 
 	def index
-		redirect_to :controller => "content_viewer", :action => "page"
+		@page = ContentPage.where(:home => true).first
 	end	
 end

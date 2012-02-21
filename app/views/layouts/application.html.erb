@@ -38,11 +38,18 @@
 		<div class="container">
 
 			<div class="main">		
-
+				
 				<div class="content">
+					<div style="text-align: center; font-size: 1.5em; color: #CCCCCC;">The 37th Annual Western Australian Science Fiction and Fantasy Convention</div>
 					<p class="notice"><%= notice %></p>
 					<p class="alert"><%= alert %></p>
 					<%= yield %>
+				</div>
+
+				<div class="sidesocial">
+					<%= link_to(image_tag("sn-facebook.png", height: 50, width: 50), "https://www.facebook.com/Swancon") %>
+					<%= link_to(image_tag("sn-twitter.png", height: 50, width: 50), "https://twitter.com/#!/swancon") %>
+					<%= link_to(image_tag("sn-RSS.png", height: 50, width: 50), "/content/news.xml") %>
 				</div>
 
 				<div class="sidenav">
