@@ -30,7 +30,7 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
-  <% if current_user != nil or current_user.role_symbols.include?(:committee) %>
+  <% if current_user != nil %>
   <div class="field">
     <%= f.label :user_id_visible, "Show panel as being suggested by me" %><br />
     <%= f.check_box :user_id_visible %>
