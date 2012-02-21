@@ -8,15 +8,22 @@
     <th></th>
   </tr>
 
-<% @panel_suggestions.each do |panel_suggestion| %>
+<% @panel_suggestions.each do |suggestion| %>
+<% if suggestion.visible %>
   <tr>
-    <td><%= panel_suggestion.name %></td>
-    <td><% if panel_suggestion.user_id_visible %><%= panel_suggestion.user.name %><% else %>N/A<% end %></td>
-    <td><%= link_to 'Show', panel_suggestion %></td>
+<% else %>
+  <tr style="background-color: #AA0000;">
+<% end %>
+    <td><%= suggestion.name %></td>
+    <td>
+      <% if suggestion.user_id != nil and !suggestion.user_id_visible -%>
+        N/A<% else -%><%= suggestion.display_name %><% end %>
+    </td>
+    <td><%= link_to 'Show', suggestion %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<% if current_user != nil %><%= link_to 'Suggest a Panel!', new_panel_suggestion_path %><% else %>Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to suggest a panel<% end %>
+<%= link_to 'Suggest a Panel!', new_panel_suggestion_path %>

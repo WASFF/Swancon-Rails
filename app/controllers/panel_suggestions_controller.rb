@@ -1,10 +1,14 @@
 class PanelSuggestionsController < ApplicationController
-	filter_resource_access	
+	filter_resource_access :additional_member => [:make_visible, :make_invisible]
 
   # GET /panel_suggestions
   # GET /panel_suggestions.xml
   def index
-    @panel_suggestions = PanelSuggestion.all
+    if current_user != nil and PanelSuggestion.allowed_to_administer?(current_user)
+      @panel_suggestions = PanelSuggestion.all
+    else
+      @panel_suggestions = PanelSuggestion.where(visible: true)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -47,7 +51,12 @@ class PanelSuggestionsController < ApplicationController
   # POST /panel_suggestions.xml
   def create
     @panel_suggestion = PanelSuggestion.new(params[:panel_suggestion])
-		@panel_suggestion.user = current_user
+    if current_user != nil
+  		@panel_suggestion.user = current_user
+      @panel_suggestion.visible = true
+    else
+      @panel_suggestion.visible = false
+    end
 
     respond_to do |format|
       if @panel_suggestion.save
@@ -78,6 +87,20 @@ class PanelSuggestionsController < ApplicationController
         format.xml  { render :xml => @panel_suggestion.errors, :status => :unprocessable_entity }
       end
     end
+  end
+
+  def make_visible
+    @panel_suggestion = PanelSuggestion.find(params[:id])
+    @panel_suggestion.visible = true
+    @panel_suggestion.save
+    redirect_to(@panel_suggestion, :notice => 'Panel suggestion was successfully updated.')
+  end
+
+  def make_invisible
+    @panel_suggestion = PanelSuggestion.find(params[:id])
+    @panel_suggestion.visible = false
+    @panel_suggestion.save
+    redirect_to(@panel_suggestion, :notice => 'Panel suggestion was successfully updated.')
   end
 
   # DELETE /panel_suggestions/1

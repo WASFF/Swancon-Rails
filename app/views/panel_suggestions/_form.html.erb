@@ -11,18 +11,31 @@
     </div>
   <% end %>
 
+  <% if current_user == nil or current_user.role_symbols.include?(:committee) %>
+    <div class="field">
+      <%= f.label :user_name, "Your Name" %><br />
+      <%= f.text_field :user_name %>
+    </div>
+    <div class="field">
+      <%= f.label :user_email, "Your Email address" %><br />
+      <%= f.text_field :user_email %>
+    </div>
+  <% end %>
+
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name, "Panel Name" %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
+  <% if current_user != nil or current_user.role_symbols.include?(:committee) %>
   <div class="field">
     <%= f.label :user_id_visible, "Show panel as being suggested by me" %><br />
     <%= f.check_box :user_id_visible %>
   </div>
+  <% end %>
   <div class="actions">
     <%= f.submit(@panel_suggestion.submit_button_name) %>
   </div>

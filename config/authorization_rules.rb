@@ -1,7 +1,7 @@
 authorization do
   role :guest do
 		has_permission_on :index, :to => :index
-		has_permission_on [:panel_suggestions], :to => [:show, :index]
+		has_permission_on [:panel_suggestions], :to => [:show, :index, :new, :create]
 		has_permission_on [:award_nomination], to: [:new, :index, :create, :edit, :update, :show]
   end
 	
@@ -40,7 +40,7 @@ authorization do
 		has_permission_on [:content_pages], :to => [:new, :index, :create, :edit, :update, :show]
 		has_permission_on [:content_files], :to => [:new, :index, :create, :edit, :update, :show]
 		has_permission_on [:content_images], :to => [:new, :index, :create, :edit, :update, :show]
-		has_permission_on [:panel_suggestions], :to => [:destroy]
+		has_permission_on [:panel_suggestions], :to => [:destroy, :make_visible, :make_invisible]
 	end
 
 	role :"awards administrator" do

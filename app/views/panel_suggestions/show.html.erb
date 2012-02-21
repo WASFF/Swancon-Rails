@@ -9,6 +9,11 @@
 <%- if @panel_suggestion.user_id_visible %>
 <p><b>Suggested By:</b> <%= @panel_suggestion.user.name %></p>
 <%- end %>
-<%= link_to 'Edit', edit_panel_suggestion_path(@panel_suggestion) if @panel_suggestion.allowed_to_edit?(current_user) -%>
+<% if @panel_suggestion.visible %>
+<%= link_to 'Hide', make_invisible_panel_suggestion_path(@panel_suggestion) if permitted_to? :make_invisible, :panel_suggestions -%>
+<% else %>
+<%= link_to 'Show', make_visible_panel_suggestion_path(@panel_suggestion) if permitted_to? :make_visible, :panel_suggestions -%>
+<% end %>
+ <%= link_to 'Edit', edit_panel_suggestion_path(@panel_suggestion) if @panel_suggestion.allowed_to_edit?(current_user) -%>
  <%= link_to 'Destroy', @panel_suggestion, :confirm => 'Are You Sure?', :method => :delete if permitted_to? :destroy, :panel_suggestions -%>
  <%= link_to 'Back', panel_suggestions_path %>

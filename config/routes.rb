@@ -11,7 +11,10 @@ DoomCon::Application.routes.draw do
 	end
 
 
-	resources :panel_suggestions
+	resources :panel_suggestions do
+		get 'make_visible', on: :member
+		get 'make_invisible', on: :member
+	end
 
 	resources :merchandise_option_sets
 

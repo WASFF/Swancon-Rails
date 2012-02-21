@@ -221,6 +221,9 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.boolean  "user_id_visible"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "user_name"
+    t.string   "user_email"
+    t.boolean  "visible"
   end
 
   create_table "payment_types", :force => true do |t|
