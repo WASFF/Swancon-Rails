@@ -1,0 +1,12 @@
+<% content_for :title do %>DoomCon 2012 - Panel Suggestions<% end %>
+<h1>Suggested Panels</h1>
+
+<ul>
+<% @panel_suggestions.each do |suggestion| %>
+<li><%= link_to suggestion.name, suggestion %></li>
+<% end %>
+</ul>
+
+<br />
+
+<%= link_to 'Suggest a Panel!', new_panel_suggestion_path %>
