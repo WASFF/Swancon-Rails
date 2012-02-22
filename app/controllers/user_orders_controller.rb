@@ -1,5 +1,5 @@
 class UserOrdersController < ApplicationController
-	filter_resource_access :additional_member => [:mark_paid, :remail]
+	filter_resource_access :additional_member => [:mark_paid, :remail, :void, :unvoid]
   # GET /payment_types
   # GET /payment_types.xml
   def index
@@ -61,24 +61,39 @@ class UserOrdersController < ApplicationController
 		render :action => :show
 	end
 
-  # DELETE /payment_types/1
-  # DELETE /payment_types/1.xml
-  def destroy
-    @order = UserOrder.find(params[:id])
+	def unvoid
+		@order = UserOrder.find(params[:id])
 		if !current_user.role_symbols.include?(:admin) and @order.user != current_user
-			flash[:error] = "Don't try to remove other people's orders!"
+			flash[:error] = "Don't try to unvoid other people's orders!"
 		else
-			if @order.payment == nil
-				@order.destroy
-				flash[:notice] = "Your order has been removed"
+			@order.voided_by = nil
+			@order.save
+			flash[:notice] = "Your order has been un-voided"
+		end
+
+		respond_to do |format|
+			format.html { redirect_to(orders_url) }
+			format.xml  { head :ok }
+		end
+	end
+
+	def void
+		@order = UserOrder.find(params[:id])
+			if !current_user.role_symbols.include?(:admin) and @order.user != current_user
+			flash[:error] = "Don't try to void other people's orders!"
+		else
+			if @order.voidable?
+				@order.voided_by = current_user
+				@order.save
+				flash[:notice] = "Your order has been voided"
 			else
-	    	flash[:error] = "You cannot remove an order you've paid for!"
+			flash[:error] = "You cannot remove an order you've paid for!"
 			end
 		end
 
-    respond_to do |format|
-      format.html { redirect_to(orders_url) }
-      format.xml  { head :ok }
-    end
-  end
+		respond_to do |format|
+			format.html { redirect_to(orders_url) }
+			format.xml  { head :ok }
+		end
+	end
 end

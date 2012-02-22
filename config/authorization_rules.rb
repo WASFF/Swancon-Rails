@@ -7,7 +7,7 @@ authorization do
 	
 	role :user do
 		includes :guest
-		has_permission_on [:user_orders], :to => [:index, :show, :destroy]
+		has_permission_on [:user_orders], :to => [:index, :show, :void, :unvoid]
 		has_permission_on [:member_details], :to => [:edit_my, :update, :create]
 		has_permission_on [:panel_suggestions], :to => [:update, :create, :edit, :new]
 	end

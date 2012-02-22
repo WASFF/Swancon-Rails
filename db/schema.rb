@@ -327,6 +327,7 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "operator_id"
+    t.integer  "voided_by_id"
   end
 
   create_table "user_roles", :force => true do |t|

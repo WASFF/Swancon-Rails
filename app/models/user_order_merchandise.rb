@@ -71,4 +71,8 @@ class UserOrderMerchandise < ActiveRecord::Base
 	def options
 		user_order_merchandise_options
 	end
+
+	def void
+		user_order.void
+	end	
 end

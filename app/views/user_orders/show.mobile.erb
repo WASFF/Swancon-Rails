@@ -39,7 +39,7 @@ Paid Via: <%= @order.payment.payment_type.name %><br/>
 <div class="noprint">
 <% if current_user.role_symbols.include?(:admin) %>
 Administration<br/>
-<% if @order.payment == nil%>
+<% if @order.payment == nil && !@order.isvoid? %>
 Mark Paid:
 <blockquote>
 <%= form_for(@order, :url => mark_paid_order_url, :method => :put) do |f| %>
@@ -48,8 +48,11 @@ Verification String: <%= f.text_field :verification_string, :value => "" %><br/>
 <%= f.submit("Mark Paid") -%><br/>
 <% end %>
 </blockquote>
+<%= button_to "Void Order", void_order_path(@order) %>
+<% elsif @order.isvoid? %>
+This order was voided by: <%= @order.voided_by.display_name %><br/>
 <% else %>
-Payment: <%= link_to @order.payment.reciept_number, @order.payment %> <%= button_to "Void", void_payment_url(@order.payment) %><br/>
+Payment: <%= link_to @order.payment.reciept_number, @order.payment %> <%= button_to "Void Payment", void_payment_url(@order.payment) %><br/>
 <% end %>
 <% end %>
 

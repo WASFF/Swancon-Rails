@@ -65,7 +65,9 @@ DoomCon::Application.routes.draw do
 	
 	resources :orders, :controller => "user_orders" do
 		put 'mark_paid', :on => :member
-		post 'remail', :on => :member		
+		post 'void', on: :member
+		post 'unvoid', on: :member
+		post 'remail', :on => :member
 	end
 
 	# Sample of regular route:

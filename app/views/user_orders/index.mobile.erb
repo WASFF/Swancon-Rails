@@ -19,7 +19,7 @@
 
 <% @orders.each do |order| %>
   <tr>
-    <td><%= order.invoice_number %></td>
+    <td><% if order.isvoid? %> <span class="strike"><%= order.invoice_number %></span><% else %><%= order.invoice_number %><% end %></td>
 		<% if @allorders %>
 		<td><%= link_to order.user.order_name, users_admin_path(order.user) %></td>
 		<% end %>
@@ -27,7 +27,7 @@
     <td><%= order.created_at.strftime("%d/%m/%Y %H:%M %Z") %></td>
 		<td><%= render_money(order.total) %></td>
 		<td><%= link_to 'Show', order_path(order) %></td>
-		<td><% if order.cancellable %><%= link_to 'Remove', order_path(order), :confirm => "Are you sure?", :method => :delete %><% end %></td>
+		<td><% if order.voidable? %><%= link_to 'void', void_order_path(order), method: :post %><% elsif order.isvoid? %><%= link_to 'unvoid', unvoid_order_path(order), method: :post %><% end %>
   </tr>
 <% end %>
 </table>

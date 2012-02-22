@@ -5,6 +5,7 @@ class UserOrder < ActiveRecord::Base
 	has_many :user_order_tickets, :dependent => :destroy
 	belongs_to :payment
 	belongs_to :payment_type
+	belongs_to :voided_by, :class_name => "User"
 
 	scope :paid, lambda {
 		where(self.paidarel)
@@ -77,8 +78,12 @@ class UserOrder < ActiveRecord::Base
 		subtotal + surcharge
 	end
 	
-	def cancellable
-		payment == nil	
+	def voidable?
+		payment == nil && voided_by_id == nil
+	end
+
+	def isvoid?
+		voided_by_id != nil
 	end
 	
 	def self.paidarel
