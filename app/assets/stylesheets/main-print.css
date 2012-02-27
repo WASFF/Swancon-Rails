@@ -30,6 +30,10 @@ span.superstrong {
 	font-weight: bold;
 }
 
+.sidesocial {
+	display: none;
+}
+
 body {
 	font: normal 75.0% "Courier New",sans-serif;
 }
