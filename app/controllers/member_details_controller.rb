@@ -75,7 +75,8 @@ class MemberDetailsController < ApplicationController
 			@member_detail.user = current_user
 		end
 
-		if @member_detail.user.member_detail != @member_detail
+		if @member_detail.user.member_detail != @member_detail and @member_detail.user.member_detail != nil
+			params[:member_detail][:user_id] = @member_detail.user.id
 			params[:id] = current_user.member_detail.id
 			update
 			return
