@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/lordmortis/MortisCMS.git
-  revision: 234898e3568eb84be7951203579dfdc65e3f858e
+  revision: ca454671ecc736e860263ebb0c1bacc564aced33
   specs:
     MortisCMS (0.1.8)
       RedCloth
@@ -134,7 +134,7 @@ GEM
     omniauth-twitter (0.0.7)
       omniauth-oauth (~> 1.0)
     orm_adapter (0.0.6)
-    paperclip (2.6.0)
+    paperclip (2.7.0)
       activerecord (>= 2.3.0)
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
