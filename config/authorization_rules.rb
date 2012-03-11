@@ -10,6 +10,7 @@ authorization do
 		has_permission_on [:user_orders], :to => [:index, :show, :void, :unvoid]
 		has_permission_on [:member_details], :to => [:edit_my, :update, :create]
 		has_permission_on [:panel_suggestions], :to => [:update, :create, :edit, :new]
+		has_permission_on [:tickets], :to => [:index, :transfer, :find_user, :confirm_transfer, :reconfirm_transfer]
 	end
 
 	role :member do
@@ -65,5 +66,6 @@ authorization do
 		has_permission_on [:payments], :to => [:void]
 		has_permission_on [:vendors], :to => [:new, :index, :create, :edit, :update, :show, :destroy, :open_order]
 		has_permission_on [:vendor_orders], :to => [:index, :create, :show, :destroy, :mark_arrivals, :close]
+		has_permission_on [:tickets], :to => [:cancel_transfer]
 	end
 end

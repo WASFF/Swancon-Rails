@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+<p>Transfer: <%= @transfer.id %> has been cancelled.</p>
+<p>Transfer was from: <%= @transfer.previous_owner.display_name %> to <%= @transfer.recipient.display_name %></p>
+</body>

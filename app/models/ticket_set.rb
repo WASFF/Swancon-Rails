@@ -13,6 +13,12 @@ class TicketSet < ActiveRecord::Base
 		ticket_types
 	end
 
+	def sold_tickets
+		ids = ticket_types.all.collect {|item| item.id}
+		valid_order_ids = UserOrder.where(voided_by_id: nil).collect { |item| item.id}
+		UserOrderTicket.where(ticket_type_id: ids).where(user_order_id: valid_order_ids)
+	end
+
 	def self.available(user = nil)
 		if (user == nil) || (!user.full_store_visible?)
 			joins(:ticket_types).where(TicketType.availablearel).group(:id)

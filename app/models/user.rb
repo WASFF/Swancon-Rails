@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 	has_many :user_omni_auths, :dependent => :destroy
 	has_many :roles, :through => :user_roles
 	has_many :user_orders
+	has_many :user_order_tickets
 
 	has_one :member_detail, dependent: :destroy
 	accepts_nested_attributes_for :member_detail

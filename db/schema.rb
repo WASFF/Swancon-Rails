@@ -312,6 +312,17 @@ ActiveRecord::Schema.define(:version => 201103230827024) do
     t.datetime "shipped_at"
   end
 
+  create_table "user_order_ticket_transfers", :force => true do |t|
+    t.integer  "user_order_ticket_id", :null => false
+    t.integer  "sender_id",            :null => false
+    t.integer  "previous_owner_id",    :null => false
+    t.integer  "recipient_id",         :null => false
+    t.string   "confirmation_code"
+    t.datetime "confirmed_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "user_order_tickets", :force => true do |t|
     t.integer  "user_order_id"
     t.integer  "ticket_type_id"

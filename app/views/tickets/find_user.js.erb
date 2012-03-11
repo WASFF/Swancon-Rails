@@ -1,0 +1,6 @@
+<% if @user == nil -%>
+$("#results").html("<%= escape_javascript(render partial: "find_failed") %>");
+$("#user_email").html("<%= escape_javascript(params[:email]) %>")
+<% else -%>
+$("#results").html("<%= escape_javascript(render(partial: "found_user", locals: {user: @user, ticket_id: params[:id]})) %>");
+<% end -%>

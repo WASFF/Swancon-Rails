@@ -64,6 +64,9 @@
 							<% permitted_to? :index, :user_orders do -%>
 								<li><%= link_to "Orders", orders_path %></li>
 							<% end %>
+							<% permitted_to? :index, :tickets do -%>
+								<li><%= link_to "My Tickets", tickets_my_path %></li>
+							<% end -%>
 							<li><%= link_to("Log out", destroy_user_session_path) %></li>
 						</ul>
 					<%- else %>
@@ -108,8 +111,14 @@
 						<h2>Admin</h2>
 						<ul>
 						<% permitted_to? :index, :users do -%>
-						<li><%= link_to("Member/User Administration", users_admin_index_path) %></li>
+						<li><%= link_to("User Administration", users_admin_index_path) %></li>
 						<% end %>
+						<% permitted_to? :index, :member_details do -%>
+							<li><%= link_to("List all Membership Details", member_details_path) %></li>
+						<% end %>
+						<% permitted_to? :index, :tickets do -%>
+							<li><%= link_to "All Tickets", tickets_all_path %></li>
+						<% end -%>
 						<% permitted_to? :edit, :merchandise_sets do -%>
 						<li><%= link_to("Manage Merchandise Sets", merchandise_sets_path)%></li>
 						<% end %>

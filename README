@@ -1,5 +1,19 @@
 h2. Swancon Rails websystem
 
+Ticket Transfer
+ - Need to have a final date... 
+ - Admin list (need to see all transfer sets, and all pending - PRK needs to be able to cancel and confirm from this list)
+
+User/Member Editing
+ - Need to be able to add/edit membership details from new system.
+
+Voided Sale
+ - Email PRK that a Sale has been voided.
+
+ALL THE EMAIL ADDRESSES SHOULD BE CONFIGURABLE IN THE CONFIG FILE!
+
+
+
 Point Of Sale payment types - should have some sort of confirmation "You have processed this transaction?"
 
 Fixes: Edit screens are all broken!

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+<%= @transfer.previous_owner.display_name %>,
+<p>The ticket transfer from you to <%= @transfer.recipient.display_name %> has been cancelled</p>
+<p>If you have any queries, please email us at <%= link_to "memberships-2012@swancon.com.au", "mailto:memberships-2012@swancon.com.au" %></p>
+</body>

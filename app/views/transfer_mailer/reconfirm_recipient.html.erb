@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+<%= @transfer.recipient.display_name %>,
+<p><%= @transfer.previous_owner.display_name %> has begun a transfer of a <%= @ticket.type.order_name %> to your account.</p>
+<p>They have received an email with details on how to complete the transfer and they cannot cancel it without contacting us.</p>
+<p>Transfers must be complete before April 5th <%# FIXME: GET FINAL DATE FROM SET -%>in order for this transfer to occur</p>
+<p>If there are any issues with this transfer please email us at <%= link_to "memberships-2012@swancon.com.au", "mailto:memberships-2012@swancon.com.au" %> to resolve them.</p>
+</body>

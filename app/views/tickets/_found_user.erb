@@ -1,0 +1,8 @@
+<blockquote>
+<p>You have elected to transfer this ticket to <%= user.display_name %> with email address "<%= user.email %>".</p>
+<ol>
+<li>You will recieve an email to confirm this transfer</li>
+<li>After confirmation - the ownership of this ticket will be transferred</li>
+</ol>
+<%= button_to("I understand", action: :confirm_transfer, id: ticket_id, recipient_id: user.id) %>
+</blockquote>

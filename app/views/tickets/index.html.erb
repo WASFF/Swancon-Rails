@@ -1,0 +1,33 @@
+<% if @alltickets %>
+<% content_for :title do %>DoomCon 2012 - All Sold Tickets<% end %>
+<h2>Sold Tickets</h2>
+<% else %>
+<% content_for :title do %>DoomCon 2012 - My Tickets<% end %>
+<h2>My Tickets</h2>
+<% end %>
+
+<% @sets.each do |set| %>
+<%= set[:set].name %> Tickets (<%= set[:tickets].count %>)
+<table width="100%">
+	<tr>
+		<% if @alltickets %>
+		<th>Owner</th>
+		<% end %>
+		<th>Purchaser</th>
+		<th>Payment Verified</th>
+		<th></th>
+  </tr>
+<% set[:tickets].each do |user_order_ticket| %>
+	<tr>
+		<% if @alltickets %>
+			<td><%= user_order_ticket.user.display_name %></td>
+		<% end %>
+		<td><%= user_order_ticket.user_order.user.display_name %></td>
+		<td style="text-align: center;"><% if user_order_ticket.payment_verified? %>Yes<% else %>No<% end %></td>
+		<td><% if user_order_ticket.can_transfer?(current_user) %><%= link_to "Transfer", action: :transfer, id: user_order_ticket.id, alltickets: @alltickets %><% end %></td>
+	</tr>
+<% end %>
+</table>
+<% end %>
+
+<!-- FIXME: Add list of transfer's that are pending -->

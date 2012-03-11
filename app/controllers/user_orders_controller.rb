@@ -5,7 +5,7 @@ class UserOrdersController < ApplicationController
   def index
 		@allorders = false
 		if params[:all] == "true" and current_user.role_symbols.include?(:admin)
-    	@orders = UserOrder.includes(:user_order_merchandise).includes(:user_order_tickets).all
+	    	@orders = UserOrder.includes(:user_order_merchandise).includes(:user_order_tickets).all
 			@allorders = true
 		else
 			@orders = UserOrder.where(:user_id => current_user.id).includes(:user_order_merchandise).includes(:user_order_tickets).all

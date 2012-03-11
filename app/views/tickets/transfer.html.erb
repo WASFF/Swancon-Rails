@@ -1,0 +1,20 @@
+<% content_for :title do %>DoomCon 2012 - Ticket Transfer<% end %>
+<h2>Ticket Transfer</h2>
+<p>You wish to transfer a "<%= @user_order_ticket.type.order_name %>" to someone else.</p>
+<p>In order to do this:
+<ol>
+<li>The recipient must have an account on this website</li>
+<li>The recipient must have entered all their "member details" into this website</li>
+<li>You must have the email address they have registered with</li>
+<li>The transfer must be completed by April 5th <%# FIXME: MAKE SURE YOU UPDATE THIS FOR TICKET SET STUFF! %></li>
+<li>You must have Javascript enabled on your browser</li>
+</ol>
+</p>
+
+<%= form_tag({action: :find_user}, remote: true, method: "get") do %>
+<%= hidden_field_tag("id", @user_order_ticket.id) %>
+Enter the User's email address: <%= text_field_tag("email") %><%= submit_tag("Search") %>
+<% end %>
+</br>
+<div id="results">
+</div>
