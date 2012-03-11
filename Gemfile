@@ -19,6 +19,7 @@ gem 'omniauth-twitter'
 gem "oa-oauth", :require => "omniauth/oauth"
 gem 'declarative_authorization'
 gem 'capistrano'
+gem 'actionmailer-with-request'
 
 gem 'csv_builder'
 

@@ -59,7 +59,7 @@
   </div>
 <%= render :partial => "/member_details/disclaimer"%>
 <% if @member_detail.disclaimer_signed -%>
-I HAVE AGREED TO THE ABOVE <%= link_to "Buy Tickets", controller: "store", action: "index" %>
+I HAVE AGREED TO THE ABOVE<br/>
 <% else -%>
 I AGREE TO THE ABOVE: <%= f.check_box :disclaimer_signed %>
 <% end -%>
@@ -67,3 +67,6 @@ I AGREE TO THE ABOVE: <%= f.check_box :disclaimer_signed %>
     <%= f.submit %>
   </div>
 <% end %>
+  <% if @member_detail.disclaimer_signed %>
+  <%= button_to "Buy Tickets", controller: "store", action: "index" %>
+  <% end %>

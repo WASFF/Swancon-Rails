@@ -30,6 +30,8 @@ GEM
     actionmailer (3.1.0)
       actionpack (= 3.1.0)
       mail (~> 2.3.0)
+    actionmailer-with-request (0.3.0)
+      rails (>= 3)
     actionpack (3.1.0)
       activemodel (= 3.1.0)
       activesupport (= 3.1.0)
@@ -199,6 +201,7 @@ PLATFORMS
 
 DEPENDENCIES
   MortisCMS!
+  actionmailer-with-request
   capistrano
   coffee-rails (~> 3.1.0)
   csv_builder

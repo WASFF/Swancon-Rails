@@ -86,7 +86,7 @@ class MemberDetailsController < ApplicationController
 			if @member_detail.save
 				format.html {
 					if @member_detail.user == current_user
-						redirect_to(edit_member_detail_path(@member_detail), :notice => 'Your details were saved!')
+						redirect_to(edit_my_member_details_path(@member_detail), :notice => 'Your details were saved!')
 					else
 						if permitted_to? :show
 							redirect_to(@member_detail, :notice => 'Member detail was successfully created.')
@@ -118,7 +118,7 @@ class MemberDetailsController < ApplicationController
 			if @member_detail.update_attributes(params[:member_detail])
 				format.html {
 					if @member_detail.user == current_user
-						redirect_to(edit_member_detail_path(@member_detail), :notice => 'Your details were updated!')
+						redirect_to(edit_my_member_details_path(@member_detail), :notice => 'Your details were updated!')
 					else
 						redirect_to(@member_detail, :notice => 'Member detail was successfully updated.')
 					end

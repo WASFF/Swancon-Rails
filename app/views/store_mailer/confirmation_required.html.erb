@@ -4,7 +4,7 @@
    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 </head>
 <body>
-A new order <%= link_to order_path(@order), @order.invoice_number %> requiring confirmation has been received! 
+A new order <%= link_to @order.invoice_number, order_url(@order, only_path: false) %> requiring confirmation has been received! 
 
 <%= render :partial => "/user_orders/listing" %>
 </body>
