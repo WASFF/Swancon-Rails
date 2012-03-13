@@ -41,7 +41,7 @@ class TicketsController < ApplicationController
 		if user_order_ticket != nil and user_order_ticket.can_transfer?(current_user)
 			recipient = User.where(id: params[:recipient_id]).first
 			if recipient != nil
-				transfer = user_order_ticket.transfer(current_user, recipient)
+				transfer = user_order_ticket.transfer(current_user, recipient) and !user_order_ticket.transferring
 				if current_user.role_symbols.include?(:admin)
 					flash[:alert] = "Transfer Completed."
 					transfer.confirm

@@ -37,10 +37,7 @@ class UserOrderTicket < ActiveRecord::Base
 	end
 
 	def can_transfer?(user)
-		# FIXME: shouldn't be able to transfer if a transfer is pending.
 		if user_order.payment_id == nil
-			false
-		elsif user_order_ticket_transfers.where(confirmed_on: nil).count > 0
 			false
 		elsif user == nil
 			false
