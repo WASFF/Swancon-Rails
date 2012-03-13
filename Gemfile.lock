@@ -1,27 +1,27 @@
 GIT
   remote: git://github.com/lordmortis/MortisCMS.git
-  revision: ca454671ecc736e860263ebb0c1bacc564aced33
+  revision: 12c809aa8e7e8873ce3a3b975dcc8609fbaf3ec4
   specs:
-    MortisCMS (0.1.8)
+    MortisCMS (0.1.10)
       RedCloth
       paperclip (~> 2.3)
       paperclip-meta
 
 GIT
   remote: git://github.com/ryanb/nested_form.git
-  revision: 54da3123d9f1b14b37df608794508adccd6ac5ba
+  revision: 486e0f0e93f3ca455d5d0fc7869053257b6afce2
   specs:
-    nested_form (0.1.1)
+    nested_form (0.2.0)
 
 GIT
   remote: https://github.com/plataformatec/devise.git
-  revision: b061f985cfedec0b28b302eaf8e347630a5c9ff7
+  revision: 68de34c03ec44da8631f87a712cfb6ba0c02ac61
   specs:
-    devise (2.0.0)
+    devise (2.0.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       railties (~> 3.1)
-      warden (~> 1.1)
+      warden (~> 1.1.1)
 
 GEM
   remote: http://rubygems.org/
@@ -58,11 +58,11 @@ GEM
       activesupport (= 3.1.0)
     activesupport (3.1.0)
       multi_json (~> 1.0)
-    addressable (2.2.6)
-    arel (2.2.1)
+    addressable (2.2.7)
+    arel (2.2.3)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
-    capistrano (2.9.0)
+    capistrano (2.11.2)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
@@ -95,14 +95,13 @@ GEM
       thor (~> 0.14)
     json (1.6.5)
     libv8 (3.3.10.4)
-    mail (2.3.0)
+    mail (2.3.2)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.17.2)
-    multi_json (1.0.4)
-    multi_xml (0.4.1)
-    multipart-post (1.1.4)
+    multi_json (1.1.0)
+    multipart-post (1.1.5)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -110,30 +109,31 @@ GEM
     net-ssh (2.3.0)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    oa-core (0.3.2)
-    oa-oauth (0.3.2)
-      faraday (~> 0.7.3)
-      multi_json (~> 1.0.0)
-      multi_xml (~> 0.4.0)
-      oa-core (= 0.3.2)
-      oauth (~> 0.4.0)
-      oauth2 (~> 0.5.0)
+    nokogiri (1.5.2)
+    oa-core (0.0.5)
+      rack (~> 1.1)
+    oa-oauth (0.0.1)
+      json
+      nokogiri
+      oa-core (~> 0.0.0)
+      oauth
+      oauth2
     oauth (0.4.5)
     oauth2 (0.5.2)
       faraday (~> 0.7)
       multi_json (~> 1.0)
-    omniauth (1.0.2)
+    omniauth (1.0.3)
       hashie (~> 1.2)
       rack
     omniauth-facebook (1.2.0)
       omniauth-oauth2 (~> 1.0.0)
-    omniauth-oauth (1.0.0)
+    omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
     omniauth-oauth2 (1.0.0)
       oauth2 (~> 0.5.0)
       omniauth (~> 1.0)
-    omniauth-twitter (0.0.7)
+    omniauth-twitter (0.0.8)
       omniauth-oauth (~> 1.0)
     orm_adapter (0.0.6)
     paperclip (2.7.0)
@@ -141,7 +141,7 @@ GEM
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
       mime-types
-    paperclip-meta (0.3.1)
+    paperclip-meta (0.4.1)
       paperclip
     polyglot (0.3.3)
     rack (1.3.6)
@@ -171,7 +171,7 @@ GEM
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
-    sass (3.1.12)
+    sass (3.1.15)
     sass-rails (3.1.5)
       actionpack (~> 3.1.0)
       railties (~> 3.1.0)
@@ -182,18 +182,18 @@ GEM
       rack (~> 1.0)
       tilt (!= 1.3.0, ~> 1.1)
     sqlite3 (1.3.5)
-    therubyracer (0.9.9)
+    therubyracer (0.9.10)
       libv8 (~> 3.3.10)
     thor (0.14.6)
     tilt (1.3.3)
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.31)
+    tzinfo (0.3.32)
     uglifier (1.2.3)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
-    warden (1.1.0)
+    warden (1.1.1)
       rack (>= 1.0)
 
 PLATFORMS
