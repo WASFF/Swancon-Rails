@@ -4,5 +4,8 @@
    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 </head>
 <body>
-<p>Transfer: <%= @transfer.id %> has been completed.</p>
+<p>Transfer: <%= @transfer.id %> has begun.</p>
+<p>Transfer is from: <%= @transfer.previous_owner.display_name %> to <%= @transfer.recipient.display_name %> for a <%= @ticket.type.order_name %></p>
+<p>To complete this transfer click <%= link_to "Here", controller: :tickets, action: :reconfirm_transfer, id: @transfer.id, code: @transfer.confirmation_code, only_path: false %>.</p>
+<p>To cancel this transfer click <%= link_to "Here", controller: :tickets, action: :cancel_transfer, id: @transfer.id, code: @transfer.confirmation_code, only_path: false %>.</p>
 </body>

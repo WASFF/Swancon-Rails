@@ -1,0 +1,5 @@
+Transfer: <%= @transfer.id %> has begun.
+Transfer is from: <%= @transfer.previous_owner.display_name %> to <%= @transfer.recipient.display_name %> for a <%= @ticket.type.order_name %>
+To complete this transfer go here: <%= url_for controller: :tickets, action: :reconfirm_transfer, id: @transfer.id, code: @transfer.confirmation_code, only_path: false %>
+To cancel this transfer go here: <%= url_for controller: :tickets, action: :cancel_transfer, id: @transfer.id, code: @transfer.confirmation_code, only_path: false %>
+</body>

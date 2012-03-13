@@ -1,0 +1,9 @@
+<%= @transfer.previous_owner.display_name %>,
+	Someone (hopefully you!) has requested a transfer of one of your tickets to another person.
+	The ticket in question is a: <%= @ticket.type.order_name %>
+	The recipient is: <%= @recipient.display_name %> at email address <%= @recipient.email %>
+	To complete this transfer go here: <%= url_for controller: :tickets, action: :reconfirm_transfer, id: @transfer.id, code: @transfer.confirmation_code, only_path: false %>
+	After confirming this transfer, you will no-longer own this ticket and will lose all rights this ticket confers.
+
+	Transfers must be complete before April 5th <%# FIXME: GET FINAL DATE FROM SET %> in order for this transfer to occur
+	If you did not request this transfer, or to cancel it, please email us at memberships-2012@swancon.com.au
