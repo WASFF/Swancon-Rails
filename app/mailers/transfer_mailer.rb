@@ -1,5 +1,5 @@
 class TransferMailer < ActionMailer::Base
-  default :from => "memberships-2012@swancon.com.au"
+  default from: "Doom-Con: Swancon 2012 Memberships <memberships-2012@swancon.com.au>", return_path: 'memberships-2012@swancon.com.au'
 	helper :application, Authorization::AuthorizationHelper
 
 	def reconfirm_sender(transfer)
