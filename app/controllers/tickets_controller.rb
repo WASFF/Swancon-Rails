@@ -44,6 +44,9 @@ class TicketsController < ApplicationController
 				transfer = user_order_ticket.transfer(current_user, recipient) and !user_order_ticket.transferring
 				if current_user.role_symbols.include?(:admin)
 					flash[:alert] = "Transfer Completed."
+					TransferMailer.completed_sender(transfer).deliver
+					TransferMailer.completed_recipient(transfer).deliver
+					TransferMailer.completed_admin(transfer).deliver
 					transfer.confirm
 				else
 					# SEND EMAIL IF NON ADMIN.
