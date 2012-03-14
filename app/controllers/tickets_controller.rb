@@ -21,7 +21,7 @@ class TicketsController < ApplicationController
 	end
 
 	def find_user
-		@user = User.joins(:member_detail).where(email: params[:email]).first
+		@user = User.joins(:member_detail).where(email: params[:email].strip).first
 	end
 
 	def transfer
