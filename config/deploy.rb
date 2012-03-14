@@ -25,7 +25,7 @@ role :web, "clientweb.sektorseven.net"                          # Your HTTP serv
 role :app, "clientweb.sektorseven.net"                          # This may be the same as your `Web` server
 role :db,  "clientweb.sektorseven.net", :primary => true # This is where Rails migrations will run
 
-set :deploy_to, "/home/wasff/swanconapp/"
+set :deploy_to, "/home/wasff/2013/"
 set :deploy_via, :export
 
 # if you're still using the script/reaper helper you will need
