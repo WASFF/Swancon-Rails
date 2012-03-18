@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/lordmortis/MortisCMS.git
-  revision: 12c809aa8e7e8873ce3a3b975dcc8609fbaf3ec4
+  revision: 838cf6293b777b0cb36a24980ad9372015133657
   specs:
-    MortisCMS (0.1.10)
+    MortisCMS (0.1.11)
       RedCloth
       paperclip (~> 2.3)
       paperclip-meta
@@ -15,9 +15,9 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/devise.git
-  revision: 68de34c03ec44da8631f87a712cfb6ba0c02ac61
+  revision: a1376ac8ea80a05259928bbb78052fbaa04de04c
   specs:
-    devise (2.0.4)
+    devise (2.1.0.rc)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       railties (~> 3.1)
@@ -95,7 +95,7 @@ GEM
       thor (~> 0.14)
     json (1.6.5)
     libv8 (3.3.10.4)
-    mail (2.3.2)
+    mail (2.3.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
