@@ -141,6 +141,8 @@ Devise.setup do |config|
   # end
   config.use_salt_as_remember_token = true
   config.reset_password_within = 12.hours
+
+  config.strip_whitespace_keys = [:username, :email]
 end
 
 ActionController::Responder.class_eval do
