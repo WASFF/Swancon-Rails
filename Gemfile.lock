@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/lordmortis/MortisCMS.git
-  revision: 838cf6293b777b0cb36a24980ad9372015133657
+  revision: df7f50f1d8a63c7d3ab1473727de9c7b5cbbb608
   specs:
-    MortisCMS (0.1.11)
+    MortisCMS (0.1.12)
       RedCloth
       paperclip (~> 2.3)
       paperclip-meta
