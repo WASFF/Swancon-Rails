@@ -106,6 +106,20 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def edit_member_details
+		@user = User.find(params[:id])
+
+		if @user.member_detail = nil
+			@member_detail = @user.member_detail
+			render "member_details/edit"
+		else
+			@member_detail = MemberDetail.new
+			@member_detail.user = @user
+			@member_detail.name_badge = @member_detail.user.username
+			render "member_details/new"
+		end
+	end
+
 	def update
 		if current_user.role_symbols.index(:admin) == nil
 			params[:user].delete(:role_ids)

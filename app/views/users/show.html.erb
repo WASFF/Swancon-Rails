@@ -48,6 +48,8 @@ Phone: <%= detail.phone %>
 </div>
 <button class="hidden" id="hide_member_details_button" onClick="hide('member_details'); hide('hide_member_details_button'); show('show_member_details_button');">Hide Member Details</button>
 <button id="show_member_details_button"  onClick="show('member_details'); show('hide_member_details_button'); hide('show_member_details_button');">Show Member Details</button>
+<% else %>
+<%= button_to "Add Member Details", {action: :edit_member_details}, method: :get %>
 <% end %>
 
 <h2>Orders</h2>

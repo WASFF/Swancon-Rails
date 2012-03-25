@@ -31,7 +31,7 @@ authorization do
 		has_permission_on [:merchandise_types], :to => [:add_image, :remove_image, :update_image_description]
 
 		has_permission_on [:payments], :to => [:index, :show]
-		has_permission_on [:users], :to => [:index, :show, :purchase_for]
+		has_permission_on [:users], :to => [:index, :show, :purchase_for, :edit_member_details]
 		has_permission_on [:user_orders], :to => [:remail]
 		
 		has_permission_on [:member_details], :to => [:new, :index, :edit, :show, :destroy]

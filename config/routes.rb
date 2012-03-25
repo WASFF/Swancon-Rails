@@ -61,6 +61,7 @@ DoomCon::Application.routes.draw do
 
 	resources :users_admin, :controller => "users" do
 		get 'purchase_for', :on => :member
+		get 'edit_member_details', :on => :member
 	end
 	
 	resources :orders, :controller => "user_orders" do
