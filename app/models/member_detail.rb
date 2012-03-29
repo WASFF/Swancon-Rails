@@ -41,6 +41,6 @@ class MemberDetail < ActiveRecord::Base
 	end
 	
 	def self.email_list
-		includes(:user).where(email_optin: true)
+		includes(:user).where(email_optin: true).where("users.email IS NOT NULL and users.email != \"\"")
 	end	
 end
