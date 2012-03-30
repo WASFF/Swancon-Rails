@@ -27,7 +27,17 @@
 </head>
 <body>
   <div id="centre_column">
-    <div class="mbox" id="main_content">  <!-- ordinarily contains site-header and main-contend divs-->
+
+    <div class="mbox site-header">
+      <div style="text-align: center;">
+        <img src="<%= image_path "Logo720.png"%>" width=630 height=280 alt="[:LOGO:]"/> <!-- aspect 2.25 -->
+        <h3>A Western Australian Speculative Fiction Convention</h3>
+
+
+      </div>
+    </div>
+
+    <div class="mbox" id="main_content">
       <%= yield %>
     </div>
 
