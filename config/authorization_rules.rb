@@ -10,7 +10,7 @@ authorization do
 		has_permission_on [:user_orders], :to => [:index, :show, :void, :unvoid]
 		has_permission_on [:member_details], :to => [:edit_my, :update, :create]
 		has_permission_on [:panel_suggestions], :to => [:update, :create, :edit, :new]
-		has_permission_on [:tickets], :to => [:index, :transfer, :find_user, :confirm_transfer, :reconfirm_transfer]
+		has_permission_on [:tickets], :to => [:transfer, :find_user, :confirm_transfer, :reconfirm_transfer, :my]
 	end
 
 	role :member do
@@ -26,6 +26,7 @@ authorization do
 	role :committee do
 		includes :member
 		includes :"ticket seller"
+		has_permission_on [:tickets], :to => [:index]
 		has_permission_on [:ticket_sets, :ticket_types, :payment_types, :merchandise_sets, :merchandise_types],
 			:to => [:new, :index, :create, :edit, :update, :show, :destroy]
 		has_permission_on [:merchandise_types], :to => [:add_image, :remove_image, :update_image_description]

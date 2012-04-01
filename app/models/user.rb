@@ -203,4 +203,7 @@ class User < ActiveRecord::Base
 		omniauth.user		
 	end
 
+	def owned_ticket_sets
+		TicketSet.joins{ticket_types.user_order_tickets.user_order}.where{(user_order_tickets.user_id == my{id}) & (user_orders.voided_by_id == nil)}.group{id}
+	end
 end

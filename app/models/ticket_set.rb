@@ -14,9 +14,22 @@ class TicketSet < ActiveRecord::Base
 	end
 
 	def sold_tickets
-		ids = ticket_types.all.collect {|item| item.id}
-		valid_order_ids = UserOrder.where(voided_by_id: nil).collect { |item| item.id}
-		UserOrderTicket.where(ticket_type_id: ids).where(user_order_id: valid_order_ids)
+		UserOrderTicket.joins{user_order}.joins{ticket_type.ticket_set}.where{(user_order.voided_by_id == nil) & (ticket_sets.id == my{id})}
+	end
+
+	def tickets_for(user)
+		UserOrderTicket.joins{user_order}.joins{ticket_type.ticket_set}.where{(user_order.voided_by_id == nil) & (ticket_sets.id == my{id}) & (user_id == user)}
+	end
+
+	def pending
+		joins = UserOrderTicket.joins{user_order_ticket_transfers}.joins{user_order}.joins{ticket_type.ticket_set}
+		joins.where{(user_order_ticket_transfers.confirmed_on == nil) & (ticket_sets.id == my{id})}
+	end
+
+	def user_owns_multiple
+		userticket = User.joins{user_order_tickets.user_order}.joins{user_order_tickets.ticket_type.ticket_set}.where{(ticket_sets.id == my{id}) & (user_orders.voided_by_id == nil)}.group{users.id}.having{ count(users.id) > 1 }.select{id}
+		joins = UserOrderTicket.joins{user_order}.joins{ticket_type.ticket_set}.joins{user}
+		joins.where{(user_order.voided_by_id == nil) & (ticket_sets.id == my{id}) & (user.id.in(userticket))}
 	end
 
 	def self.available(user = nil)

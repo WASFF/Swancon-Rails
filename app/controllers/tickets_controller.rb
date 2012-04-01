@@ -2,22 +2,24 @@ class TicketsController < ApplicationController
 	filter_access_to :all
 
 	def index
-		@alltickets = false
-		@sets = Array.new
-		if params[:all] == "true" and current_user.role_symbols.include?(:admin)
-			@alltickets = true
-			TicketSet.all.each do |set|
-				if set.sold_tickets.count > 0 
-					@sets << {set: set, tickets: set.sold_tickets }
-				end
-			end
-		else
-			TicketSet.all.each do |set|
-				if set.sold_tickets.where(user_id: current_user.id).count > 0
-					@sets << {set: set, tickets: set.sold_tickets.where(user_id: current_user.id) }
-				end
-			end
+		@all = true
+		@multiple = false
+		@pending = false
+		@sets = TicketSet.all
+		@subquery = nil
+		if params[:multiple] == "true"
+			@all = false
+			@multiple = true
+			@subquery = :user_owns_multiple
+		elsif params[:pending] == "true"
+			@all = false
+			@pending = true
+			@subquery = :pending
 		end
+	end
+
+	def my
+		@sets = current_user.owned_ticket_sets
 	end
 
 	def find_user
