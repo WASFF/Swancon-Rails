@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+gem 'rails', '3.1.3'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -20,7 +20,7 @@ gem "oa-oauth", :require => "omniauth/oauth"
 gem 'declarative_authorization'
 gem 'capistrano'
 gem 'actionmailer-with-request'
-
+gem 'squeel'
 gem 'csv_builder'
 
 gem "nested_form", :git => "git://github.com/ryanb/nested_form.git"
