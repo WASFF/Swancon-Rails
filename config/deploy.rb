@@ -46,7 +46,7 @@ namespace :assets do
   desc "Compile assets"
   task :precompile, :roles => :app do
     run "ln -nfs #{shared_path}/assets #{release_path}/public/assets" 
-    run "cd #{release_path} && bundle exec rake RAILS_ENV=#{rails_env} precompile"
+    run "cd #{release_path} && bundle exec rake RAILS_ENV=#{rails_env} assets:precompile"
   end
 end
 
@@ -71,6 +71,6 @@ before "deploy:setup" do
   assets.symlinks.setup
 end
 
-before "deploy:symlink" do
+before "deploy:create_symlink" do
   assets.symlinks.update
 end
