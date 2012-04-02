@@ -34,7 +34,7 @@ class UserOrderMerchandise < ActiveRecord::Base
 		if collectionids.length == 0
 			return where("1 = 1")
 		end
-		optionids = collection.joins(:user_order_merchandise_options).group(:merchandise_option_id).select(:merchandise_option_id).collect {|item| item.merchandise_option_id}
+		optionids = collection.joins{user_order_merchandise_options}.group{user_order_merchandise_options.merchandise_option_id}.select{user_order_merchandise_options.merchandise_option_id}.collect {|item| item.merchandise_option_id}
 		setids = MerchandiseOption.where(:id => optionids).select(:merchandise_option_set_id).group(:merchandise_option_set_id).collect{|item| item.merchandise_option_set_id}
 			
 		selectfrag = ""
