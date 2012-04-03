@@ -26,7 +26,7 @@ authorization do
 	role :committee do
 		includes :member
 		includes :"ticket seller"
-		has_permission_on [:tickets], :to => [:index]
+		has_permission_on [:tickets], :to => [:index, :export]
 		has_permission_on [:ticket_sets, :ticket_types, :payment_types, :merchandise_sets, :merchandise_types],
 			:to => [:new, :index, :create, :edit, :update, :show, :destroy]
 		has_permission_on [:merchandise_types], :to => [:add_image, :remove_image, :update_image_description]

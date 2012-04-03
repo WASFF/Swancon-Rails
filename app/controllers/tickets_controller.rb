@@ -18,6 +18,34 @@ class TicketsController < ApplicationController
 		end
 	end
 
+	def export
+		@all = true
+		@multiple = false
+		set = TicketSet.find(params[:id])
+		@filename = "#{set.name.downcase.gsub(" ", "_")}"
+		if params[:multiple] == "true"
+			@all = false
+			@multiple = true
+			@tickets = set.user_owns_multiple
+			@filename += "-owners_of_multiple_tickets"
+		elsif params[:pending] == "true"
+			@all = false
+			@pending = true
+			@tickets = set.pending
+			@filename += "-pending_transfers"
+		else
+			@tickets = set.sold_tickets
+		end
+
+		@filename += ".csv"
+
+		headers.merge!({
+			'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+			'Content-Type' => 'text/csv',
+			'Content-Transfer-Encoding' => 'binary'
+		})
+	end
+
 	def my
 		@sets = current_user.owned_ticket_sets
 	end

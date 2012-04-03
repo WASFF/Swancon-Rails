@@ -11,10 +11,12 @@
 <% else %>
 <% collection = set.send(@subquery) %>
 <% end %>
-(<%= collection.count %>)
+<div class="floatright"><%= link_to "CSV Export", format: :csv, action: :export, multiple: @multipler, pending: @pending, id: set.id %></div>
+(<%= collection.count %>) 
 <table width="100%">
 	<tr>
 		<th>Owner</th>
+		<th>Badge Name</th>
 		<th>Purchaser</th>
 		<th>Payment Verified</th>
 		<th></th>

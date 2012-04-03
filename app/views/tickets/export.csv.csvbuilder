@@ -1,0 +1,14 @@
+csv << [ 'Badge Name', 'First Name', 'Surname' ]
+
+@tickets.each do |user_order_ticket| 
+	if user_order_ticket.user.member_detail != nil
+		badge_name = user_order_ticket.user.member_detail.name_badge
+		if badge_name == nil
+			badge_name = user_order_ticket.user.member_detail.name_first
+		end
+
+		csv << [badge_name, user_order_ticket.user.member_detail.name_first , user_order_ticket.user.member_detail.name_last]
+	else
+		csv << [user_order_ticket.user.username]
+	end
+end

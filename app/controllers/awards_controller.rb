@@ -22,7 +22,6 @@ class AwardsController < ApplicationController
 
 	def nominations
 		@award = Award.find(params[:id])
-		
 
 		if params[:category_id] == nil
 			@list = @award.category_nominations
