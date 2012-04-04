@@ -64,7 +64,7 @@
 							<% permitted_to? :index, :user_orders do -%>
 								<li><%= link_to "Orders", orders_path %></li>
 							<% end %>
-							<% permitted_to? :index, :tickets do -%>
+							<% permitted_to? :my, :tickets do -%>
 								<li><%= link_to "My Tickets", tickets_my_path %></li>
 							<% end -%>
 							<li><%= link_to("Log out", destroy_user_session_path) %></li>
