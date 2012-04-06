@@ -16,7 +16,7 @@ set :rake, 'bundle exec rake'
 
 set :scm, :git
 #set :git_enable_submodules, 1 # if you have vendored rails
-set :branch, "sc2013"
+set :branch, "master"
 set :git_shallow_clone, 1
 #set :scm_verbose, true
 set :use_sudo, false
