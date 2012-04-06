@@ -3,13 +3,18 @@
 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1"/>
-	<title><% if content_for?(:title) %><%= yield :title %><% else %>DoomCon 2012<% end %></title>
+	<title>Swancon 2013</title>
 	<link rel="shortcut icon" href="<%= image_path "favicon.png" %>" />
 	<link rel="apple-touch-icon-precomposed" href="<%= image_path "mobileicon57.png" %>" />
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= image_path "mobileicon72.png" %>"/>
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= image_path "mobileicon114.png" %>"/>
-	<%= stylesheet_link_tag "main-dark", :title => "Dark" %>
-	<link rel="alternate stylesheet" type="text/css" href="<%= stylesheet_path "main-light.css" %>" title="Light" media="screen" />
+    <%= stylesheet_link_tag "reset" %>
+    <%= stylesheet_link_tag "sc2013" %>
+<style type="text/css">
+  html {
+    background: url(<%=image_path "background.jpg"%>) fixed 50% 0%;
+  }
+</style>    
 	<%= stylesheet_link_tag "main-ipad", :media => "only screen and (max-device-width: 1024px)"%>
 	<%= stylesheet_link_tag "main-print", :media => "print" %>
 	<%= javascript_include_tag "application" %>
@@ -17,171 +22,82 @@
 	<%= yield :header %>
 	<script>
 	$(document).ready(function() {
-		var style = readCookie("style");
-		if (style == null) {
-			createCookie("style", "Dark", 365);
-		} else {
-			styleChange(style);
-		}
-		
-		
-		$(".stylechange").each(styleLinkDisable);
-		$(".stylechange").click(styleChangeLink);
 	});
 	</script>
 </head>
 <body>
-	<a href="#navigation" class="nodisplay">Go To Navigation</a>
+  <div id="centre_column">  <!-- centre_column -->
+    <% if current_user == nil -%>
+      <div class="mbox" id="main_content">
+        <%= yield %>
+      </div>
+    <% else -%>
 
-	<div class="wrapper">
+    <div class="mbox site-header">
+      <div style="text-align: center;">
+        <img src="<%= image_path "Logo720.png"%>" width=630 height=280 alt="[:LOGO:]"/> <!-- aspect 2.25 -->
+        <h3>A Western Australian Speculative Fiction Convention</h3>
+      </div>
+    </div>
 
-		<div class="container">
 
-			<div class="main">		
-				
-				<div class="content">
-					<div style="text-align: center; font-size: 1.5em; color: #CCCCCC;">The 37th Annual Western Australian Science Fiction and Fantasy Convention</div>
-					<p class="notice"><%= notice %></p>
-					<p class="alert"><%= alert %></p>
-					<%= yield %>
-				</div>
+    <div class="mbox" id="main_content">
+      <div id="nav">
+        <ul>
+          <% ContentPage.topbar.all.each do |page| %>
+            <li><%= link_to :controller=>"/content_viewer", :action => "page", :id => page.name do%>
+            <%- page.name.split(" ").each do |word| %><%= word.capitalize %> <% end %>
+            <% end %></li>
+          <% end %>
+        </ul>
+      </div>
+      <%= yield %>
+      <div style="clear:both;">
+      </div>
+    </div>
 
-				<div class="sidesocial">
-					<%= link_to(image_tag("sn-facebook.png", height: 50, width: 50), "https://www.facebook.com/Swancon") %>
-					<%= link_to(image_tag("sn-twitter.png", height: 50, width: 50), "https://twitter.com/#!/swancon") %>
-					<%= link_to(image_tag("sn-RSS.png", height: 50, width: 50), "/content/news.xml") %>
-				</div>
-
-				<div class="sidenav">
-					<a name="navigation"/>
-					<%- if user_signed_in? %>
-						<h2>Welcome <%= current_user.username %></h2>
-						<ul>
-							<li><%= link_to("Profile", edit_user_registration_path) %></li>
-							<% permitted_to? :edit_my, :member_details do -%>
-								<li><%= link_to("Membership Details", edit_my_member_details_path) %></li>
-							<% end %>
-							<% permitted_to? :index, :user_orders do -%>
-								<li><%= link_to "Orders", orders_path %></li>
-							<% end %>
-							<% permitted_to? :my, :tickets do -%>
-								<li><%= link_to "My Tickets", tickets_my_path %></li>
-							<% end -%>
-							<li><%= link_to("Log out", destroy_user_session_path) %></li>
-						</ul>
-					<%- else %>
-					<h2>Registration</h2>
-						<ul>
-							<li><%= link_to("Log in", new_user_session_path) %></li>
-							<li><%= link_to("Register", new_user_registration_path) %></li>
-						</ul>
-					<%- end %>
-						<% permitted_to? :index, :seller do -%>
-						<h2>Seller Actions</h2>
-						<ul>
-						<% if session[:store_user_id] != nil %>
-							<% storeuser = User.find(session[:store_user_id]) %>
-							<% if storeuser != nil %>
-								<li>Buying for: <%= storeuser.order_name %></li>
-								<li><%= link_to("Cancel Sale", controller: :seller, action: :clear) %></li>
-								<li><%= link_to("Store", controller: :store) %></li>							
-							<% end %>
-						<% end %>
-						<% permitted_to? :select, :seller do -%>
-						<li><%= link_to("Existing Member", controller: :seller, action: :select) %></li>
-						<% end %>
-						<% permitted_to? :create, :seller do -%>
-						<li><%= link_to("New Member", controller: :seller, action: :create) %></li>
-						<% end %>
-						<% permitted_to? :sales, :seller do -%>
-						<li><%= link_to("My Sales", controller: :seller, action: :sales) %></li>
-						<% end %>
-						</ul>
-						<% end %>
-						<h2>Sections</h2>
-						<ul>
-							<% ContentPage.topbar.all.each do |page| %>
-							<li><%= link_to :controller=>"/content_viewer", :action => "page", :id => page.name do%>
-							<%- page.name.split(" ").each do |word| %><%= word.capitalize %> <% end %>
-							<% end %></li>
-							<% end %>
-						</ul>
-
-						<% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
-						<h2>Admin</h2>
-						<ul>
-						<% permitted_to? :index, :users do -%>
-						<li><%= link_to("User Administration", users_admin_index_path) %></li>
-						<% end %>
-						<% permitted_to? :index, :member_details do -%>
-							<li><%= link_to("List all Membership Details", member_details_path) %></li>
-						<% end %>
-						<% permitted_to? :index, :tickets do -%>
-							<li><%= link_to "All Tickets", tickets_all_path %></li>
-						<% end -%>
-						<% permitted_to? :edit, :merchandise_sets do -%>
-						<li><%= link_to("Manage Merchandise Sets", merchandise_sets_path)%></li>
-						<% end %>
-						<% permitted_to? :edit, :merchandise_types do -%>
-						<li><%= link_to("Manage Merchandise", merchandise_types_path)%></li>
-						<% end %>
-						<% permitted_to? :edit, :ticket_sets do -%>
-						<li><%= link_to("Manage Ticket Sets", ticket_sets_path)%></li>
-						<% end %>
-						<% permitted_to? :edit, :ticket_types do -%>
-						<li><%= link_to("Manage Tickets", ticket_types_path)%></li>
-						<% end %>
-						<% permitted_to? :index, :vendors do -%>
-						<li><%= link_to("Show Vendors", vendors_path) %></li>
-						<% end %>
-						<% permitted_to? :index, :vendor_orders do -%>
-						<li><%= link_to("Show Vendor Orders", vendor_orders_path) %></li>
-						<% end %>
-						<% permitted_to? :index, :payments do -%>
-						<li><%= link_to("Show Payments", payments_path) %></li>
-						<% end %>
-						<li><%= link_to("Show All Orders", orders_path(:all => true)) %></li>
-						<% permitted_to? :index, :awards do -%>
-						<li><%= link_to("Awards Administration", awards_path) %></li>
-						<% end %>
-						</ul>
-
-						<h2>Content</h2>
-						<ul>
-						<li><%= link_to("Content Pages", content_pages_path ) %></li>
-						<li><%= link_to("Content Blocks", content_blocks_path ) %></li>
-						<li><%= link_to("Content Tags", content_tags_path ) %></li>
-						<li><%= link_to("Content Images", content_images_path ) %></li>
-						<li><%= link_to("Content Files", content_files_path ) %></li>
-						</ul>
-						<% end %>
-				</div>
-
-				<div class="clearer"></div>
-
-			</div>
-
-			<div class="footer">
-				<div class="left">&copy; 2007 <a href="index.html">Website.com</a>. Valid <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> &amp; <a href="http://validator.w3.org/check?uri=referer">XHTML</a>
-					
-				| Change Style: <a href="#" class="stylechange">Light</a> <a href="#" class="stylechange">Dark</a>
-				</div>
-			
-				<div class="right"><a href="http://templates.arcsin.se/">Website template</a> by <a href="http://arcsin.se/">Arcsin</a></div>
-
-				<div class="clearer"><span></span></div>
-			</div>
-
+	<div class="mbox loginbar">
+		<div class="open">
+		<% if user_signed_in? %>
+			<%= link_to("Profile", edit_user_registration_path) %>
+			<%= link_to("Membership Details", edit_my_member_details_path) %>
+			<%= link_to "Orders", orders_path %>
+			<%= link_to("Log out", destroy_user_session_path) %>
+		<% else %>
+			<%= link_to("Log in", new_user_session_path) %>
+			<%= link_to("Register", new_user_registration_path) %>
+		<% end %>
 		</div>
-
 	</div>
 
-	</body>  
+    <div class="mbox admin">
+      <ul>
+        <li><%= link_to("Log in", new_user_session_path) %></li>
+      </ul>
+      <% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
 
-<div id="rightpanel">
+        
+        <h2>Admin</h2>
+        <ul>
+          <% permitted_to? :index, :users do -%>
+            <li><%= link_to("User Administration", users_admin_index_path) %></li>
+          <% end %>
+        </ul>
+
+        <h2>Content</h2>
+        <ul>
+          <li><%= link_to("Content Pages", content_pages_path ) %></li>
+          <li><%= link_to("Content Blocks", content_blocks_path ) %></li>
+          <li><%= link_to("Content Tags", content_tags_path ) %></li>
+          <li><%= link_to("Content Images", content_images_path ) %></li>
+          <li><%= link_to("Content Files", content_files_path ) %></li>
+        </ul>
+      <% end %>
+    </div>
 
 
-</div>
+    <% end -%>
+  </div>  <!-- centre_column -->
 
 </body>
 </html>
