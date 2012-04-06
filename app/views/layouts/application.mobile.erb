@@ -1,46 +1,90 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-	<title><% if content_for?(:title) %><%= yield :title %><% else %>DoomCon 2012<% end %></title>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1"/>
+	<title>Swancon 2013</title>
 	<link rel="shortcut icon" href="<%= image_path "favicon.png" %>" />
 	<link rel="apple-touch-icon-precomposed" href="<%= image_path "mobileicon57.png" %>" />
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= image_path "mobileicon72.png" %>"/>
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= image_path "mobileicon114.png" %>"/>
-	<meta name="viewport" content="width=device-width" />
-	<%= stylesheet_link_tag "main-mobile" %>
-	<%= javascript_include_tag "mobile" %>
+    <%= stylesheet_link_tag "reset" %>
+    <%= stylesheet_link_tag "sc2013" %>
+<style type="text/css">
+  html {
+    background: url(<%=image_path "background.jpg"%>) fixed 50% 0%;
+  }
+</style>    
+	<%= stylesheet_link_tag "main-ipad", :media => "only screen and (max-device-width: 1024px)"%>
+	<%= stylesheet_link_tag "main-print", :media => "print" %>
+	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tag %>
 	<%= yield :header %>
+	<script>
+	$(document).ready(function() {
+	});
+	</script>
 </head>
 <body>
-	<div id="wrapper-top"></div>
+  <div id="centre_column">  <!-- centre_column -->
+    <% if current_user == nil -%>
+      <div class="mbox" id="main_content">
+        <%= yield %>
+      </div>
+    <% else -%>
 
-	<div id="loginbar">
-		<div class="close">&gt;&gt;</div>
-		<div class="open">
-		<% if user_signed_in? %>
-			<%= link_to("Profile", edit_user_registration_path) %>
-			<%= link_to("Membership Details", edit_my_member_details_path) %>
-			<%= link_to "Orders", orders_path %>
-			<%= link_to("Log out", destroy_user_session_path) %>
-		<% else %>
-			<%= link_to("Log in", new_user_session_path) %>
-			<%= link_to("Register", new_user_registration_path) %>
-		<% end %>
-		</div>
-	</div>
-	<div id="linkbar">
-		<div class="close">&gt;&gt;</div>
-		<div class="open">
-			<% ContentPage.topbar.all.each do |page| %>
-			<%= link_to page.name.capitalize, :controller=>"/content_viewer", :action=>"page", :id => page.name %>
-			<% end %>
-		</div>
-	</div>
-	<div id="page">
-		<div id="content">
-			<%= yield %>
-		</div>
-	</div>	
+    <div class="mbox site-header">
+      <div style="text-align: center;">
+        <img src="<%= image_path "Logo720.png"%>" width=630 height=280 alt="[:LOGO:]"/> <!-- aspect 2.25 -->
+        <h3>A Western Australian Speculative Fiction Convention</h3>
+      </div>
+    </div>
+
+
+    <div class="mbox" id="main_content">
+      <div id="nav">
+        <ul>
+          <% ContentPage.topbar.all.each do |page| %>
+            <li><%= link_to :controller=>"/content_viewer", :action => "page", :id => page.name do%>
+            <%- page.name.split(" ").each do |word| %><%= word.capitalize %> <% end %>
+            <% end %></li>
+          <% end %>
+        </ul>
+      </div>
+      <%= yield %>
+      <div style="clear:both;">
+      </div>
+    </div>
+
+    <div class="mbox admin">
+      <ul>
+        <li><%= link_to("Log in", new_user_session_path) %></li>
+      </ul>
+      <% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
+
+        
+        <h2>Admin</h2>
+        <ul>
+          <% permitted_to? :index, :users do -%>
+            <li><%= link_to("User Administration", users_admin_index_path) %></li>
+          <% end %>
+        </ul>
+
+        <h2>Content</h2>
+        <ul>
+          <li><%= link_to("Content Pages", content_pages_path ) %></li>
+          <li><%= link_to("Content Blocks", content_blocks_path ) %></li>
+          <li><%= link_to("Content Tags", content_tags_path ) %></li>
+          <li><%= link_to("Content Images", content_images_path ) %></li>
+          <li><%= link_to("Content Files", content_files_path ) %></li>
+        </ul>
+      <% end %>
+    </div>
+
+
+    <% end -%>
+  </div>  <!-- centre_column -->
+
 </body>
 </html>
+
