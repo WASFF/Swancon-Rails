@@ -4,6 +4,7 @@ ABN: 58 948 540 963<br/>
 PO Box G429<br/>
 Perth Business Centre WA 6841<br/></div>
 <% if @order.payment != nil %>
+Purchasing User Number: <%= @order.user.id %><br/>
 Invoice: <%= @order.invoice_number %> Paid in Receipt: <%= link_to @order.payment.receipt_number, @order.payment %><br/>
 Issued: <%= render_time(@order.created_at) %><br/>
 Paid: <%= render_time(@order.payment.created_at) %><br/>
