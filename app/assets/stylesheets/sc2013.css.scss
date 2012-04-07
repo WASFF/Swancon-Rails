@@ -80,6 +80,12 @@ p {
   margin: 0px auto;
 }
 
+.scroller {
+  min-height: 300px;
+  max-height: 480px;
+  overflow:auto;
+
+}
 
 #main_content {
   min-height: 300px;
@@ -92,6 +98,12 @@ p {
   float:right;
 }
 
+.enbox {
+  border: 1px solid #444;
+  margin: 10px;
+  padding:10px;
+}
+
 .mbox {
   background: #fdd;
   @include linear-gradient(rgba(200,200,255,0.7), rgba(120,100,180,0.6) );
@@ -99,6 +111,10 @@ p {
   padding: 20px;
   margin-top: 8px;
   @include rounded(20px);
+  .enbox a {
+    margin: 8px;
+    display: block;
+  }
 }
 .site-header {
   h3 {
@@ -124,7 +140,8 @@ p {
     font-size:93%;
     line-height:normal;
     position:relative;
-    top:-55px;
+    height:33px;
+    top:0px;
     padding-left: 20px;
 
     ul {

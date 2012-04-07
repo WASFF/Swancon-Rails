@@ -41,11 +41,11 @@
       </div>
     </div>
   <% else %>
-    <div style="height: 200px;"></div>
+    <div style="height: 170px;"></div>
   <% end %>
 
 
-    <div class="mbox" id="main_content">
+  <div>
       <div id="nav">
         <ul>
           <% ContentPage.topbar.all.each do |page| %>
@@ -57,9 +57,14 @@
           <li><a href="/store">Store</a></li>
         </ul>
       </div>
-      <%= yield %>
+    <div class="mbox" id="main_content">
+
+      <div>
+        <%= yield %>
+      </div>
       <div style="clear:both;">
       </div>
+    </div>
     </div>
 
 	<div class="mbox loginbar">
