@@ -6,7 +6,7 @@
 
 <%= form_tag(:action => :purchase, :confirm => true) do |f| %>
 Purchase With: <%= select("purchase", "payment_type_id", @payment_types.collect {|item| [item.form_display, item.id]}, :include_blank => true) %><br/>
-<% if @can_disable_email %>
+<% if @can_disable_email and @store_user.email.strip != "" %>
 Send Email: <%= check_box_tag("send_email", "true", true) %><br/>
 <% end %>
 <%= submit_tag "Confirm" %>
