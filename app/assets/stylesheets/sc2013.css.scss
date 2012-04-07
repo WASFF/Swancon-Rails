@@ -64,9 +64,20 @@ html,body {
   min-height:100%;
 }
 
-h1,h2,h3,h4 {
+h1,h2,h3,h4,.title {
 	@include headingFont;
+    margin-top:1ex;
+    margin-bottom:1.0ex;
 }
+li {
+  margin-bottom: 8px;
+}
+h1 { font-size: 28px }
+h2 { font-size: 24px }
+.title { font-size: 24px }
+h3 { font-size: 20px }
+h4 { font-size: 16px }
+
 
 strong {
   font-weight: bold;
@@ -108,7 +119,7 @@ p {
   background: #fdd;
   @include linear-gradient(rgba(200,200,255,0.7), rgba(120,100,180,0.6) );
   border: 2px solid black;
-  padding: 20px;
+  padding: 10px 20px;
   margin-top: 8px;
   @include rounded(20px);
   .enbox a {
