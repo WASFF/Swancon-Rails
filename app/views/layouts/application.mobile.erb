@@ -33,12 +33,16 @@
       </div>
     <% else -%>
 
+      <% if false %>
     <div class="mbox site-header">
       <div style="text-align: center;">
         <img src="<%= image_path "Logo720.png"%>" width=630 height=280 alt="[:LOGO:]"/> <!-- aspect 2.25 -->
         <h3>A Western Australian Speculative Fiction Convention</h3>
       </div>
     </div>
+  <% else %>
+    <div style="height: 200px;"></div>
+  <% end %>
 
 
     <div class="mbox" id="main_content">
@@ -55,6 +59,20 @@
       <div style="clear:both;">
       </div>
     </div>
+
+	<div class="mbox loginbar">
+		<div class="open">
+		<% if user_signed_in? %>
+			<%= link_to("Profile", edit_user_registration_path) %>
+			<%= link_to("Membership Details", edit_my_member_details_path) %>
+			<%= link_to "Orders", orders_path %>
+			<%= link_to("Log out", destroy_user_session_path) %>
+		<% else %>
+			<%= link_to("Log in", new_user_session_path) %>
+			<%= link_to("Register", new_user_registration_path) %>
+		<% end %>
+		</div>
+	</div>
 
     <div class="mbox admin">
       <ul>
@@ -81,10 +99,46 @@
       <% end %>
     </div>
 
+    <div class="mbox admin">
+      Tickets and Merch Admin
+      <ul>
+        <% permitted_to? :index, :member_details do -%>
+          <li><%= link_to("List all Membership Details", member_details_path) %></li>
+        <% end %>
+        <% permitted_to? :index, :tickets do -%>
+          <li><%= link_to "All Tickets", tickets_all_path %></li>
+        <% end -%>
+        <% permitted_to? :edit, :merchandise_sets do -%>
+        <li><%= link_to("Manage Merchandise Sets", merchandise_sets_path)%></li>
+        <% end %>
+        <% permitted_to? :edit, :merchandise_types do -%>
+        <li><%= link_to("Manage Merchandise", merchandise_types_path)%></li>
+        <% end %>
+        <% permitted_to? :edit, :ticket_sets do -%>
+        <li><%= link_to("Manage Ticket Sets", ticket_sets_path)%></li>
+        <% end %>
+        <% permitted_to? :edit, :ticket_types do -%>
+        <li><%= link_to("Manage Tickets", ticket_types_path)%></li>
+        <% end %>
+        <% permitted_to? :index, :vendors do -%>
+        <li><%= link_to("Show Vendors", vendors_path) %></li>
+        <% end %>
+        <% permitted_to? :index, :vendor_orders do -%>
+        <li><%= link_to("Show Vendor Orders", vendor_orders_path) %></li>
+        <% end %>
+        <% permitted_to? :index, :payments do -%>
+        <li><%= link_to("Show Payments", payments_path) %></li>
+        <% end %>
+        <li><%= link_to("Show All Orders", orders_path(:all => true)) %></li>
+        <% permitted_to? :index, :awards do -%>
+        <li><%= link_to("Awards Administration", awards_path) %></li>
+        <% end %>
+      </ul>
+
+    </div>
 
     <% end -%>
   </div>  <!-- centre_column -->
 
 </body>
 </html>
-
