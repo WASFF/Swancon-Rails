@@ -51,7 +51,7 @@ class SellerController < ApplicationController
 			if @user.save
 				@saved = true
 				session[:store_user_id] = @user.id
-				redirect_to controller: :store
+				#redirect_to controller: :store
 				return
 			else
 				@saved = false
