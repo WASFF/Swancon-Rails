@@ -83,7 +83,9 @@ p {
 
 #main_content {
   min-height: 300px;
-  overflow:visible;
+  max-height: 480px;
+  -overflow:visible;
+  overflow: auto;
 }
 
 .right {
