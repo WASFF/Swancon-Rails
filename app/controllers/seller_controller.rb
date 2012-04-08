@@ -5,7 +5,7 @@ class SellerController < ApplicationController
 		@users = User.joins("LEFT OUTER JOIN member_details ON users.id = member_details.user_id").includes(:member_detail)
 		if params[:name_search] != nil
 			search = params[:name_search].gsub(/[^([a-z]|[A-Z]|[0-9])]/, "").strip
-			if search.length > 3
+			if search.length > 2
 				searchstring = "%#{search}%"
 				emailsearch = "#{search}%"
 				@search = true
@@ -50,8 +50,11 @@ class SellerController < ApplicationController
 			
 			if @user.save
 				@saved = true
+                @saved_name= @user.order_name
 				session[:store_user_id] = @user.id
-				redirect_to controller: :store
+				#redirect_to controller: :store
+			@user = User.new()
+			@user.build_member_detail
 				return
 			else
 				@saved = false

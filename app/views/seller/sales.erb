@@ -1,3 +1,13 @@
+
+<div class="enbox">
+<%= link_to "Sell to Existing Member", action: :select %>
+</div>
+<div class="enbox">
+<%= link_to "Create New Member", action: :create %>
+</div>
+<hr/>
+
+
 <h2>My Sales</h2>
 <%= form_tag({action: :sales, controller: :seller}, remote: true, method: "get") do %>
 <h2>Search</h2>
@@ -10,6 +20,3 @@
 <div id="results">
 <%= render partial: "noresults" %>
 </div>
-<h2>Other Links</h2>
-<%= link_to "Sell to Existing Member", action: :select %><br/>
-<%= link_to "Create New Member", action: :create %>

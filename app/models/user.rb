@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 					:recoverable, :rememberable, :trackable, :validatable,
 					:omniauthable
 
-	validates :username, :presence => true, :length => {:minimum => 3}
+	validates :username, :presence => true, :length => {:minimum => 3}, :uniqueness => { :case_sensitive => false }
 
   # Setup accessible (or protected) attributes for your model
 	attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :role_ids, :member_detail_attributes 

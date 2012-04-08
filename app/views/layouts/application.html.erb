@@ -12,7 +12,7 @@
     <%= stylesheet_link_tag "sc2013" %>
 <style type="text/css">
   html {
-    background: url(<%=image_path "background.jpg"%>) fixed 50% 0%;
+    background: #000 url(<%=image_path "background.jpg"%>) fixed 50% -20px;
   }
 </style>    
 	<%= stylesheet_link_tag "main-ipad", :media => "only screen and (max-device-width: 1024px)"%>
@@ -41,27 +41,34 @@
       </div>
     </div>
   <% else %>
-    <div style="height: 200px;"></div>
+    <div style="height: 150px;" class="noprint"></div>
   <% end %>
 
 
-    <div class="mbox" id="main_content">
-      <div id="nav">
+  <div>
+      <div id="nav" class="noprint">
         <ul>
           <% ContentPage.topbar.all.each do |page| %>
             <li><%= link_to :controller=>"/content_viewer", :action => "page", :id => page.name do%>
             <%- page.name.split(" ").each do |word| %><%= word.capitalize %> <% end %>
             <% end %></li>
           <% end %>
+          <li><a href="/seller/sales">Sales</a></li>
+          <li><a href="/store">Store</a></li>
         </ul>
       </div>
-      <%= yield %>
+    <div class="mbox" id="main_content">
+
+      <div>
+        <%= yield %>
+      </div>
       <div style="clear:both;">
       </div>
     </div>
+    </div>
 
-	<div class="mbox loginbar">
-		<div class="open">
+	<div class="mbox noprint loginbar">
+		<div class="open" style="float:right;">
 		<% if user_signed_in? %>
 			<%= link_to("Profile", edit_user_registration_path) %>
 			<%= link_to("Membership Details", edit_my_member_details_path) %>
@@ -72,12 +79,12 @@
 			<%= link_to("Register", new_user_registration_path) %>
 		<% end %>
 		</div>
+        <div style="clear:both"/>
 	</div>
 
-    <div class="mbox admin">
-      <ul>
-        <li><%= link_to("Log in", new_user_session_path) %></li>
-      </ul>
+      <% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
+
+    <div class="mbox noprint admin">
       <% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
 
         
@@ -99,7 +106,7 @@
       <% end %>
     </div>
 
-    <div class="mbox admin">
+    <div class="mbox noprint admin">
       Tickets and Merch Admin
       <ul>
         <% permitted_to? :index, :member_details do -%>
@@ -136,6 +143,7 @@
       </ul>
 
     </div>
+      <% end %>
 
     <% end -%>
   </div>  <!-- centre_column -->
