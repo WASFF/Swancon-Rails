@@ -93,7 +93,7 @@ p {
 
 #main_content {
   min-height: 300px;
-  max-height: 680px;
+  -max-height: 680px;
   -overflow:visible;
   overflow: auto;
 }
