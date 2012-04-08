@@ -91,16 +91,9 @@ p {
   margin: 0px auto;
 }
 
-.scroller {
-  min-height: 300px;
-  max-height: 480px;
-  overflow:auto;
-
-}
-
 #main_content {
   min-height: 300px;
-  max-height: 480px;
+  max-height: 680px;
   -overflow:visible;
   overflow: auto;
 }

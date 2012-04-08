@@ -6,7 +6,7 @@
 <% end %>
 
 <h2>Create New Member</h2>
-<p>(after creating, you will be able to sell something to this member)</p>
+<p style="font-size: 50%;">(after creating, you will be able to sell something to this member)</p>
 <% @quickform = true %>
 <%= form_for(@user, url: {action: :create}, :method => :post) do |form| %>
 <%= render partial: 'users/form', locals: {quick: true, f: form} %>
