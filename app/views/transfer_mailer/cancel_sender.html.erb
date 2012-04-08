@@ -6,5 +6,5 @@
 <body>
 <%= @transfer.previous_owner.display_name %>,
 <p>The ticket transfer from you to <%= @transfer.recipient.display_name %> has been cancelled</p>
-<p>If you have any queries, please email us at <%= link_to "memberships-#{DoomCon.config.swancon_year}@swancon.com.au", "mailto:memberships-#{DoomCon.config.swancon_year}@swancon.com.au" %></p>
+<p>If you have any queries, please email us at <%= link_to "memberships-#{Rails.application.config.swancon_year}@swancon.com.au", "mailto:memberships-#{Rails.application.config.swancon_year}@swancon.com.au" %></p>
 </body>

@@ -1,5 +1,5 @@
 class StoreMailer < ActionMailer::Base
-  default from: "Swancon #{DoomCon.config.swancon_year} Store/Tickets <#{DoomCon.config.swancon_year}@swancon.com.au>", return_path: 'tickets-#{DoomCon.config.swancon_year}@swancon.com.au'
+  default from: "Swancon #{Rails.application.config.swancon_year} Store/Tickets <#{Rails.application.config.swancon_year}@swancon.com.au>", return_path: "tickets-#{Rails.application.config.swancon_year}@swancon.com.au"
 	helper :application, Authorization::AuthorizationHelper
 
 	def invoice(order)
@@ -17,7 +17,7 @@ class StoreMailer < ActionMailer::Base
 	def confirmation_required(order)
 		@order = order
 		@email = true
-		mail(:to => "memberships-2012@swancon.com.au", :subject => "New Order Recieved: #{order.invoice_number}")
+		mail(:to => "memberships-#{Rails.application.config.swancon_year}@swancon.com.au", :subject => "New Order Recieved: #{order.invoice_number}")
 	end
 
 	def tshirtconfirm(user, shirtorders, orders)

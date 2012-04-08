@@ -1,5 +1,5 @@
 class TransferMailer < ActionMailer::Base
-  default from: "Doom-Con: Swancon 2012 Memberships <memberships-2012@swancon.com.au>", return_path: 'memberships-2012@swancon.com.au'
+  default from: "Swancon #{Rails.application.config.swancon_year} Memberships <memberships-#{Rails.application.config.swancon_year}@swancon.com.au>", return_path: "memberships-#{Rails.application.config.swancon_year}@swancon.com.au"
 	helper :application, Authorization::AuthorizationHelper
 
 	def reconfirm_sender(transfer)
@@ -23,7 +23,7 @@ class TransferMailer < ActionMailer::Base
 		@recipient = transfer.recipient
 		@sender = transfer.sender
 		@transfer = transfer
-		mail(to: "memberships-2012@swancon.com.au", subject: "Ticket Transfer #{transfer.id} started.")
+		mail(to: "memberships-#{Rails.application.config.swancon_year}@swancon.com.au", subject: "Ticket Transfer #{transfer.id} started.")
 	end
 
 	def cancel_sender(transfer)
@@ -71,7 +71,7 @@ class TransferMailer < ActionMailer::Base
 		@recipient = transfer.recipient
 		@sender = transfer.sender
 		@transfer = transfer
-		mail(to: "memberships-2012@swancon.com.au", subject: "Ticket Transfer #{transfer.id} completed.")
+		mail(to: "memberships-#{Rails.application.config.swancon_year}@swancon.com.au", subject: "Ticket Transfer #{transfer.id} completed.")
 	end
 
 	def permitted_to?(*args)

@@ -8,5 +8,5 @@
 <p><%= @transfer.previous_owner.display_name %> has begun a transfer of a <%= @ticket.type.order_name %> to your account.</p>
 <p>They have received an email with details on how to complete the transfer and they cannot cancel it without contacting us.</p>
 <p>Transfers must be complete before April 5th <%# FIXME: GET FINAL DATE FROM SET -%>in order for this transfer to occur</p>
-<p>If there are any issues with this transfer please email us at <%= link_to "memberships-#{DoomCon.config.swancon_year}@swancon.com.au", "mailto:memberships-#{DoomCon.config.swancon_year}@swancon.com.au" %> to resolve them.</p>
+<p>If there are any issues with this transfer please email us at <%= link_to "memberships-#{Rails.application.config.swancon_year}@swancon.com.au", "mailto:memberships-#{Rails.application.config.swancon_year}@swancon.com.au" %> to resolve them.</p>
 </body>
