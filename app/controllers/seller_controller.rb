@@ -50,8 +50,11 @@ class SellerController < ApplicationController
 			
 			if @user.save
 				@saved = true
+                @saved_name= @user.order_name
 				session[:store_user_id] = @user.id
 				#redirect_to controller: :store
+			@user = User.new()
+			@user.build_member_detail
 				return
 			else
 				@saved = false
