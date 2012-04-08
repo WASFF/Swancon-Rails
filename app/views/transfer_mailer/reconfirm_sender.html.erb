@@ -10,5 +10,5 @@
 <p>The recipient is: <%= @recipient.display_name %> at email address "<%= link_to @recipient.email, "mailto:#{@recipient.email}" %>"</p>
 <p>To complete this transfer click <%= link_to "Here", controller: :tickets, action: :reconfirm_transfer, id: @transfer.id, code: @transfer.confirmation_code, only_path: false %>. After clicking this, you will no-longer own this ticket and will lose all rights this ticket confers.</p>
 <p>Transfers must be complete before April 5th <%# FIXME: GET FINAL DATE FROM SET %> in order for this transfer to occur</p>
-<p>If you did not request this transfer, or to cancel it, please email us at <%= link_to "memberships-2012@swancon.com.au", "mailto:memberships-2012@swancon.com.au" %> to resolve this.</p>
+<p>If you did not request this transfer, or to cancel it, please email us at <%= link_to "memberships-#{DoomCon.config.swancon_year}@swancon.com.au", "mailto:memberships-#{DoomCon.config.swancon_year}@swancon.com.au" %> to resolve this.</p>
 </body>

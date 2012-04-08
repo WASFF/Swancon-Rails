@@ -3,7 +3,7 @@
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender = "tickets-2012@swancon.com.au"
+  config.mailer_sender = "tickets-2013@swancon.com.au"
   config.case_insensitive_keys = [:email, :username]
 
   # Configure the class responsible to send e-mails.
