@@ -6,5 +6,5 @@
 <body>
 <%= @transfer.recipient.display_name %>,
 <p>The ticket transfer to you from <%= @transfer.previous_owner.display_name %> has been completed</p>
-<p>If you have any queries, please email us at <%= link_to "memberships-2012@swancon.com.au", "mailto:memberships-2012@swancon.com.au" %></p>
+<p>If you have any queries, please email us at <%= link_to "memberships-#{DoomCon.config.swancon_year}@swancon.com.au", "mailto:memberships-#{DoomCon.config.swancon_year}@swancon.com.au" %></p>
 </body>

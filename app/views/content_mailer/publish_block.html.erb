@@ -6,6 +6,6 @@ A new Swancon post has been published!
 <%= redcloth_render(@block.bodytext) %>
 </blockquote>
 
-(view this on the website <%= link_to "here", "http://2013.swancon.com.au/#{url_for({controller: "content_viewer", action: "content", id: @block.id})}" %>)
+(view this on the website <%= link_to "here", "http://#{DoomCon.config.swancon_year}.swancon.com.au/#{url_for({controller: "content_viewer", action: "content", id: @block.id})}" %>)
 
-If you wish to unsubscribe from this email, please <%= link_to "email us", "mailto:tickets-2012@swancon.com.au" %> asking to opt out, or change your settings on the DoomCon website by logging in, click on "Membership Details" on the right hand side, unchecking "Email optin" and updating your details.
+If you wish to unsubscribe from this email, please <%= link_to "email us", "mailto:tickets-#{DoomCon.config.swancon_year}@swancon.com.au" %> asking to opt out, or change your settings on the DoomCon website by logging in, click on "Membership Details" on the right hand side, unchecking "Email optin" and updating your details.
