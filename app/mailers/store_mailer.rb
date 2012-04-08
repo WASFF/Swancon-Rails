@@ -1,5 +1,5 @@
 class StoreMailer < ActionMailer::Base
-  default from: "Swancon #{DoomCon.config.swancon_year} Store/Tickets <#{DoomCon.config.swancon_year}@swancon.com.au>", return_path: 'tickets-#{DoomCon.config.swancon_year}@swancon.com.au'
+  default from: "Swancon #{DoomCon::config.swancon_year} Store/Tickets <#{DoomCon::config.swancon_year}@swancon.com.au>", return_path: 'tickets-#{DoomCon::config.swancon_year}@swancon.com.au'
 	helper :application, Authorization::AuthorizationHelper
 
 	def invoice(order)
