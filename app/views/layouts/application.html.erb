@@ -68,7 +68,7 @@
     </div>
 
 	<div class="mbox loginbar">
-		<div class="open">
+		<div class="open" style="float:right;">
 		<% if user_signed_in? %>
 			<%= link_to("Profile", edit_user_registration_path) %>
 			<%= link_to("Membership Details", edit_my_member_details_path) %>
@@ -79,12 +79,12 @@
 			<%= link_to("Register", new_user_registration_path) %>
 		<% end %>
 		</div>
+        <div style="clear:both"/>
 	</div>
 
+      <% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
+
     <div class="mbox admin">
-      <ul>
-        <li><%= link_to("Log in", new_user_session_path) %></li>
-      </ul>
       <% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
 
         
@@ -143,6 +143,7 @@
       </ul>
 
     </div>
+      <% end %>
 
     <% end -%>
   </div>  <!-- centre_column -->

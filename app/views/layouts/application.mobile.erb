@@ -41,11 +41,11 @@
       </div>
     </div>
   <% else %>
-    <div style="height: 200px;"></div>
+    <div style="height: 170px;"></div>
   <% end %>
 
 
-    <div class="mbox" id="main_content">
+  <div>
       <div id="nav">
         <ul>
           <% ContentPage.topbar.all.each do |page| %>
@@ -53,31 +53,38 @@
             <%- page.name.split(" ").each do |word| %><%= word.capitalize %> <% end %>
             <% end %></li>
           <% end %>
+          <li><a href="/seller/sales">Sales</a></li>
+          <li><a href="/store">Store</a></li>
         </ul>
       </div>
-      <%= yield %>
+    <div class="mbox" id="main_content">
+
+      <div>
+        <%= yield %>
+      </div>
       <div style="clear:both;">
       </div>
     </div>
+    </div>
 
 	<div class="mbox loginbar">
-		<div class="open">
+		<div class="open" style="float:right;">
 		<% if user_signed_in? %>
-			<%= link_to("Profile", edit_user_registration_path) %>
-			<%= link_to("Membership Details", edit_my_member_details_path) %>
-			<%= link_to "Orders", orders_path %>
+			<!--%= link_to("Profile", edit_user_registration_path) %-->
+			<!--%= link_to("Membership Details", edit_my_member_details_path) %-->
+			<!--%= link_to "Orders", orders_path %-->
 			<%= link_to("Log out", destroy_user_session_path) %>
 		<% else %>
 			<%= link_to("Log in", new_user_session_path) %>
 			<%= link_to("Register", new_user_registration_path) %>
 		<% end %>
 		</div>
+        <div style="clear:both"/>
 	</div>
 
+      <% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
+
     <div class="mbox admin">
-      <ul>
-        <li><%= link_to("Log in", new_user_session_path) %></li>
-      </ul>
       <% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
 
         
@@ -136,6 +143,7 @@
       </ul>
 
     </div>
+      <% end %>
 
     <% end -%>
   </div>  <!-- centre_column -->
