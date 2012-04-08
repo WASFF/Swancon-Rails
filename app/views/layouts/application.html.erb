@@ -41,12 +41,12 @@
       </div>
     </div>
   <% else %>
-    <div style="height: 150px;"></div>
+    <div style="height: 150px;" class="noprint"></div>
   <% end %>
 
 
   <div>
-      <div id="nav">
+      <div id="nav" class="noprint">
         <ul>
           <% ContentPage.topbar.all.each do |page| %>
             <li><%= link_to :controller=>"/content_viewer", :action => "page", :id => page.name do%>
@@ -67,7 +67,7 @@
     </div>
     </div>
 
-	<div class="mbox loginbar">
+	<div class="mbox noprint loginbar">
 		<div class="open" style="float:right;">
 		<% if user_signed_in? %>
 			<%= link_to("Profile", edit_user_registration_path) %>
@@ -84,7 +84,7 @@
 
       <% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
 
-    <div class="mbox admin">
+    <div class="mbox noprint admin">
       <% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
 
         
@@ -106,7 +106,7 @@
       <% end %>
     </div>
 
-    <div class="mbox admin">
+    <div class="mbox noprint admin">
       Tickets and Merch Admin
       <ul>
         <% permitted_to? :index, :member_details do -%>
