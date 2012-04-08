@@ -7,6 +7,7 @@ class MemberDetail < ActiveRecord::Base
 	validates :address_postcode, :presence => true, :length => {:minimum => 4}
 	validates :address_state, :presence => true, :length => {:minimum => 2}	
 	validates :address_country, :presence => true, :length => {:minimum => 2}
+    validates :disclaimer_signed, :inclusion => {:in => [true,1] }
 		
 	before_save :blank_to_null
 	
