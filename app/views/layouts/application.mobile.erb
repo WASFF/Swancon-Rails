@@ -31,12 +31,17 @@
   <div>
       <div id="nav" class="noprint">
         <ul>
+          <li><a href="/">Home</a></li>
           <% ContentPage.topbar.all.each do |page| %>
-            <li><%= link_to :controller=>"/content_viewer", :action => "page", :id => page.name do%>
-            <%- page.name.split(" ").each do |word| %><%= word.capitalize %> <% end %>
-            <% end %></li>
+            <%if page.name!='home' %>
+              <li><%= link_to :controller=>"/content_viewer", :action => "page", :id => page.name do%>
+              <%- page.name.split(" ").each do |word| %><%= word.capitalize %> <% end %>
+              <% end %></li>
+            <% end %>
           <% end %>
-          <li><a href="/seller/sales">Sales</a></li>
+				<% if permitted_to? :sales, :seller %>
+                  <li><a href="/seller/sales">Sales</a></li>
+				<% end %>
           <li><a href="/store">Store</a></li>
         </ul>
       </div>
