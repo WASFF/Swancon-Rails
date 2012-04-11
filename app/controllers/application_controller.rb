@@ -1,16 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 	before_filter :prepare_for_mobile
-    before_filter :authorize_admin, :except => :new
 
 	private
-    def authorize_admin
-      if current_user #&& current_user.role_symbols.include?(:admin)
-        true
-      else
-        redirect_to(:controller => "devise/sessions", :action => :new)
-      end
-    end
 
 	def mobile_device?
 		logger.debug("User Agent: #{request.user_agent}")

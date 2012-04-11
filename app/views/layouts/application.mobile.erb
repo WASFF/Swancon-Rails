@@ -27,24 +27,7 @@
 </head>
 <body>
   <div id="centre_column">  <!-- centre_column -->
-    <% if current_user == nil -%>
-      <div class="mbox" id="main_content">
-        <%= yield %>
-      </div>
-    <% else -%>
-
-      <% if false %>
-    <div class="mbox site-header">
-      <div style="text-align: center;">
-        <img src="<%= image_path "Logo720.png"%>" width=630 height=280 alt="[:LOGO:]"/> <!-- aspect 2.25 -->
-        <h3>A Western Australian Speculative Fiction Convention</h3>
-      </div>
-    </div>
-  <% else %>
     <div style="height: 150px;" class="noprint"></div>
-  <% end %>
-
-
   <div>
       <div id="nav" class="noprint">
         <ul>
@@ -144,8 +127,6 @@
 
     </div>
       <% end %>
-
-    <% end -%>
   </div>  <!-- centre_column -->
 
 </body>
