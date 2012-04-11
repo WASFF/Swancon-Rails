@@ -88,14 +88,18 @@ p {
 
 #centre_column {
   width:800px;
-  margin: 0px auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 150px;
+  margin-bottom: 5px;
+  height: 100px;
 }
 
 #main_content {
-  min-height: 300px;
-  -max-height: 680px;
-  -overflow:visible;
-  overflow: auto;
+//  min-height: 300px;
+//  -max-height: 680px;
+//  -overflow:visible;
+//  overflow: auto;
 }
 
 .right {

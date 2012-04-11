@@ -8,129 +8,126 @@
 	<link rel="apple-touch-icon-precomposed" href="<%= image_path "mobileicon57.png" %>" />
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= image_path "mobileicon72.png" %>"/>
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= image_path "mobileicon114.png" %>"/>
-    <%= stylesheet_link_tag "reset" %>
-    <%= stylesheet_link_tag "sc2013" %>
-<style type="text/css">
-  html {
-    background: #000 url(<%=image_path "background.jpg"%>) fixed 50% -20px;
-  }
-</style>    
+		<%= stylesheet_link_tag "reset" %>
+		<%= stylesheet_link_tag "sc2013" %>
+	<style type="text/css">
+		html {
+			background: #000 url(<%=image_path "background.jpg"%>) fixed 50% -20px;
+		}
+	</style>    
 	<%= stylesheet_link_tag "main-ipad", :media => "only screen and (max-device-width: 1024px)"%>
 	<%= stylesheet_link_tag "main-print", :media => "print" %>
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tag %>
 	<%= yield :header %>
 	<script>
-	$(document).ready(function() {
-	});
+		$(document).ready(function() {
+		});
 	</script>
 </head>
 <body>
-  <div id="centre_column">  <!-- centre_column -->
-    <div style="height: 150px;" class="noprint"></div>
-  <div>
-      <div id="nav" class="noprint">
-        <ul>
-          <% ContentPage.topbar.all.each do |page| %>
-            <li><%= link_to :controller=>"/content_viewer", :action => "page", :id => page.name do%>
-            <%- page.name.split(" ").each do |word| %><%= word.capitalize %> <% end %>
-            <% end %></li>
-          <% end %>
-          <% if permitted_to? :sales, :seller %>
-          <li><a href="/seller/sales">Sales</a></li>
-          <% end %>
-          <li><a href="/store">Store</a></li>
-        </ul>
-      </div>
-      <div class="mbox" id="main_content">
+	<div id="centre_column">  <!-- centre_column -->
+		<div id="nav" class="noprint">
+			<ul>
+				<% ContentPage.topbar.all.each do |page| %>
+					<li><%= link_to :controller=>"/content_viewer", :action => "page", :id => page.name do%>
+					<%- page.name.split(" ").each do |word| %><%= word.capitalize %> <% end %>
+					<% end %></li>
+				<% end %>
+				<% if permitted_to? :sales, :seller %>
+				<li><a href="/seller/sales">Sales</a></li>
+				<% end %>
+				<li><a href="/store">Store</a></li>
+			</ul>
+		</div>
+		<div style="clear: both;"/>
+		<div class="mbox" id="main_content">
+			<div>
+				<%= yield %>
+			</div>
+			<div style="clear:both;">
+			</div>
+		</div>
 
-        <div>
-          <%= yield %>
-        </div>
-        <div style="clear:both;">
-        </div>
-      </div>
-    </div>
+		<div class="mbox noprint loginbar">
+			<div class="open" style="float:right;">
+				<% if user_signed_in? %>
+					<%= link_to("Profile", edit_user_registration_path) %>
+					<%= link_to("Membership Details", edit_my_member_details_path) %>
+					<%= link_to "Orders", orders_path %>
+					<%= link_to("Log out", destroy_user_session_path) %>
+				<% else %>
+					<%= link_to("Log in", new_user_session_path) %>
+					<%= link_to("Register", new_user_registration_path) %>
+				<% end %>
+			</div>
+			<div style="clear:both"></div>
+		</div>
 
-    <div class="mbox noprint loginbar">
-      <div class="open" style="float:right;">
-        <% if user_signed_in? %>
-          <%= link_to("Profile", edit_user_registration_path) %>
-          <%= link_to("Membership Details", edit_my_member_details_path) %>
-          <%= link_to "Orders", orders_path %>
-          <%= link_to("Log out", destroy_user_session_path) %>
-        <% else %>
-          <%= link_to("Log in", new_user_session_path) %>
-          <%= link_to("Register", new_user_registration_path) %>
-        <% end %>
-      </div>
-      <div style="clear:both"></div>
-    </div>
+			<% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
 
-      <% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
+		<div class="mbox noprint admin">
+			<% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
 
-    <div class="mbox noprint admin">
-      <% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
+				
+				<h2>Admin</h2>
+				<ul>
+					<% permitted_to? :index, :users do -%>
+						<li><%= link_to("User Administration", users_admin_index_path) %></li>
+					<% end %>
+				</ul>
 
-        
-        <h2>Admin</h2>
-        <ul>
-          <% permitted_to? :index, :users do -%>
-            <li><%= link_to("User Administration", users_admin_index_path) %></li>
-          <% end %>
-        </ul>
+				<h2>Content</h2>
+				<ul>
+					<li><%= link_to("Content Pages", content_pages_path ) %></li>
+					<li><%= link_to("Content Blocks", content_blocks_path ) %></li>
+					<li><%= link_to("Content Tags", content_tags_path ) %></li>
+					<li><%= link_to("Content Images", content_images_path ) %></li>
+					<li><%= link_to("Content Files", content_files_path ) %></li>
+				</ul>
+			<% end %>
+		</div>
 
-        <h2>Content</h2>
-        <ul>
-          <li><%= link_to("Content Pages", content_pages_path ) %></li>
-          <li><%= link_to("Content Blocks", content_blocks_path ) %></li>
-          <li><%= link_to("Content Tags", content_tags_path ) %></li>
-          <li><%= link_to("Content Images", content_images_path ) %></li>
-          <li><%= link_to("Content Files", content_files_path ) %></li>
-        </ul>
-      <% end %>
-    </div>
+		<div class="mbox noprint admin">
+			Tickets and Merch Admin
+			<ul>
+				<% permitted_to? :index, :member_details do -%>
+					<li><%= link_to("List all Membership Details", member_details_path) %></li>
+				<% end %>
+				<% permitted_to? :index, :tickets do -%>
+					<li><%= link_to "All Tickets", tickets_all_path %></li>
+				<% end -%>
+				<% permitted_to? :edit, :merchandise_sets do -%>
+				<li><%= link_to("Manage Merchandise Sets", merchandise_sets_path)%></li>
+				<% end %>
+				<% permitted_to? :edit, :merchandise_types do -%>
+				<li><%= link_to("Manage Merchandise", merchandise_types_path)%></li>
+				<% end %>
+				<% permitted_to? :edit, :ticket_sets do -%>
+				<li><%= link_to("Manage Ticket Sets", ticket_sets_path)%></li>
+				<% end %>
+				<% permitted_to? :edit, :ticket_types do -%>
+				<li><%= link_to("Manage Tickets", ticket_types_path)%></li>
+				<% end %>
+				<% permitted_to? :index, :vendors do -%>
+				<li><%= link_to("Show Vendors", vendors_path) %></li>
+				<% end %>
+				<% permitted_to? :index, :vendor_orders do -%>
+				<li><%= link_to("Show Vendor Orders", vendor_orders_path) %></li>
+				<% end %>
+				<% permitted_to? :index, :payments do -%>
+				<li><%= link_to("Show Payments", payments_path) %></li>
+				<% end %>
+				<li><%= link_to("Show All Orders", orders_path(:all => true)) %></li>
+				<% permitted_to? :index, :awards do -%>
+				<li><%= link_to("Awards Administration", awards_path) %></li>
+				<% end %>
+			</ul>
 
-    <div class="mbox noprint admin">
-      Tickets and Merch Admin
-      <ul>
-        <% permitted_to? :index, :member_details do -%>
-          <li><%= link_to("List all Membership Details", member_details_path) %></li>
-        <% end %>
-        <% permitted_to? :index, :tickets do -%>
-          <li><%= link_to "All Tickets", tickets_all_path %></li>
-        <% end -%>
-        <% permitted_to? :edit, :merchandise_sets do -%>
-        <li><%= link_to("Manage Merchandise Sets", merchandise_sets_path)%></li>
-        <% end %>
-        <% permitted_to? :edit, :merchandise_types do -%>
-        <li><%= link_to("Manage Merchandise", merchandise_types_path)%></li>
-        <% end %>
-        <% permitted_to? :edit, :ticket_sets do -%>
-        <li><%= link_to("Manage Ticket Sets", ticket_sets_path)%></li>
-        <% end %>
-        <% permitted_to? :edit, :ticket_types do -%>
-        <li><%= link_to("Manage Tickets", ticket_types_path)%></li>
-        <% end %>
-        <% permitted_to? :index, :vendors do -%>
-        <li><%= link_to("Show Vendors", vendors_path) %></li>
-        <% end %>
-        <% permitted_to? :index, :vendor_orders do -%>
-        <li><%= link_to("Show Vendor Orders", vendor_orders_path) %></li>
-        <% end %>
-        <% permitted_to? :index, :payments do -%>
-        <li><%= link_to("Show Payments", payments_path) %></li>
-        <% end %>
-        <li><%= link_to("Show All Orders", orders_path(:all => true)) %></li>
-        <% permitted_to? :index, :awards do -%>
-        <li><%= link_to("Awards Administration", awards_path) %></li>
-        <% end %>
-      </ul>
+		</div>
+			<% end %>
 
-    </div>
-      <% end %>
-
-  </div>  <!-- centre_column -->
+	</div>  <!-- centre_column -->
 
 </body>
 </html>
