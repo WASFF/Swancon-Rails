@@ -1,4 +1,4 @@
-<% content_for :title do %>Doom-Store&trade;<% end %>
+<% content_for :title do %>Swancon <%= Rails.application.config.swancon_year %> Store<% end %>
 <div class="title">Store</div>
 <%= render partial: "header" %>
 <% @ticketsets.each do |set| -%>
