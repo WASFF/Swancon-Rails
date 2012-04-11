@@ -59,6 +59,7 @@ authorization do
 		has_permission_on [:merchandise_options], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
 		has_permission_on [:merchandise_option_sets], :to => [:new, :index, :create, :edit, :update, :show, :destroy]
 			
+		has_permission_on [:content_pages], :to => [:destroy]
 		has_permission_on [:content_blocks], :to => [:destroy, :publish, :unpublish]
 		has_permission_on [:content_files], :to => [:destroy]
 		has_permission_on [:content_images], :to => [:destroy]
