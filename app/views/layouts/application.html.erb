@@ -45,6 +45,14 @@
 		</div>
 		<div style="clear: both;"/>
 		<div class="mbox" id="main_content">
+
+          <div id="social" style="float:right">
+            <%= link_to(image_tag("sn-facebook.png", height: 32, width: 32, :alt =>"Facebook" ), "https://www.facebook.com/Swancon") %>
+            <%= link_to(image_tag("sn-twitter.png",  height: 32, width: 32, :alt =>"Twitter"  ), "https://twitter.com/#!/swancon") %>
+            <%= link_to(image_tag("sn-email.png",    height: 32, width: 32, :alt =>"Email"    ), "mailto:convenor-2013@swancon.com.au?subject=Website%20enquiry") %>
+            <%= link_to(image_tag("sn-tumblr.png",   height: 32, width: 32, :alt =>"Tumblr"   ), "http://swancon.tumblr.com/") %>
+          </div>
+
 			<div>
 				<%= yield %>
 			</div>
