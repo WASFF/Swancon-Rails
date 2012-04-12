@@ -5,6 +5,11 @@
 </head>
 <body>
 Receipt: <%= @payment.receipt_number %><br/>
+<div class="right">Western Australian Science Fiction Foundation<br/>
+Trading as Swancon<br/>
+ABN: 58 948 540 963<br/>
+PO Box G429<br/>
+Perth Business Centre WA 6841<br/></div>
 Issued: <%= @payment.created_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 <%- if @payment.operator != nil %>
 Operator: <%= @payment.operator.username %>

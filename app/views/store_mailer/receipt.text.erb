@@ -1,4 +1,10 @@
 Receipt: <%= @payment.receipt_number %>
+Western Australian Science Fiction Foundation
+Trading as Swancon
+ABN: 58 948 540 963
+PO Box G429
+Perth Business Centre WA 6841
+
 Issued: <%= @payment.created_at.strftime("%d/%m/%Y %H:%M %Z") %>
 <%- if @payment.operator != nil %>
 Operator: <%= @payment.operator.username %>

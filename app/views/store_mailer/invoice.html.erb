@@ -4,6 +4,11 @@
    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 </head>
 <body>
+<div class="right">Western Australian Science Fiction Foundation<br/>
+Trading as Swancon<br/>
+ABN: 58 948 540 963<br/>
+PO Box G429<br/>
+Perth Business Centre WA 6841<br/></div>
 Invoice: <%= @order.invoice_number %><br/>
 Issued: <%= @order.created_at.strftime("%d/%m/%Y %H:%M %Z") %><br/>
 <%- if @order.operator != nil %>
