@@ -18,9 +18,9 @@
 
 $useIEFilters: 0; // might be 0 or 1. disabled by default.
 
-@mixin linear-gradient($from, $to, $ie: $useIEFilters) {
+@mixin linear-gradient($from, $to, $fallback, $ie: $useIEFilters) {
   @if $ie != 1 {
-    background-color: $to;
+    background-color: $fallback;
   }
   
   background-image: -moz-linear-gradient($from, $to);
@@ -114,7 +114,7 @@ p {
 
 .mbox {
   background: #fdd;
-  @include linear-gradient(rgba(200,200,255,0.7), rgba(120,100,180,0.6) );
+  @include linear-gradient(rgba(200,200,255,0.7), rgba(120,100,180,0.6), rgb(128,126,168) );
   border: 2px solid black;
   padding: 10px 20px;
   margin-top: 8px;
@@ -164,7 +164,7 @@ p {
     }
     a {
       display:block;
-      @include linear-gradient(rgba(200,200,255,0.6), rgba(200,200,250,0.7) );
+      @include linear-gradient(rgba(200,200,255,0.6), rgba(200,200,250,0.7), rgb(128,126,168) );
       padding:5px 15px;
       border: 2px solid black;
       border-bottom: none;
