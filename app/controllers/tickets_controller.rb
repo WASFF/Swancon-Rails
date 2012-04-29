@@ -18,7 +18,7 @@ class TicketsController < ApplicationController
 		end
 	end
 
-	def export
+	def export_badges
 		@all = true
 		@multiple = false
 		set = TicketSet.find(params[:id])
@@ -44,6 +44,10 @@ class TicketsController < ApplicationController
 			'Content-Type' => 'text/csv',
 			'Content-Transfer-Encoding' => 'binary'
 		})
+	end
+
+	def export_salesdata
+		export_badges
 	end
 
 	def my
