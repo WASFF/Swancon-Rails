@@ -1,0 +1,9 @@
+csv << [ 'Reciept Number' ,'Price', 'sold_at' ]
+
+@tickets.each do |user_order_ticket| 
+	if user_order_ticket.user_order.payment != nil
+		csv << [user_order_ticket.user_order.payment.receipt_number, user_order_ticket.price, user_order_ticket.created_at]
+	else
+		csv << ["NO PAYMENT", user_order_ticket.price, user_order_ticket.created_at]
+	end
+end
