@@ -66,8 +66,9 @@ html,body {
 
 h1,h2,h3,h4,.title {
 	@include headingFont;
-    margin-top:1ex;
+    margin-top:2ex;
     margin-bottom:1.0ex;
+    text-shadow: 1px 1px 1px #c4c4e8;
 }
 li {
   margin-bottom: 8px;
