@@ -18,6 +18,7 @@
 		<th>Owner</th>
 		<th>Badge Name</th>
 		<th>Purchaser</th>
+		<th>Operator</th>
 		<th>Payment Verified</th>
 		<th></th>
   </tr>
@@ -35,6 +36,13 @@
 			<td><%= user.member_detail.name_badge %></td>
 		<% end %>
 		<td><%= user_order_ticket.user_order.user.display_name %></td>
+
+		<% operator = user_order_ticket.user_order.operator %>
+        <td>
+            <% if operator %>
+              <%= operator.display_name %>
+            <% end %>
+        </td>
 		<td style="text-align: center;"><% if user_order_ticket.payment_verified? %>Yes<% else %>No<% end %></td>
 		<td><% if user_order_ticket.can_transfer?(current_user) %><% if user_order_ticket.transferring %>Transferring to: <%= user_order_ticket.transfers.where(confirmed_on: nil).first.recipient.display_name -%>
 			<% else user_order_ticket.transferring %><%= link_to "Transfer", action: :transfer, id: user_order_ticket.id, alltickets: @alltickets -%>
