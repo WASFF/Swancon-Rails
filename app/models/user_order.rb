@@ -85,6 +85,9 @@ class UserOrder < ActiveRecord::Base
 	def isvoid?
 		voided_by_id != nil
 	end
+	def ispaid?
+		self.payment != nil
+	end
 	
 	def self.paidarel
 		uoarel = UserOrder.arel_table

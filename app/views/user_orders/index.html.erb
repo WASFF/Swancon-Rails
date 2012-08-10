@@ -3,7 +3,7 @@
 <% else %>
 <div class="title">Your Orders</div>
 <% end%>
-<p class="nb">(click on column headings to sort)<p>
+<p class="nb">(click on column headings to sort, or order number for more detail)<p>
 
 
 <table width="100%" border="1" class="sortable orders">
@@ -15,20 +15,24 @@
 		<th>Items</th>
 		<th>Placed</th>		
 		<th>Amount</th>
-    <th></th>
-		<th></th>
+		<th>Status</th>
+		<th>Void?</th>
   </tr>
 
 <% @orders.each do |order| %>
   <tr>
-	<td><% if order.isvoid? %> <span class="strike"><%= order.invoice_number %></span><% else %><%= order.invoice_number %><% end %></td>
-		<% if @allorders %>
-		<td><%= link_to order.user.order_name, users_admin_path(order.user) %></td>
+      <td>
+		<%= link_to(order_path(order)) do %>
+		  <% if order.isvoid? %> <span class="strike"><%= order.invoice_number %></span><% else %><%= order.invoice_number %><% end %>
 		<% end %>
-    <td><%= order.merchandise.count + order.tickets.count %></td>
-    <td><%= order.created_at.strftime("%d/%m/%Y %H:%M %Z") %></td>
-		<td><%= render_money(order.total) %></td>
-		<td><%= link_to 'Show', order_path(order) %></td>
+		</td>
+		<% if @allorders %>
+			<td><%= link_to order.user.order_name, users_admin_path(order.user) %></td>
+		<% end %>
+		<td><%= order.merchandise.count + order.tickets.count %></td>
+		<td style="text-align:center;"><%= order.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+		<td style="text-align:right;"><%= render_money(order.total) %></td>
+		<td><% if order.ispaid? %>paid<% else %>unpaid<% end %></td>
 		<td><% if order.voidable? %><%= link_to 'void', void_order_path(order), method: :post %><% elsif order.isvoid? %><%= link_to 'unvoid', unvoid_order_path(order), method: :post %><% end %>
   </tr>
 <% end %>
