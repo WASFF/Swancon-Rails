@@ -13,7 +13,7 @@
 <% end %>
 <div class="floatright"><%= link_to "Badge CSV Export", format: :csv, action: :export_badges, multiple: @multipler, pending: @pending, id: set.id %> |
 <%= link_to "Sales CSV Export", format: :csv, action: :export_salesdata, multiple: @multipler, pending: @pending, id: set.id %></div>
-<table width="100%">
+<table width="100%" class="sortable tickets">
 	<tr>
 		<th>Owner</th>
 		<th>Badge Name</th>
