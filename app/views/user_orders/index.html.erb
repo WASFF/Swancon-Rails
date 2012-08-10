@@ -3,9 +3,10 @@
 <% else %>
 <div class="title">Your Orders</div>
 <% end%>
+<p class="nb">(click on column headings to sort)<p>
 
 
-<table width="100%" border="1">
+<table width="100%" border="1" class="sortable orders">
   <tr>
     <th>Order/Invoice No.</th>
 		<% if @allorders %>

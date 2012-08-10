@@ -178,3 +178,25 @@ p {
 }
 
 
+.nb {
+  font-size: 0.4em;
+}
+table.orders {
+  background: #dde;
+  font-size: 0.58em;
+
+
+  tr {
+    @include linear-gradient(rgb(215,215,245), rgb(200,200,240), rgb(200,200,220) );
+  }
+  th { padding: 4px;
+    border: 1px solid #888;
+  }
+  td { padding: 2px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #888;
+    border-right: 1px solid #888;
+  }
+}
+
