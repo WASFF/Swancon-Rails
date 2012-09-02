@@ -6,3 +6,4 @@ privateconfig/
 public/system/
 public/assets/
 .sass-cache/
+.DS_Store

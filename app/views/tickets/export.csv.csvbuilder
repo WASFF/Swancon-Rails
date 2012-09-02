@@ -1,8 +1,8 @@
-csv << [ 'Reciept Number', 'Price', 'sold_at', 'First Name', 'Surname',
+csv << [ 'Reciept Number', 'Price', 'sold_at', 'Member ID', 'First Name', 'Surname',
 			"Badge Name", "Username", "Email Address", "Street Addresss",
 			"Suburb", "Postcode", "State", "Country", "Phone Number",
 			"Can Be Emailed?", "Has Signed Disclaimer?", "Membership Card Send Date?"]
-outputorder = ['reciept', 'price', 'soldat', 'firstname', 'surname', 
+outputorder = ['reciept', 'price', 'soldat', 'memberid', 'firstname', 'surname', 
 			'badgename', "username", "email", "address", "suburb",
 			"postcode", "state", "country", "phone", "emailoptin", "emailoptin", "disclaimer", "card_issue"]
 
@@ -25,11 +25,13 @@ outputorder = ['reciept', 'price', 'soldat', 'firstname', 'surname',
 
 	union = union | outputorder
 
+	data["memberid"] = ticket.user.id
+
 	if union.length > 0 and ticket.user.details != nil
 		details = ticket.user.details
 		data["firstname"] = details.name_first
-		data["surname"] = details.name_first
-		data["badgename"] = details.name_first
+		data["surname"] = details.name_last
+		data["badgename"] = details.name_badge
 		if details.address_2 == nil
 			data["address"] = details.address_1
 		else

@@ -32,9 +32,9 @@
 	</td>
 <td style="text-align: center;">
 	<% if ticket.card_issued != nil %>
-		<%= ticket.card_issued.to_s %>
+		<%= ticket.card_issued.strftime("%Y-%m-%d %H:%m") %>
 		<% if all %>
-			<%= link_to "Unissue", ticket_card_unissue_path(id: ticket.id), remote: true, class: "remote_send_fadeout", 'data-fade-id' => "#ticket_#{ticket.id}", confirm: "Really Unissue this?" %>
+			<br/><%= link_to "Unissue", ticket_card_unissue_path(id: ticket.id), remote: true, class: "remote_send_fadeout", 'data-fade-id' => "#ticket_#{ticket.id}", confirm: "Really Unissue this?" %>
 		<% end %>
 	<% else %>
 		<% if all %>
