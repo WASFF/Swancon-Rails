@@ -32,6 +32,17 @@ class TicketSet < ActiveRecord::Base
 		joins.where{(user_order.voided_by_id == nil) & (ticket_sets.id == my{id}) & (user.id.in(userticket))}
 	end
 
+	def cards_unsent
+		UserOrderTicket
+			.joins{user_order}
+			.joins{ticket_type.ticket_set}
+			.where{
+				(user_order.voided_by_id == nil) & 
+				(ticket_sets.id == my{id}) & 
+				(user_order_tickets.card_issued == nil)
+			}
+	end
+
 	def self.available(user = nil)
 		if (user == nil) || (!user.full_store_visible?)
 			joins(:ticket_types).where(TicketType.availablearel).group(:id)

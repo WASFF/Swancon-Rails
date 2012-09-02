@@ -5,6 +5,7 @@ class TicketsController < ApplicationController
 		@all = true
 		@multiple = false
 		@pending = false
+		@cards = false
 		@sets = TicketSet.all
 		@subquery = nil
 		if params[:multiple] == "true"
@@ -15,12 +16,18 @@ class TicketsController < ApplicationController
 			@all = false
 			@pending = true
 			@subquery = :pending
+		elsif params[:cards] == "true"
+			@all = false
+			@cards = true
+			@subquery = :cards_unsent
 		end
 	end
 
-	def export_badges
+	def export
 		@all = true
 		@multiple = false
+		@pending = false
+		@cards = false
 		set = TicketSet.find(params[:id])
 		@filename = "#{set.name.downcase.gsub(" ", "_")}"
 		if params[:multiple] == "true"
@@ -33,6 +40,46 @@ class TicketsController < ApplicationController
 			@pending = true
 			@tickets = set.pending
 			@filename += "-pending_transfers"
+		elsif params[:cards] == "true"
+			@all = false
+			@cards = true
+			@tickets = set.cards_unsent
+			@filename += "-cards_unsent"
+		else
+			@tickets = set.sold_tickets
+		end
+
+		@filename += "-all_details.csv"
+
+		headers.merge!({
+			'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+			'Content-Type' => 'text/csv',
+			'Content-Transfer-Encoding' => 'binary'
+		})
+	end
+
+	def export_badges
+		@all = true
+		@multiple = false
+		@pending = false
+		@cards = false
+		set = TicketSet.find(params[:id])
+		@filename = "#{set.name.downcase.gsub(" ", "_")}"
+		if params[:multiple] == "true"
+			@all = false
+			@multiple = true
+			@tickets = set.user_owns_multiple
+			@filename += "-owners_of_multiple_tickets"
+		elsif params[:pending] == "true"
+			@all = false
+			@pending = true
+			@tickets = set.pending
+			@filename += "-pending_transfers"
+		elsif params[:cards] == "true"
+			@all = false
+			@cards = true
+			@tickets = set.cards_unsent
+			@filename += "-cards_unsent"
 		else
 			@tickets = set.sold_tickets
 		end

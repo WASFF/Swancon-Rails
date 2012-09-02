@@ -70,6 +70,6 @@ authorization do
 		has_permission_on [:payments], :to => [:void]
 		has_permission_on [:vendors], :to => [:new, :index, :create, :edit, :update, :show, :destroy, :open_order]
 		has_permission_on [:vendor_orders], :to => [:index, :create, :show, :destroy, :mark_arrivals, :close]
-		has_permission_on [:tickets], :to => [:cancel_transfer]
+		has_permission_on [:tickets], :to => [:cancel_transfer, :export]
 	end
 end

@@ -1,0 +1,65 @@
+csv << [ 'Reciept Number', 'Price', 'sold_at', 'First Name', 'Surname',
+			"Badge Name", "Username", "Email Address", "Street Addresss",
+			"Suburb", "Postcode", "State", "Country", "Phone Number",
+			"Can Be Emailed?", "Has Signed Disclaimer?", "Membership Card Send Date?"]
+outputorder = ['reciept', 'price', 'soldat', 'firstname', 'surname', 
+			'badgename', "username", "email", "address", "suburb",
+			"postcode", "state", "country", "phone", "emailoptin", "emailoptin", "disclaimer", "card_issue"]
+
+@tickets.each do |ticket| 
+	data = Hash.new
+	output = Array.new
+
+	if outputorder.include? 'reciept'
+		if ticket.user_order.payment != nil
+			data["reciept"] = ticket.user_order.payment.receipt_number
+		else
+			data["reciept"] = "No Payment"
+		end
+	end
+
+	data["price"] = ticket.price
+	data["soldat"] = ticket.created_at
+
+	union = ["firstname", "surname", "badgename", "address", "country", "postcode", "state", "phone", "disclaimer"]
+
+	union = union | outputorder
+
+	if union.length > 0 and ticket.user.details != nil
+		details = ticket.user.details
+		data["firstname"] = details.name_first
+		data["surname"] = details.name_first
+		data["badgename"] = details.name_first
+		if details.address_2 == nil
+			data["address"] = details.address_1
+		else
+			data["address"] = details.address_1 + " " + details.address_2
+		end
+		data["suburb"] = details.address_3
+		data["country"] = details.address_country
+		data["postcode"] = details.address_postcode
+		data["state"] =  details.address_state
+		data["phone"] =  details.phone
+		data["disclaimer"] =  details.disclaimer_signed
+		data["emailoptin"] = details.email_optin
+	end
+
+	data["username"] = ticket.user.username
+	data["email"] = ticket.user.email
+
+	if ticket.card_issued != nil
+		data["card_issue"] = ticket.card_issued
+	else
+		data["card_issue"] = "Not Issued"
+	end
+
+	outputorder.each do |item|
+		if data.key? item
+			output << data[item]
+		else
+			output << "n/a"
+		end
+	end
+
+	csv << output
+end
