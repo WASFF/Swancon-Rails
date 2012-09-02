@@ -77,6 +77,10 @@ DoomCon::Application.routes.draw do
   
   	match 'tickets/my' => 'tickets#my'
   	match 'tickets/all' => 'tickets#index', :defaults => { all: 'true' }
+ 	match 'tickets/card_issue/:id' => 
+ 		'tickets#card_issue', via: :post, as: "ticket_card_issue"
+ 	match 'tickets/card_unissue/:id' => 
+ 		'tickets#card_unissue', via: :post, as: "ticket_card_unissue"
  	match 'tickets/:action' => 'tickets'
  	match 'tickets/:action/:id' => 'tickets'
 

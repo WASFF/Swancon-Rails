@@ -34,7 +34,7 @@
 	<% if ticket.card_issued != nil %>
 		<%= ticket.card_issued.to_s %>
 		<% if all %>
-			<%= link_to "Unissue", ticket_card_unissue_path(id: ticket.id), remote: true, class: "remote_click_fadeout", 'data-fade-id' => "#ticket_#{ticket.id}" %>
+			<%= link_to "Unissue", ticket_card_unissue_path(id: ticket.id), remote: true, class: "remote_send_fadeout", 'data-fade-id' => "#ticket_#{ticket.id}", confirm: "Really Unissue this?" %>
 		<% end %>
 	<% else %>
 		<% if all %>

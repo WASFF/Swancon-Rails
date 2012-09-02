@@ -36,6 +36,16 @@ class UserOrderTicket < ActiveRecord::Base
 		user_order_ticket_transfers.where(confirmed_on: nil).count > 0
 	end
 
+	def issue_card
+		self.card_issued = Time.now
+		self.save
+	end
+
+	def unissue_card
+		self.card_issued = nil
+		self.save
+	end
+
 	def can_transfer?(user)
 		if user_order.payment_id == nil
 			false

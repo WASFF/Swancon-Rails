@@ -20,38 +20,12 @@
 		<th>Purchaser</th>
 		<th>Operator</th>
 		<th>Payment Verified</th>
+		<th>Card Issued</th>
 		<th></th>
   </tr>
-<% collection.joins{user.member_detail.outer}.order{[user.member_detail.name_first, user.member_detail.name_last]}.each do |user_order_ticket| %>
-<% if user_order_ticket.user.member_detail == nil %>
-	<tr style="background-color: red;">
-<% else %>
-	<tr>
-<% end %>
-		<% user = user_order_ticket.user %>
-		<td><%= link_to user.display_name, users_admin_path(user) %></td>
-		<% if user.member_detail == nil %>
-			<td>NO MEMBER DETAILS</td>
-		<% else %>
-			<td><%= user.member_detail.name_badge %></td>
-		<% end %>
-		<td><%= user_order_ticket.user_order.user.display_name %></td>
-
-		<% operator = user_order_ticket.user_order.operator %>
-        <td>
-            <% if operator %>
-              <%= operator.display_name %>
-            <% end %>
-        </td>
-		<td style="text-align: center;"><% if user_order_ticket.payment_verified? %>Yes<% else %>No<% end %></td>
-		<td><% if user_order_ticket.can_transfer?(current_user) %><% if user_order_ticket.transferring %>Transferring to: <%= user_order_ticket.transfers.where(confirmed_on: nil).first.recipient.display_name -%>
-			<% else user_order_ticket.transferring %><%= link_to "Transfer", action: :transfer, id: user_order_ticket.id, alltickets: @alltickets -%>
-			<% end %>
-			<% end %></td>
-	</tr>
+<% collection.joins{user.member_detail.outer}.order{[user.member_detail.name_first, user.member_detail.name_last]}.each do |ticket| %>
+<%= render partial: "ticket", locals: {all: true, ticket: ticket} %>
 <% end %>
 </table>
 <% end %>
 <br/>
-
-<!-- FIXME: Add list of transfer's that are pending -->

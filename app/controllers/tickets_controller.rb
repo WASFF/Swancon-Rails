@@ -142,4 +142,16 @@ class TicketsController < ApplicationController
 		end
 		redirect_to action: :index
 	end	
+
+	def card_issue
+		@ticket = UserOrderTicket.where(:id => params[:id]).first
+		@ticket.issue_card
+		render action: "ticket_reload"
+	end
+
+	def card_unissue
+		@ticket = UserOrderTicket.where(:id => params[:id]).first
+		@ticket.unissue_card
+		render action: "ticket_reload"
+	end
 end
