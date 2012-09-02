@@ -1,0 +1,57 @@
+<% if ticket.user.member_detail == nil -%>
+	<tr style="background-color: red;" id="ticket_<%= ticket.id %>">
+<% else -%>
+	<tr id="ticket_<%= ticket.id %>">
+<% end -%>
+
+<% user = ticket.user -%>
+<td>
+	<% if all -%>
+		<%= link_to user.display_name, users_admin_path(user) %>
+	<% else -%>
+		<%= ticket.user_order.user.display_name %>
+	<% end -%>
+</td>
+<% if all -%>
+	<% if user.member_detail == nil %>
+		<td>NO MEMBER DETAILS</td>
+	<% else %>
+		<td><%= user.member_detail.name_badge %></td>
+	<% end %>
+	<td><%= ticket.user_order.user.display_name %></td>
+
+	<% operator = ticket.user_order.operator %>
+	<td>
+		<% if operator %>
+			<%= operator.display_name %>
+		<% end %>
+	</td>
+<% end -%>
+<td style="text-align: center;">
+	<% if ticket.payment_verified? %>Yes<% else %>No<% end %>
+	</td>
+<td style="text-align: center;">
+	<% if ticket.card_issued != nil %>
+		<%= ticket.card_issued.to_s %>
+		<% if all %>
+			<%= link_to "Unissue", ticket_card_unissue_path(id: ticket.id), remote: true, class: "remote_click_fadeout", 'data-fade-id' => "#ticket_#{ticket.id}" %>
+		<% end %>
+	<% else %>
+		<% if all %>
+			<%= link_to "No", ticket_card_issue_path(id: ticket.id), remote: true, class: "remote_click_fadeout", 'data-fade-id' => "#ticket_#{ticket.id}" %>
+		<% else %>
+			No
+		<% end %>
+	<%end%>
+</td>
+<td>
+	<% if ticket.can_transfer?(current_user) %>
+		<% if ticket.transferring %>
+			Transferring to: <%= ticket.transfers.where(confirmed_on: nil).first.recipient.display_name -%>
+		<% else ticket.transferring %>
+			<%= link_to "Transfer", action: :transfer, id: ticket.id, alltickets: all -%>
+		<% end %>
+	<% end %>
+</td>
+
+</tr>

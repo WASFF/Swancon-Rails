@@ -8,6 +8,7 @@
 //= require jquery_ujs
 //= require jquery_nested_form
 //= require sorttable
+//= require application-coffee
 
 function createCookie(name,value,days) {
 	if (days)
