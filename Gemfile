@@ -22,6 +22,7 @@ gem 'capistrano'
 gem 'actionmailer-with-request'
 gem 'squeel'
 gem 'csv_builder'
+gem 'cocaine', :git => "https://github.com/thoughtbot/cocaine.git"
 
 gem "nested_form", :git => "git://github.com/ryanb/nested_form.git"
 
