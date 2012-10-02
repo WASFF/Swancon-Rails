@@ -55,7 +55,8 @@ $useIEFilters: 0; // might be 0 or 1. disabled by default.
   font-family: Continuum, Conv_continuum-medium, Helvetica, Arial, sans-serif;
 }
 @mixin bodyFont {
-  font-family: Futura, Conv_betecknalowercase, Helvetica, Arial, sans-serif;
+  font-family: "futura-pt", Wingdings, Arial, sans-serif;
+  font-size: 1.1em;
 }
 
 
@@ -83,6 +84,19 @@ h4 { font-size: 16px }
 strong {
   font-weight: bold;
 }
+
+.smaller {
+  font-size: 0.7;
+}
+
+em {
+  font-style: italic;
+}
+
+.tiny {
+  font-size: 0.65em;
+}
+
 p {
   margin: 1em 0;
 }
