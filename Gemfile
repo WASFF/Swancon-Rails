@@ -22,12 +22,11 @@ gem 'capistrano'
 gem 'actionmailer-with-request'
 gem 'squeel'
 gem 'csv_builder'
-gem 'cocaine', :git => "https://github.com/thoughtbot/cocaine.git"
 
 gem "nested_form", :git => "git://github.com/ryanb/nested_form.git"
 
-#gem 'MortisCMS', :require => 'mortiscms', :path => '/Users/lordmortis/Projects/MortisCMS'
-gem 'MortisCMS', :require => 'mortiscms', :git => 'git://github.com/lordmortis/MortisCMS.git'
+gem 'MortisCMS', :require => 'mortiscms', :path => '/Users/lordmortis/Projects/MortisCMS'
+#gem 'MortisCMS', :require => 'mortiscms', :git => 'git://github.com/lordmortis/MortisCMS.git'
 
 group :production do
 	gem 'therubyracer', :platforms => :ruby
