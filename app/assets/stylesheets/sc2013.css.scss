@@ -165,12 +165,12 @@ p {
 #nav {
     float:left;
     width:100%;
-    font-size:93%;
+    font-size: 17px;
     line-height:normal;
     position:relative;
     height:33px;
     top:0px;
-    padding-left: 20px;
+    padding-left: 18px;
 
     ul {
       margin:0;
@@ -185,7 +185,7 @@ p {
     a {
       display:block;
       @include linear-gradient(rgba(200,200,255,0.6), rgba(200,200,250,0.7), rgb(128,126,168) );
-      padding:5px 15px;
+      padding:5px 12px;
       border: 2px solid black;
       border-bottom: none;
       -webkit-border-radius: 10px 10px 0 0;
