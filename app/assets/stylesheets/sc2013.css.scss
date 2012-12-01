@@ -151,7 +151,7 @@ p {
 }
 
     table {
-	padding: 2px;
+	  padding: 2px;
       margin: 20px auto;
       border: 1px solid black;
       background: rgba(255,255,255,0.15);
@@ -162,6 +162,57 @@ p {
 
 	}
 
+
+#myForm {
+	.shadow {
+	-webkit-filter: drop-shadow(1px 1px 4px rgba(0,0,0,0.3));
+	-moz-filter:    drop-shadow(1px 1px 4px rgba(0,0,0,0.3));
+	-ms-filter:     drop-shadow(1px 1px 4px rgba(0,0,0,0.3));
+	-o-filter:      drop-shadow(1px 1px 4px rgba(0,0,0,0.3));
+	filter:         drop-shadow(1px 1px 4px rgba(0,0,0,0.3));
+	  }
+      td {
+       min-width: 0;
+      }
+      table {
+      background: None;
+      }
+	dt,dd,#log {
+		background:#dde;
+	}
+	dt {
+		display:inline;
+		height:18px;
+		padding:3px 7px;
+		margin: 0 0 0 10px;  /* trbl */
+		border: 1px solid #222;
+		border-radius: 4px;
+		font-size:86%;
+	}
+	dd, #log {
+		padding:20px 10px 10px;
+		width:720px;
+		margin: -10px 0px 20px 0;
+		display:block;
+		border: 1px solid #222;
+		border-radius: 4px;
+	}
+	.error {
+		border: 1px solid #f66;
+	}
+	.w0 {
+		width:680px;
+	}
+	.w1 {
+		width:560px;
+	}
+	.w2 {
+		width:260px;
+	}
+    table {
+    border: 0px;
+    }
+}
 #nav {
     float:left;
     width:100%;

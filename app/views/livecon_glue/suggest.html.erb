@@ -1,0 +1,188 @@
+    <script>
+		$(document).ready(function(){
+
+
+			// http://stackoverflow.com/questions/467336/jquery-how-to-use-slidedown-or-show-function-on-a-table-row 
+
+			var lc_server="http://pestilence7.moondine.homelinux.org:3000/data/conventions/29/"
+			//var lc_server="http://127.0.0.1:3100/data/conventions/29/"
+
+
+			//may need following to fix missing carriage returns.  Cf http://api.jquery.com/val/
+			//		$.valHooks.textarea = {
+			//			get: function( elem ) {
+			//				return elem.value.replace( /\r?\n/g, "\r\n" );
+			//			}
+			//		};
+			
+			var submission = {
+				"convention_key": "sdjfkdsjfl;ksdjk;a",
+				"captcha_challenge": "CAPTCHA_KEY","captcha_response": "CAPTCHA_RESPONSE",
+
+				"name": "MMO Archetypes",
+				"length": 3600, "setup": 300, "teardown": 300,
+				"description": "I love mmo's and want to talk about them",
+				"type": "discussion", 
+				"requirements": ["projector, sound"],
+				"panelists": [
+				{"name":"Dave Cake", "contact": "dave@difference.net"},
+				{"name": "Brendan Ragan"}
+				],
+				"submitter": {
+					"name": "Brendan Ragan",
+					"show_name_on_suggestions": true,
+					"contact": "lordmortis@gmail.com",
+					"show_email_publicly": false,    
+				}
+			}
+
+
+			var rqc=$("#rqcell");
+			$.ajax({
+				url: lc_server+'session_requirements', 
+				success: function(data,textStatus, jqXHR){
+					$.map(data.requirements, function(requirement,i) {
+						rqc.append('<input type="checkbox" value="'+requirement+'" name="'+requirement+'"/>'+requirement+'<br/>');
+						return i;
+					})
+				},
+			});
+			var tpc=$("#tpcell");
+			$.ajax({
+				url: lc_server+'session_types', 
+				success: function(data,textStatus, jqXHR){
+					$.map(data.types, function(session_type,i) {
+						tpc.append('<option value="'+session_type+'">'+session_type+'</option>');
+						return i;
+					})
+				},
+                error: function(jqXHR, textStatus, errorThrown) {
+                  var session_type="panel";
+                  tpc.append('<option value="'+session_type+'">'+session_type+'</option>');
+                },
+			});
+
+			var log = function(txt) {
+				$("#log").append(txt+"<br/>");
+			}
+
+			$("#add_panelists").click(function(){
+				$("#add_panelists_row").before(
+					'<tr class="panelist_row"><td>name:  </td><td><input class="w2 pn" type="text" value=""/><br/></td>'+
+						'<td>contact:</td><td><input class="w2 pc" type="text" value=""/></td><td class="remove_panelist">&#xD7;</td></tr>'
+					);
+					$(".panelist_row").last()
+					.find('td').wrapInner('<div style="display: none;" />')
+						.parent().find('td > div')
+						.slideDown(200, function(){
+							var $set = $(this);
+							$set.replaceWith($set.contents());
+						});
+
+			});
+			$("#panelists").on("click", ".remove_panelist", function(){
+				$(this).parent()
+ .find('td')
+ .wrapInner('<div style="display: block;" />')
+ .parent()
+ .find('td > div')
+ .slideUp(200, function(){
+  $(this).parent().parent().remove();
+ });
+				
+			});
+
+			$('#myForm').submit(function() { 
+				$(".error").removeClass("error");
+				var errored=false;
+
+
+				submission.name = $("#title").val();
+				submission.submitter.name    = $("#submitter_name").val();
+				submission.submitter.contact = $("#submitter_contact").val();
+				submission.description       = $("#description").val();
+				submission.requirements      = $('input[type="checkbox"]:checked').map(function() { return this.name; }).get();
+				submission.type= $("#tpcell").val();
+
+				submission.panelists = $("#panelists tr.panelist_row").map(function() {
+					return  {
+						"name"   : $(".pn",this).val(),
+						"contact": $(".pc",this).val()
+					};
+				}).get();
+
+				log("title:"+submission.name);
+				log("description:"+submission.description.replace("\n","<br/>"));
+				log("submitter name:"+submission.submitter.name);
+				log("submitter contact:"+submission.submitter.contact);
+				log("requirements:"+submission.requirements.join(", "));
+				log("panelists:"+submission.panelists.map(function(foo){return foo.name+": "+foo.contact;}).join(", "));
+				log("type:"+submission.type);
+				
+
+                var error_str="";
+				if (submission.type        == "--") { $("#tpcell"     ).parent().addClass("error"); errored = true; error_str="please select a type"; }
+				if (submission.description == "")   { $("#description").parent().addClass("error"); errored = true; error_str="please describe the panel"; }
+				if (submission.name        == "")   { $("#title"      ).parent().addClass("error"); errored = true; error_str="please propose a title"; }
+
+
+				json_response = JSON.stringify(submission);
+                if(errored) {
+                  alert(error_str)
+                }
+                else {
+                  alert("posting!");
+                  $.ajax({
+                    url: lc_server+'sessions', 
+                    type:'POST',
+                    cache: false,
+                    dataType: 'json',
+                    data: json_response,
+                    success: function(data,textStatus, jqXHR){
+                      if(data.status=='ok') {
+                        alert("Thankyou for your submission");
+                        location.reload();
+                      }
+                      else {
+                        alert("Something has gone wrong\nPerhaps try again later?\nstatus: "+data.status);
+                      }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                      alert("Something has gone wrong\nPerhaps try again later?");
+                    },
+                  });
+                }
+				return false;
+			});
+
+
+		});
+  </script>
+
+
+<h2>Panel suggestion</h2>
+<form id="myForm" action="comment.php" method="post"> 
+  <dl>
+    <div class="shadow"><dt>Title</dt              ><dd><input class="w0" type="text" name="title"    id="title" value=""/> </dd></div>
+    <div class="shadow"><dt>Description</dt        ><dd><textarea class="w0" name="description" id="description" style="height:80px;"></textarea> </dd></div>
+    <div class="shadow"><dt>Proposed by</dt        ><dd><table>
+        <tr><td>name:   </td><td><input class="w1" type="text" name="submitter_name"    id="submitter_name"    value=""/><br/></td></tr>
+        <tr><td>contact:</td><td><input class="w1" type="text" name="submitter_contact" id="submitter_contact" value=""/></td></tr>
+    </table></dd></div>
+    <div class="shadow"><dt>Suggested panelists</dt><dd>
+      <table id="panelists">
+        <tr class="panelist_row"><td>name:   </td><td><input class="w2 pn" type="text" value=""/><br/></td>
+          <td>contact:</td><td><input class="w2 pc" type="text" value="" /></td><td class="remove_panelist">&#xD7;</td></tr>
+        <tr class="panelist_row"><td>name:   </td><td><input class="w2 pn" type="text" value=""/><br/></td>
+          <td>contact:</td><td><input class="w2 pc" type="text" value="" /></td><td class="remove_panelist">&#xD7;</td></tr>
+        <tr id="add_panelists_row"><td style="width:5ex;"></td><td  colspan="4"><a href="#" id="add_panelists">add another</a></td></tr>
+      </table>
+      <div class="shadow"><dt>requirements</dt       ><dd id="rqcell"></dd></div>
+      <div class="shadow"><dt>type</dt               ><dd><select id="tpcell"><option value="--">--</option></select></dd></div>
+    </dl>
+    <input type="submit" value="Submit panel suggestion" />
+  </form>
+  <!--div id="log">
+  </div-->
+
+

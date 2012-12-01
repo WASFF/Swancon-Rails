@@ -102,5 +102,7 @@ DoomCon::Application.routes.draw do
 
 	match 'store/purchase' => 'store#purchase'
 
+	match 'aterpoo/suggest' => 'livecon_glue#suggest'
+
 	root :to => "index#index"
 end
