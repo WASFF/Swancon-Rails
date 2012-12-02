@@ -136,6 +136,7 @@
                     url: lc_server+'sessions', 
                     type:'POST',
                     cache: false,
+                    contentType: "application/json",
                     dataType: 'json',
                     data: json_response,
                     success: function(data,textStatus, jqXHR){
@@ -148,7 +149,10 @@
                       }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
-                      alert("Something has gone wrong\nPerhaps try again later?");
+                      alert("Something has gone wrong\nPerhaps try again later?"+data.status);
+                      var responseText = jQuery.parseJSON(jqXHR.responseText);
+                      console.log(responseText);
+                      
                     },
                   });
                 }
