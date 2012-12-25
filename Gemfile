@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem 'rails', '3.1.8'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -22,12 +22,12 @@ gem 'capistrano'
 gem 'actionmailer-with-request'
 gem 'squeel'
 gem 'csv_builder'
-gem 'cocaine', git: "https://github.com/thoughtbot/cocaine.git", tag: "v0.3.2"
+#gem 'cocaine', git: "https://github.com/thoughtbot/cocaine.git"
 
 gem "nested_form", :git => "git://github.com/ryanb/nested_form.git"
 
-#gem 'MortisCMS', :require => 'mortiscms', :path => '/Users/lordmortis/Projects/MortisCMS'
-gem 'MortisCMS', :require => 'mortiscms', :git => 'git://github.com/lordmortis/MortisCMS.git'
+gem 'MortisCMS', :require => 'mortiscms', :path => '/Users/lordmortis/Projects/MortisCMS'
+#gem 'MortisCMS', :require => 'mortiscms', :git => 'git://github.com/lordmortis/MortisCMS.git'
 
 group :production do
 	gem 'therubyracer', :platforms => :ruby
