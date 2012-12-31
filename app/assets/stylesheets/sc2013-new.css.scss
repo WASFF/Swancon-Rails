@@ -119,6 +119,7 @@ p {
     margin-left: auto;
     margin-right: auto;
   }
+  margin-bottom: 10px;
 }
 
 #nav {
@@ -165,5 +166,13 @@ p {
   .enbox a {
     margin: 8px;
     display: block;
+  }
+
+  .right {
+    float: right;
+  }
+
+  .left {
+    float: left;
   }
 }
