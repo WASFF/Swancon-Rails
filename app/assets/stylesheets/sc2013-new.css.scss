@@ -1,0 +1,164 @@
+
+@mixin rounded($radius: 0.5em) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin box-shadow($top, $left, $blur, $spread, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $spread $color;
+    -moz-box-shadow:inset $top $left $blur $spread $color;
+    box-shadow:inset $top $left $blur $spread $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $spread $color;
+    -moz-box-shadow: $top $left $blur $spread $color;
+    box-shadow: $top $left $blur $spread $color;
+  }
+}
+
+$useIEFilters: 0; // might be 0 or 1. disabled by default.
+
+@mixin linear-gradient($from, $to, $fallback, $ie: $useIEFilters) {
+  @if $ie != 1 {
+    background-color: $fallback;
+  }
+  
+  background-image: -moz-linear-gradient($from, $to);
+  background-image: -o-linear-gradient($from, $to);
+  background-image: -ms-linear-gradient($from, $to);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, $from),color-stop(1, $to));
+  background-image: -webkit-linear-gradient($from, $to);
+
+  @if $ie == 1 { 
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
+    -ms-filter: quote(progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}'));
+  }
+}
+
+
+@font-face {
+	font-family: 'Conv_continuum-medium';
+	src: local('Continuum'), url('continuum-medium.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Conv_betecknalowercase';
+	src: font-url('betecknalowercase.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* It's Continuum for headings and Futura for body text. */
+
+@mixin headingFont {
+  font-family: Continuum, Conv_continuum-medium, Helvetica, Arial, sans-serif;
+}
+@mixin bodyFont {
+  font-family: "futura-pt", Wingdings, Arial, sans-serif;
+  font-size: 1.1em;
+}
+
+
+html,body {
+  @include bodyFont;
+  min-height:100%;
+  background-color: black;
+  background-image: url('background.jpg');
+  background-position: center top;
+  min-width: 1024px;
+}
+
+h1,h2,h3,h4,.title {
+	@include headingFont;
+    margin-top:2ex;
+    margin-bottom:1.0ex;
+    text-shadow: 1px 1px 1px #c4c4e8;
+}
+li {
+  margin-bottom: 8px;
+}
+h1 { font-size: 28px }
+h2 { font-size: 24px }
+.title { font-size: 24px }
+h3 { font-size: 20px }
+h4 { font-size: 16px }
+
+
+strong {
+  font-weight: bold;
+}
+
+.smaller {
+  font-size: 0.7;
+}
+
+em {
+  font-style: italic;
+}
+
+.tiny {
+  font-size: 0.65em;
+}
+
+p {
+  margin: 1em 0;
+}
+
+.center, .centre {
+  text-align: center;
+}
+
+#centre_column {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1024px;
+  padding-top: 175px;
+}
+
+#nav {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  width: 150px;
+  vertical-align: top;
+  ul {
+    @include linear-gradient(rgba(200,200,255,0.7), rgba(120,100,180,0.6), rgb(128,126,168) );
+    border: 2px solid black;
+    padding: 10px 10px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    @include rounded(20px);
+    list-style: none;
+    li.title {
+      font-family: Continuum, Conv_continuum-medium, Helvetica, Arial, sans-serif;
+      text-shadow: 1px 1px 1px #c4c4e8;
+      margin-bottom: 1.0ex;
+      font-size: 100%;
+      margin-top: 0;
+    }
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+#main_content {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  width: 768px;
+  vertical-align: top;
+  @include linear-gradient(rgba(200,200,255,0.7), rgba(120,100,180,0.6), rgb(128,126,168) );
+  border: 2px solid black;
+  padding: 10px 20px;
+  margin-top: 8px;
+  @include rounded(20px);
+  .enbox a {
+    margin: 8px;
+    display: block;
+  }
+}
