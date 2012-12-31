@@ -26,8 +26,8 @@ gem 'csv_builder'
 
 gem "nested_form", :git => "git://github.com/ryanb/nested_form.git"
 
-gem 'MortisCMS', :require => 'mortiscms', :path => '/Users/lordmortis/Projects/MortisCMS'
-#gem 'MortisCMS', :require => 'mortiscms', :git => 'git://github.com/lordmortis/MortisCMS.git'
+#gem 'MortisCMS', :require => 'mortiscms', :path => '/Users/lordmortis/Projects/MortisCMS'
+gem 'MortisCMS', :require => 'mortiscms', :git => 'git://github.com/lordmortis/MortisCMS.git'
 
 group :production do
 	gem 'therubyracer', :platforms => :ruby
