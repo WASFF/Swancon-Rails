@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/lordmortis/MortisCMS.git
+  revision: 709dc68a43404bef852f1787999e50925e6ee32c
+  specs:
+    MortisCMS (0.1.16)
+      RedCloth
+      cocaine (= 0.3.2)
+      paperclip (~> 3.0)
+      paperclip-meta
+
+GIT
   remote: git://github.com/ryanb/nested_form.git
   revision: f591c0d72d0119c50511c16153b3960fe2da8b71
   specs:
@@ -13,15 +23,6 @@ GIT
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
-
-PATH
-  remote: /Users/lordmortis/Projects/MortisCMS
-  specs:
-    MortisCMS (0.1.16)
-      RedCloth
-      cocaine (= 0.3.2)
-      paperclip (~> 3.0)
-      paperclip-meta
 
 GEM
   remote: http://rubygems.org/
