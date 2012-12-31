@@ -30,5 +30,6 @@ gem "nested_form", :git => "git://github.com/ryanb/nested_form.git"
 gem 'MortisCMS', :require => 'mortiscms', :git => 'git://github.com/lordmortis/MortisCMS.git'
 
 group :production do
+	gem 'libv8', '~> 3.11.8'
 	gem 'therubyracer', :platforms => :ruby
 end
