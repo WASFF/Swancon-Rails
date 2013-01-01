@@ -53,14 +53,14 @@
 				<% end %>
 				<li><a href="/store">Store</a></li>
 			</ul>
-			<% permitted_to? content_pages_path do %>
+			<% permitted_to? :index, :content_files do %>
 				<ul>
 					<li class="title">Content Admin</li>
-					<li><%= link_to("Content Pages", content_pages_path ) %></li>
-					<li><%= link_to("Content Blocks", content_blocks_path ) %></li>
-					<li><%= link_to("Content Tags", content_tags_path ) %></li>
-					<li><%= link_to("Content Images", content_images_path ) %></li>
-					<li><%= link_to("Content Files", content_files_path ) %></li>
+					<li><%= link_to "Content Pages", content_pages_path if permitted_to? :index, :content_pages  %></li>
+					<li><%= link_to "Content Blocks", content_blocks_path if permitted_to? :index, :content_blocks  %></li>
+					<li><%= link_to "Content Tags", content_tags_path if permitted_to? :index, :content_tags  %></li>
+					<li><%= link_to "Content Images", content_images_path if permitted_to? :index, :content_images  %></li>
+					<li><%= link_to "Content Files", content_files_path if permitted_to? :index, :content_files %></li>
 				</ul>
 			<% end %>
 			<% if current_user != nil and (current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)) -%>
