@@ -1,0 +1,57 @@
+
+    <script>
+		$(document).ready(function(){
+
+
+			// http://stackoverflow.com/questions/467336/jquery-how-to-use-slidedown-or-show-function-on-a-table-row 
+
+			var lc_server="http://pestilence7.moondine.homelinux.org:3000/data/conventions/29/";
+		  var sessions=[
+		  {"name":"Magic Hat of Mysteries","length":0,"setup":0,"teardown":0,"requirements":["speakers"],"description":"Comedians needed - Danny Oz, Grant Watson, Simon, John Robertson?","description-html":"<p>Comedians needed &#8211; Danny Oz, Grant Watson, Simon, John Robertson?</p>","panelists":[]},
+		  {"name":"Dinner with Pizza","length":0,"setup":0,"teardown":0,"requirements":[],"description":"The Pizza Dinner of Awesomeness\r\n\r\nFree Pizza for all con-goers.\r\n\r\nPlease let the organisers know if you have special needs, preferrably prior to the convention","description-html":"<p>The Pizza Dinner of Awesomeness</p>\n<p>Free Pizza for all con-goers.</p>\n<p>Please let the organisers know if you have special needs, preferrably prior to the convention</p>","panelists":[]},
+		  {"name":"LARP Equipment Creation","length":0,"setup":0,"teardown":0,"requirements":[],"description":"A Mighty Warrior deserves a Mighty Weapon.\r\nCome and make your weapon for the combat LARP, the weapon that your soul calls for. \r\nOur trusty experts will be onhand to help you bring your horrors into other people's lives","description-html":"<p>A Mighty Warrior deserves a Mighty Weapon.<br />\nCome and make your weapon for the combat <span class=\"caps\">LARP</span>, the weapon that your soul calls for. <br />\nOur trusty experts will be onhand to help you bring your horrors into other people&#8217;s lives</p>","panelists":[]},
+		  {"name":"Rebel Empire","length":0,"setup":0,"teardown":0,"requirements":[],"description":null,"description-html":null,"panelists":[]},
+		  {"name":"LARP","length":0,"setup":0,"teardown":0,"requirements":[],"description":"LARP - More details to be included later","description-html":"<p><span class=\"caps\">LARP</span> &#8211; More details to be included later</p>","panelists":[]},
+		  {"name":"Quidditch for the Muggle-kind","length":0,"setup":0,"teardown":0,"requirements":[],"description":"The Australian Quidditch League","description-html":"<p>The Australian Quidditch League</p>","panelists":[]},
+		  {"name":"NERF Warfare","length":0,"setup":0,"teardown":0,"requirements":[],"description":null,"description-html":null,"panelists":[]}
+		  ];
+		  $("#blarg").html("fetching");
+
+          var update=function(sessions) {
+            var $table = $('<table/>').addClass("sessions");
+              $row=$('<tr/>');
+                $row.append( '<th>Title</th>' );
+                $row.append( '<th>Description</th>' );
+                $table.append( $row);
+
+                sessions.forEach(function(session) {
+                  $row=$('<tr/>');
+                    $row.append( '<td>' + session.name + '</td>' );
+                    $row.append( '<td>' + session.description + '</td>' );
+                    $table.append( $row);
+                  });
+                  $('#blarg').html($table);
+                }
+            //update(sessions);
+
+            items=$.getJSON(
+            lc_server+"sessions/",
+            function(json) {
+            	  sessions=json.sessions
+            	  //$("#blarg").html(sessions.length);
+                  update(sessions)
+              });
+
+
+	  });
+    </script>            
+<style>
+	  table{padding:2px;margin:20px auto;border-collapse: collapse; border:1px solid black;background:rgba(255,255,255,0.15)}td,th{min-width:100px;padding:2px; border:1px solid black;}
+    </style>
+<h2>Suggested panels</h2>
+<p>These are panels that have been suggested by prospective attendants. As we get closer to the con, there'll be opportunities to volunteer for them, and confirmation as to which will be going ahead.</p>
+<p>Make your own suggestions <a href="/aterpoo/suggest/">here</a>, or by contacting our programme manager&mdash;<a href="mailto:programming-2013@swancon.com.au?subject=panel%20suggestion">programming-2013@swancon.com.au</a><p>
+<p>Watch this space for the full programme!</p>
+
+	<div id="blarg">things</div>
+

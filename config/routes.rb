@@ -11,10 +11,10 @@ DoomCon::Application.routes.draw do
 	end
 
 
-	resources :panel_suggestions do
-		get 'make_visible', on: :member
-		get 'make_invisible', on: :member
-	end
+#   resources :panel_suggestions do
+#   	get 'make_visible', on: :member
+#   	get 'make_invisible', on: :member
+#   end
 
 	resources :merchandise_option_sets
 
@@ -102,7 +102,8 @@ DoomCon::Application.routes.draw do
 
 	match 'store/purchase' => 'store#purchase'
 
-	match 'aterpoo/suggest' => 'livecon_glue#suggest'
+	match 'programme/suggest' => 'livecon_glue#suggest'
+	match 'programme/panels' => 'livecon_glue#panels'
 
 	root :to => "index#index"
 end
