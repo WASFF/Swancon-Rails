@@ -4,8 +4,9 @@
 
 			// http://stackoverflow.com/questions/467336/jquery-how-to-use-slidedown-or-show-function-on-a-table-row 
 
-			var lc_server="http://pestilence7.moondine.homelinux.org:3000/data/conventions/29/"
-			//var lc_server="http://127.0.0.1:3100/data/conventions/29/"
+			//var lc_server="http://pestilence7.moondine.homelinux.org:3000/data/conventions/29/"
+            var lc_server="https://livecon.net/data/conventions/32/";  //sc2013
+			//var lc_server="http://127.0.0.1:8000/data/conventions/29/"
 
 
 			//may need following to fix missing carriage returns.  Cf http://api.jquery.com/val/
@@ -92,7 +93,7 @@
 				
 			});
 
-			$('#myForm').submit(function() { 
+			$('#panelForm').submit(function() { 
 				$(".error").removeClass("error");
 				var errored=false;
 
@@ -128,7 +129,7 @@
 
 				json_response = JSON.stringify(submission);
                 if(errored) {
-                  alert(error_str)
+                  alert(error_str);
                 }
                 else {
                   alert("posting!");
@@ -141,8 +142,9 @@
                     data: json_response,
                     success: function(data,textStatus, jqXHR){
                       if(data.status=='ok') {
-                        alert("Thankyou for your submission");
-                        location.reload();
+                        document.location.href=('/programme/suggestion_accepted');
+                        //alert("Thankyou for your submission");
+                        //location.reload();
                       }
                       else {
                         alert("Something has gone wrong\nPerhaps try again later?\nstatus: "+data.status);
@@ -165,11 +167,11 @@
 
 
 <h2>Panel suggestion</h2>
-<form id="myForm" action="comment.php" method="post"> 
+<form id="panelForm" action="comment.php" method="post"> 
   <dl>
     <div class="shadow"><dt>Title</dt              ><dd><input class="w0" type="text" name="title"    id="title" value=""/> </dd></div>
     <div class="shadow"><dt>Description</dt        ><dd><textarea class="w0" name="description" id="description" style="height:80px;"></textarea> </dd></div>
-    <div class="shadow"><dt>Proposed by</dt        ><dd><table>
+    <div class="shadow"><dt>Submitted by</dt        ><dd><table>
         <tr><td>name:   </td><td><input class="w1" type="text" name="submitter_name"    id="submitter_name"    value=""/><br/></td></tr>
         <tr><td>contact:</td><td><input class="w1" type="text" name="submitter_contact" id="submitter_contact" value=""/></td></tr>
     </table></dd></div>
