@@ -4,14 +4,12 @@ Mortiscms.config do |config|
 	config.show_titles_in_pages = true
 	config.show_titles_in_tags = true
 	config.routes_enabled = true
-	#config.publish_to_email = {query: MemberDetail.email_list, name: :name_real, email: :email}
-	config.publish_to_email = false
+	config.publish_to_email = {query: MemberDetail.email_list, name: :name_real, email: :email}
 	config.publish_from_address = "donotreply@swancon.com.au"
 	config.publish_from_friendly_address = "Swancon 2013 Auto Mailer <donotreply@swancon.com.au>"
 	config.link_root = "http://2013.swancon.com.au/"
 	config.writer_query_message = :is_writer?
 	config.editor_query_message = :is_editor?
 	config.user_model = "User"
-	#config.publish_extra_emails = [["Swancon", "swancon@guild.uwa.edu.au"]]
-	config.publish_extra_emails = []
+	config.publish_extra_emails = [["Swancon", "swancon@guild.uwa.edu.au"]]
 end
