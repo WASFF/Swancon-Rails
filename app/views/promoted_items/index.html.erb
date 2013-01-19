@@ -1,0 +1,23 @@
+<h1>Promoted Items</h1>
+<%= form_tag(action: :form_save, method: :post) do -%>
+<fieldset>
+	<legend>Promoted Items Tag</legend>
+<%= select_tag(
+	"tag_id",
+	options_for_select(@tags, @selected)) %>
+<%= submit_tag "Check" %> <%= submit_tag "Save" %>
+</fieldset>
+<% end -%>
+
+<fieldset id="items">
+<% if @blocks %>
+	<legend>Current Promoted Content Blocks</legend>
+<% else %>
+	<legend>Promoted Items Disabled</legend>
+<% end %>
+	<% if @blocks %>
+		<% @blocks.each do |block| %>
+			<%= link_to block.title, block %><br/>
+		<% end %>
+	<% end %>
+</fieldset>

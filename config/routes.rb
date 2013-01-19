@@ -106,5 +106,9 @@ DoomCon::Application.routes.draw do
 	match 'programme/suggestion_accepted' => 'livecon_glue#suggestion_accepted'
 	match 'programme/panels' => 'livecon_glue#panels'
 
+	match 'promoted_items/' => 'promoted_items#index'
+	match 'promoted_items/:action' => 'promoted_items'
+	match 'promoted_items/:action/:id' => 'promoted_items'
+
 	root :to => "index#index"
 end

@@ -33,3 +33,5 @@ group :production do
 	gem 'libv8', '~> 3.11.8'
 	gem 'therubyracer', :platforms => :ruby
 end
+
+gem 'ledermann-rails-settings', :require => 'rails-settings'

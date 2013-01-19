@@ -94,6 +94,8 @@ GEM
     json (1.7.6)
     jwt (0.1.5)
       multi_json (>= 1.0)
+    ledermann-rails-settings (1.2.0)
+      activerecord (>= 2.3)
     libv8 (3.11.8.13)
     mail (2.3.3)
       i18n (>= 0.4.0)
@@ -220,6 +222,7 @@ DEPENDENCIES
   declarative_authorization
   devise!
   jquery-rails (>= 1.0.14)
+  ledermann-rails-settings
   libv8 (~> 3.11.8)
   nested_form!
   oa-oauth
