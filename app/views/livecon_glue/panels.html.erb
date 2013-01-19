@@ -26,9 +26,13 @@
                 $table.append( $row);
 
                 sessions.forEach(function(session) {
+                  var description=session.description;
+                  if (description==null) {
+                    description="";
+                  }
                   $row=$('<tr/>');
                     $row.append( '<td>' + session.name + '</td>' );
-                    $row.append( '<td>' + session.description + '</td>' );
+                    $row.append( '<td>' + description + '</td>' );
                     $table.append( $row);
                   });
                   $('#blarg').html($table);
