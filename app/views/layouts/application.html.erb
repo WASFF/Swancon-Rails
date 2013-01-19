@@ -22,6 +22,18 @@
 	<div id="centre_column">  <!-- centre_column -->
 		<%= image_tag "logo.png", class: "logo" %>
 		<div id="nav" class="noprint">
+			<% if Settings.promoted_items_tag_id != nil -%>
+			<% tag = ContentTag.where(id: Settings.promoted_items_tag_id).first -%>
+			<% if tag != nil %>
+			<% if tag.blocks.count > 0 %>
+			<ul>
+				<% tag.blocks.each do |block| %>
+					<li><%= link_to block.title, block %></li>
+				<% end %>
+			</ul>
+			<% end %>
+			<% end %>
+			<% end -%>
 			<ul>
 				<% if user_signed_in? %>
 					<li class="title">Profile</li>
@@ -97,6 +109,9 @@
 				<li><%= link_to("Show Payments", payments_path) %></li>
 				<% end %>
 				<li><%= link_to("Show All Orders", orders_path(:all => true)) %></li>
+				<% permitted_to? :index, :promoted_items do -%>
+				<li><%= link_to("Promoted Items Panel", controller: :promoted_items, action: :index) %></li>
+				<% end %>
 				<% permitted_to? :index, :awards do -%>
 				<li><%= link_to("Awards Administration", awards_path) %></li>
 				<% end %>

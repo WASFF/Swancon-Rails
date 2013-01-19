@@ -45,6 +45,7 @@ authorization do
 		has_permission_on [:content_files], :to => [:new, :index, :create, :edit, :update, :show]
 		has_permission_on [:content_images], :to => [:new, :index, :create, :edit, :update, :show]
 		has_permission_on [:panel_suggestions], :to => [:destroy, :make_visible, :make_invisible]
+		has_permission_on [:promoted_items], :to => [:index, :form_save]
 	end
 
 	role :"awards administrator" do
