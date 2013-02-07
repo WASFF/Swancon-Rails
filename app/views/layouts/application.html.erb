@@ -19,21 +19,10 @@
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 <body>
+<% show_promoted_panel = (Settings.promoted_items_tag_id != nil and current_page?(root_url)) -%>
 	<div id="centre_column">  <!-- centre_column -->
 		<%= image_tag "logo.png", class: "logo" %>
 		<div id="nav" class="noprint">
-			<% if Settings.promoted_items_tag_id != nil -%>
-			<% tag = ContentTag.where(id: Settings.promoted_items_tag_id).first -%>
-			<% if tag != nil %>
-			<% if tag.blocks.count > 0 %>
-			<ul>
-				<% tag.blocks.each do |block| %>
-					<li><%= link_to block.title, block %></li>
-				<% end %>
-			</ul>
-			<% end %>
-			<% end %>
-			<% end -%>
 			<ul>
 				<% if user_signed_in? %>
 					<li class="title">Profile</li>
@@ -118,24 +107,53 @@
 			</ul>
 			<% end %>
 		</div>
-		<div class="mbox" id="main_content">
-
-          <div id="social" style="float:right">
-            <%= link_to(image_tag("sn-facebook.png",    height: 32, width: 32, :alt =>"Facebook"   ), "https://www.facebook.com/Swancon") %>
-            <%= link_to(image_tag("sn-twitterb.png",     height: 32, width: 32, :alt =>"Twitter"    ), "https://twitter.com/#!/swancon") %>
-            <%= link_to(image_tag("sn-tumblr.png",      height: 32, width: 32, :alt =>"Tumblr"     ), "http://swancon.tumblr.com/") %>
-            <%= link_to(image_tag("sn-livejournal.png", height: 32, width: 32, :alt =>"Livejournal"), "http://swancon.livejournal.com/") %>
-            <%= link_to(image_tag("sn-email.png",       height: 32, width: 32, :alt =>"Email"      ), "mailto:convenor-2013@swancon.com.au?subject=Website%20enquiry") %>
-          </div>
-
-			<div>
-              <%if notice!=nil %><p class="notice"><%= notice %></p><% end %>
-              <%if alert!=nil %><p class="alert"><%= alert %></p><% end%>
-				<%= yield %>
-			</div>
-			<div style="clear:both;">
+		<% if show_promoted_panel %>
+			<div id="main_content_small">
+		<% else %>
+			<div id="main_content">
+		<% end %>
+			<div class="mbox">
+	          <div id="social" style="float:right">
+	            <%= link_to(image_tag("sn-facebook.png",    height: 32, width: 32, :alt =>"Facebook"   ), "https://www.facebook.com/Swancon") %>
+	            <%= link_to(image_tag("sn-twitterb.png",     height: 32, width: 32, :alt =>"Twitter"    ), "https://twitter.com/#!/swancon") %>
+	            <%= link_to(image_tag("sn-tumblr.png",      height: 32, width: 32, :alt =>"Tumblr"     ), "http://swancon.tumblr.com/") %>
+	            <%= link_to(image_tag("sn-livejournal.png", height: 32, width: 32, :alt =>"Livejournal"), "http://swancon.livejournal.com/") %>
+	            <%= link_to(image_tag("sn-email.png",       height: 32, width: 32, :alt =>"Email"      ), "mailto:convenor-2013@swancon.com.au?subject=Website%20enquiry") %>
+	          </div>
+				<div>
+	              <%if notice!=nil %><p class="notice"><%= notice %></p><% end %>
+	              <%if alert!=nil %><p class="alert"><%= alert %></p><% end%>
+					<%= yield %>
+				</div>
+				<div style="clear:both;">
+				</div>
 			</div>
 		</div>
+		<% if show_promoted_panel %>
+			<% tag = ContentTag.where(id: Settings.promoted_items_tag_id).first -%>
+			<% if tag != nil %>
+				<% if tag.blocks.count > 0 %>
+				<div id="nav">
+					<div class="center"></div>
+					<ul id="whatsnew">
+						<li class="title">What's New?</class>
+						<% tag.blocks.each do |block| -%>
+							<% if block == tag.blocks.first -%>
+								<li class="item-first">
+									<%= link_to block.summary, block %>
+								</li>
+							<% else -%>							
+								<li class="item">
+									<%= link_to block.summary, block %>
+								</li>
+							<% end -%>
+						<% end %>
+					</ul>
+				</div>
+				<% end -%>
+			<% end -%>
+		<% end -%>
+
 	</div>  <!-- centre_column -->
 
 </body>
