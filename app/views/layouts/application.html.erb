@@ -140,7 +140,7 @@
 						<% tag.blocks.each do |block| -%>
 							<% if block == tag.blocks.first -%>
 								<li class="item-first">
-									<%= link_to block.summary, block %>
+									<%= link_to block.summary, controller: :content_viewer, action: :content, id: block.id %>
 								</li>
 							<% else -%>							
 								<li class="item">
