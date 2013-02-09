@@ -144,7 +144,7 @@
 								</li>
 							<% else -%>							
 								<li class="item">
-									<%= link_to block.summary, block %>
+									<%= link_to block.summary, controller: :content_viewer, action: :content, id: block.id %>
 								</li>
 							<% end -%>
 						<% end %>
