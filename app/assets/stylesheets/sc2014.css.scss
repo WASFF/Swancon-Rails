@@ -1,0 +1,107 @@
+@import "sc2014-mixins";
+
+body {
+	background-color: black;
+	color: white;
+	margin: 0;
+	padding: 0;
+}
+
+#wrapper {
+	margin: 5px auto;
+	width: 1024px;
+	padding: 0;
+
+	#header {
+		margin: 0 0 10px;
+		padding: 0;
+
+		ul {
+			position: relative;
+			width: 150px;
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+			li {
+				display: block;
+				padding-bottom: 5px;
+			}
+			.header {
+				font-weight: bold;
+			}
+		}
+
+		#menu_right {
+			float: right;
+			text-align: right;
+			background-color: green;
+		}
+
+		#menu_left {
+			text-align: left;
+			float: left;
+			background-color: green;
+		}
+
+		#logo {
+			background-color: blue;
+			text-align: center;
+		}
+	}
+
+	#content {
+		clear: both;
+		padding: 10px 0 10px 0;
+
+		#social {
+			float: right;
+		}
+	}
+
+	#footer {
+		clear: both;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	#wrapper {
+		margin: 5px 2px;
+		width: auto;
+	}
+}
+
+@media screen and (max-width: 719px) {
+	#wrapper {
+		margin: 5px 0;
+		width: auto;
+
+		#header {
+			ul {
+				li {
+					padding-bottom: 2px;
+				}
+			}
+
+			#menu_right {
+				float: none;
+				text-align: left;
+				width: 100%;
+			}
+
+			#menu_left {
+				float: none;
+				width: 100%;
+			}
+		}
+
+		#content {
+			clear: both;
+			padding: 2px 0 2px 0;
+			max-width: 100%;
+
+			#social {
+				display: none;
+			}
+		}		
+	}
+}

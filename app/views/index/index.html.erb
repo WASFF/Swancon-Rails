@@ -1,7 +1,0 @@
-<div class="main-content">
-  <% if @page == nil %>
-    <p>Watch this space</p>
-  <% else %>
-    <%= redcloth_render(@page.block.bodytext) %>
-  <% end %>
-</div>

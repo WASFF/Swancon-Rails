@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  layout "2014"
 #	before_filter :prepare_for_mobile
 
 	private

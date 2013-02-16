@@ -1,0 +1,23 @@
+%html
+
+	%head
+		= stylesheet_link_tag "sc2014"
+		%meta{name: "viewport", content: "width=device-width"}
+		= yield :header
+
+	%body
+		%div#wrapper
+			%div#header
+				%div#logo
+					= link_to image_tag("test", height: 80, width: 100), "/"
+					%ul#menu_left
+						- menu_left.each do |item|
+							%li= link_to item[:name], item[:path]
+					%ul#menu_right
+						- menu_right.each do |item|
+							%li= link_to item[:name], item[:path]
+			%div#content
+				= yield
+			%div#footer
+				&copy; 2014 WASFF Inc. This is wooty. Yay.
+				= yield :footer
