@@ -34,4 +34,6 @@ group :production do
 	gem 'therubyracer', :platforms => :ruby
 end
 
+gem "haml-rails"
+
 gem 'ledermann-rails-settings', :require => 'rails-settings'

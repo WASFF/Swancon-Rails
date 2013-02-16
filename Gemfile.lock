@@ -83,6 +83,13 @@ GEM
       multi_json (~> 1.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
+    haml (4.0.0)
+      tilt
+    haml-rails (0.4)
+      actionpack (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
+      haml (>= 3.1, < 4.1)
+      railties (>= 3.1, < 4.1)
     hashie (1.2.0)
     highline (1.6.15)
     hike (1.2.1)
@@ -221,6 +228,7 @@ DEPENDENCIES
   csv_builder
   declarative_authorization
   devise!
+  haml-rails
   jquery-rails (>= 1.0.14)
   ledermann-rails-settings
   libv8 (~> 3.11.8)
