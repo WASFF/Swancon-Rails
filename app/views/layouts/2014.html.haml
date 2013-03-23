@@ -9,7 +9,7 @@
 		%div#wrapper
 			%div#header
 				%div#logo
-					= link_to image_tag("test", height: 80, width: 100), "/"
+					%span#mobilelogo
 					%ul#menu_left
 						- menu_left.each do |item|
 							%li= link_to item[:name], item[:path]
