@@ -2,7 +2,14 @@
 
 	%head
 		= stylesheet_link_tag "sc2014"
+		= javascript_include_tag "application-2014.js"
+		= javascript_include_tag "//use.typekit.net/qpj3nvs.js"
+		%link{rel: "shortcut icon", href: "#{image_path("favicon.ico")}"}
+		%link{rel: "apple-touch-icon-precomposed", href: "#{image_path("mobileicon57.png")}"}
+		%link{rel: "apple-touch-icon-precomposed", href: "#{image_path("mobileicon72.png")}"}
+		%link{rel: "apple-touch-icon-precomposed", href: "#{image_path("mobileicon114.png")}"}
 		%meta{name: "viewport", content: "width=device-width"}
+		%title= @title
 		= yield :header
 
 	%body
@@ -19,5 +26,6 @@
 			%div#content
 				= yield
 			%div#footer
-				&copy; 2014 WASFF Inc. This is wooty. Yay.
+				%div#sclogo
+				Swancon &copy; 2014 WASFF Inc.
 				= yield :footer
