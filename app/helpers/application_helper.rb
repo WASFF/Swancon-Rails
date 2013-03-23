@@ -16,13 +16,13 @@ module ApplicationHelper
 	def promoted_items
 		if @promoted_items == nil
 			@promoted_items = []
-			promoted_tag_id = Settings.promoted_items_tag_id
-			if promoted_tag_id != nil
-				tag = ContentTag.where(id: promoted_tag_id).first
+#			promoted_tag_id = Settings.promoted_items_tag_id
+#			if promoted_tag_id != nil
+				tag = ContentTag.where(id: 6).first
 				if tag != nil
 					@promoted_items = tag.blocks
 				end
-			end
+#			end
 		end
 		@promoted_items
 	end
