@@ -31,7 +31,11 @@ class StoreController < ApplicationController
 		
 			session[:cart][:merch] << {:id => params[:id].to_i, :options => options}
 		end
-		redirect_to :back
+		if request.env.include?("HTTP_REFERER")
+			redirect_to :back
+		else
+			redirect_to action: :merchandise, id: merch.id
+		end
 	end
 	
 	def merchandise_remove
@@ -39,7 +43,11 @@ class StoreController < ApplicationController
 		if params[:index].to_i >= 0 and params[:index].to_i < array.size
 			array.delete_at(params[:index].to_i)
 		end
-		redirect_to :back
+		if request.env.include?("HTTP_REFERER")
+			redirect_to :back
+		else
+			redirect_to action: :index
+		end
 	end
 
 	def ticket
@@ -56,7 +64,11 @@ class StoreController < ApplicationController
 		if ticket.available? or @store_user != nil
 			session[:cart][:tickets] << params[:id].to_i
 		end
-		redirect_to :back
+		if request.env.include?("HTTP_REFERER")
+			redirect_to :back
+		else
+			redirect_to action: :ticket, id: ticket.id
+		end
 	end
 	
 	def ticket_remove
@@ -64,7 +76,11 @@ class StoreController < ApplicationController
 		if params[:index].to_i >= 0 and params[:index].to_i < array.size
 			array.delete_at(params[:index].to_i)
 		end		
-		redirect_to :back
+		if request.env.include?("HTTP_REFERER")
+			redirect_to :back
+		else
+			redirect_to action: :index
+		end
 	end
 	
 	def purchase		
