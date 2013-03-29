@@ -41,8 +41,22 @@ module ApplicationHelper
 					@items << item
 				end
 			end
+			@user_items = []
+			if user_signed_in?
+				@user_items << {name: "My Profile", path: edit_user_registration_path}
+				@user_items << {name: "Membership Details", path: edit_my_member_details_path}
+				@user_items << {name: "Orders", path: orders_path}
+				@user_items << {name: "Log Out", path: destroy_user_session_path}
+			else
+				@user_items << {name: "Log In", path: new_user_session_path}
+				@user_items << {name: "Register", path: new_user_registration_path}
+			end
+			
+			@items = @user_items + @items
 
-			pp @items
+			if user_signed_in? && current_user.admin_panel_visible?
+				@items << {name: "Admin", path: "/admin/"}
+			end
 
 		end
 		@items
@@ -51,27 +65,15 @@ module ApplicationHelper
 	def menu_left
 		if @left == nil
 			@left = []
-			if user_signed_in?
-				@left << {name: "My Profile", path: edit_user_registration_path}
-				@left << {name: "Membership Details", path: edit_my_member_details_path}
-				@left << {name: "Orders", path: orders_path}
-				@left << {name: "Log Out", path: destroy_user_session_path}
-			else
-				@left << {name: "Log In", path: new_user_session_path}
-				@left << {name: "Register", path: new_user_registration_path}
-			end
-
-			size = (menu_items.length + @left.length) / 2
-			left = size - @left.length
-
-			@left = @left + menu_items[0..left]
+			size = menu_items.length / 2
+			@left = menu_items[0..size]
 		end
 		@left
 	end
 
 	def menu_right
 		if @right == nil
-			@right = menu_items[menu_left.length - 1..-1]
+			@right = menu_items[menu_left.length..-1]
 		end
 
 		@right
