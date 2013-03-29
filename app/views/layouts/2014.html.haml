@@ -6,8 +6,8 @@
 		= javascript_include_tag "//use.typekit.net/qpj3nvs.js"
 		%link{rel: "shortcut icon", href: "#{image_path("favicon.ico")}"}
 		%link{rel: "apple-touch-icon-precomposed", href: "#{image_path("mobileicon57.png")}"}
-		%link{rel: "apple-touch-icon-precomposed", href: "#{image_path("mobileicon72.png")}"}
-		%link{rel: "apple-touch-icon-precomposed", href: "#{image_path("mobileicon114.png")}"}
+		%link{rel: "apple-touch-icon-precomposed", sizes: "72x72", href: "#{image_path("mobileicon72.png")}"}
+		%link{rel: "apple-touch-icon-precomposed", sizes: "114x114", href: "#{image_path("mobileicon114.png")}"}
 		%meta{name: "viewport", content: "width=device-width"}
 		%title= @title
 		= yield :header
