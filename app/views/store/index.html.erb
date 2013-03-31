@@ -7,9 +7,13 @@
 <%- ticketquery = set.tickets.available(current_user) %>
 <% ticketquery.all.each do |ticket| -%>
 <% if ticket.available? %>
-<li><%= link_to "#{ticket.name} #{render_money(ticket.price)}", :action => "ticket", :id => ticket.id %></li>
+<li><%= link_to :action => "ticket", :id => ticket.id do%>
+<%= ticket.name %> <%= render_money ticket.price %><% if ticket.concession_price %> / <%= render_money ticket.concession_price %> <% end %>
+<% end %></li>
 <%- else %>
-<li><%= link_to "#{ticket.name} #{render_money(ticket.price)}", :action => "ticket", :id => ticket.id %> (currently unlisted)</li>
+<li><%= link_to :action => "ticket", :id => ticket.id do%>
+<%= ticket.name %> <%= render_money ticket.price %><% if ticket.concession_price %> / <%= render_money ticket.concession_price %> <% end %>(unlisted) 
+<% end %></li>
 <%- end %>
 <%- end %>
 </ul>

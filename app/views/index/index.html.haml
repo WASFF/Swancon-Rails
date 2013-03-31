@@ -1,0 +1,14 @@
+=content_for :header do
+	%script
+		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+%div#social
+	%span#facebook
+		Facebook Feed goes here. OMG very long text. Woo.
+	%span#twitter
+		%a{class: "twitter-timeline", href: "https://twitter.com/Swancon", "data-widget-id" => "302699362914549760", "data-theme" => "light", "data-link-color" => "#078C47"}
+			Tweets by @Swancon
+
+- promoted_items.each do |item|
+	%div
+		=link_to item.summary, controller: :content_viewer, action: :content, id: item.id

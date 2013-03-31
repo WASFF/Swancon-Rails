@@ -86,6 +86,11 @@ class User < ActiveRecord::Base
 
 		retval
 	end
+
+	def admin_panel_visible?
+		symbols = role_symbols
+		return symbols.include?(:admin) || symbols.include?(:committe)
+	end
 	
 	# Class Functions
   def self.find_by_username_or_email(username, email)

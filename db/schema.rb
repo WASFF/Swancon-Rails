@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130119092759) do
+ActiveRecord::Schema.define(:version => 20130324074408) do
 
   create_table "award_categories", :force => true do |t|
     t.string   "name",        :null => false
@@ -112,41 +112,6 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
 
   create_table "content_tags", :force => true do |t|
     t.string   "name",       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "launch_member_merchandise_types", :force => true do |t|
-    t.integer  "launch_member_id"
-    t.integer  "merchandise_type_id"
-    t.string   "merchandise_options_hash"
-    t.integer  "payment_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "launch_member_ticket_types", :force => true do |t|
-    t.integer  "launch_member_id"
-    t.integer  "ticket_type_id"
-    t.integer  "payment_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "launch_members", :force => true do |t|
-    t.string   "name_first",                           :null => false
-    t.string   "name_last"
-    t.string   "name_badge"
-    t.string   "address_street1",                      :null => false
-    t.string   "address_street2"
-    t.string   "address_street3",                      :null => false
-    t.string   "address_postcode",                     :null => false
-    t.string   "address_state",                        :null => false
-    t.string   "address_country",                      :null => false
-    t.string   "phoneno"
-    t.string   "email"
-    t.boolean  "email_optin",       :default => false, :null => false
-    t.boolean  "disclaimer_signed", :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -265,17 +230,6 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
-  create_table "settings", :force => true do |t|
-    t.string   "var",                       :null => false
-    t.text     "value"
-    t.integer  "target_id"
-    t.string   "target_type", :limit => 30
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "settings", ["target_type", "target_id", "var"], :name => "index_settings_on_target_type_and_target_id_and_var", :unique => true
-
   create_table "ticket_sets", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -285,13 +239,14 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
 
   create_table "ticket_types", :force => true do |t|
     t.string   "name"
-    t.float    "price"
     t.integer  "ticket_set_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "available_from"
     t.datetime "available_to"
-    t.integer  "target",         :default => 0, :null => false
+    t.integer  "target",           :default => 0,   :null => false
+    t.decimal  "concession_price"
+    t.decimal  "price",            :default => 0.0, :null => false
   end
 
   create_table "user_omni_auths", :force => true do |t|
@@ -342,6 +297,7 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
     t.datetime "updated_at"
     t.datetime "card_issued"
     t.datetime "arrived"
+    t.boolean  "concession",     :default => false, :null => false
   end
 
   create_table "user_orders", :force => true do |t|

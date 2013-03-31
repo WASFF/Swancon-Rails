@@ -22,12 +22,12 @@ DoomCon::Application.configure do
 	# Only use best-standards-support built into browsers
 	config.action_dispatch.best_standards_support = :builtin
 
-#	ActionMailer::Base.delivery_method = :smtp
-#	ActionMailer::Base.smtp_settings = {
-#	   :address => "mail.iinet.net.au",
-#	   :port => 25,
-#	   :domain => "2012.swancon.com.au",
-#	}
+	ActionMailer::Base.delivery_method = :smtp
+	ActionMailer::Base.smtp_settings = {
+	   :address => "mail.iinet.net.au",
+	   :port => 25,
+	   :domain => "2014.swancon.com.au",
+	}
 
 	# Do not compress assets
 	config.assets.compress = false

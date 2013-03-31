@@ -54,13 +54,22 @@ class StoreController < ApplicationController
 		ticket = TicketType.where(:id => params[:id]).first
 		
 		if ticket.available? or @store_user != nil
-			session[:cart][:tickets] << params[:id].to_i
+			if params[:concession] == "true"
+				session[:cart][:concessions] << params[:id].to_i				
+			else
+				session[:cart][:tickets] << params[:id].to_i
+			end
 		end
 		redirect_to :back
 	end
 	
 	def ticket_remove
-		array = session[:cart][:tickets]
+		array = []
+		if params[:concessions] == "true"
+			array = session[:cart][:concessions]
+		else
+			array = session[:cart][:tickets]
+		end
 		if params[:index].to_i >= 0 and params[:index].to_i < array.size
 			array.delete_at(params[:index].to_i)
 		end		
@@ -68,7 +77,7 @@ class StoreController < ApplicationController
 	end
 	
 	def purchase		
-		if @cart[:merch].size == 0 and @cart[:tickets].size == 0
+		if @cart[:merch].size == 0 and @cart[:tickets].size == 0 and @cart[:concessions].size == 0
 			flash[:notice] = "Please add items to your cart"
 			redirect_to :action => :index
 			return
@@ -118,6 +127,16 @@ class StoreController < ApplicationController
 			order.save
 			@cart[:tickets].each do |ticket_id|
 				ticket = UserOrderTicket.new(:ticket_type_id => ticket_id, :user_order_id => order.id)
+				if @store_user == nil
+					 ticket.user_id = current_user.id
+				else
+					 ticket.user_id = @store_user.id					
+				end
+				ticket.save
+			end
+
+			@cart[:concessions].each do |ticket_id|
+				ticket = UserOrderTicket.new(:ticket_type_id => ticket_id, :user_order_id => order.id, concession: true)
 				if @store_user == nil
 					 ticket.user_id = current_user.id
 				else
@@ -179,6 +198,7 @@ class StoreController < ApplicationController
 			session[:cart] = Hash.new
 			session[:cart][:merch] = Array.new
 			session[:cart][:tickets] = Array.new
+			session[:cart][:concessions] = Array.new
 		end
 		
 		@cart = session[:cart]	

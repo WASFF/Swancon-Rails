@@ -16,6 +16,10 @@ class UserOrderTicket < ActiveRecord::Base
 		ticket_type
 	end
 
+	def concession_price
+		ticket_type.concession_price
+	end
+
 	def price
 		ticket_type.price
 	end

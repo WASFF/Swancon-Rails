@@ -22,40 +22,104 @@ class SellerController < ApplicationController
 		respond_to do |format|
 			format.html # index.html.erb
 			format.js
+			format.json {
+				if @user != nil
+
+				else
+					array = []
+					@users.each do |user| 
+						details = {}
+						if user.member_detail != nil
+							details = {
+								"member_detail_attributes[name_first]" =>
+									user.member_detail.name_first,
+								"member_detail_attributes[name_last]" =>
+									user.member_detail.name_last,
+								"member_detail_attributes[name_badge]" =>
+									user.member_detail.name_badge,
+								"member_detail_attributes[address_1]" =>
+									user.member_detail.address_1,
+								"member_detail_attributes[address_2]" =>
+									user.member_detail.address_2,
+								"member_detail_attributes[address_3]" =>
+									user.member_detail.address_3,								
+								"member_detail_attributes[address_postcode]" =>
+									user.member_detail.address_postcode,
+								"member_detail_attributes[address_state]" =>
+									user.member_detail.address_state,
+								"member_detail_attributes[address_country]" =>
+									user.member_detail.address_country,
+								"member_detail_attributes[phone]" =>
+									user.member_detail.phone,
+								"member_detail_attributes[email_optin]" =>
+									user.member_detail.email_optin,
+								"member_detail_attributes[disclaimer_signed]" =>
+									user.member_detail.disclaimer_signed
+							}
+						end
+						entry = {
+							id: user.id,
+							username: user.username,
+							email: user.email
+						}
+						array << entry.merge(details)
+					end
+					render json: array
+				end
+			}
 		end
 	end
 
 	def create
 		if params[:user] != nil
-			@user = User.new(params[:user])
-			if @user.password.strip == ""
-				@user.password = Devise.friendly_token[0,20]
-				@user.password_confirmation = @user.password
-			end
+			if params[:user][:id].to_i == 0
+				@user = User.new(params[:user])
+				if @user.password == nil || @user.password.strip == ""
+					@user.password = Devise.friendly_token[0,20]
+					@user.password_confirmation = @user.password
+				end
 
-			if @user.username.strip == ""
-				if @user.details.name_badge.strip != ""
-					@user.username = @user.details.name_badge
+				if @user.username == nil || @user.username.strip == ""
+					if @user.details.name_badge != nil && @user.details.name_badge.strip != ""
+						@user.username = @user.details.name_badge
+					else
+						@user.username = "#{@user.details.name_first}-#{@user.details.name_last}"
+					end
+				end
+
+				@user.skip_confirmation!
+				@user.confirm!
+
+			else
+				@user = User.where(id: params[:user][:id].to_i).first
+				if @user == nil
+					respond_to do |respond| 
+						respond.json {
+							render json: {
+								error: {user_id: "User Not Found" }
+							}, status: :error
+						}
+					end
+					return
 				else
-					@user.username = "#{@user.details.name_first}-#{@user.details.name_last}"
+					if @user.member_detail == nil
+						@user.member_detail = MemberDetail.new(params[:user][:member_detail_attributes])
+						@user.member_detail.save
+					else
+						@user.member_detail.update_attributes(params[:user][:member_detail_attributes])
+						@user.save
+					end
 				end
 			end
 
-			if @user.email == ""
-				
-			end
+#			pp @user
+#			pp @user.member_detail
 
-			@user.skip_confirmation!
-			@user.confirm!
-			
 			if @user.save
 				@saved = true
                 @saved_name= @user.order_name
 				session[:store_user_id] = @user.id
 				#redirect_to controller: :store
-			@user = User.new()
-			@user.build_member_detail
-				return
 			else
 				@saved = false
 			end				
@@ -64,6 +128,22 @@ class SellerController < ApplicationController
 			@user.build_member_detail
 			@saved = false
 		end
+
+		respond_to do |respond|
+			respond.json {
+				if @saved
+					render json: {status: "ok"}, status: :ok 
+				else
+					render json: {
+						error: @user.errors
+					}, status: :error
+				end
+			}
+			respond.html {
+
+			}
+		end
+
 	end
 
 	def clear
