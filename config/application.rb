@@ -44,7 +44,7 @@ module DoomCon
 
 		config.site_name = Mortiscms.config.site_name
 
-		config.swancon_year = "2013"
+		config.swancon_year = "2014"
 
 		# Enable the asset pipeline
 		config.assets.enabled = true

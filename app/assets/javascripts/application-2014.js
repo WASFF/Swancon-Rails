@@ -10,7 +10,7 @@
 
 $(document).ready(function() {
 	try{
-		Typekit.load();
+//		Typekit.load();
 	} catch(e) {}
 });
 

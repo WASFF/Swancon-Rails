@@ -55,7 +55,7 @@ module ApplicationHelper
 			@items = @user_items + @items
 
 			if user_signed_in? && current_user.admin_panel_visible?
-				@items << {name: "Admin", path: "/admin/"}
+				@items << {name: "Admin", path: admin_path}
 			end
 
 		end

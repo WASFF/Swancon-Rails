@@ -26,6 +26,7 @@ authorization do
 	role :committee do
 		includes :member
 		includes :"ticket seller"
+		has_permission_on [:index], to: :admin
 		has_permission_on [:tickets], 
 			:to => [:index, :export_badges, :export_salesdata, 
 					:card_issue, :card_unissue]
