@@ -52,6 +52,6 @@ module DoomCon
 		# Version of your assets, change this if you want to expire all your assets
 		config.assets.version = '1.0' 
 
-		config.assets.precompile += ['main-ipad.css', 'main-print.css', 'mobile.js', 'sc2013-new.css', 'reset.css' ]
+		config.assets.precompile += [ '*.js', '*.css' ]
 	end
 end
