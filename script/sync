@@ -1,4 +1,4 @@
 #!/bin/sh
 
-scp wasff@clientweb.sektorseven.net:/home/wasff/2013/shared/privateconfig/production.sqlite3 db/development.sqlite3
-rsync -avz wasff@clientweb.sektorseven.net:/home/wasff/2013/shared/system public/
+scp wasff@clientweb.sektorseven.net:/home/wasff/2014/shared/privateconfig/production.sqlite3 db/development.sqlite3
+rsync -avz wasff@clientweb.sektorseven.net:/home/wasff/2014/shared/system public/
