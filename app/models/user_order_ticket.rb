@@ -21,7 +21,7 @@ class UserOrderTicket < ActiveRecord::Base
 	end
 
 	def price
-		ticket_type.price
+		concession ? ticket_type.concession_price : ticket_type.price
 	end
 
 	def isvoid?
