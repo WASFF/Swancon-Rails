@@ -5,11 +5,48 @@
 <ul class="link">
 	<li id="details">Gatherer of Details</li>
 	<li><%= link_to "Front Desk", action: "select", controller: "seller" %></li>
+	<li id="store_admin">Store Administration</li>
+	<li id="treas_admin">Treasury Administration</li>
+	<li id="content_admin">Content Administration</li>
+</ul>
+
+<div id="store_admin" class="hideable">
+<h1>Store Admin</h1>
+<ul>
 	<li><%= link_to "Ticket Administration", ticket_types_path %></li>
 	<li><%= link_to "Ticket Set Administration", ticket_sets_path %></li>
+	<li><%= link_to "Ticket List", tickets_all_path %></li>
+</ul>
+</div>
+
+<div id="treas_admin" class="hideable">
+<h1>Treasury Admin</h1>
+<ul>
 	<li><%= link_to "Orders Administration", orders_path(all: true) %></li>
 	<li><%= link_to "Payments Administration", payments_path %></li>
 </ul>
+</div>
+
+<div id="content_admin" class="hideable">
+<h1>Content Admin</h1>
+<ul>
+	<li>
+		<%= link_to "Content Pages", content_pages_path if permitted_to? :index, :content_pages  %>
+	</li>
+	<li>
+		<%= link_to "Content Blocks", content_blocks_path if permitted_to? :index, :content_blocks  %>
+	</li>
+	<li>
+		<%= link_to "Content Tags", content_tags_path if permitted_to? :index, :content_tags  %>
+	</li>
+	<li>
+		<%= link_to "Content Images", content_images_path if permitted_to? :index, :content_images  %>
+	</li>
+	<li>
+		<%= link_to "Content Files", content_files_path if permitted_to? :index, :content_files %>
+	</li>
+</ul>
+</div>
 
 <div id="details" class="hideable">
 <h1>Search Members</h1>
