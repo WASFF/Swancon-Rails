@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/lordmortis/MortisCMS.git
-  revision: 709dc68a43404bef852f1787999e50925e6ee32c
+  revision: 6d8c31599342391bf3ad33acc3f41f9fdaba8a95
   specs:
-    MortisCMS (0.1.16)
+    MortisCMS (0.1.18)
       RedCloth
       cocaine (= 0.3.2)
       paperclip (~> 3.0)
