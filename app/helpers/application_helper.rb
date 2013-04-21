@@ -44,6 +44,7 @@ module ApplicationHelper
 			@user_items = []
 			if user_signed_in?
 				@user_items << {name: "My Profile", path: edit_user_registration_path}
+				@user_items << {name: "My Tickets", path: tickets_my_path}
 				@user_items << {name: "Membership Details", path: edit_my_member_details_path}
 				@user_items << {name: "Orders", path: orders_path}
 				@user_items << {name: "Log Out", path: destroy_user_session_path}
