@@ -9,6 +9,9 @@
 		%a{class: "twitter-timeline", href: "https://twitter.com/Swancon", "data-widget-id" => "302699362914549760", "data-theme" => "light", "data-link-color" => "#078C47"}
 			Tweets by @Swancon
 
+- if @page != nil 
+	= redcloth_render(@page.block.bodytext)
+
 - promoted_items.each do |item|
 	%div
 		=link_to item.summary, controller: :content_viewer, action: :content, id: item.id
