@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1"/>
-	<title>Swancon 2013</title>
+	<title> <%= "Swancon #{Rails.application.config.swancon_year}" %> </title>
 	<link rel="shortcut icon" href="<%= image_path "favicon.png" %>" />
 	<link rel="apple-touch-icon-precomposed" href="<%= image_path "mobileicon57.png" %>" />
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= image_path "mobileicon72.png" %>"/>
@@ -118,7 +118,7 @@
 	            <%= link_to(image_tag("sn-twitterb.png",     height: 32, width: 32, :alt =>"Twitter"    ), "https://twitter.com/#!/swancon") %>
 	            <%= link_to(image_tag("sn-tumblr.png",      height: 32, width: 32, :alt =>"Tumblr"     ), "http://swancon.tumblr.com/") %>
 	            <%= link_to(image_tag("sn-livejournal.png", height: 32, width: 32, :alt =>"Livejournal"), "http://swancon.livejournal.com/") %>
-	            <%= link_to(image_tag("sn-email.png",       height: 32, width: 32, :alt =>"Email"      ), "mailto:convenor-2013@swancon.com.au?subject=Website%20enquiry") %>
+	            <%= link_to(image_tag("sn-email.png",       height: 32, width: 32, :alt =>"Email"      ), "mailto:convenor-#{Rails.application.config.swancon_year}@swancon.com.au?subject=Website%20enquiry") %>
 	          </div>
 				<div>
 	              <%if notice!=nil %><p class="notice"><%= notice %></p><% end %>
