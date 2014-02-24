@@ -15,6 +15,13 @@ GIT
     nested_form (0.3.1)
 
 GIT
+  remote: https://github.com/4ormat/execjs.git
+  revision: fe2bde333660f4893be59fb7a4fd7f42ae5934ac
+  ref: fe2bde333660f4893be59fb7a4fd7f42ae5934ac
+  specs:
+    execjs (2.0.2)
+
+GIT
   remote: https://github.com/plataformatec/devise.git
   revision: 72cbafa3225bab8904d62df9b1f5cbaaa0322931
   specs:
@@ -78,8 +85,6 @@ GEM
       actionpack (>= 3.0.0)
     declarative_authorization (0.5.7)
     erubis (2.7.0)
-    execjs (1.4.0)
-      multi_json (~> 1.0)
     faraday (0.8.6)
       multipart-post (~> 1.1)
     haml (4.0.1)
@@ -101,7 +106,6 @@ GEM
     json (1.7.7)
     jwt (0.1.8)
       multi_json (>= 1.5)
-    libv8 (3.11.8.17)
     mail (2.5.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -183,7 +187,6 @@ GEM
     rake (10.0.3)
     rdoc (3.12.2)
       json (~> 1.4)
-    ref (1.0.4)
     sass (3.2.7)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -199,9 +202,6 @@ GEM
       activerecord (~> 3.0)
       activesupport (~> 3.0)
       polyamorous (~> 0.5.0)
-    therubyracer (0.11.4)
-      libv8 (~> 3.11.8.12)
-      ref
     thor (0.17.0)
     tilt (1.3.6)
     treetop (1.4.12)
@@ -225,9 +225,9 @@ DEPENDENCIES
   csv_builder
   declarative_authorization
   devise!
+  execjs!
   haml-rails
   jquery-rails (>= 1.0.14)
-  libv8 (~> 3.11.8)
   nested_form!
   oa-oauth
   omniauth
@@ -237,5 +237,4 @@ DEPENDENCIES
   sass-rails
   sqlite3
   squeel
-  therubyracer
   uglifier
