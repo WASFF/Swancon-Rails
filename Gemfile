@@ -30,7 +30,7 @@ gem 'csv_builder'
 gem "nested_form"
 
 #gem 'MortisCMS', :require => 'mortiscms', :path => '/Users/lordmortis/Projects/MortisCMS'
-gem 'MortisCMS', :require => 'mortiscms', :git => 'git://github.com/lordmortis/MortisCMS.git'
+gem 'MortisCMS', require: 'mortiscms', git: 'git://github.com/lordmortis/MortisCMS.git', branch: :rails4
 
 gem "haml-rails"
 
