@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '4.0.4'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -12,9 +12,9 @@ gem 'uglifier'
 gem "execjs", git: "https://github.com/4ormat/execjs.git", ref: "fe2bde333660f4893be59fb7a4fd7f42ae5934ac"
 
 
-gem 'jquery-rails', '>= 1.0.14'
+gem 'jquery-rails'
 gem 'sqlite3'
-gem 'devise', :git => "https://github.com/plataformatec/devise.git"
+gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
@@ -25,7 +25,7 @@ gem 'actionmailer-with-request'
 gem 'squeel'
 gem 'csv_builder'
 
-gem "nested_form", :git => "git://github.com/ryanb/nested_form.git"
+gem "nested_form"
 
 #gem 'MortisCMS', :require => 'mortiscms', :path => '/Users/lordmortis/Projects/MortisCMS'
 gem 'MortisCMS', :require => 'mortiscms', :git => 'git://github.com/lordmortis/MortisCMS.git'
