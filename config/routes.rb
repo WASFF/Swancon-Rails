@@ -88,17 +88,17 @@ DoomCon::Application.routes.draw do
   
   match 'store' => 'store#index', via: [:get]
   
-  match 'store/empty_cart' => 'store#clear_cart', via: [:get]
+  match 'store/empty_cart' => 'store#clear_cart', via: [:post]
 
   match 'store/ticket/:id' => 'store#ticket', via: [:get]
-  match 'store/ticket/add/:id' => 'store#ticket_add', via: [:get]
-  match 'store/ticket/remove/:index' => 'store#ticket_remove', via: [:get]
+  match 'store/ticket/add/:id' => 'store#ticket_add', via: [:post]
+  match 'store/ticket/remove/:index' => 'store#ticket_remove', via: [:post]
 
   match 'store/merchandise/:id' => 'store#merchandise', via: [:get]
-  match 'store/merchandise/add/:id' => 'store#merchandise_add', via: [:get]
-  match 'store/merchandise/remove/:index' => 'store#merchandise_remove', via: [:get]
+  match 'store/merchandise/add/:id' => 'store#merchandise_add', via: [:post]
+  match 'store/merchandise/remove/:index' => 'store#merchandise_remove', via: [:post]
 
-  match 'store/purchase' => 'store#purchase', via: [:get]
+  match 'store/purchase' => 'store#purchase', via: [:post]
 
   match 'programme/suggest' => 'livecon_glue#suggest', via: [:get]
   match 'programme/suggestion_accepted' => 'livecon_glue#suggestion_accepted', via: [:get]
