@@ -5,6 +5,8 @@ gem 'rails', '4.0.4'
 # Gems used only for assets and not required
 # in production environments by default.
 gem 'sass-rails'
+#TODO: this should not be required when we start using sass rails 4.0.2
+gem 'sprockets', '2.11.0'
 gem 'coffee-rails'
 gem 'uglifier'
 
@@ -34,6 +36,7 @@ gem "haml-rails"
 
 group :development do
 	gem 'capistrano'
+	gem 'letter_opener'
 end
 
 group :development, :test do
