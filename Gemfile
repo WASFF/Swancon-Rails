@@ -21,7 +21,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem "oa-oauth", :require => "omniauth/oauth"
-gem 'declarative_authorization'
+gem "pundit"
 
 gem 'actionmailer-with-request'
 gem 'squeel'
