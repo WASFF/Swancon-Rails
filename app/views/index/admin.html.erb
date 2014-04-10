@@ -31,19 +31,19 @@
 <h1>Content Admin</h1>
 <ul>
 	<li>
-		<%= link_to "Content Pages", content_pages_path if permitted_to? :index, :content_pages  %>
+		<%= link_to "Content Pages", content_pages_path if user_can?("see", ContentPage) %>
 	</li>
 	<li>
-		<%= link_to "Content Blocks", content_blocks_path if permitted_to? :index, :content_blocks  %>
+		<%= link_to "Content Blocks", content_blocks_path if user_can?("see", ContentBlock) %>
 	</li>
 	<li>
-		<%= link_to "Content Tags", content_tags_path if permitted_to? :index, :content_tags  %>
+		<%= link_to "Content Tags", content_tags_path if user_can?("see", ContentTag)  %>
 	</li>
 	<li>
-		<%= link_to "Content Images", content_images_path if permitted_to? :index, :content_images  %>
+		<%= link_to "Content Images", content_images_path if user_can?("see", ContentImage) %>
 	</li>
 	<li>
-		<%= link_to "Content Files", content_files_path if permitted_to? :index, :content_files %>
+		<%= link_to "Content Files", content_files_path if user_can?("see", ContentFile) %>
 	</li>
 </ul>
 </div>

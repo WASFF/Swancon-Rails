@@ -8,8 +8,7 @@ Mortiscms.config do |config|
 	config.publish_from_address = "donotreply@swancon.com.au"
 	config.publish_from_friendly_address = "Swancon 2014 Auto Mailer <donotreply@swancon.com.au>"
 	config.link_root = "http://2014.swancon.com.au/"
-	config.writer_query_message = :is_writer?
-	config.editor_query_message = :is_editor?
+	config.authorization_system = :pundit
 	config.user_model = "User"
 	config.publish_extra_emails = [["Swancon", "swancon@guild.uwa.edu.au"]]
 end

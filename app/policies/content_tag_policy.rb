@@ -1,0 +1,3 @@
+class ContentTagPolicy < ContentPolicy
+end
+

@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+	include Pundit
   protect_from_forgery
   layout "2014"
   before_filter :title
@@ -44,5 +45,9 @@ class ApplicationController < ActionController::Base
 #		else
 			root_path
 #		end
+	end
+
+	def authorize_path!
+		render "layouts/unauthorized", status: :unauthorized unless RoutePolicy.new(current_user).visit?(controller_name, action_name)
 	end
 end
