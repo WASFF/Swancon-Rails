@@ -41,7 +41,7 @@ class MerchandiseSetsController < ApplicationController
   # POST /merchandise_sets
   # POST /merchandise_sets.xml
   def create
-    @merchandise_set = MerchandiseSet.new(params[:merchandise_set])
+    @merchandise_set = MerchandiseSet.new(merchandise_set_params)
 
     respond_to do |format|
       if @merchandise_set.save
@@ -60,7 +60,7 @@ class MerchandiseSetsController < ApplicationController
     @merchandise_set = MerchandiseSet.find(params[:id])
 
     respond_to do |format|
-      if @merchandise_set.update_attributes(params[:merchandise_set])
+      if @merchandise_set.update_attributes(merchandise_set_params)
         format.html { redirect_to(@merchandise_set, :notice => 'Merchandise set was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -84,5 +84,12 @@ class MerchandiseSetsController < ApplicationController
       format.html { redirect_to(merchandise_sets_url) }
       format.xml  { head :ok }
     end
+  end
+
+private
+  def merchandise_set_params
+    params.require(:merchandise_set).permit(
+      :name, :merchandise_type_id, :merchandise_option_set_id, :description, :order_index
+    )
   end
 end

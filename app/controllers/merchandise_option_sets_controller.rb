@@ -85,4 +85,13 @@ class MerchandiseOptionSetsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+
+private
+  def merchandise_option_set_params
+    params.require(:merchandise_option_set).permit(
+      :name
+    )
+  end
+
 end

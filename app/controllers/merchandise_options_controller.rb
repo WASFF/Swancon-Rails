@@ -79,4 +79,11 @@ class MerchandiseOptionsController < ApplicationController
 			redirect_to @merchandise_option
 		end
   end
+
+private
+  def merchandise_option_params
+    params.require(:merchandise_option).permit(
+      :name
+    )
+  end
 end

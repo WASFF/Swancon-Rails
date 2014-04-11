@@ -42,7 +42,7 @@ class MerchandiseTypesController < ApplicationController
   # POST /merchandise_types
   # POST /merchandise_types.xml
   def create
-    @merchandise_type = MerchandiseType.new(params[:merchandise_type])
+    @merchandise_type = MerchandiseType.new(merchandise_type_params)
 
     respond_to do |format|
       if @merchandise_type.save
@@ -61,7 +61,7 @@ class MerchandiseTypesController < ApplicationController
     @merchandise_type = MerchandiseType.find(params[:id])
 
     respond_to do |format|
-      if @merchandise_type.update_attributes(params[:merchandise_type])
+      if @merchandise_type.update_attributes(merchandise_type_params)
         format.html { redirect_to(@merchandise_type, :notice => 'Merchandise type was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -117,4 +117,12 @@ class MerchandiseTypesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+private
+  def merchandise_type_params
+    params.require(:merchandise_type).permit(
+      :name, :merchandise_set_id, :price, :available_from, :available_to
+    )
+  end
+
 end
