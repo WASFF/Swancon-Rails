@@ -35,8 +35,9 @@ gem 'MortisCMS', require: 'mortiscms', git: 'git://github.com/lordmortis/MortisC
 gem "haml-rails"
 
 group :development do
+	gem 'capistrano-rails'
+	gem 'capistrano-rvm'
 	gem 'byebug'
-	gem 'capistrano'
 	gem 'letter_opener'
 end
 

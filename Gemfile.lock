@@ -58,6 +58,15 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (~> 1.3)
+    capistrano-bundler (1.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
+    capistrano-rails (1.1.1)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rvm (0.1.1)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.4)
@@ -247,7 +256,8 @@ DEPENDENCIES
   MortisCMS!
   actionmailer-with-request
   byebug
-  capistrano
+  capistrano-rails
+  capistrano-rvm
   coffee-rails
   csv_builder
   devise
