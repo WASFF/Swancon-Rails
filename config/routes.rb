@@ -83,8 +83,8 @@ DoomCon::Application.routes.draw do
   match 'tickets/:action/:id' => 'tickets', via: [:get, :post]
 
   match 'seller' => 'seller#index', via: [:get]
-  match 'seller/:action' => 'seller', via: [:get]
-  match 'seller/:action/:id' => 'seller', via: [:get]
+  match 'seller/:action' => 'seller', via: [:get, :post]
+  match 'seller/:action/:id' => 'seller', via: [:get, :post]
   
   match 'store' => 'store#index', via: [:get]
   

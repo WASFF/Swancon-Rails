@@ -56,11 +56,6 @@ DoomCon::Application.configure do
 	config.action_mailer.default_url_options = { :host => '2015-dev.swancon.com.au', :protocol => 'https' }
 	
 	ActionMailer::Base.delivery_method = :smtp
-	ActionMailer::Base.smtp_settings = {
-	   :address => "mail.sektorseven.net",
-	   :port => 25,
-	   :domain => "2014.swancon.com.au",
-	}
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
