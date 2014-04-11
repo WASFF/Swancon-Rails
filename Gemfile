@@ -34,6 +34,8 @@ gem 'MortisCMS', require: 'mortiscms', git: 'git://github.com/lordmortis/MortisC
 
 gem "haml-rails"
 
+gem "exception_notification"
+
 group :development do
 	gem 'capistrano-rails'
 	gem 'capistrano-rvm'

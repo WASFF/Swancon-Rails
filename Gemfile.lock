@@ -91,6 +91,9 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
+    exception_notification (4.0.1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     git (1.2.6)
@@ -261,6 +264,7 @@ DEPENDENCIES
   coffee-rails
   csv_builder
   devise
+  exception_notification
   execjs!
   haml-rails
   jquery-rails
