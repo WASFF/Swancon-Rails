@@ -73,7 +73,7 @@ class SellerController < ApplicationController
 	def create
 		if params[:user] != nil
 			if params[:user][:id].to_i == 0
-				@user = User.new(params[:user])
+				@user = User.new(user_params)
 				if @user.password == nil || @user.password.strip == ""
 					@user.password = Devise.friendly_token[0,20]
 					@user.password_confirmation = @user.password
@@ -103,10 +103,10 @@ class SellerController < ApplicationController
 					return
 				else
 					if @user.member_detail == nil
-						@user.member_detail = MemberDetail.new(params[:user][:member_detail_attributes])
+						@user.member_detail = MemberDetail.new(user_params[:member_detail_attributes])
 						@user.member_detail.save
 					else
-						@user.member_detail.update_attributes(params[:user][:member_detail_attributes])
+						@user.member_detail.update_attributes(user_params[:member_detail_attributes])
 						@user.save
 					end
 				end
@@ -169,5 +169,16 @@ class SellerController < ApplicationController
 			format.html # index.html.erb
 			format.js
 		end
+	end
+
+private
+	def user_params
+		params.require(:user).permit :username, :email, :password, :password_confirmation, 
+			member_detail_attributes: {
+				:name_first, :name_last, :name_badge, :address_1, :address_2, :address_3,
+				:address_postcode, :address_country, :address_state, :phone, :email_optin,
+				:disclaimer_signed
+			}
+
 	end
 end
