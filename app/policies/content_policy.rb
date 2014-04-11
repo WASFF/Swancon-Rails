@@ -16,7 +16,7 @@ class ContentPolicy
 
   def admin
     unless @user.blank?
-      @user.role_symbols.include? :committee
+      @user.role_symbols.include? :admin
     else
       false
     end        
