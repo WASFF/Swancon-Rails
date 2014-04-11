@@ -1,5 +1,5 @@
 class SellerController < ApplicationController
-	filter_access_to :all
+	before_filter :authorize_path!
 
 	def select
 		@users = User.joins("LEFT OUTER JOIN member_details ON users.id = member_details.user_id").includes(:member_detail)

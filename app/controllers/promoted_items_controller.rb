@@ -1,5 +1,6 @@
 class PromotedItemsController < ApplicationController
-	filter_access_to :all
+	before_filter :authorize_path!
+	
 	def index
 		@selected = Settings.promoted_items_tag_id
 		tag_list
