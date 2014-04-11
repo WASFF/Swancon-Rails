@@ -19,7 +19,9 @@
 		<td><%= render_time(payment.created_at) %></td>
 		<td><%= render_money(payment.amount) %></td>
     <td><%= payment.type.name %></td>
-    <td><%= link_to 'Show', payment %></td>
+    <%- unless payment.isvoid? %>
+      <td><%= link_to 'Show', payment %></td>
+    <%- end %>
   </tr>
 <% end %>
 </table>
