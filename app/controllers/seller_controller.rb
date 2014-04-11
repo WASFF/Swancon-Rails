@@ -174,11 +174,11 @@ class SellerController < ApplicationController
 private
 	def user_params
 		params.require(:user).permit :username, :email, :password, :password_confirmation, 
-			member_detail_attributes: {
+			member_detail_attributes: [
 				:name_first, :name_last, :name_badge, :address_1, :address_2, :address_3,
 				:address_postcode, :address_country, :address_state, :phone, :email_optin,
 				:disclaimer_signed
-			}
+			]
 
 	end
 end
