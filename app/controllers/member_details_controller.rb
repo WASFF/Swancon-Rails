@@ -69,7 +69,7 @@ class MemberDetailsController < ApplicationController
 	# POST /member_details
 	# POST /member_details.xml
 	def create
-		@member_detail = MemberDetail.new(detail_params)
+		@member_detail = MemberDetail.new(member_detail_params)
 		
 		unless user_can_visit?(:member_details, :new)
 			@member_detail.user = current_user
