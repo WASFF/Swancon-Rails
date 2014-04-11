@@ -5,13 +5,34 @@ class RoutePolicy
     admin: {
       index: true,
       tickets: true,
+      ticket_sets: true,
+      ticket_types: true,
+      payment_types: true,
+      merchandise_sets: true,
+      merchandise_types: true,
+      payments: true,
+      panel_suggestions: true,
+      promoted_items: true,
       user_orders: true,
-      seller: true
+      users: true,
+      seller: true,
+      vendors: true,
+      vendor_orders: true
     },
     committee: {
       index: true,
       tickets: [:index, :export_badges, :export_salesdata, :card_issue, :card_unissue ],
+      ticket_sets: [:index, :show, :new, :create, :edit, :update, :show],
+      ticket_types: [:index, :show, :new, :create, :edit, :update, :show],
+      payment_types: [:index, :show, :new, :create, :edit, :update, :show],
+      merchandise_sets: [:index, :show, :new, :create, :edit, :update, :show],
+      merchandise_types: [:index, :show, :new, :create, :edit, :update, :show, :add_image, :remove_image, :update_image_description],
+      payments: [:index, :show],
+      panel_suggestions: [:destroy, :make_visible, :make_invisible],
+      promoted_items: [:index, :form_save],
+      member_details: [:new, :edit, :index, :show, :destroy],
       user_orders: :remail,
+      users: [:index, :show, :purchase_for, :edit_member_details],
       seller: true
     },
     ticket_seller: {
@@ -21,9 +42,15 @@ class RoutePolicy
     },
     user: {
       tickets: [:transfer, :find_user, :confirm_transfer, :reconfirm_transfer, :my ],
-      user_orders: [:index, :show, :void, :unvoid ]
+      user_orders: [:index, :show, :void, :unvoid ],
+      panel_suggestions: [:update, :edit],
+      member_details: [:edit_my, :update, :create]
     },
-    guest: {index: [:index]}
+    guest: {
+      index: [:index],
+      panel_suggestions: [:index, :show, :new, :create],
+      award_nomination: [:index, :show, :new, :create, :edit, :update, :show]
+    }
   }.freeze
 
   def initialize(user)
