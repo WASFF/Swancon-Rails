@@ -1,8 +1,9 @@
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
-set :application, '2014 Webapp'
+set :application, 'swancon2014'
 set :repo_url, 'git@github.com:lordmortis/Swancon-Rails.git'
+set :rvm_ruby_version, '2.1.1'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
