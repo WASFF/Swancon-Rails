@@ -1,5 +1,5 @@
 class TicketSetsController < ApplicationController
-	filter_resource_access
+  before_filter :authorize_path!
   # GET /ticket_sets
   # GET /ticket_sets.xml
   def index

@@ -1,5 +1,6 @@
 class MerchandiseTypesController < ApplicationController
-	filter_resource_access :additional_member => [:mark_shipped, :add_image, :remove_image, :update_image_description]
+	before_filter :authorize_path!
+
   # GET /merchandise_types
   # GET /merchandise_types.xml
   def index

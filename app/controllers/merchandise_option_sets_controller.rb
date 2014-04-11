@@ -1,5 +1,5 @@
 class MerchandiseOptionSetsController < ApplicationController
-	filter_resource_access
+	before_filter :authorize_path!
   # GET /merchandise_option_sets
   # GET /merchandise_option_sets.xml
   def index

@@ -1,5 +1,5 @@
 class MemberDetailsController < ApplicationController
-	filter_resource_access :additional_collection => [:edit_my]
+	before_filter :authorize_path!
 	# GET /member_details
 	# GET /member_details.xml
 	def index
@@ -14,7 +14,7 @@ class MemberDetailsController < ApplicationController
 	# GET /member_details/1
 	# GET /member_details/1.xml
 	def show
-		if !permitted_to? :index
+		unless user_can_visit?(:member_details, :index)
 			redirect_to :action => "edit_my"
 			return
 		end
@@ -71,7 +71,7 @@ class MemberDetailsController < ApplicationController
 	def create
 		@member_detail = MemberDetail.new(params[:member_detail])
 		
-		if !permitted_to? :new or @member_detail.user == nil
+		unless user_can_visit?(:member_details, :new)
 			@member_detail.user = current_user
 		end
 
@@ -88,7 +88,7 @@ class MemberDetailsController < ApplicationController
 					if @member_detail.user == current_user
 						redirect_to(edit_my_member_details_path(@member_detail), :notice => 'Your details were saved!')
 					else
-						if permitted_to? :show
+						if user_can_visit?(:member_details, :show)
 							redirect_to(@member_detail, :notice => 'Member detail was successfully created.')
 						elsif session[:back] != nil
 							redirect_to(session[:back], :notice => 'Member detail was successfully created.')
@@ -110,7 +110,7 @@ class MemberDetailsController < ApplicationController
 	def update
 		@member_detail = MemberDetail.find(params[:id])
 		
-		if !permitted_to? :index
+		unless user_can_visit?(:member_details, :index)
 			params[:member_detail].delete(:user_id)
 		end
 		

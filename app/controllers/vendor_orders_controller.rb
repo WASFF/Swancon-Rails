@@ -1,5 +1,5 @@
 class VendorOrdersController < ApplicationController
-	filter_resource_access
+  before_filter :authorize_path!
   # GET /vendor_orders
   # GET /vendor_orders.xml
   def index

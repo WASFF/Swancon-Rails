@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	filter_resource_access
+	before_filter :authorize_path!
 
 	def index
 		@users = User.joins("LEFT OUTER JOIN member_details ON users.id = member_details.user_id").includes(:member_detail)

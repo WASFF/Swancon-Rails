@@ -1,5 +1,6 @@
 class UserOrdersController < ApplicationController
-	filter_resource_access :additional_member => [:mark_paid, :remail, :void, :unvoid]
+	before_filter :authorize_path!
+	
   # GET /payment_types
   # GET /payment_types.xml
   def index

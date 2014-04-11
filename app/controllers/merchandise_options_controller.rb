@@ -1,5 +1,5 @@
 class MerchandiseOptionsController < ApplicationController
-	filter_resource_access
+	before_filter :authorize_path!
   # GET /merchandise_options/1
   # GET /merchandise_options/1.xml
   def show

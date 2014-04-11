@@ -1,5 +1,5 @@
 class TicketTypesController < ApplicationController
-	filter_resource_access
+  before_filter :authorize_path!
   # GET /ticket_types
   # GET /ticket_types.xml
   def index
