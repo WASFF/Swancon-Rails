@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
-	filter_access_to :all
-
+	before_filter :authorize_path!
+	
 	def index
 		@all = true
 		@multiple = false
