@@ -1,7 +1,7 @@
 class TransferMailer < ActionMailer::Base
   default from: "Swancon #{Rails.application.config.swancon_year} Memberships <memberships-#{Rails.application.config.swancon_year}@swancon.com.au>", return_path: "memberships-#{Rails.application.config.swancon_year}@swancon.com.au"
-	helper :application, Authorization::AuthorizationHelper
-
+  add_template_helper(ApplicationHelper)
+  
 	def reconfirm_sender(transfer)
 		@ticket = transfer.ticket
 		@recipient = transfer.recipient
@@ -72,9 +72,5 @@ class TransferMailer < ActionMailer::Base
 		@sender = transfer.sender
 		@transfer = transfer
 		mail(to: "memberships-#{Rails.application.config.swancon_year}@swancon.com.au", subject: "Ticket Transfer #{transfer.id} completed.")
-	end
-
-	def permitted_to?(*args)
-		false
 	end
 end

@@ -1,6 +1,7 @@
 class StoreMailer < ActionMailer::Base
 	default from: "Swancon #{Rails.application.config.swancon_year} Store/Tickets <tickets-#{Rails.application.config.swancon_year}@swancon.com.au>", return_path: "tickets-#{Rails.application.config.swancon_year}@swancon.com.au"
-	helper :application, Authorization::AuthorizationHelper
+	helper_method :user_can_visit?, :user_can?
+	helper :application
 
 	def invoice(order)
 		@order = order
@@ -35,8 +36,12 @@ class StoreMailer < ActionMailer::Base
 		end
 		mail(:to => user.email, :subject => subject)
 	end
-	
-	def permitted_to?(*args)
+
+	def user_can_visit?(*args)
+		false
+	end
+
+	def user_can?(*args)
 		false
 	end
 end
