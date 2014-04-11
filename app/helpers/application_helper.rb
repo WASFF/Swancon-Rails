@@ -1,5 +1,3 @@
-require 'pp'
-
 module ApplicationHelper
   def render_time(time)
     if time != nil
@@ -78,43 +76,5 @@ module ApplicationHelper
     end
 
     @right
-  end
-
-  def user_can?(action, object)
-    object_is_instance = object.class != Class
-    if object_is_instance
-      klass = object.class
-    else
-      klass = object
-    end
-
-    policy_instance = nil
-
-    unless action.ends_with?("?")
-      action += "?"
-    end
-
-    begin
-      policy_class = Module.const_get("#{klass.to_s}Policy")
-      if object_is_instance
-        policy_instance = policy_class.new(current_user, object)
-      else
-        policy_instance = policy_class.new(current_user)
-      end
-    rescue NameError => e
-      logger.warn "Could not find policy for class #{klass.to_s}"
-      return false
-    end
-
-    unless action.ends_with?("?")
-      action += "?"
-    end
-
-    if policy_instance.respond_to? action
-      policy_instance.send(action)
-    else
-      logger.warn "#{klass.to_s}Policy doesn't respond to #{action}"
-      false
-    end
   end
 end
