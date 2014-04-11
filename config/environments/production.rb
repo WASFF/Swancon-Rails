@@ -53,7 +53,7 @@ DoomCon::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-	config.action_mailer.default_url_options = { :host => '2014.swancon.com.au', :protocol => 'https' }
+	config.action_mailer.default_url_options = { :host => '2015.swancon.com.au', :protocol => 'https' }
 	
 	ActionMailer::Base.delivery_method = :smtp
 	ActionMailer::Base.smtp_settings = {

@@ -4,13 +4,13 @@
 # server in each group is considered to be the first
 # unless any hosts have the primary property set.
 # Don't declare `role :all`, it's a meta role
-role :app, %w{sc2014@swancon-mel1.swancon.com.au}
-role :web, %w{sc2014@swancon-mel1.swancon.com.au}
-role :db,  %w{sc2014@swancon-mel1.swancon.com.au}
+role :app, %w{sc2015@swancon-mel1.swancon.com.au}
+role :web, %w{sc2015@swancon-mel1.swancon.com.au}
+role :db,  %w{sc2015@swancon-mel1.swancon.com.au}
 
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :deploy_to, '/home/sc2014/SwanconRails/staging'
+set :deploy_to, '/home/sc2015/SwanconRails/staging'
 
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
