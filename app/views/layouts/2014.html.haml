@@ -16,6 +16,8 @@
 		= stylesheet_link_tag "2014-print", :media => "print"
 
 	%body
+		- if Rails.env == "staging"
+			%div#staging You are on the Staging site. None of your changes will be reflected on the real site.
 		%div#wrapper
 			%div#header
 				%div#logo
