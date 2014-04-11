@@ -57,7 +57,7 @@ DoomCon::Application.routes.draw do
     get 'viewpurchase', :on => :member
   end
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :users_admin, :controller => "users" do
     get 'purchase_for', :on => :member
