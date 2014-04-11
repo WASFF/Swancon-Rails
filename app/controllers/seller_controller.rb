@@ -179,6 +179,5 @@ private
 				:address_postcode, :address_country, :address_state, :phone, :email_optin,
 				:disclaimer_signed
 			]
-
 	end
 end
