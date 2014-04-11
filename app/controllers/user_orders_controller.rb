@@ -37,9 +37,9 @@ class UserOrdersController < ApplicationController
 		@order = UserOrder.find(params[:id])
 		
 		if @order.payment == nil
-			StoreMailer.invoice(@order).deliver
+			StoreMailer.invoice(@order, current_user).deliver
 		else
-			StoreMailer.receipt(@order.payment).deliver
+			StoreMailer.receipt(@order.payment, current_user).deliver
 		end
 		
 		render :show
@@ -58,7 +58,7 @@ class UserOrdersController < ApplicationController
 		payment.operator = current_user
 		payment.save
 
-		StoreMailer.receipt(payment).deliver		
+		StoreMailer.receipt(payment, current_user).deliver		
 		render :action => :show
 	end
 

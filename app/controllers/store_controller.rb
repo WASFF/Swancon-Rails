@@ -162,8 +162,8 @@ class StoreController < ApplicationController
 				if order.payment_type.requires_reconciliation
 					if params[:send_email] == "true" or !@can_disable_email
 						if order.user.email_valid
-							StoreMailer.invoice(order).deliver
-							StoreMailer.confirmation_required(order).deliver
+							StoreMailer.invoice(order, current_user).deliver
+							StoreMailer.confirmation_required(order, current_user).deliver
 							flash[:notice] += ", Email Sent"
 						else
 							flash[:notice] += ", User has no email address. Ensure they take their reciept print out (print this page)!"
@@ -176,15 +176,15 @@ class StoreController < ApplicationController
 					payment.verification_string = "Point Of Sale"
 					payment.save
 					if params[:send_email] == "true"
-						StoreMailer.receipt(payment).deliver
+						StoreMailer.receipt(payment, current_user).deliver
 					end
-					StoreMailer.confirmation_required(order).deliver
+					StoreMailer.confirmation_required(order, current_user).deliver
 					redirect_to payment
 					return
 				end
 			else
-				StoreMailer.invoice(order).deliver
-				StoreMailer.confirmation_required(order).deliver
+				StoreMailer.invoice(order, current_user).deliver
+				StoreMailer.confirmation_required(order, current_user).deliver
 			end
 			
 			redirect_to order_path(order)

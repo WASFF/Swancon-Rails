@@ -1,27 +1,37 @@
-class StoreMailer < ActionMailer::Base
+class StoreMailer < BaseMailer
 	default from: "Swancon #{Rails.application.config.swancon_year} Store/Tickets <tickets-#{Rails.application.config.swancon_year}@swancon.com.au>", return_path: "tickets-#{Rails.application.config.swancon_year}@swancon.com.au"
-	helper_method :user_can_visit?, :user_can?
-	helper :application
 
-	def invoice(order)
+	def invoice(order, current_user = nil)
 		@order = order
 		@email = true
-		mail(:to => order.user.email, :subject => "Invoice #{order.invoice_number}")
+		mail(
+			:to => order.user.email,
+			current_user: current_user,
+			:subject => "Invoice #{order.invoice_number}"
+		)
 	end
 	
-	def receipt(payment)
+	def receipt(payment, current_user = nil)
 		@payment = payment
 		@email = true
-		mail(:to => payment.user_order.user.email, :subject => "Receipt #{payment.receipt_number}")
+		mail(
+			:to => payment.user_order.user.email,
+			current_user: current_user,
+			subject: "Receipt #{payment.receipt_number}"
+		)
 	end
 
-	def confirmation_required(order)
+	def confirmation_required(order, current_user = nil)
 		@order = order
 		@email = true
-		mail(:to => "memberships-#{Rails.application.config.swancon_year}@swancon.com.au", :subject => "New Order Recieved: #{order.invoice_number}")
+		mail(
+			to: "memberships-#{Rails.application.config.swancon_year}@swancon.com.au",
+			subject: "New Order Recieved: #{order.invoice_number}",
+			current_user: current_user
+		)
 	end
 
-	def tshirtconfirm(user, shirtorders, orders)
+	def tshirtconfirm(user, shirtorders, orders, current_user = nil)
 		@user = user
 		@detail = user.member_detail
 		@shirtorders = shirtorders
@@ -34,7 +44,11 @@ class StoreMailer < ActionMailer::Base
 				subject += " [#{order.payment.reciept_number}]"
 			end
 		end
-		mail(:to => user.email, :subject => subject)
+		mail(
+			to: user.email,
+			subject: subject,
+			 current_user: current_user
+		)
 	end
 
 	def user_can_visit?(*args)
