@@ -52,9 +52,9 @@ namespace :deploy do
       tag_msg = "Deployed by #{user} <#{email}> to #{fetch :stage} as #{fetch :release_name}"
  
       tag_name = "deploys/2014/#{fetch :stage }"
-      execute :git, %(push origin :refs/tag/#{tag_name})
-      execute :git, %(tag -f #{tag_name} #{fetch :branch} -m "#{tag_msg}")
-      execute :git, "push -f origin #{tag_name}"
+      execute :git, %(push origin :refs/tags/#{tag_name})
+      execute :git, %(tag -f #{tag_name} origin/#{fetch :branch} -m "#{tag_msg}")
+      execute :git, "push origin #{tag_name}"
     end
   end
 
