@@ -4,7 +4,8 @@ gem 'rails', '4.0.4'
 
 # Gems used only for assets and not required
 # in production environments by default.
-gem 'sass-rails'
+gem 'sass-rails', '~> 4.0.2'
+gem 'compass-rails'
 #TODO: this should not be required when we start using sass rails 4.0.2
 gem 'sprockets', '2.11.0'
 gem 'coffee-rails'
