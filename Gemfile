@@ -29,6 +29,8 @@ gem 'csv_builder'
 
 gem "nested_form"
 
+gem "rails-settings-cached", "0.3.1"
+
 #gem 'MortisCMS', :require => 'mortiscms', :path => '/Users/lordmortis/Projects/MortisCMS'
 gem 'MortisCMS', require: 'mortiscms', git: 'git://github.com/lordmortis/MortisCMS.git', branch: :rails4
 
