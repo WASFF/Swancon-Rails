@@ -41,7 +41,7 @@ class TicketTypesController < ApplicationController
   # POST /ticket_types
   # POST /ticket_types.xml
   def create
-    @ticket_type = TicketType.new(params[:ticket_type])
+    @ticket_type = TicketType.new(ticket_type_params)
 
     respond_to do |format|
       if @ticket_type.save
@@ -60,7 +60,7 @@ class TicketTypesController < ApplicationController
     @ticket_type = TicketType.find(params[:id])
 
     respond_to do |format|
-      if @ticket_type.update_attributes(params[:ticket_type])
+      if @ticket_type.update_attributes(ticket_type_params)
         format.html { redirect_to(@ticket_type, :notice => 'Ticket type was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -84,5 +84,12 @@ class TicketTypesController < ApplicationController
       format.html { redirect_to(ticket_types_url) }
       format.xml  { head :ok }
     end
+  end
+
+private
+  def ticket_type_params
+    params.require(:ticket_type).permit(
+      :name, :ticket_set_id, :price, :concession_price, :target, :available_from, :available_to
+    )
   end
 end

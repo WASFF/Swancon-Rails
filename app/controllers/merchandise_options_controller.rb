@@ -32,7 +32,7 @@ class MerchandiseOptionsController < ApplicationController
   # POST /merchandise_options
   # POST /merchandise_options.xml
   def create
-    @merchandise_option = MerchandiseOption.new(params[:merchandise_option])
+    @merchandise_option = MerchandiseOption.new(merchandise_option_params)
 		@merchandise_option.merchandise_type = MerchandiseType.find(params[:merchandise_type_id])
 
     respond_to do |format|
@@ -53,7 +53,7 @@ class MerchandiseOptionsController < ApplicationController
 		@merchandise_option.merchandise_type = MerchandiseType.find(params[:merchandise_type_id])
 
     respond_to do |format|
-      if @merchandise_option.update_attributes(params[:merchandise_option])
+      if @merchandise_option.update_attributes(merchandise_option_params)
         format.html { redirect_to(@merchandise_option.merchandise_type, :notice => 'Merchandise option was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -78,5 +78,12 @@ class MerchandiseOptionsController < ApplicationController
 			flash[:error] = "Cannot delete an option that has an order attached!"
 			redirect_to @merchandise_option
 		end
+  end
+
+private
+  def merchandise_option_params
+    params.require(:merchandise_option).permit(
+      :name, :description, :order_index, :merchandise_option_set_id
+    )
   end
 end

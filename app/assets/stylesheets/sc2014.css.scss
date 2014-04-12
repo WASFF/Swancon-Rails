@@ -28,6 +28,21 @@ a {
 	}
 }
 
+#staging {
+	background-color: red;
+	color: white;
+	text-align: center;
+}
+
+.strike {
+	text-decoration: line-through;
+}
+
+.alert {
+  color: #c00;
+  font-size: 1.2em;
+}
+
 #wrapper {
 	background-color: #ACA1B2;
 	margin: 0 auto;
@@ -89,6 +104,7 @@ a {
 
 		#social {
 			float: right;
+			margin-left: 5px;
 			span {
 				vertical-align: top;
 				width: 180px;

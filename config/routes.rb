@@ -57,7 +57,7 @@ DoomCon::Application.routes.draw do
     get 'viewpurchase', :on => :member
   end
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :users_admin, :controller => "users" do
     get 'purchase_for', :on => :member
@@ -86,7 +86,7 @@ DoomCon::Application.routes.draw do
   match 'seller/:action' => 'seller', via: [:get, :post]
   match 'seller/:action/:id' => 'seller', via: [:get, :post]
   
-  match 'store' => 'store#index', via: [:get]
+  match 'store' => 'store#index', via: [:get, :post]
   
   match 'store/empty_cart' => 'store#clear_cart', via: [:post]
 

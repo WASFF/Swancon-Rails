@@ -69,7 +69,7 @@ class MemberDetailsController < ApplicationController
 	# POST /member_details
 	# POST /member_details.xml
 	def create
-		@member_detail = MemberDetail.new(params[:member_detail])
+		@member_detail = MemberDetail.new(member_detail_params)
 		
 		unless user_can_visit?(:member_details, :new)
 			@member_detail.user = current_user
@@ -115,7 +115,7 @@ class MemberDetailsController < ApplicationController
 		end
 		
 		respond_to do |format|
-			if @member_detail.update_attributes(params[:member_detail])
+			if @member_detail.update_attributes(member_detail_params)
 				format.html {
 					if @member_detail.user == current_user
 						redirect_to(edit_my_member_details_path(@member_detail), :notice => 'Your details were updated!')
@@ -141,5 +141,14 @@ class MemberDetailsController < ApplicationController
 			format.html { redirect_to(member_details_url) }
 			format.xml  { head :ok }
 		end
+	end
+
+private
+	def member_detail_params
+		params.require(:member_detail).permit [
+				:user_id, :name_first, :name_last, :name_badge, :address_1, :address_2, :address_3,
+				:address_postcode, :address_country, :address_state, :phone, :email_optin,
+				:disclaimer_signed
+			]
 	end
 end
