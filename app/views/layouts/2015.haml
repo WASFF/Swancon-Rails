@@ -1,0 +1,33 @@
+!!! 5
+!!!
+%html
+  %head
+    = stylesheet_link_tag "2015-print", :media => "print"
+    = stylesheet_link_tag "2015"
+    = javascript_include_tag "2015.js"
+    %meta{http_equiv: "Content-Type", content:"text/html; charset=UTF-8"}
+    %title= @title
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
+    %meta{charset: "utf-8"}
+    %meta{name: "description", content: "Come and join us as WA's premier literary speculative fiction convention celebrates it's 40th anniversary."}    
+    %meta{name: "keywords", content: "swancon 2015 perth wa convention conventions club clubs meetup meetups expos science fiction fantasy speculative con scene australia"}
+    = csrf_meta_tag
+    = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
+    = yield :header
+
+  %body
+    - if Rails.env == "staging"
+      %div#staging You are on the Staging site. None of your changes will be reflected on the real site.
+    %div#container
+      - unless controller_name == "store"
+        %aside#ticketdrop
+          = link_to store_path(category: "convention tickets") do
+            = image_tag("arrow.png", alt: "Get your ticket now")
+            %p ORDER TICKETS
+      %header
+        = image_tag("logo3.png", alt: "Swancon's 40th Anniversary", title: "Swancon 2015")
+        = render partial: "layouts/login"
+
+      = yield
+      
+      %article{id: "tickets"}

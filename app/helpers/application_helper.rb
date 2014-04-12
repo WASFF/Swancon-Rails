@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def menu_items
-    if @items == nil
+    if @items.blank?
       @items = []
       ContentPage.topbar.all.each do |page|
         if page.name != 'home'
@@ -39,42 +39,26 @@ module ApplicationHelper
           @items << item
         end
       end
-      @user_items = []
-      if user_signed_in?
-        @user_items << {name: "My Profile", path: edit_user_registration_path}
-        @user_items << {name: "My Tickets", path: tickets_my_path}
-        @user_items << {name: "Membership Details", path: edit_my_member_details_path}
-        @user_items << {name: "Orders", path: orders_path}
-        @user_items << {name: "Log Out", path: destroy_user_session_path}
-      else
-        @user_items << {name: "Log In", path: new_user_session_path}
-        @user_items << {name: "Register", path: new_user_registration_path}
-      end
-      
-      @items = @user_items + @items
 
       if user_signed_in? && current_user.admin_panel_visible?
         @items << {name: "Admin", path: admin_path}
       end
-
     end
+    @items[0][:first] = true if @items.length > 0
     @items
   end
 
-  def menu_left
-    if @left == nil
-      @left = []
-      size = menu_items.length / 2
-      @left = menu_items[0..size]
-    end
-    @left
-  end
+  def items_for_tag(name)
+    items = []
+    ContentTag.find_by_name("guests").blocks.each do |block|
+      item = {title: block.title, text: block.summary}
+      item[:path] = {controller:"content_viewer", action:"content", id: block.id}
+      ## TODO: put block image here
+      item[:image] = "ruby150.png"
 
-  def menu_right
-    if @right == nil
-      @right = menu_items[menu_left.length..-1]
+      items << item
     end
 
-    @right
+    items
   end
 end

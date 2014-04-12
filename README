@@ -1,57 +1,8 @@
-Fix the leading page stories
-add photo flipper to front page
-add countdown to swancon
+Todo:
 
-h2. Swancon Rails websystem
+content blocks should be able to have (optional) ContentImages as a header. 
+Use above to make guests section work properly
 
-Ticket Transfer
- - Need to have a final date... 
- - Admin list (need to see all transfer sets, and all pending - PRK needs to be able to cancel and confirm from this list)
+Content blocks should have dates? Optionally have a specialized content block that is an event?
 
-User/Member Editing
- - Need to be able to add/edit membership details from new system.
-
-Voided Sale
- - Email PRK that a Sale has been voided.
-
-ALL THE EMAIL ADDRESSES SHOULD BE CONFIGURABLE IN THE CONFIG FILE!
-
-
-
-Point Of Sale payment types - should have some sort of confirmation "You have processed this transaction?"
-
-Fixes: Edit screens are all broken!
-
-Twitter registrations need to change their email address, or we'll get bounces.
-
-Features to implement:
-
-Single Page Order
-
-
-
-Blogging
-This is Swancon
-Gallery
-
-
-DATABASE RESET
-
-MerchandiseImage.delete_all
-MerchandiseOption.delete_all
-MerchandiseOptionSet.delete_all
-MerchandiseSet.delete_all
-MerchandiseType.delete_all
-PanelSuggestion.delete_all
-TicketSet.delete_all
-TicketType.delete_all
-Vendor.delete_all
-VendorOrder.delete_all
-UserOrder.delete_all
-Payment.delete_all
-ContentBlock.delete_all
-ContentFile.delete_all
-ContentImage.delete_all
-ContentPage.delete_all
-ContentTag.delete_all
-ContentTagBlock.delete_all
+Add program item request thingy to the front page.

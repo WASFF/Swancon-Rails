@@ -1,15 +1,65 @@
-=content_for :header do
-	%script
-		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+%section
+  %article
+    %div{id: "ruby"}= image_tag("ruby250.png", alt: "Celebrating Swancon 40")
+    %div{id: "intro"}
+      %h1 Welcome to Swancon 40
+      %p In 2015, we're proud to announce the Ruby Anniversary (that's 40 years!) of WA's premier speculative fiction convention.
 
-%div#social
-	%span#twitter
-		%a{class: "twitter-timeline", href: "https://twitter.com/Swancon", "data-widget-id" => "302699362914549760", "data-theme" => "light", "data-link-color" => "#078C47"}
-			Tweets by @Swancon
+      %p 
+        - menu_items.each do |item|
+          - unless item[:first]
+            |
+          = link_to item[:name].upcase, item[:path]
 
-- if @page != nil 
-	= redcloth_render(@page.block.bodytext)
+%article
+  - items_for_tag("guests").each do |item|
+    %div{class: "guests"}
+      = link_to item[:path] do
+        %h2=item[:title]
+      %p=item[:text]
+      = link_to item[:path] do
+        =image_tag(item[:image], alt: item[:title])
 
-- promoted_items.each do |item|
-	%div
-		=link_to item.summary, controller: :content_viewer, action: :content, id: item.id
+%section{class:"dark"}
+  %article
+    %h1 The Program
+    %p Whoa there, it's still early days yet! We'll be adding to and refining the program in 2014, so stay tuned for more details.
+
+%section{id: "eventstitle"}
+  %h1 Events We Host
+
+%article{id:"events"}
+  - items_for_tag("events").each do |item|
+    = link_to item[:path] do
+      %div{class: "image"}= image_tag(item[:image], alt: item[:title])
+    %div{class: "info"}
+      %h2=item[:title]
+      %h4 item[:date]
+      %p=item[:text]
+      = link_to item[:path] do
+        %aside=image_tag("ruby150-2.png", alt: item[:title])
+
+%section
+  %article{id: "contact"}
+    %h1 Contact Us
+    %div.people
+      %div{class: "title"} Committee Contacts
+      %div
+        %strong Convenor
+        &dash; Kat Griffiths
+      %div
+        %strong Secretary
+        &dash; Stephen Griffiths
+      %div
+        %strong Treasurer
+        &dash; Helen Duffill
+      %div
+        %strong Panel Coordinator
+        &dash; Sarah Parker
+    %div
+      %div{class: "title"} Swancon in Social Media
+      = link_to "https://www.facebook.com/groups/5668237047/" do 
+        = image_tag("fb.png", alt: "Swancon on Facebook")
+      = link_to "https://twitter.com/Swancon" do
+        = image_tag("twitter.png", alt: "Swancon on Twitter")
+
