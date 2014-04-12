@@ -22,7 +22,7 @@ class RoutePolicy
       vendor_orders: true
     },
     committee: {
-      index: true,
+      index: [:index, :admin],
       tickets: [:index, :export_badges, :export_salesdata, :card_issue, :card_unissue ],
       ticket_sets: [:index, :show, :new, :create, :edit, :update, :show],
       ticket_types: [:index, :show, :new, :create, :edit, :update, :show],

@@ -109,6 +109,7 @@ DoomCon::Application.routes.draw do
   match 'promoted_items/:action/:id' => 'promoted_items', via: [:get]
 
   match '/admin' => "index#admin", as: "admin", via: [:get]
+  match '/admin/set_con_mode' => "index#set_con_mode", as: "set_con_mode", via: [:get]
 
   root :to => "index#index"
 end

@@ -18,6 +18,11 @@
 		%li= link_to "Merchandise Administration", merchandise_types_path
 		%li= link_to "Merchandise Set Administration", merchandise_sets_path
 		%li= link_to "Merchandise Option Set Administration", merchandise_option_sets_path
+		- if user_can_visit? :index, :set_con_mode
+			- if SiteSettings.con_mode
+				%li= link_to "Disable Con Mode", set_con_mode_path(enable: false)
+			- else
+				%li= link_to "Enable Con Mode", set_con_mode_path(enable: true)
 
 %div{id: "treas_admin", class: "hideable"}
 	%h1 Treasury Admin
