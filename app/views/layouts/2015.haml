@@ -19,7 +19,7 @@
     - if Rails.env == "staging"
       %div#staging You are on the Staging site. None of your changes will be reflected on the real site.
     %div#container
-      - unless controller_name == "store"
+      - if controller_name == "store" and can_show_content
         %aside#ticketdrop
           = link_to store_path(category: "convention tickets") do
             = image_tag("arrow.png", alt: "Get your ticket now")
@@ -28,6 +28,15 @@
         = image_tag("logo3.png", alt: "Swancon's 40th Anniversary", title: "Swancon 2015")
         = render partial: "layouts/login"
 
-      = yield
+      - if can_show_content
+        = yield
+      - else
+        %section 
+          %article{class: "centered"}
+            %h1
+              Swancon 40 is currently in stealth mode
+            %h1
+              All will be revealed
+              = render_clock
       
       %article{id: "tickets"}

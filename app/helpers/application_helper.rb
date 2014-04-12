@@ -66,4 +66,17 @@ module ApplicationHelper
 
     items
   end
+
+  def reveal_time
+    "2014-04-20 17:30 0800"
+  end
+
+  def can_show_content
+    Time.new > Time.parse(reveal_time) or user_can_visit? :index, :admin
+  end
+
+  def render_clock
+    raw "<div class=\"countdown\" data-time=\"#{reveal_time}\">"
+  end
+
 end
