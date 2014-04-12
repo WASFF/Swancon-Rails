@@ -1,34 +1,15 @@
 class ApplicationController < ActionController::Base
 	include Pundit
   protect_from_forgery
-  layout "2014"
+  layout "2015"
   before_filter :title
   helper_method :user_can?, :user_can_visit?
 
 	def title
-		@title = "Swancon 39 - Conjuration"
+		@title = "Swancon 40"
 	end
 
 	private
-
-	def mobile_device?
-		logger.debug("User Agent: #{request.user_agent}")
-		if session[:mobile_param]
-			session[:mobile_param] == "1"
-		elsif request.user_agent =~ /iPad/
-			false
-		elsif request.user_agent =~ /GT-P1000T/
-			false
-		else
-			request.user_agent =~ /Mobile|webOS/
-		end
-	end
-	helper_method :mobile_device?
-
-	def prepare_for_mobile
-		session[:mobile_param] = params[:mobile] if params[:mobile]
-		request.format = :mobile if mobile_device? and request.format != "json"
-	end
 
 	def prepare_backlink
 		session[:back] = {controller: controller_name, action: action_name}
