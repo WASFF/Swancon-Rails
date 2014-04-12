@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 		render "layouts/unauthorized", status: :unauthorized unless RoutePolicy.new(current_user).visit?(controller_name, action_name)
 	end
 
-	def user_can_visit?(action, controller)
+	def user_can_visit?(controller, action)
 		RoutePolicy.new(current_user).visit?(controller.to_sym, action.to_sym)
 	end
 

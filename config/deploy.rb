@@ -35,12 +35,26 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+require 'capistrano/git'
 namespace :deploy do
 
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       execute :touch, release_path.join('tmp/restart.txt')
+    end
+  end
+
+  after :finishing, :tag_and_push_tag do 
+    run_locally do
+      user = capture(:git, "config --get user.name")
+      email = capture(:git, "config --get user.email")
+      tag_msg = "Deployed by #{user} <#{email}> to #{fetch :stage} as #{fetch :release_name}"
+ 
+      tag_name = "deploys/2014/#{fetch :stage }"
+      execute :git, %(push origin :refs/tags/#{tag_name})
+      execute :git, %(tag -f #{tag_name} origin/#{fetch :branch} -m "#{tag_msg}")
+      execute :git, "push origin #{tag_name}"
     end
   end
 
