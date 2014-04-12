@@ -51,7 +51,7 @@ namespace :deploy do
       email = capture(:git, "config --get user.email")
       tag_msg = "Deployed by #{user} <#{email}> to #{fetch :stage} as #{fetch :release_name}"
  
-      tag_name = "deploys/2014/#{fetch :stage }"
+      tag_name = "deploys/2015/#{fetch :stage }"
       execute :git, %(push origin :refs/tags/#{tag_name})
       execute :git, %(tag -f #{tag_name} origin/#{fetch :branch} -m "#{tag_msg}")
       execute :git, "push origin #{tag_name}"
