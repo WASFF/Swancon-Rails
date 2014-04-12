@@ -50,7 +50,12 @@ module ApplicationHelper
 
   def items_for_tag(name)
     items = []
-    ContentTag.find_by_name("guests").blocks.each do |block|
+    tag = ContentTag.find_by_name(name)
+    if tag.blank?
+      return items
+    end
+    
+    tag.blocks.each do |block|
       item = {title: block.title, text: block.summary}
       item[:path] = {controller:"content_viewer", action:"content", id: block.id}
       ## TODO: put block image here
