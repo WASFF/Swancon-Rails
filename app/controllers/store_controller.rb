@@ -51,6 +51,7 @@ class StoreController < ApplicationController
 	end
 
 	def ticket
+#		@title = 
 		@ticket = TicketType.where(:id => params[:id]).first
 		if @ticket == nil
 			redirect_to :action => :index
@@ -62,7 +63,7 @@ class StoreController < ApplicationController
 		ticket = TicketType.where(:id => params[:id]).first
 		
 		if ticket.available? or @store_user != nil
-			if params[:concession] == "true"
+			if params[:concession][:value] == "true"
 				session[:cart][:concessions] << params[:id].to_i				
 			else
 				session[:cart][:tickets] << params[:id].to_i
