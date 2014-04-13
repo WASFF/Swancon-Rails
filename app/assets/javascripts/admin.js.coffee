@@ -38,6 +38,11 @@ doGatherSearch = ->
 		con_mode: window.CON_MODE,	
 		authenticity_token: AUTH_TOKEN
 	}
+
+	if fields.name_search.length < 3
+		changeGatherMessage("Too short!")
+		return 
+
 	setSearchButtonState(true)
 	jQuery.ajax
 		data: fields
@@ -78,37 +83,35 @@ doGatherSearch = ->
 				$elem = $(elem)
 				$elem.find("button.verify").click ->
 					id = innervalue.id
-					data = member_data[id]
-					$("#member_create_form").css("display", "block")
-					jQuery.each(data, (innerindex, innervalue) -> 
-						field = $("[name='user[" + innerindex + "]']")
-						if field.attr("type") == "checkbox"
-							field.prop('checked', innervalue);
-						else
-							field.val(innervalue)
-					)
-					#todo - scroll to form!
+					showMemberForm(member_data[id])
 				$elem.find("button.tickets").click ->
 					unless innervalue.showingTickets
 						innervalue.showingTickets = true
 						jQuery.each innervalue.tickets, (innerindex, ticketValue) ->
-							ticketRow = "<tr class='ticket_for_#{innervalue.id}'><td colspan='3'>#{ticketValue.name}</td></tr>"
+							ticketRow = "<tr class='ticket_for_#{innervalue.id}'><td colspan='3'>#{ticketValue.name}</td>"
 							ticketRow += "<td>"
 							ticketRow += "<button class='redeem'>Redeem Ticket</button>"
 							ticketRow += "</td>"
+							ticketRow += "</tr>"
 							$ticketRow = $(ticketRow)
 							$ticketRow.find("button.redeem").click ->
-								$(this).attr("disabled", "true").html("Redeeming...")
-								jQuery.ajax
-									url: "/seller/redeem/#{ticketValue.id}"
-									type: "POST"
-									dataType: "json",
-									error: (jqxhr, textStatus, errorThrown) -> 
-										$(this).removeAttr("disabled").html("Redeem Ticket")
-										console.log(errorThrown)
-									, success: (data, textStatus, jqxhr) ->
-										$ticketRow.fadeOut ->
-											$ticketRow.remove()
+								redeem = confirm "You've definitely given this person their stuff?"
+								if redeem
+									$(this).attr("disabled", "true").html("Redeeming...")
+									jQuery.ajax
+										url: "/seller/redeem/#{ticketValue.id}"
+										type: "POST"
+										dataType: "json",
+										error: (jqxhr, textStatus, errorThrown) -> 
+											$(this).removeAttr("disabled").html("Redeem Ticket")
+											console.log(errorThrown)
+										, success: (data, textStatus, jqxhr) ->
+											index = innervalue.tickets.indexOf(ticketValue)
+											innervalue.tickets.splice(index, 1)
+											if innervalue.tickets.length == 0
+												$elem.find("button.tickets").remove()
+											$ticketRow.fadeOut ->
+												$ticketRow.remove()
 							$elem.after($ticketRow)
 					else
 						innervalue.showingTickets = false
@@ -117,6 +120,33 @@ doGatherSearch = ->
 				$elem.appendTo($table)
 			)
 			setSearchButtonState(false)
+
+showMemberForm = (data) ->
+	unless data?
+		data = {
+			email: ""
+			"member_detail_attributes[address_1]": ""
+			"member_detail_attributes[address_2]": ""
+			"member_detail_attributes[address_3]": ""
+			"member_detail_attributes[address_country]": ""
+			"member_detail_attributes[address_postcode]": ""
+			"member_detail_attributes[address_state]": ""
+			"member_detail_attributes[disclaimer_signed]": false
+			"member_detail_attributes[email_optin]": false
+			"member_detail_attributes[name_badge]": ""
+			"member_detail_attributes[name_first]": ""
+			"member_detail_attributes[name_last]": ""
+			"member_detail_attributes[phone]": ""
+			username: ""
+		}
+	$("#member_create_form").fadeIn()
+	jQuery.each data, (innerindex, innervalue) -> 
+		field = $("[name='user[" + innerindex + "]']")
+		if field.attr("type") == "checkbox"
+			field.prop('checked', innervalue);
+		else
+			field.val(innervalue)
+	#todo - scroll to form!
 
 createMember = ->
 	fields = {authenticity_token: AUTH_TOKEN}
@@ -148,16 +178,14 @@ createMember = ->
 			$("#member_created_message").html(errors);
 		, success: -> 
 			$("#member_created_message").html("Created!");
-			$("#member_create_form input[type='text']").each ->
-				$(this).val("");
-			$("#member_create_form input[type='hidden']").each ->
-				$(this).val("0");
+			$("#member_create_form").fadeOut()
 			$("button#member_create_form_submit").attr("disabled", true)
 
 jQuery ->
 	$("button#member_create").click ->
-		toggleVisibility($("#member_create_form"))
+		showMemberForm(null)
 	$("#member_create_form input").blur ->
+		console.log("BLUR")
 		attrs = [
 				"user[username]",
 				"user[email]",
