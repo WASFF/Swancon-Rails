@@ -22,51 +22,7 @@ class SellerController < ApplicationController
 		respond_to do |format|
 			format.html # index.html.erb
 			format.js
-			format.json {
-				if @user != nil
-
-				else
-					array = []
-					@users.each do |user| 
-						details = {}
-						if user.member_detail != nil
-							details = {
-								"member_detail_attributes[name_first]" =>
-									user.member_detail.name_first,
-								"member_detail_attributes[name_last]" =>
-									user.member_detail.name_last,
-								"member_detail_attributes[name_badge]" =>
-									user.member_detail.name_badge,
-								"member_detail_attributes[address_1]" =>
-									user.member_detail.address_1,
-								"member_detail_attributes[address_2]" =>
-									user.member_detail.address_2,
-								"member_detail_attributes[address_3]" =>
-									user.member_detail.address_3,								
-								"member_detail_attributes[address_postcode]" =>
-									user.member_detail.address_postcode,
-								"member_detail_attributes[address_state]" =>
-									user.member_detail.address_state,
-								"member_detail_attributes[address_country]" =>
-									user.member_detail.address_country,
-								"member_detail_attributes[phone]" =>
-									user.member_detail.phone,
-								"member_detail_attributes[email_optin]" =>
-									user.member_detail.email_optin,
-								"member_detail_attributes[disclaimer_signed]" =>
-									user.member_detail.disclaimer_signed
-							}
-						end
-						entry = {
-							id: user.id,
-							username: user.username,
-							email: user.email
-						}
-						array << entry.merge(details)
-					end
-					render json: array
-				end
-			}
+			format.json { render json: @users, root: "users", include_member_details: true }
 		end
 	end
 

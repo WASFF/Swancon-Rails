@@ -50,16 +50,15 @@ doGatherSearch = ->
 		, success: (data, textStatus, jqxhr) ->
 			searching = false
 			$table.find("tr.datarow").remove()
-			if data.length > 0
-				changeGatherMessage("#{data.length} results!")
+			if data.users.length > 0
+				changeGatherMessage("#{data.users.length} results!")
 				$table.fadeIn()
 			else
 				changeGatherMessage("No Results found!")
 				$table.fadeOut()
-
-
+				
 			member_data = []
-			jQuery.each(data, (innerindex, innervalue) ->
+			jQuery.each(data.users, (innerindex, innervalue) ->
 				member_data[innervalue.id] = innervalue
 				elem = "<tr id='" + innervalue.id + "' class='datarow'>"				
 				if innervalue["member_detail_attributes[name_first]"] != undefined
