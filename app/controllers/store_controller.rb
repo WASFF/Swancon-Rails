@@ -109,7 +109,7 @@ class StoreController < ApplicationController
 		@can_disable_email = false
 
 		if user_can_visit?(:index, :seller) && @store_user.present?
-			if current_user.role_symbols.include?(:committee)
+			if current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin) 
 				@payment_types = PaymentType.all
 				@can_disable_email = true
 			else

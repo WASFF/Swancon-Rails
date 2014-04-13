@@ -19,6 +19,9 @@
 <%- elsif current_user != nil and current_user.full_store_visible? %>
 	Warning: Item is currently unavailable to normal users<br/>
 	<%= button_to "add to cart", :action => "ticket_add", :id => @ticket.id %>
+	<%- if @ticket.concession_price %>
+		<%= button_to "add concession to cart", :action => "ticket_add", :id => @ticket.id, :concession => true %>
+	<%- end %>
 <%- else %>
 	This item is not available!
 <%- end %>
