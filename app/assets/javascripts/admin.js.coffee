@@ -1,4 +1,9 @@
 member_data = []
+$table = null
+searching = false
+$gather_member_search_button = null
+$gather_member_search_field = null
+$gather_member_search_message = null
 
 toggleVisibility = (block) ->
 	if block.css("display") == "none"
@@ -6,21 +11,47 @@ toggleVisibility = (block) ->
 	else
 		block.css("display", "none")
 
+changeGatherMessage = (newmessage) ->
+	if $gather_member_search_message.html().length > 0
+		$gather_member_search_message.fadeOut ->
+			$gather_member_search_message.html(newmessage)
+			$gather_member_search_message.fadeIn()
+	else
+		$gather_member_search_message.html(newmessage)
+		$gather_member_search_message.fadeIn()
+
 doGatherSearch = ->
+	if searching
+		console.log("Searching Already")
+		return
+	searching = true
+
 	fields = { 
-		"name_search": $("[name='gather_member_search']").val(),
+		name_search: $gather_member_search_field.val(),
+		con_mode: window.CON_MODE,	
 		authenticity_token: AUTH_TOKEN
 	}
+	$gather_member_search_button.attr("disabled", "true")
+	$gather_member_search_button.html("Searching...")
 	jQuery.ajax
 		data: fields
 		url: "/seller/select.json",
 		type: "POST",
 		dataType: "json",
 		error: (jqxhr, textStatus, errorThrown) -> 
-			console.log("Error!")
+			changeGatherMessage("Error: #{errorThrown}")
+			searching = false
 		, success: (data, textStatus, jqxhr) ->
-			table = $("#gather_member_search_results")
-			table.find("tr.datarow").remove()
+			searching = false
+			$table.find("tr.datarow").remove()
+			if data.length > 0
+				changeGatherMessage("#{data.length} results!")
+				$table.fadeIn()
+			else
+				changeGatherMessage("No Results found!")
+				$table.fadeOut()
+
+
 			member_data = []
 			jQuery.each(data, (innerindex, innervalue) ->
 				member_data[innervalue.id] = innervalue
@@ -29,12 +60,16 @@ doGatherSearch = ->
 					name = innervalue["member_detail_attributes[name_first]"] + " " +
 						innervalue["member_detail_attributes[name_last]"]
 					elem += "<td>" + name + "</td>"
+				else
+					elem += "<td></td>"
 				elem += "<td>" + innervalue.username + "</td>"
 				elem += "<td>" + innervalue.email + "</td>"
 				elem += "<td><button class='verify'>Verify Details</button></td>"
 				elem += "</tr>"
-				$(elem).appendTo(table)
+				$(elem).appendTo($table)
 			)
+			$gather_member_search_button.removeAttr("disabled")
+			$gather_member_search_button.html("Search")
 			$("button.verify").click ->
 				id = $(this).parent().parent().attr("id")
 				data = member_data[id]
@@ -145,8 +180,10 @@ jQuery ->
 			block = $("div.hideable#" + $(this).attr("id"))
 			toggleVisibility(block)
 
-	$("#gather_member_search").click(doGatherSearch)
-
-	$("[name='gather_member_search']").keypress (event) ->
+	$gather_member_search_button = $("#gather_member_search").click(doGatherSearch)
+	$gather_member_search_field = $("[name='gather_member_search']").keypress (event) ->
 		if event.keyCode == 13
 			doGatherSearch()
+	$gather_member_search_message = $("#gather_member_search_message")
+
+	$table = $("#gather_member_search_results")
