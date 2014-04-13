@@ -20,19 +20,25 @@ changeGatherMessage = (newmessage) ->
 		$gather_member_search_message.html(newmessage)
 		$gather_member_search_message.fadeIn()
 
+setSearchButtonState = (newSearchingValue) ->
+	if newSearchingValue
+		$gather_member_search_button.attr("disabled", "true")
+		$gather_member_search_button.html("Searching...")
+	else 
+		$gather_member_search_button.removeAttr("disabled")
+		$gather_member_search_button.html("Search")
+	searching = newSearchingValue
+
 doGatherSearch = ->
 	if searching
 		console.log("Searching Already")
 		return
-	searching = true
-
 	fields = { 
 		name_search: $gather_member_search_field.val(),
 		con_mode: window.CON_MODE,	
 		authenticity_token: AUTH_TOKEN
 	}
-	$gather_member_search_button.attr("disabled", "true")
-	$gather_member_search_button.html("Searching...")
+	setSearchButtonState(true)
 	jQuery.ajax
 		data: fields
 		url: "/seller/select.json",
@@ -40,7 +46,7 @@ doGatherSearch = ->
 		dataType: "json",
 		error: (jqxhr, textStatus, errorThrown) -> 
 			changeGatherMessage("Error: #{errorThrown}")
-			searching = false
+			setSearchButtonState(false)
 		, success: (data, textStatus, jqxhr) ->
 			searching = false
 			$table.find("tr.datarow").remove()
@@ -68,8 +74,7 @@ doGatherSearch = ->
 				elem += "</tr>"
 				$(elem).appendTo($table)
 			)
-			$gather_member_search_button.removeAttr("disabled")
-			$gather_member_search_button.html("Search")
+			setSearchButtonState(false)
 			$("button.verify").click ->
 				id = $(this).parent().parent().attr("id")
 				data = member_data[id]
