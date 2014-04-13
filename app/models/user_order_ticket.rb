@@ -12,6 +12,13 @@ class UserOrderTicket < ActiveRecord::Base
 		joins(:user_order).where(UserOrder.unpaidarel)
 	}	
 
+	def self.valid_convention_ticket
+		scope = where(redeemed_at: nil)
+		scope = scope.joins(:user_order).where(UserOrder.paidarel)
+		scope = scope.joins(ticket_type: :ticket_set).where(TicketSet.extended_details_arel)
+		scope
+	end
+
 	def type
 		ticket_type
 	end
@@ -80,5 +87,14 @@ class UserOrderTicket < ActiveRecord::Base
 		transfer.save
 
 		transfer
+	end
+
+	def transfer!(sender, newowner)
+		transfer(sender, newowner)
+	end
+
+	def redeem!
+		self.redeemed_at = Time.now
+		self.save
 	end
 end

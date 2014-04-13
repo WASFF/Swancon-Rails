@@ -28,6 +28,18 @@ class SellerController < ApplicationController
 		end
 	end
 
+	def redeem
+		unless SiteSettings.con_mode
+			render json: {error: "Con mode not enabled"}, status: :bad_request
+			return
+		end
+
+		ticket = UserOrderTicket.find(params[:id])
+		ticket.redeem!
+
+		render json: {redeemed_id: params[:id]}
+	end
+
 	def create
 		if params[:user] != nil
 			if params[:user][:id].to_i == 0

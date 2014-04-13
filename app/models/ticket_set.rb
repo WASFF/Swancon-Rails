@@ -51,4 +51,9 @@ class TicketSet < ActiveRecord::Base
 		end
 	end
 
+	def self.extended_details_arel(required = true)
+		tsarel = self.arel_table
+		tsarel[:requires_extended_details].eq(required)
+	end	
+
 end
