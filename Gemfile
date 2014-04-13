@@ -38,6 +38,8 @@ gem "haml-rails"
 
 gem "exception_notification"
 
+gem "active_model_serializers"
+
 group :development do
 	gem 'capistrano-rails'
 	gem 'capistrano-rvm'
