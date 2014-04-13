@@ -150,7 +150,7 @@ showMemberForm = (data) ->
 			field.prop('checked', innervalue);
 		else
 			field.val(innervalue)
-	#todo - scroll to form!
+	$("button#member_create_form_submit").attr("disabled", true)
 
 createMember = ->
 	fields = {authenticity_token: AUTH_TOKEN}
@@ -183,64 +183,46 @@ createMember = ->
 		, success: -> 
 			$("#member_created_message").html("Created!");
 			$("#member_create_form").fadeOut()
-			$("button#member_create_form_submit").attr("disabled", true)
+
+validateMember = ->
+	attrs = 
+		"user[username]": 4
+		"user[email]": 4
+		"user[member_detail_attributes[address_postcode]]": 4
+		"user[member_detail_attributes[address_state]]": 2
+		"user[member_detail_attributes[address_country]]": 2
+		"user[member_detail_attributes[name_first]]": 1
+		"user[member_detail_attributes[address_1]]": 1
+		"user[member_detail_attributes[address_3]]": 1
+	enable = true
+	$("#member_create_form input").each (index, item) ->
+		if enable
+			$item = $(item)
+			attr = attrs[$item.attr("name")]
+			if attr?
+				enable = $item.val().length >= attr
+				msgsrc = "span[name='" + $item.attr("name") + "_msg']"
+				if enable
+					$(msgsrc).html("")
+					$item.css("background-color", "white")
+				else
+					$(msgsrc).html("Too Short!")
+					$item.css("background-color", "red")
+
+	if enable
+		if $("#disclaimer_signed").is(":checked")
+			$("button#member_create_form_submit").removeAttr("disabled")
+			return
+	$("button#member_create_form_submit").attr("disabled", "true")
 
 jQuery ->
 	$("button#member_create").click ->
 		showMemberForm(null)
-	$("#member_create_form input").blur ->
-		console.log("BLUR")
-		attrs = [
-				"user[username]",
-				"user[email]",
-				"user[member_detail_attributes[address_postcode]]"
-			]
-		if attrs.indexOf($(this).attr("name")) != -1
-			msgsrc = "span[name='" + $(this).attr("name") + "_msg']"
-			if $(this).val().length < 4
-				$(msgsrc).html("Too Short!")
-				$(this).css("background-color", "red")
-				$(this).focus();
-				return
-			else
-				$(this).css("background-color", "white")
-				$(msgsrc).html("")
-				return
+	$("#member_create_form input[type=text]").blur ->
+		validateMember()
 
-		attrs = [
-			"user[member_detail_attributes[address_state]]",
-			"user[member_detail_attributes[address_country]]"
-		]
-		if attrs.indexOf($(this).attr("name")) != -1
-			msgsrc = "span[name='" + $(this).attr("name") + "_msg']"
-			if $(this).val().length < 2
-				$(msgsrc).html("Too Short!")
-				$(this).css("background-color", "red")
-				$(this).focus();
-				return
-			else
-				$(this).css("background-color", "white")
-				$(msgsrc).html("")
-				if "user[member_detail_attributes[address_country]]" == $(this).attr("name")
-					$("button#member_create_form_submit").removeAttr("disabled")
-				return
-
-		attrs = [
-			"user[member_detail_attributes[name_first]]",
-			"user[member_detail_attributes[address_1]]",
-			"user[member_detail_attributes[address_3]]"
-		]
-		if attrs.indexOf($(this).attr("name")) != -1
-			msgsrc = "span[name='" + $(this).attr("name") + "_msg']"
-			if $(this).val().length < 1
-				$(msgsrc).html("Too Short!")
-				$(this).css("background-color", "red")
-				$(this).focus();
-				return
-			else
-				$(this).css("background-color", "white")
-				$(msgsrc).html("")
-				return
+	$("#member_create_form input[type=checkbox]").change ->
+		validateMember()
 
 	$("#member_create_form_submit").click(createMember);
 	$(".link li").each ->
