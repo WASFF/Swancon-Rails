@@ -9,4 +9,7 @@
 		%div
 			%label{for:"send_email"}Send Email:
 			= check_box_tag("send_email", "true", true)
-	= submit_tag "Confirm", data: {requires_value: "purchase_payment_type_id"}
+	- if @store_user.present?
+		= submit_tag "Confirm", data: {requires_value: "purchase_payment_type_id", confirm: "have you recieved the money for this purchase?"}
+	- else
+		= submit_tag "Confirm", data: {requires_value: "purchase_payment_type_id"}
