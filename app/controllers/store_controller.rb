@@ -106,15 +106,19 @@ class StoreController < ApplicationController
 			return
 		end
 		
-		@payment_types = PaymentType.onlineTypes
+		@payment_types = PaymentType.online_types
 		@can_disable_email = false
 
 		if user_can_visit?(:index, :seller) && @store_user.present?
 			if current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin) 
-				@payment_types = PaymentType.all
+				if SiteSettings.con_mode
+					@payment_types = PaymentType.con_types
+				else
+					@payment_types = PaymentType.all
+				end
 				@can_disable_email = true
 			else
-				@payment_types = PaymentType.resellerTypes
+				@payment_types = PaymentType.reseller_types
 			end
 		end
 		
