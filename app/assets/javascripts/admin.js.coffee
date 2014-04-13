@@ -69,22 +69,41 @@ doGatherSearch = ->
 					elem += "<td></td>"
 				elem += "<td>" + innervalue.username + "</td>"
 				elem += "<td>" + innervalue.email + "</td>"
-				elem += "<td><button class='verify'>Verify Details</button></td>"
+				elem += "<td>"
+				elem += "<button class='verify'>Verify Details</button>"
+				if window.CON_MODE && innervalue.tickets.length > 0
+					elem += "<button class='tickets'>Show Ticket Details</button>"
+				elem += "</td>"
 				elem += "</tr>"
-				$(elem).appendTo($table)
+				$elem = $(elem)
+				$elem.find("button.verify").click ->
+					id = innervalue.id
+					data = member_data[id]
+					$("#member_create_form").css("display", "block")
+					jQuery.each(data, (innerindex, innervalue) -> 
+						field = $("[name='user[" + innerindex + "]']")
+						if field.attr("type") == "checkbox"
+							field.prop('checked', innervalue);
+						else
+							field.val(innervalue)
+					)
+					#todo - scroll to form!
+				$elem.find("button.tickets").click ->
+					unless innervalue.showingTickets
+						innervalue.showingTickets = true
+						jQuery.each innervalue.tickets, (innerindex, ticketValue) ->
+							ticketRow = "<tr class='ticket_for_#{innervalue.id}'><td colspan='3'>#{ticketValue.name}</td></tr>"
+							ticketRow += "<td>"
+							ticketRow += "</td>"
+							$ticketRow = $(ticketRow)
+							$elem.after($ticketRow)
+					else
+						innervalue.showingTickets = false
+						$(".ticket_for_#{innervalue.id}").fadeOut ->
+							$(this).remove()
+				$elem.appendTo($table)
 			)
 			setSearchButtonState(false)
-			$("button.verify").click ->
-				id = $(this).parent().parent().attr("id")
-				data = member_data[id]
-				$("#member_create_form").css("display", "block")
-				jQuery.each(data, (innerindex, innervalue) -> 
-					field = $("[name='user[" + innerindex + "]']")
-					if field.attr("type") == "checkbox"
-						field.prop('checked', innervalue);
-					else
-						field.val(innervalue)
-				)
 
 createMember = ->
 	fields = {authenticity_token: AUTH_TOKEN}

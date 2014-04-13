@@ -45,7 +45,9 @@ class UserSerializer < ActiveModel::Serializer
     if user_can?(:view_extended_details, object) and @options[:include_ticket_details]
     	data[:tickets] = []
     	object.user_order_tickets.paid.each do |ticket|
-    		data[:tickets] = {name: ticket.type.order_name, redeemed: false}
+    		if ticket.requires_extended_details
+    			data[:tickets] << {name: ticket.type.order_name, redeemed: false}
+    		end
     	end
     end
 
