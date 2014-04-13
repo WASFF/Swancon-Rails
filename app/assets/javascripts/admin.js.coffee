@@ -94,8 +94,21 @@ doGatherSearch = ->
 						jQuery.each innervalue.tickets, (innerindex, ticketValue) ->
 							ticketRow = "<tr class='ticket_for_#{innervalue.id}'><td colspan='3'>#{ticketValue.name}</td></tr>"
 							ticketRow += "<td>"
+							ticketRow += "<button class='redeem'>Redeem Ticket</button>"
 							ticketRow += "</td>"
 							$ticketRow = $(ticketRow)
+							$ticketRow.find("button.redeem").click ->
+								$(this).attr("disabled", "true").html("Redeeming...")
+								jQuery.ajax
+									url: "/seller/redeem/#{ticketValue.id}"
+									type: "POST"
+									dataType: "json",
+									error: (jqxhr, textStatus, errorThrown) -> 
+										$(this).removeAttr("disabled").html("Redeem Ticket")
+										console.log(errorThrown)
+									, success: (data, textStatus, jqxhr) ->
+										$ticketRow.fadeOut ->
+											$ticketRow.remove()
 							$elem.after($ticketRow)
 					else
 						innervalue.showingTickets = false

@@ -88,4 +88,13 @@ class UserOrderTicket < ActiveRecord::Base
 
 		transfer
 	end
+
+	def transfer!(sender, newowner)
+		transfer(sender, newowner)
+	end
+
+	def redeem!
+		self.redeemed_at = Time.now
+		self.save
+	end
 end
