@@ -13,7 +13,7 @@ class UserSerializer < ActiveModel::Serializer
     	end
     end
 
-    if @options[:include_member_details] and user_can? :view_extended_details?, object and object.member_detail.present?
+    if @options[:include_member_details] and user_can?(:view_extended_details?, object) and object.member_detail.present?
     	data.merge!({
 				"member_detail_attributes[name_first]" =>
 					object.member_detail.name_first,
@@ -40,6 +40,13 @@ class UserSerializer < ActiveModel::Serializer
 				"member_detail_attributes[disclaimer_signed]" =>
 					object.member_detail.disclaimer_signed
 				})
+    end
+
+    if user_can?(:view_extended_details, object) and @options[:include_ticket_details]
+    	data[:tickets] = []
+    	object.user_order_tickets.paid.each do |ticket|
+    		data[:tickets] = {name: ticket.type.order_name, redeemed: false}
+    	end
     end
 
     data

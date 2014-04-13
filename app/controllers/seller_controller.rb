@@ -19,10 +19,12 @@ class SellerController < ApplicationController
 			return
 		end
 
+		include_tickets = SiteSettings.con_mode
+
 		respond_to do |format|
 			format.html # index.html.erb
 			format.js
-			format.json { render json: @users, root: "users", include_member_details: true }
+			format.json { render json: @users, root: "users", include_member_details: true, include_ticket_details: include_tickets }
 		end
 	end
 
