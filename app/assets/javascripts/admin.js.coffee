@@ -140,6 +140,10 @@ showMemberForm = (data) ->
 			username: ""
 		}
 	$("#member_create_form").fadeIn()
+	$('html, body').animate({
+        scrollTop: $("#member_create_form").offset().top
+    }, 250);
+	$("#member_create_form").find("#username").focus()
 	jQuery.each data, (innerindex, innervalue) -> 
 		field = $("[name='user[" + innerindex + "]']")
 		if field.attr("type") == "checkbox"
