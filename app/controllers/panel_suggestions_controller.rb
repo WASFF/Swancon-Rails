@@ -1,5 +1,5 @@
 class PanelSuggestionsController < ApplicationController
-	filter_resource_access :additional_member => [:make_visible, :make_invisible]
+  before_filter :authorize_path!
 
   # GET /panel_suggestions
   # GET /panel_suggestions.xml

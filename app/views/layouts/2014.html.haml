@@ -1,33 +1,39 @@
 %html
+  %head
+    = stylesheet_link_tag "sc2014"
+    = javascript_include_tag "application-2014.js"
+    = javascript_include_tag "//use.typekit.net/qpj3nvs.js"
+    %link{rel: "shortcut icon", href: "#{image_path("favicon.ico")}"}
+    %link{rel: "apple-touch-icon-precomposed", href: "#{image_path("mobileicon57.png")}"}
+    %link{rel: "apple-touch-icon-precomposed", sizes: "72x72", href: "#{image_path("mobileicon72.png")}"}
+    %link{rel: "apple-touch-icon-precomposed", sizes: "114x114", href: "#{image_path("mobileicon114.png")}"}
+    %meta{name: "viewport", content: "width=device-width"}
+    %title= @title
+    = csrf_meta_tag
+    = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
+    = yield :header
+    = stylesheet_link_tag "2014-print", :media => "print"
 
-	%head
-		= stylesheet_link_tag "sc2014"
-		= javascript_include_tag "application-2014.js"
-		= javascript_include_tag "//use.typekit.net/qpj3nvs.js"
-		%link{rel: "shortcut icon", href: "#{image_path("favicon.ico")}"}
-		%link{rel: "apple-touch-icon-precomposed", href: "#{image_path("mobileicon57.png")}"}
-		%link{rel: "apple-touch-icon-precomposed", sizes: "72x72", href: "#{image_path("mobileicon72.png")}"}
-		%link{rel: "apple-touch-icon-precomposed", sizes: "114x114", href: "#{image_path("mobileicon114.png")}"}
-		%meta{name: "viewport", content: "width=device-width"}
-		%title= @title
-		= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
-		= yield :header
-		= stylesheet_link_tag "2014-print", :media => "print"
-
-	%body
-		%div#wrapper
-			%div#header
-				%div#logo
-					%span#mobilelogo
-					%ul#menu_left
-						- menu_left.each do |item|
-							%li= link_to item[:name], item[:path]
-					%ul#menu_right
-						- menu_right.each do |item|
-							%li= link_to item[:name], item[:path]
-			%div#content
-				= yield
-			%div#footer
-				%div#sclogo
-				Swancon &copy; 2014 WASFF Inc.
-				= yield :footer
+  %body
+    - if Rails.env == "staging"
+      %div#staging You are on the Staging site. None of your changes will be reflected on the real site.
+    %div#wrapper
+      %div#header
+        %div#logo
+          %span#mobilelogo
+          %ul#menu_left
+            - menu_left.each do |item|
+              %li= link_to item[:name], item[:path]
+          %ul#menu_right
+            - menu_right.each do |item|
+              %li= link_to item[:name], item[:path]
+      %div#content
+        - if notice
+          %div{class: "notice"}=notice
+        - if alert
+          %div{class: "alert"}=alert      
+        = yield
+      %div#footer
+        %div#sclogo
+        Swancon &copy; 2014 WASFF Inc.
+        = yield :footer

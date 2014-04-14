@@ -1,5 +1,5 @@
 class TicketSetsController < ApplicationController
-	filter_resource_access
+  before_filter :authorize_path!
   # GET /ticket_sets
   # GET /ticket_sets.xml
   def index
@@ -41,7 +41,7 @@ class TicketSetsController < ApplicationController
   # POST /ticket_sets
   # POST /ticket_sets.xml
   def create
-    @ticket_set = TicketSet.new(params[:ticket_set])
+    @ticket_set = TicketSet.new(ticket_set_params)
 
     respond_to do |format|
       if @ticket_set.save
@@ -60,7 +60,7 @@ class TicketSetsController < ApplicationController
     @ticket_set = TicketSet.find(params[:id])
 
     respond_to do |format|
-      if @ticket_set.update_attributes(params[:ticket_set])
+      if @ticket_set.update_attributes(ticket_set_params)
         format.html { redirect_to(@ticket_set, :notice => 'Ticket set was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -85,4 +85,12 @@ class TicketSetsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+private
+  def ticket_set_params
+    params.require(:ticket_set).permit(
+      :name, :requires_extended_details
+    )
+  end
+
 end

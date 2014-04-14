@@ -1,5 +1,5 @@
 class AwardsController < ApplicationController
-	filter_resource_access
+	before_filter :authorize_path!
 	def index
 		@awards = Award.all
 

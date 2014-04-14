@@ -1,5 +1,5 @@
 class SellerController < ApplicationController
-	filter_access_to :all
+	before_filter :authorize_path!
 
 	def select
 		@users = User.joins("LEFT OUTER JOIN member_details ON users.id = member_details.user_id").includes(:member_detail)
@@ -19,61 +19,31 @@ class SellerController < ApplicationController
 			return
 		end
 
+		include_tickets = SiteSettings.con_mode
+
 		respond_to do |format|
 			format.html # index.html.erb
 			format.js
-			format.json {
-				if @user != nil
-
-				else
-					array = []
-					@users.each do |user| 
-						details = {}
-						if user.member_detail != nil
-							details = {
-								"member_detail_attributes[name_first]" =>
-									user.member_detail.name_first,
-								"member_detail_attributes[name_last]" =>
-									user.member_detail.name_last,
-								"member_detail_attributes[name_badge]" =>
-									user.member_detail.name_badge,
-								"member_detail_attributes[address_1]" =>
-									user.member_detail.address_1,
-								"member_detail_attributes[address_2]" =>
-									user.member_detail.address_2,
-								"member_detail_attributes[address_3]" =>
-									user.member_detail.address_3,								
-								"member_detail_attributes[address_postcode]" =>
-									user.member_detail.address_postcode,
-								"member_detail_attributes[address_state]" =>
-									user.member_detail.address_state,
-								"member_detail_attributes[address_country]" =>
-									user.member_detail.address_country,
-								"member_detail_attributes[phone]" =>
-									user.member_detail.phone,
-								"member_detail_attributes[email_optin]" =>
-									user.member_detail.email_optin,
-								"member_detail_attributes[disclaimer_signed]" =>
-									user.member_detail.disclaimer_signed
-							}
-						end
-						entry = {
-							id: user.id,
-							username: user.username,
-							email: user.email
-						}
-						array << entry.merge(details)
-					end
-					render json: array
-				end
-			}
+			format.json { render json: @users, root: "users", include_member_details: true, include_ticket_details: include_tickets }
 		end
+	end
+
+	def redeem
+		unless SiteSettings.con_mode
+			render json: {error: "Con mode not enabled"}, status: :bad_request
+			return
+		end
+
+		ticket = UserOrderTicket.find(params[:id])
+		ticket.redeem!
+
+		render json: {redeemed_id: params[:id]}
 	end
 
 	def create
 		if params[:user] != nil
 			if params[:user][:id].to_i == 0
-				@user = User.new(params[:user])
+				@user = User.new(user_params)
 				if @user.password == nil || @user.password.strip == ""
 					@user.password = Devise.friendly_token[0,20]
 					@user.password_confirmation = @user.password
@@ -103,10 +73,10 @@ class SellerController < ApplicationController
 					return
 				else
 					if @user.member_detail == nil
-						@user.member_detail = MemberDetail.new(params[:user][:member_detail_attributes])
+						@user.member_detail = MemberDetail.new(user_params[:member_detail_attributes])
 						@user.member_detail.save
 					else
-						@user.member_detail.update_attributes(params[:user][:member_detail_attributes])
+						@user.member_detail.update_attributes(user_params[:member_detail_attributes])
 						@user.save
 					end
 				end
@@ -169,5 +139,15 @@ class SellerController < ApplicationController
 			format.html # index.html.erb
 			format.js
 		end
+	end
+
+private
+	def user_params
+		params.require(:user).permit :username, :email, :password, :password_confirmation, 
+			member_detail_attributes: [
+				:name_first, :name_last, :name_badge, :address_1, :address_2, :address_3,
+				:address_postcode, :address_country, :address_state, :phone, :email_optin,
+				:disclaimer_signed
+			]
 	end
 end

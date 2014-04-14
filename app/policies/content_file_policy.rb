@@ -1,0 +1,3 @@
+class ContentFilePolicy < ContentPolicy
+end
+

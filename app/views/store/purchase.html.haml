@@ -1,0 +1,15 @@
+%div{class: "title"} Purchase
+= render partial: "header"
+= render partial: "cart"
+
+= form_tag(:action => :purchase, :confirm => true) do 
+	%label{for:"purchase_payment_type_id"}Purchase With:
+	= select("purchase", "payment_type_id", @payment_types.collect {|item| [item.form_display, item.id]}, :include_blank => true)
+	- if @can_disable_email and @store_user.email.strip.present?
+		%div
+			%label{for:"send_email"}Send Email:
+			= check_box_tag("send_email", "true", true)
+	- if @store_user.present?
+		= submit_tag "Confirm", data: {requires_value: "purchase_payment_type_id", confirm: "have you recieved the money for this purchase?"}
+	- else
+		= submit_tag "Confirm", data: {requires_value: "purchase_payment_type_id"}

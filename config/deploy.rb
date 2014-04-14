@@ -1,92 +1,72 @@
-require "bundler/capistrano"
-load 'deploy/assets'
+# config valid only for Capistrano 3.1
+lock '3.1.0'
 
-set :default_environment, {
-  'PATH' => "/usr/local/rvm/gems/ruby-1.9.2-p290/bin:/usr/local/rvm/bin:$PATH",
-  'RUBY_VERSION' => 'ruby 1.9.2',
-  'GEM_HOME'     => '/usr/local/rvm/gems/ruby-1.9.2-p290',
-  'GEM_PATH'     => '/usr/local/rvm/gems/ruby-1.9.2-p290',
-  'BUNDLE_PATH'  => '/usr/local/rvm/gems/ruby-1.9.2-p290'  # If you are using bundler.
-}
+set :application, 'swancon2014'
+set :repo_url, 'git@github.com:lordmortis/Swancon-Rails.git'
+set :rvm_ruby_version, '2.1.1'
 
-set :application, "Swancon Rails App"
-set :repository,  "git://github.com/lordmortis/Swancon-Rails.git"
-set :user, 'wasff'
-set :default_shell, 'bash'
-set :rake, 'bundle exec rake'
+# Default branch is :master
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :scm, :git
-#set :git_enable_submodules, 1 # if you have vendored rails
-set :branch, "develop"
-#set :scm_verbose, true
-set :use_sudo, false
+# Default deploy_to directory is /var/www/my_app
+# set :deploy_to, '/var/www/my_app'
 
-role :web, "clientweb.sektorseven.net"                          # Your HTTP server, Apache/etc
-role :app, "clientweb.sektorseven.net"                          # This may be the same as your `Web` server
-role :db,  "clientweb.sektorseven.net", :primary => true # This is where Rails migrations will run
+# Default value for :scm is :git
+# set :scm, :git
 
-set :deploy_to, "/home/wasff/2014/"
-set :deploy_via, :export
+# Default value for :format is :pretty
+# set :format, :pretty
 
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
+# Default value for :log_level is :debug
+# set :log_level, :debug
 
-# If you are using Passenger mod_rails uncomment this:
+# Default value for :pty is false
+# set :pty, true
+
+# Default value for :linked_files is []
+set :linked_files, %w{config/database.yml config/smtp.yml db/staging.sqlite3}
+
+# Default value for linked_dirs is []
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
+
+require 'capistrano/git'
 namespace :deploy do
-	task :start do ; end
-	task :stop do ; end
-	task :restart, :roles => :app, :except => { :no_release => true } do
-		run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-	end
-end
 
-namespace :deploy do
-  namespace :assets do
-
-    task :precompile, :roles => :web do
-      from = source.next_revision(current_revision)
-      if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ lib/assets/ app/assets/ | wc -l").to_i > 0
-        run_locally("rake assets:clean && rake assets:precompile")
-        run_locally "cd public && tar -jcf assets.tar.bz2 assets"
-        top.upload "public/assets.tar.bz2", "#{shared_path}", :via => :scp
-        run "cd #{shared_path} && tar -jxf assets.tar.bz2 && rm assets.tar.bz2"
-        run_locally "rm public/assets.tar.bz2"
-        run_locally("rake assets:clean")
-      else
-        logger.info "Skipping asset precompilation because there were no asset changes"
-      end
-    end
-
-    task :symlink, roles: :web do
-      run ("rm -rf #{latest_release}/public/assets &&
-            mkdir -p #{latest_release}/public &&
-            mkdir -p #{shared_path}/assets &&
-            ln -s #{shared_path}/assets #{latest_release}/public/assets")
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute :touch, release_path.join('tmp/restart.txt')
     end
   end
-end
 
-set :shared_assets, %w{privateconfig privatefiles}
-
-namespace :assets  do
-  namespace :symlinks do
-    desc "Setup application symlinks for shared assets"
-    task :setup, :roles => [:app, :web] do
-      shared_assets.each { |link| run "mkdir -p #{shared_path}/#{link}" }
-      run "mkdir -p #{shared_path}/assets"
-    end
-
-    desc "Link assets for current deploy to the shared location"
-    task :update, :roles => [:app, :web] do
-      shared_assets.each { |link| run "ln -nfs #{shared_path}/#{link} #{release_path}/#{link}" }
+  after :finishing, :tag_and_push_tag do 
+    run_locally do
+      user = capture(:git, "config --get user.name")
+      email = capture(:git, "config --get user.email")
+      tag_msg = "Deployed by #{user} <#{email}> to #{fetch :stage} as #{fetch :release_name}"
+ 
+      tag_name = "deploys/2014/#{fetch :stage }"
+      execute :git, %(push origin :refs/tags/#{tag_name})
+      execute :git, %(tag -f #{tag_name} origin/#{fetch :branch} -m "#{tag_msg}")
+      execute :git, "push origin #{tag_name}"
     end
   end
-end
 
-before "deploy:setup" do
-  assets.symlinks.setup
-end
+  after :publishing, :restart
 
-before "deploy:create_symlink" do
-  assets.symlinks.update
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
+  end
+
 end

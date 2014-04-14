@@ -1,5 +1,5 @@
 class PaymentTypesController < ApplicationController
-	filter_resource_access
+  before_filter :authorize_path!
   # GET /payment_types
   # GET /payment_types.xml
   def index

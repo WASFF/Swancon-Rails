@@ -1,5 +1,5 @@
 class AwardCategoriesController < ApplicationController
-	filter_resource_access
+	before_filter :authorize_path!
 	before_filter :loadaward
 	# GET /payment_types/new
 	# GET /payment_types/new.xml

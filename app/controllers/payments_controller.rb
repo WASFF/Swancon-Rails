@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-	filter_resource_access
+  before_filter :authorize_path!
   def index
     @payments = Payment.all
 

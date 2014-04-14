@@ -1,5 +1,5 @@
 class LaunchMembersController < ApplicationController
-	filter_resource_access :additional_member => [:buy_ticket]
+	before_filter :authorize_path!
   # GET /launch_members
   # GET /launch_members.xml
   def index
