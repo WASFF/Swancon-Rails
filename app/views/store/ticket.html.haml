@@ -10,7 +10,7 @@
 		= render_money(@ticket.concession_price)
 	= render partial: "header"
 	- if @ticket.available?
-		- if @ticket.available_to.blank?
+		- unless @ticket.available_to.blank?
 			Available until: 
 			= render_time(@ticket.available_to)
 		- if (current_user.present? and current_user.member_detail and @store_user.blank?) or (@store_user.present? and @store_user.member_detail.present?) or !@ticket.requires_extended_details 
