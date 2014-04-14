@@ -25,7 +25,7 @@
 			Please fill out your 
 			= link_to "member details", edit_my_member_details_path
 			before buying a ticket
-		- elsif @store_user.present and @store_user.member_detail == nil
+		- elsif @store_user.present? and @store_user.member_detail == nil
 			Please fill out the 
 			= link_to "member details", new_member_detail_path(user_id: @store_user.id)
 			for
