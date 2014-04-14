@@ -63,7 +63,7 @@ class StoreController < ApplicationController
 		ticket = TicketType.where(:id => params[:id]).first
 		
 		if ticket.available? or @store_user != nil
-			if params[:concession][:value] == "true"
+			if params[:concession].present? and params[:concession][:value] == "true"
 				session[:cart][:concessions] << params[:id].to_i				
 			else
 				session[:cart][:tickets] << params[:id].to_i
