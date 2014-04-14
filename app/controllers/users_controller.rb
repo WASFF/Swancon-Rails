@@ -121,13 +121,15 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		if current_user.role_symbols.index(:admin) == nil
+		unless current_user.role_symbols.include? :admin
 			params[:user].delete(:role_ids)
 		else
 			if !params[:user].key?(:role_ids)
 				params[:user][:role_ids] = []
-			end
+			end			
 		end
+
+		byebug
 		
 		if params[:user][:password].strip == ""
 			params[:user].delete(:password)
@@ -166,7 +168,7 @@ class UsersController < ApplicationController
 private
 	def user_params
 		params.require(:user).permit [
-				:username, :email, :password, :password_confirmation, :role_ids
+				:username, :email, :password, :password_confirmation, role_ids: []
 			]
 	end
 end
