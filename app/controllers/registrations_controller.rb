@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_filter :update_sanitized_params, if: :devise_controller?
+
   def update
     # Devise use update_with_password instead of update_attributes.
     # This is the only change we make.
@@ -28,6 +30,10 @@ private
     params.require(resource_name).permit(
       :username, :email, :password, :password_confirmation, :current_password
     )
+  end
+
+  def update_sanitized_params
+    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:username, :email, :password, :password_confirmation)}
   end
 
 end
