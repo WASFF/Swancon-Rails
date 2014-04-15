@@ -128,8 +128,6 @@ class UsersController < ApplicationController
 				params[:user][:role_ids] = []
 			end			
 		end
-
-		byebug
 		
 		if params[:user][:password].strip == ""
 			params[:user].delete(:password)
