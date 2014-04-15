@@ -12,6 +12,9 @@ ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 set :deploy_to, '/home/sc2014/SwanconRails/staging'
 
+set :linked_files, fetch(:base_linked_files) + ["db/staging.sqlite3"]
+set :linked_dirs, fetch(:base_linked_dirs)
+
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
 # you can see them in [net/ssh documentation](http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start)

@@ -24,4 +24,4 @@ require 'capistrano/rails/migrations'
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
 
-Rake::Task[:staging].invoke
+#Rake::Task[:staging].invoke

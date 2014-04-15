@@ -67,6 +67,6 @@ I AGREE TO THE ABOVE: <%= f.check_box :disclaimer_signed %>
     <%= f.submit %>
   </div>
 <% end %>
-  <% if @member_detail.disclaimer_signed %>
+  <% if @member_detail.disclaimer_signed and @member_detail.user == current_user %>
   <%= button_to "Buy Tickets", controller: "store", action: "index" %>
   <% end %>

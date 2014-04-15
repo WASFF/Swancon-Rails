@@ -21,7 +21,7 @@
 					%label{for: "concession_value"}Standard or Concession?
 					= select("concession", "value", [["Standard", false], ["Concession", true]], include_blank: true)
 					= submit_tag("Add to cart", data: {requires_value: "concession_value"})
-		- elsif current_user.present? and current_user.member_detail.blank and @store_user.blank?
+		- elsif current_user.present? and current_user.member_detail.blank? and @store_user.blank?
 			Please fill out your 
 			= link_to "member details", edit_my_member_details_path
 			before buying a ticket

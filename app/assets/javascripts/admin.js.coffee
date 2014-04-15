@@ -205,7 +205,7 @@ validateMember = ->
 				if enable
 					$(msgsrc).html("")
 					$item.css("background-color", "white")
-				else
+				else if $item.val().length > 0
 					$(msgsrc).html("Too Short!")
 					$item.css("background-color", "red")
 

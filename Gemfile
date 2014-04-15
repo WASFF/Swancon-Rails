@@ -13,7 +13,6 @@ gem 'uglifier'
 # Restores line errors, should only be required until https://github.com/sstephenson/execjs/pull/140 is merged.
 gem "execjs", git: "https://github.com/4ormat/execjs.git", ref: "fe2bde333660f4893be59fb7a4fd7f42ae5934ac"
 
-
 gem 'jquery-rails'
 gem 'sqlite3'
 gem 'devise'

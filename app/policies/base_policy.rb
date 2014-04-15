@@ -9,6 +9,10 @@ class BasePolicy
     end    
   end
 
+  def committee_or_admin?
+    committee_or_admin
+  end
+
   def admin
     unless @user.blank?
       @user.role_symbols.include? :admin
@@ -16,5 +20,10 @@ class BasePolicy
       false
     end        
   end
+
+  def admin?
+    admin
+  end
+
 end
 

@@ -15,6 +15,7 @@ class RoutePolicy
       payments: true,
       panel_suggestions: true,
       promoted_items: true,
+      member_details: true,
       user_orders: true,
       users: true,
       seller: true,

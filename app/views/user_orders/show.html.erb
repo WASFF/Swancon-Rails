@@ -36,7 +36,7 @@ Paid Via: <%= @order.payment.payment_type.name %><br/>
 <div class="text-right">Total: <%= render_money(@order.total) %></div>
 <br/>
 
-<%= render :partial => "#{@order.payment_type.name.downcase.gsub(" ", "_")}_details" %>
+<%= render partial: "#{@order.payment_type.name.downcase.gsub(" ", "_")}_details" rescue nil %>
 
 <% end %>
 
