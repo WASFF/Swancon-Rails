@@ -11,7 +11,7 @@ class RegistrationsController < Devise::RegistrationsController
 
 		params[resource_name].delete(:password) if params[resource_name][:password].blank?
 		params[resource_name].delete(:password_confirmation) if params[resource_name][:password_confirmation].blank?
-    if resource.update_attributes(allowed_params)
+    if resource.update_with_password(allowed_params)
       set_flash_message :notice, :updated
       # Line below required if using Devise >= 1.2.0
       sign_in resource_name, resource, :bypass => true
