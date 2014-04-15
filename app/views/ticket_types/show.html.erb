@@ -1,5 +1,5 @@
 <div class="title"><%= @ticket_type.name %></div>
-<p class="olive">$<%= @ticket_type.price %></p>
+<p class="olive"><%= render_money @ticket_type.price %><% if @ticket_type.concession_price != nil %> / <%= render_money @ticket_type.concession_price %><% end %></p>
 
 <p>
   <b>Ticket set:</b>
@@ -41,17 +41,6 @@
 	<blockquote>
 	<% @ticket_type.orders.paid.each do |uot| %>
 	<%= order %>. <%= uot.user.name %><br/>
-	<% order += 1%>
-	<% end %>
-	</blockquote>
-</p>
-
-<p>
-	<b>Orders (old system)</b>
-	<% order = 1 %>
-	<blockquote>
-	<% @ticket_type.launch_member_ticket_types.each do |lmtt| %>
-	<%= order %>. <%= lmtt.launch_member.name %><br/>
 	<% order += 1%>
 	<% end %>
 	</blockquote>

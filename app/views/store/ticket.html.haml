@@ -1,0 +1,46 @@
+%div{class: "title"}
+	= @ticket.set.name
+	Ticket
+%p{class: "olive"}
+	= @ticket.name
+	&dash;
+	= render_money(@ticket.price)
+	- if @ticket.concession_price.present?
+		/
+		= render_money(@ticket.concession_price)
+	= render partial: "header"
+	- if @ticket.available?
+		- unless @ticket.available_to.blank?
+			Available until: 
+			= render_time(@ticket.available_to)
+		- if (current_user.present? and current_user.member_detail and @store_user.blank?) or (@store_user.present? and @store_user.member_detail.present?) or !@ticket.requires_extended_details 
+			- if @ticket.concession_price.blank?
+				= button_to "add to cart", action: "ticket_add", id: @ticket.id
+			- else
+				= form_tag action: "ticket_add", id: @ticket.id do
+					%label{for: "concession_value"}Standard or Concession?
+					= select("concession", "value", [["Standard", false], ["Concession", true]], include_blank: true)
+					= submit_tag("Add to cart", data: {requires_value: "concession_value"})
+		- elsif current_user.present? and current_user.member_detail.blank? and @store_user.blank?
+			Please fill out your 
+			= link_to "member details", edit_my_member_details_path
+			before buying a ticket
+		- elsif @store_user.present? and @store_user.member_detail == nil
+			Please fill out the 
+			= link_to "member details", new_member_detail_path(user_id: @store_user.id)
+			for
+			= @store_user.name
+			before buying a ticket on their behalf
+	- elsif current_user.present? and current_user.full_store_visible?
+		%div{class: "warning"} Warning: Item is currently unavailable to normal user
+		- if @ticket.concession_price.blank?
+			= button_to "add to cart", action: "ticket_add", id: @ticket.id
+		- else
+			= form_tag action: "ticket_add", id: @ticket.id do
+				%label{for: "concession_value"}Standard or Concession?
+				= select("concession", "value", [["Standard", false], ["Concession", true]], include_blank: true)
+				= submit_tag("Add to cart", data: {requires_value: "concession_value"})
+	- else
+		This item is not available
+
+= render partial: "cart"

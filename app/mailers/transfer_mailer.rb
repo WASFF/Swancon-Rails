@@ -1,80 +1,111 @@
-class TransferMailer < ActionMailer::Base
+class TransferMailer < BaseMailer
   default from: "Swancon #{Rails.application.config.swancon_year} Memberships <memberships-#{Rails.application.config.swancon_year}@swancon.com.au>", return_path: "memberships-#{Rails.application.config.swancon_year}@swancon.com.au"
-	helper :application, Authorization::AuthorizationHelper
-
-	def reconfirm_sender(transfer)
+  
+	def reconfirm_sender(transfer, current_user = nil)
 		@ticket = transfer.ticket
 		@recipient = transfer.recipient
 		@sender = transfer.sender
 		@transfer = transfer
-		mail(to: transfer.previous_owner.email, :subject => "A Ticket transfer has been requested.}")
+		mail(
+			to: transfer.previous_owner.email,
+			current_user: current_user,
+			subject: "A Ticket transfer has been requested."
+		)
 	end
 
-	def reconfirm_recipient(transfer)
+	def reconfirm_recipient(transfer, current_user = nil)
 		@ticket = transfer.ticket
 		@recipient = transfer.recipient
 		@sender = transfer.sender
 		@transfer = transfer
-		mail(to: transfer.recipient.email, :subject => "Ticket transfer to you has begun!}")
+		mail(
+			to: transfer.recipient.email,
+			current_user: current_user,
+			subject: "Ticket transfer to you has begun!"
+		)
 	end
 
-	def reconfirm_admin(transfer)
+	def reconfirm_admin(transfer, current_user = nil)
 		@ticket = transfer.ticket
 		@recipient = transfer.recipient
 		@sender = transfer.sender
 		@transfer = transfer
-		mail(to: "memberships-#{Rails.application.config.swancon_year}@swancon.com.au", subject: "Ticket Transfer #{transfer.id} started.")
+		mail(
+			to: "memberships-#{Rails.application.config.swancon_year}@swancon.com.au",
+			current_user: current_user,
+			subject: "Ticket Transfer #{transfer.id} started."
+		)
 	end
 
-	def cancel_sender(transfer)
+	def cancel_sender(transfer, current_user = nil)
 		@ticket = transfer.ticket
 		@recipient = transfer.recipient
 		@sender = transfer.sender
 		@transfer = transfer		
-		mail(to: transfer.previous_owner.email, :subject => "Your ticket transfer has been cancelled.}")
+		mail(
+			to: transfer.previous_owner.email,
+			current_user: current_user,
+			subject: "Your ticket transfer has been cancelled."
+		)
 	end
 
-	def cancel_recipient(transfer)
+	def cancel_recipient(transfer, current_user = nil)
 		@ticket = transfer.ticket
 		@recipient = transfer.recipient
 		@sender = transfer.sender
 		@transfer = transfer		
-		mail(to: transfer.recipient.email, :subject => "Ticket Transfer to you has been cancelled.}")
+		mail(
+			to: transfer.recipient.email,
+			current_user: current_user,
+			subject: "Ticket Transfer to you has been cancelled."
+		)
 	end
 
-	def cancel_admin(transfer)
+	def cancel_admin(transfer, current_user = nil)
 		@ticket = transfer.ticket
 		@recipient = transfer.recipient
 		@sender = transfer.sender
 		@transfer = transfer		
-		mail(to: transfer.previous_owner.email, :subject => "Ticket Transfer #{transfer.id} started")
+		mail(
+			to: transfer.previous_owner.email,
+			current_user: current_user,
+			subject: "Ticket Transfer #{transfer.id} started"
+		)
 	end
 
-	def completed_sender(transfer)
+	def completed_sender(transfer, current_user = nil)
 		@ticket = transfer.ticket
 		@recipient = transfer.recipient
 		@sender = transfer.sender
 		@transfer = transfer		
-		mail(to: transfer.previous_owner.email, :subject => "Your ticket has now been transferred to the recipient.}")
+		mail(
+			to: transfer.previous_owner.email,
+			current_user: current_user,
+			subject: "Your ticket has now been transferred to the recipient."
+		)
 	end
 
-	def completed_recipient(transfer)
+	def completed_recipient(transfer, current_user = nil)
 		@ticket = transfer.ticket
 		@recipient = transfer.recipient
 		@sender = transfer.sender
 		@transfer = transfer		
-		mail(to: transfer.recipient.email, :subject => "Ticket transfer to you has finished!}")
+		mail(
+			to: transfer.recipient.email,
+			current_user: current_user,
+			subject: "Ticket transfer to you has finished!"
+		)
 	end
 	
-	def completed_admin(transfer)
+	def completed_admin(transfer, current_user = nil)
 		@ticket = transfer.ticket
 		@recipient = transfer.recipient
 		@sender = transfer.sender
 		@transfer = transfer
-		mail(to: "memberships-#{Rails.application.config.swancon_year}@swancon.com.au", subject: "Ticket Transfer #{transfer.id} completed.")
-	end
-
-	def permitted_to?(*args)
-		false
+		mail(
+			to: "memberships-#{Rails.application.config.swancon_year}@swancon.com.au",
+			current_user: current_user,
+			subject: "Ticket Transfer #{transfer.id} completed."
+		)
 	end
 end

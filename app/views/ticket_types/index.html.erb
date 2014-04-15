@@ -10,6 +10,7 @@ Requires Extended Details<br/>
   <tr>
     <th>Name</th>
     <th>Price</th>
+    <th>Concession</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,7 +19,8 @@ Requires Extended Details<br/>
 <% set.types.order(:price).each do |ticket_type| %>
   <tr>
     <td><%= ticket_type.name %></td>
-    <td><%= ticket_type.price %></td>
+    <td><%= render_money ticket_type.price %></td>
+    <td><%= render_money ticket_type.concession_price %></td>
     <td><%= link_to 'Show', ticket_type %></td>
     <td><%= link_to 'Edit', edit_ticket_type_path(ticket_type) %></td>
     <td><% if ticket_type.deletable? %><%= link_to 'Destroy', ticket_type, :confirm => 'Are you sure?', :method => :delete %><% end %></td>

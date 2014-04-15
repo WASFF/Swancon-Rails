@@ -12,19 +12,19 @@ class UserOrder < ActiveRecord::Base
 	}
 
 	def invoice_number
-		sprintf "2013-ORDER-%05d", id
+		sprintf "2014-ORDER-%05d", id
 	end
 	
 	def invoice
-		sprintf "2013-ORDER-%05d", id		
+		sprintf "2014-ORDER-%05d", id		
 	end
 	
 	def short_invoice
-		sprintf "2013%05d", id		
+		sprintf "2014%05d", id		
 	end
 	
 	def short_invoice_number
-		sprintf "2013%05d", id
+		sprintf "2014%05d", id
 	end
 
 	def merchandise
@@ -42,7 +42,11 @@ class UserOrder < ActiveRecord::Base
 		end
 		
 		tickets.each do |ticket|
-			total += ticket.price
+			if ticket.concession
+				total += ticket.concession_price
+			else
+				total += ticket.price
+			end
 		end
 		
 		total

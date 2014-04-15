@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
 
 	validates :username, :presence => true, :length => {:minimum => 3}, :uniqueness => { :case_sensitive => false }
 
-  # Setup accessible (or protected) attributes for your model
-	attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :role_ids, :member_detail_attributes 
+# TODO: Fixme
+#	attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :role_ids, :member_detail_attributes 
 
 	after_create :add_user_role
 
@@ -85,6 +85,11 @@ class User < ActiveRecord::Base
 		end
 
 		retval
+	end
+
+	def admin_panel_visible?
+		symbols = role_symbols
+		return symbols.include?(:admin) || symbols.include?(:committee)
 	end
 	
 	# Class Functions

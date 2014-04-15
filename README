@@ -1,3 +1,7 @@
+Fix the leading page stories
+add photo flipper to front page
+add countdown to swancon
+
 h2. Swancon Rails websystem
 
 Ticket Transfer
@@ -29,3 +33,25 @@ Single Page Order
 Blogging
 This is Swancon
 Gallery
+
+
+DATABASE RESET
+
+MerchandiseImage.delete_all
+MerchandiseOption.delete_all
+MerchandiseOptionSet.delete_all
+MerchandiseSet.delete_all
+MerchandiseType.delete_all
+PanelSuggestion.delete_all
+TicketSet.delete_all
+TicketType.delete_all
+Vendor.delete_all
+VendorOrder.delete_all
+UserOrder.delete_all
+Payment.delete_all
+ContentBlock.delete_all
+ContentFile.delete_all
+ContentImage.delete_all
+ContentPage.delete_all
+ContentTag.delete_all
+ContentTagBlock.delete_all

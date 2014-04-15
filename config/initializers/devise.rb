@@ -6,6 +6,8 @@ Devise.setup do |config|
   config.mailer_sender = "tickets-2013@swancon.com.au"
   config.case_insensitive_keys = [:email, :username]
 
+  config.secret_key = "00bd0f7ff7cb0c35bcf4f0c9f6867d394ad61912a42ec3ee04b891be8a41d311a650bdb8ed021f657374554c6acc3bc00d97122640afe6da196bc9995d3ad2ea"
+
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
 

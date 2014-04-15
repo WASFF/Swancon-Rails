@@ -1,0 +1,3 @@
+class ContentImagePolicy < ContentPolicy
+end
+

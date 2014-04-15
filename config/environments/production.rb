@@ -5,6 +5,12 @@ DoomCon::Application.configure do
   # Code is not reloaded between requests
   config.cache_classes = true
 
+  # Eager load code on boot. This eager loads most of Rails and
+  # your application in memory, allowing both thread web servers
+  # and those relying on copy on write to perform better.
+  # Rake tasks automatically ignore this option for performance.
+  config.eager_load = true
+
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
@@ -47,14 +53,9 @@ DoomCon::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-	config.action_mailer.default_url_options = { :host => '2012.swancon.com.au', :protocol => 'https' }
+	config.action_mailer.default_url_options = { :host => '2014.swancon.com.au', :protocol => 'https' }
 	
 	ActionMailer::Base.delivery_method = :smtp
-	ActionMailer::Base.smtp_settings = {
-	   :address => "mail.sektorseven.net",
-	   :port => 25,
-	   :domain => "2012.swancon.com.au",
-	}
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false

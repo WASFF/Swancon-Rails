@@ -23,7 +23,7 @@ Issued: <%= render_time(@order.created_at) %><br/>
 Ordered By: <%= @order.operator.username %><br/>
 <%- end %>
 <% end -%>
-Ordered For: <%= link_to_if(permitted_to?(:show, :users), @order.user.order_name, users_admin_path(@order.user)) %><br/>
+Ordered For: <%= link_to_if(user_can_visit?(:users, :show), @order.user.order_name, users_admin_path(@order.user)) %><br/>
 Last Updated: <%= render_time(@order.updated_at) %><br/>
 <br/>
 
@@ -36,7 +36,7 @@ Paid Via: <%= @order.payment.payment_type.name %><br/>
 <div class="text-right">Total: <%= render_money(@order.total) %></div>
 <br/>
 
-<%= render :partial => "#{@order.payment_type.name.downcase.gsub(" ", "_")}_details" %>
+<%= render partial: "#{@order.payment_type.name.downcase.gsub(" ", "_")}_details" rescue nil %>
 
 <% end %>
 
@@ -67,11 +67,11 @@ Payment: <%= link_to @order.payment.reciept_number, @order.payment %> <%= button
 <% end %>
 <% end %>
 
-<% permitted_to? :remail do %>
+<% user_can_visit? :user_orders, :remail do %>
 <%= link_to "Send Email to #{@order.user.order_name} again", remail_order_path(@order), :method => :post, :class =>"noprint" %> | 
 <% end %>
 
-<% if permitted_to? :index %>
+<% if user_can_visit? :user_orders, :index %>
 	<%= link_to 'Back', orders_path, :class => "noprint" %>
 <% else %>
 	<%= link_to 'Back', {action: :sales, controller: :seller}, :class => "noprint" %>

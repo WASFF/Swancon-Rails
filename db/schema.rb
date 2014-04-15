@@ -9,29 +9,29 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130119092759) do
+ActiveRecord::Schema.define(version: 20140413042342) do
 
-  create_table "award_categories", :force => true do |t|
-    t.string   "name",        :null => false
-    t.string   "description", :null => false
-    t.integer  "award_id",    :null => false
+  create_table "award_categories", force: true do |t|
+    t.string   "name",        null: false
+    t.string   "description", null: false
+    t.integer  "award_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "award_nomination_categories", :force => true do |t|
-    t.integer  "award_nomination_id", :null => false
-    t.integer  "award_category_id",   :null => false
-    t.string   "nominee",             :null => false
-    t.string   "work",                :null => false
+  create_table "award_nomination_categories", force: true do |t|
+    t.integer  "award_nomination_id", null: false
+    t.integer  "award_category_id",   null: false
+    t.string   "nominee",             null: false
+    t.string   "work",                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "award_nominations", :force => true do |t|
-    t.integer  "award_id",   :null => false
+  create_table "award_nominations", force: true do |t|
+    t.integer  "award_id",   null: false
     t.integer  "user_id"
     t.string   "name"
     t.string   "email"
@@ -39,33 +39,33 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
     t.datetime "updated_at"
   end
 
-  create_table "awards", :force => true do |t|
-    t.string   "name",                           :null => false
-    t.string   "description",                    :null => false
-    t.boolean  "active",      :default => false, :null => false
+  create_table "awards", force: true do |t|
+    t.string   "name",                        null: false
+    t.string   "description",                 null: false
+    t.boolean  "active",      default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "content_blocks", :force => true do |t|
+  create_table "content_blocks", force: true do |t|
     t.string   "title"
     t.text     "summary"
     t.text     "bodytext"
-    t.boolean  "autosummarize", :default => false, :null => false
+    t.boolean  "autosummarize", default: false, null: false
     t.integer  "editor_id"
     t.integer  "author_id"
     t.integer  "tweet_id"
     t.string   "short_url"
-    t.boolean  "preview",       :default => true,  :null => false
+    t.boolean  "preview",       default: true,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "published_at"
   end
 
-  add_index "content_blocks", ["author_id"], :name => "index_content_blocks_on_author_id"
-  add_index "content_blocks", ["editor_id"], :name => "index_content_blocks_on_editor_id"
+  add_index "content_blocks", ["author_id"], name: "index_content_blocks_on_author_id"
+  add_index "content_blocks", ["editor_id"], name: "index_content_blocks_on_editor_id"
 
-  create_table "content_files", :force => true do |t|
+  create_table "content_files", force: true do |t|
     t.integer  "author_id"
     t.string   "description"
     t.string   "data_file_name"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
     t.datetime "updated_at"
   end
 
-  create_table "content_images", :force => true do |t|
+  create_table "content_images", force: true do |t|
     t.integer  "author_id"
     t.string   "description"
     t.string   "data_file_name"
@@ -90,11 +90,11 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
     t.datetime "updated_at"
   end
 
-  create_table "content_pages", :force => true do |t|
-    t.string   "name",                            :null => false
+  create_table "content_pages", force: true do |t|
+    t.string   "name",                         null: false
     t.integer  "content_block_id"
     t.integer  "content_tag_id"
-    t.integer  "order_index",      :default => 0, :null => false
+    t.integer  "order_index",      default: 0, null: false
     t.boolean  "home"
     t.boolean  "navbar"
     t.datetime "created_at"
@@ -103,73 +103,38 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
     t.string   "action"
   end
 
-  create_table "content_tag_blocks", :force => true do |t|
+  create_table "content_tag_blocks", force: true do |t|
     t.integer  "content_tag_id"
     t.integer  "content_block_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "content_tags", :force => true do |t|
-    t.string   "name",       :null => false
+  create_table "content_tags", force: true do |t|
+    t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "launch_member_merchandise_types", :force => true do |t|
-    t.integer  "launch_member_id"
-    t.integer  "merchandise_type_id"
-    t.string   "merchandise_options_hash"
-    t.integer  "payment_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "launch_member_ticket_types", :force => true do |t|
-    t.integer  "launch_member_id"
-    t.integer  "ticket_type_id"
-    t.integer  "payment_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "launch_members", :force => true do |t|
-    t.string   "name_first",                           :null => false
-    t.string   "name_last"
-    t.string   "name_badge"
-    t.string   "address_street1",                      :null => false
-    t.string   "address_street2"
-    t.string   "address_street3",                      :null => false
-    t.string   "address_postcode",                     :null => false
-    t.string   "address_state",                        :null => false
-    t.string   "address_country",                      :null => false
-    t.string   "phoneno"
-    t.string   "email"
-    t.boolean  "email_optin",       :default => false, :null => false
-    t.boolean  "disclaimer_signed", :default => false, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "member_details", :force => true do |t|
+  create_table "member_details", force: true do |t|
     t.integer  "user_id"
-    t.string   "name_first",                           :null => false
+    t.string   "name_first",                        null: false
     t.string   "name_last"
     t.string   "name_badge"
-    t.string   "address_1",                            :null => false
+    t.string   "address_1",                         null: false
     t.string   "address_2"
-    t.string   "address_3",                            :null => false
-    t.string   "address_postcode",                     :null => false
-    t.string   "address_state",                        :null => false
-    t.string   "address_country",                      :null => false
+    t.string   "address_3",                         null: false
+    t.string   "address_postcode",                  null: false
+    t.string   "address_state",                     null: false
+    t.string   "address_country",                   null: false
     t.string   "phone"
-    t.boolean  "email_optin",       :default => false, :null => false
-    t.boolean  "disclaimer_signed", :default => false, :null => false
+    t.boolean  "email_optin",       default: false, null: false
+    t.boolean  "disclaimer_signed", default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "merchandise_images", :force => true do |t|
+  create_table "merchandise_images", force: true do |t|
     t.integer  "merchandise_type_id"
     t.string   "description"
     t.string   "image_file_name"
@@ -182,29 +147,29 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
     t.datetime "updated_at"
   end
 
-  create_table "merchandise_option_sets", :force => true do |t|
+  create_table "merchandise_option_sets", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "merchandise_options", :force => true do |t|
+  create_table "merchandise_options", force: true do |t|
     t.string   "name"
     t.integer  "merchandise_type_id"
     t.integer  "merchandise_option_set_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description"
-    t.integer  "order_index",               :default => 0, :null => false
+    t.integer  "order_index",               default: 0, null: false
   end
 
-  create_table "merchandise_sets", :force => true do |t|
+  create_table "merchandise_sets", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "merchandise_types", :force => true do |t|
+  create_table "merchandise_types", force: true do |t|
     t.string   "name"
     t.integer  "merchandise_set_id"
     t.float    "price"
@@ -214,7 +179,7 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
     t.datetime "available_to"
   end
 
-  create_table "panel_suggestions", :force => true do |t|
+  create_table "panel_suggestions", force: true do |t|
     t.string   "name"
     t.string   "description"
     t.integer  "user_id"
@@ -226,18 +191,18 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
     t.boolean  "visible"
   end
 
-  create_table "payment_types", :force => true do |t|
+  create_table "payment_types", force: true do |t|
     t.string   "name"
     t.boolean  "requires_reconciliation"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "available_online",           :default => false, :null => false
+    t.boolean  "available_online",           default: false, null: false
     t.float    "surcharge_percent"
     t.float    "surcharge_value"
-    t.boolean  "available_to_ticket_seller", :default => false, :null => false
+    t.boolean  "available_to_ticket_seller", default: false, null: false
   end
 
-  create_table "payments", :force => true do |t|
+  create_table "payments", force: true do |t|
     t.integer  "payment_type_id"
     t.float    "amount"
     t.boolean  "reconciled"
@@ -249,52 +214,53 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
     t.integer  "operator_id"
   end
 
-  create_table "roles", :force => true do |t|
+  create_table "roles", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
+  create_table "sessions", force: true do |t|
+    t.string   "session_id", null: false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
-  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
 
-  create_table "settings", :force => true do |t|
-    t.string   "var",                       :null => false
+  create_table "settings", force: true do |t|
+    t.string   "var",                   null: false
     t.text     "value"
-    t.integer  "target_id"
-    t.string   "target_type", :limit => 30
+    t.integer  "thing_id"
+    t.string   "thing_type", limit: 30
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "settings", ["target_type", "target_id", "var"], :name => "index_settings_on_target_type_and_target_id_and_var", :unique => true
+  add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
 
-  create_table "ticket_sets", :force => true do |t|
+  create_table "ticket_sets", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "requires_extended_details", :default => false
+    t.boolean  "requires_extended_details", default: false
   end
 
-  create_table "ticket_types", :force => true do |t|
+  create_table "ticket_types", force: true do |t|
     t.string   "name"
-    t.float    "price"
     t.integer  "ticket_set_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "available_from"
     t.datetime "available_to"
-    t.integer  "target",         :default => 0, :null => false
+    t.integer  "target",           default: 0,   null: false
+    t.decimal  "concession_price"
+    t.decimal  "price",            default: 0.0, null: false
   end
 
-  create_table "user_omni_auths", :force => true do |t|
+  create_table "user_omni_auths", force: true do |t|
     t.string   "authtype"
     t.integer  "idvalue"
     t.integer  "user_id"
@@ -302,18 +268,18 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
     t.datetime "updated_at"
   end
 
-  add_index "user_omni_auths", ["authtype"], :name => "index_user_omni_auths_on_authtype"
-  add_index "user_omni_auths", ["idvalue"], :name => "index_user_omni_auths_on_idvalue"
-  add_index "user_omni_auths", ["user_id"], :name => "index_user_omni_auths_on_user_id"
+  add_index "user_omni_auths", ["authtype"], name: "index_user_omni_auths_on_authtype"
+  add_index "user_omni_auths", ["idvalue"], name: "index_user_omni_auths_on_idvalue"
+  add_index "user_omni_auths", ["user_id"], name: "index_user_omni_auths_on_user_id"
 
-  create_table "user_order_merchandise_options", :force => true do |t|
+  create_table "user_order_merchandise_options", force: true do |t|
     t.integer  "user_order_merchandise_id"
     t.integer  "merchandise_option_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "user_order_merchandises", :force => true do |t|
+  create_table "user_order_merchandises", force: true do |t|
     t.integer  "user_order_id"
     t.integer  "merchandise_type_id"
     t.datetime "created_at"
@@ -323,18 +289,18 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
     t.datetime "shipped_at"
   end
 
-  create_table "user_order_ticket_transfers", :force => true do |t|
-    t.integer  "user_order_ticket_id", :null => false
-    t.integer  "sender_id",            :null => false
-    t.integer  "previous_owner_id",    :null => false
-    t.integer  "recipient_id",         :null => false
+  create_table "user_order_ticket_transfers", force: true do |t|
+    t.integer  "user_order_ticket_id", null: false
+    t.integer  "sender_id",            null: false
+    t.integer  "previous_owner_id",    null: false
+    t.integer  "recipient_id",         null: false
     t.string   "confirmation_code"
     t.datetime "confirmed_on"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "user_order_tickets", :force => true do |t|
+  create_table "user_order_tickets", force: true do |t|
     t.integer  "user_order_id"
     t.integer  "ticket_type_id"
     t.integer  "user_id"
@@ -342,9 +308,11 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
     t.datetime "updated_at"
     t.datetime "card_issued"
     t.datetime "arrived"
+    t.boolean  "concession",     default: false, null: false
+    t.datetime "redeemed_at"
   end
 
-  create_table "user_orders", :force => true do |t|
+  create_table "user_orders", force: true do |t|
     t.integer  "user_id"
     t.integer  "payment_id"
     t.integer  "payment_type_id"
@@ -354,21 +322,21 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
     t.integer  "voided_by_id"
   end
 
-  create_table "user_roles", :force => true do |t|
+  create_table "user_roles", force: true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "username",                                              :null => false
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+  create_table "users", force: true do |t|
+    t.string   "username",                                        null: false
+    t.string   "email",                              default: "", null: false
+    t.string   "encrypted_password",     limit: 128, default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                         :default => 0
+    t.integer  "sign_in_count",                      default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -380,20 +348,20 @@ ActiveRecord::Schema.define(:version => 20130119092759) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
-  add_index "users", ["email"], :name => "index_users_on_email"
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users", ["username"], :name => "index_users_on_username"
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email"
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["username"], name: "index_users_on_username"
 
-  create_table "vendor_orders", :force => true do |t|
-    t.integer  "vendor_id",  :null => false
+  create_table "vendor_orders", force: true do |t|
+    t.integer  "vendor_id",  null: false
     t.datetime "placed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "closed_at"
   end
 
-  create_table "vendors", :force => true do |t|
+  create_table "vendors", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

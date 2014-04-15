@@ -2,12 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-if defined?(Bundler)  
-	# If you precompile assets before deploying to production, use this line  
-	Bundler.require *Rails.groups(:assets => %w(development test))  
-	# If you want your assets lazily compiled in production, use this line  
-	# Bundler.require(:default, :assets, Rails.env)  
-end  
+Bundler.require(*Rails.groups)
 
 module DoomCon
 	class Application < Rails::Application
@@ -44,7 +39,7 @@ module DoomCon
 
 		config.site_name = Mortiscms.config.site_name
 
-		config.swancon_year = "2013"
+		config.swancon_year = "2014"
 
 		# Enable the asset pipeline
 		config.assets.enabled = true
@@ -52,6 +47,6 @@ module DoomCon
 		# Version of your assets, change this if you want to expire all your assets
 		config.assets.version = '1.0' 
 
-		config.assets.precompile += ['main-ipad.css', 'main-print.css', 'mobile.js', 'sc2013-new.css', 'reset.css' ]
+		config.assets.precompile += [ '*.js', '*.css' ]
 	end
 end

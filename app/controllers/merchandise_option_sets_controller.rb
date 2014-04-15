@@ -1,5 +1,5 @@
 class MerchandiseOptionSetsController < ApplicationController
-	filter_resource_access
+	before_filter :authorize_path!
   # GET /merchandise_option_sets
   # GET /merchandise_option_sets.xml
   def index
@@ -41,7 +41,7 @@ class MerchandiseOptionSetsController < ApplicationController
   # POST /merchandise_option_sets
   # POST /merchandise_option_sets.xml
   def create
-    @merchandise_option_set = MerchandiseOptionSet.new(params[:merchandise_option_set])
+    @merchandise_option_set = MerchandiseOptionSet.new(merchandise_option_set_params)
 
     respond_to do |format|
       if @merchandise_option_set.save
@@ -60,7 +60,7 @@ class MerchandiseOptionSetsController < ApplicationController
     @merchandise_option_set = MerchandiseOptionSet.find(params[:id])
 
     respond_to do |format|
-      if @merchandise_option_set.update_attributes(params[:merchandise_option_set])
+      if @merchandise_option_set.update_attributes(merchandise_option_set_params)
         format.html { redirect_to(@merchandise_option_set, :notice => 'Merchandise option set was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -85,4 +85,13 @@ class MerchandiseOptionSetsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+
+private
+  def merchandise_option_set_params
+    params.require(:merchandise_option_set).permit(
+      :name
+    )
+  end
+
 end

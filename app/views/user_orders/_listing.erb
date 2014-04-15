@@ -10,8 +10,15 @@
 
 <% @order.tickets.all.each do |ticketorder| -%>	
 <tr>
-	<td><%= ticketorder.ticket_type.order_name %></td><td><% if permitted_to? :index, :users -%>
-		<%= link_to ticketorder.user.order_name, users_admin_path(ticketorder.user) %><% else %> <%= ticketorder.user.order_name %><% end %></td><td><%= render_money(ticketorder.ticket_type.price) %></td>
+	<td><%= ticketorder.ticket_type.order_name %></td><td><% if user_can_visit? :users, :index -%>
+		<%= link_to ticketorder.user.order_name, users_admin_path(ticketorder.user) %><% else %> <%= ticketorder.user.order_name %><% end %></td>
+		<td>
+			<% if ticketorder.concession %>
+				<%= render_money(ticketorder.ticket_type.concession_price) %>
+			<% else %>
+				<%= render_money(ticketorder.ticket_type.price) %>
+			<% end %>
+		</td>
 </tr>
 <% end %>
 <tr>

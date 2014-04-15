@@ -14,7 +14,7 @@
 <% end %>
 <div class="floatright"><%= link_to "Badge CSV Export", format: :csv, action: :export_badges, multiple: @multipler, pending: @pending, cards: @cards, id: set.id %> |
 <%= link_to "Sales CSV Export", format: :csv, action: :export_salesdata, multiple: @multipler, pending: @pending, cards: @cards, id: set.id %>
-<% if permitted_to? :export, :tickets %> |
+<% if user_can_visit? :tickets, :export %> |
 <%= link_to "All Data CSV Export", format: :csv, action: :export, multiple: @multipler, pending: @pending, cards: @cards, id: set.id %>
 <% end %>
 

@@ -51,6 +51,7 @@ class StoreController < ApplicationController
 	end
 
 	def ticket
+#		@title = 
 		@ticket = TicketType.where(:id => params[:id]).first
 		if @ticket == nil
 			redirect_to :action => :index
@@ -62,7 +63,11 @@ class StoreController < ApplicationController
 		ticket = TicketType.where(:id => params[:id]).first
 		
 		if ticket.available? or @store_user != nil
-			session[:cart][:tickets] << params[:id].to_i
+			if params[:concession].present? and params[:concession][:value] == "true"
+				session[:cart][:concessions] << params[:id].to_i				
+			else
+				session[:cart][:tickets] << params[:id].to_i
+			end
 		end
 		if request.env.include?("HTTP_REFERER")
 			redirect_to :back
@@ -72,7 +77,12 @@ class StoreController < ApplicationController
 	end
 	
 	def ticket_remove
-		array = session[:cart][:tickets]
+		array = []
+		if params[:concessions] == "true"
+			array = session[:cart][:concessions]
+		else
+			array = session[:cart][:tickets]
+		end
 		if params[:index].to_i >= 0 and params[:index].to_i < array.size
 			array.delete_at(params[:index].to_i)
 		end		
@@ -84,7 +94,7 @@ class StoreController < ApplicationController
 	end
 	
 	def purchase		
-		if @cart[:merch].size == 0 and @cart[:tickets].size == 0
+		if @cart[:merch].size == 0 and @cart[:tickets].size == 0 and @cart[:concessions].size == 0
 			flash[:notice] = "Please add items to your cart"
 			redirect_to :action => :index
 			return
@@ -96,15 +106,19 @@ class StoreController < ApplicationController
 			return
 		end
 		
-		@payment_types = PaymentType.onlineTypes
+		@payment_types = PaymentType.online_types
 		@can_disable_email = false
 
-		if (permitted_to? :index, :seller) && @store_user != nil
-			if current_user.role_symbols.include?(:committee)
-				@payment_types = PaymentType.all
+		if user_can_visit?(:seller, :index) && @store_user.present?
+			if current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin) 
+				if SiteSettings.con_mode
+					@payment_types = PaymentType.con_types
+				else
+					@payment_types = PaymentType.all
+				end
 				@can_disable_email = true
 			else
-				@payment_types = PaymentType.resellerTypes
+				@payment_types = PaymentType.reseller_types
 			end
 		end
 		
@@ -141,6 +155,16 @@ class StoreController < ApplicationController
 				end
 				ticket.save
 			end
+
+			@cart[:concessions].each do |ticket_id|
+				ticket = UserOrderTicket.new(:ticket_type_id => ticket_id, :user_order_id => order.id, concession: true)
+				if @store_user == nil
+					 ticket.user_id = current_user.id
+				else
+					 ticket.user_id = @store_user.id					
+				end
+				ticket.save
+			end
 			
 			@cart[:merch].each do |merch_hash|
 				merch = UserOrderMerchandise.new(:merchandise_type_id => merch_hash[:id], :user_order_id => order.id)
@@ -159,8 +183,8 @@ class StoreController < ApplicationController
 				if order.payment_type.requires_reconciliation
 					if params[:send_email] == "true" or !@can_disable_email
 						if order.user.email_valid
-							StoreMailer.invoice(order).deliver
-							StoreMailer.confirmation_required(order).deliver
+							StoreMailer.invoice(order, current_user).deliver
+							StoreMailer.confirmation_required(order, current_user).deliver
 							flash[:notice] += ", Email Sent"
 						else
 							flash[:notice] += ", User has no email address. Ensure they take their reciept print out (print this page)!"
@@ -173,15 +197,15 @@ class StoreController < ApplicationController
 					payment.verification_string = "Point Of Sale"
 					payment.save
 					if params[:send_email] == "true"
-						StoreMailer.receipt(payment).deliver
+						StoreMailer.receipt(payment, current_user).deliver
 					end
-					StoreMailer.confirmation_required(order).deliver
+					StoreMailer.confirmation_required(order, current_user).deliver
 					redirect_to payment
 					return
 				end
 			else
-				StoreMailer.invoice(order).deliver
-				StoreMailer.confirmation_required(order).deliver
+				StoreMailer.invoice(order, current_user).deliver
+				StoreMailer.confirmation_required(order, current_user).deliver
 			end
 			
 			redirect_to order_path(order)
@@ -195,6 +219,7 @@ class StoreController < ApplicationController
 			session[:cart] = Hash.new
 			session[:cart][:merch] = Array.new
 			session[:cart][:tickets] = Array.new
+			session[:cart][:concessions] = Array.new
 		end
 		
 		@cart = session[:cart]	

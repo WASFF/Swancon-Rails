@@ -1,0 +1,3 @@
+class ContentBlockPolicy < ContentPolicy
+end
+

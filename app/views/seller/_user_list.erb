@@ -9,10 +9,10 @@
 	<% users.each do |user| %>
 		<% if user.member_detail != nil %>
 		<% detail = true %>
-		<tr style="background-color: green;">
+		<tr class="details">
 		<% else %>
 		<% detail = false %>
-		<tr style="background-color: red;">
+		<tr class="nodetails">
 		<% end %>
 			<td><%= link_to user.username, id: user.id, action: :select, controller: :seller %></td>
 			<% if detail %>

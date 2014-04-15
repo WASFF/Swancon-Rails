@@ -29,11 +29,15 @@ class PaymentType < ActiveRecord::Base
 		value
 	end
 
-	def self.onlineTypes
+	def self.online_types
 		return PaymentType.where(available_online: true)
 	end
 
-	def self.resellerTypes
+	def self.con_types
+		return PaymentType.where(available_online: false)
+	end
+
+	def self.reseller_types
 		return PaymentType.where(available_to_ticket_seller: true)
 	end
 

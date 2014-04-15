@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
-	filter_access_to :all
-
+	before_filter :authorize_path!
+	
 	def index
 		@all = true
 		@multiple = false
@@ -114,7 +114,11 @@ class TicketsController < ApplicationController
 		else
 			flash[:alert] = "Could not find ticket."
 		end
-		redirect_to action: :index, all: params[:alltickets]
+		if user_can_visit? :tickets, :index
+			redirect_to action: :index, all: params[:alltickets]
+		else
+			redirect_to action: :my
+		end
 	end
 
 	def confirm_transfer
@@ -125,16 +129,16 @@ class TicketsController < ApplicationController
 				transfer = user_order_ticket.transfer(current_user, recipient) and !user_order_ticket.transferring
 				if current_user.role_symbols.include?(:admin)
 					flash[:alert] = "Transfer Completed."
-					TransferMailer.completed_sender(transfer).deliver
-					TransferMailer.completed_recipient(transfer).deliver
-					TransferMailer.completed_admin(transfer).deliver
+					TransferMailer.completed_sender(transfer, current_user).deliver
+					TransferMailer.completed_recipient(transfer, current_user).deliver
+					TransferMailer.completed_admin(transfer, current_user).deliver
 					transfer.confirm
 				else
 					# SEND EMAIL IF NON ADMIN.
 					flash[:alert] = "Transfer Initiated - you will have the reconfirmation email."
-					TransferMailer.reconfirm_sender(transfer).deliver
-					TransferMailer.reconfirm_recipient(transfer).deliver
-					TransferMailer.reconfirm_admin(transfer).deliver
+					TransferMailer.reconfirm_sender(transfer, current_user).deliver
+					TransferMailer.reconfirm_recipient(transfer, current_user).deliver
+					TransferMailer.reconfirm_admin(transfer, current_user).deliver
 				end
 			else
 				flash[:alert] = "This recipient doesn't exist?"
@@ -144,7 +148,11 @@ class TicketsController < ApplicationController
 		else
 			flash[:alert] = "Could not find ticket."
 		end
-		redirect_to action: :index, all: params[:alltickets]
+		if user_can_visit? :tickets, :index
+			redirect_to action: :index, all: params[:alltickets]
+		else
+			redirect_to action: :my
+		end
 	end
 
 	def reconfirm_transfer
@@ -153,9 +161,9 @@ class TicketsController < ApplicationController
 			flash[:alert] = "Could not find transfer."
 		elsif (transfer.confirmation_code == params[:code])
 			if transfer.ticket.can_transfer?(current_user)
-				TransferMailer.completed_sender(transfer).deliver
-				TransferMailer.completed_recipient(transfer).deliver
-				TransferMailer.completed_admin(transfer).deliver
+				TransferMailer.completed_sender(transfer, current_user).deliver
+				TransferMailer.completed_recipient(transfer, current_user).deliver
+				TransferMailer.completed_admin(transfer, current_user).deliver
 				flash[:alert] = "Transfer completed!"
 				transfer.confirm
 			elsif current_user == nil
@@ -164,7 +172,11 @@ class TicketsController < ApplicationController
 				flash[:alert] = "You cannot transfer this transfer"
 			end
 		end
-		redirect_to action: :index
+		if user_can_visit? :tickets, :index
+			redirect_to action: :index, all: params[:alltickets]
+		else
+			redirect_to action: :my
+		end
 	end
 
 	def cancel_transfer
@@ -174,9 +186,9 @@ class TicketsController < ApplicationController
 		elsif (transfer.confirmation_code == params[:code])
 			if transfer.can_cancel?(current_user) and transfer.confirmed_on == nil
 				flash[:alert] = "Transfer cancelled!"
-				TransferMailer.cancel_sender(transfer).deliver
-				TransferMailer.cancel_recipient(transfer).deliver
-				TransferMailer.cancel_admin(transfer).deliver				
+				TransferMailer.cancel_sender(transfer, current_user).deliver
+				TransferMailer.cancel_recipient(transfer, current_user).deliver
+				TransferMailer.cancel_admin(transfer, current_user).deliver
 				transfer.destroy
 			elsif current_user == nil
 				flash[:alert] = "You must log in to cancel the transfer"
@@ -187,7 +199,11 @@ class TicketsController < ApplicationController
 			end
 
 		end
-		redirect_to action: :index
+		if user_can_visit? :tickets, :index
+			redirect_to action: :index, all: params[:alltickets]
+		else
+			redirect_to action: :my
+		end
 	end	
 
 	def card_issue

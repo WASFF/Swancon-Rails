@@ -1,0 +1,3 @@
+class ContentPagePolicy < ContentPolicy
+end
+

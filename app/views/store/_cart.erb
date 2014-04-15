@@ -5,12 +5,23 @@ Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register",
 <% price = 0.0 -%>
 <% index = 0 -%>
 <ul>
+<% if @cart[:concessions] != nil %>
+<% @cart[:concessions].each do |ticket| -%>
+<% tickettype =  TicketType.find(ticket) -%>
+<li><%= tickettype.name %> - <%= render_money(tickettype.concession_price) %> <%= button_to "Remove", :action => "ticket_remove", :index => index, concessions: true %></li>
+<% price += tickettype.concession_price -%>
+<% index += 1 -%>
+<% end -%>
+<% end -%>
+
+<% if @cart[:tickets] != nil %>
 <% @cart[:tickets].each do |ticket| -%>
 <% tickettype =  TicketType.find(ticket) -%>
 <li><%= tickettype.name %> - <%= render_money(tickettype.price) %> <%= button_to "Remove", :action => "ticket_remove", :index => index %></li>
 <% price += tickettype.price -%>
 <% index += 1 -%>
 <% end -%>
+<% end %>
 
 <% index = 0 %>
 <% @cart[:merch].each do |merch| -%>
@@ -21,7 +32,7 @@ Please <%= link_to "log in", new_user_session_path %> or <%= link_to "register",
 <% end -%>
 </ul>
 
-<%- if (@cart[:merch].length + @cart[:tickets].length) > 0 -%>
+<%- if (@cart[:merch].length + @cart[:tickets].length + @cart[:concessions].length) > 0 -%>
 Total: <%= render_money(price) %>
 <%- if controller.action_name != "purchase" %>
 <%= button_to "Check out", :action => "purchase" %>
