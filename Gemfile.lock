@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/lordmortis/MortisCMS.git
-  revision: 17ac2545d76bf62534a3812b3b4995682dbffd62
+  revision: cbcf52746890d6767a4d58211dda8bb9421e3032
   branch: rails4
   specs:
     MortisCMS (0.1.20)
