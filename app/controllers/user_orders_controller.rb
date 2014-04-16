@@ -23,7 +23,7 @@ class UserOrdersController < ApplicationController
   def show
     @order = UserOrder.find(params[:id])
     unless user_can? :show?, @order 
-      redirect_to action: :index, controller: :orders
+      redirect_to orders_path
       return
     end
 
@@ -37,7 +37,7 @@ class UserOrdersController < ApplicationController
     @order = UserOrder.find(params[:id])
 
     unless user_can? :remail?, @order 
-      redirect_to action: :index, controller: :orders
+      redirect_to orders_path
       return
     end    
 
@@ -54,7 +54,7 @@ class UserOrdersController < ApplicationController
     @order = UserOrder.find(params[:id])
     
     unless user_can? :mark_paid?, @order 
-      redirect_to action: :index, controller: :orders
+      redirect_to orders_path
       return
     end    
     
