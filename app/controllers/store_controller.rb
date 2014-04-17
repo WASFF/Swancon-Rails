@@ -4,6 +4,7 @@ class StoreController < ApplicationController
 	def index
 		@ticketsets = TicketSet.available(current_user).all
 		@merchsets = MerchandiseSet.available(current_user).all
+		@title = "Store"
 	end
 	
 	def clear_cart
