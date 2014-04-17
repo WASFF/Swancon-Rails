@@ -5,7 +5,7 @@ class StoreController < ApplicationController
 		@ticketsets = TicketSet.available(current_user).all
 		@merchsets = MerchandiseSet.available(current_user).all
 		@title = "Store"
-		render action: :index_no_store if SiteSettings.con_mode
+		render action: :index_no_store if SiteSettings.con_mode and !(user_can_visit? :seller, :index)
 	end
 	
 	def clear_cart
