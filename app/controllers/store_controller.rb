@@ -25,8 +25,10 @@ class StoreController < ApplicationController
 		merch = MerchandiseType.where(:id => params[:id]).first
 		if merch.available? or @store_user != nil
 			options = Array.new
-			params[:option_set].keys.each do |option|
-				options << params[:option_set][option]
+			if params.has_key? :option_set
+				params[:option_set].keys.each do |option|
+					options << params[:option_set][option]
+				end
 			end
 		
 			session[:cart][:merch] << {:id => params[:id].to_i, :options => options}
