@@ -4,6 +4,8 @@ class StoreController < ApplicationController
 	def index
 		@ticketsets = TicketSet.available(current_user).all
 		@merchsets = MerchandiseSet.available(current_user).all
+		@title = "Store"
+		render action: :index_no_store if SiteSettings.con_mode and !(user_can_visit? :seller, :index)
 	end
 	
 	def clear_cart
@@ -25,8 +27,10 @@ class StoreController < ApplicationController
 		merch = MerchandiseType.where(:id => params[:id]).first
 		if merch.available? or @store_user != nil
 			options = Array.new
-			params[:option_set].keys.each do |option|
-				options << params[:option_set][option]
+			if params.has_key? :option_set
+				params[:option_set].keys.each do |option|
+					options << params[:option_set][option]
+				end
 			end
 		
 			session[:cart][:merch] << {:id => params[:id].to_i, :options => options}

@@ -6,7 +6,9 @@ class MerchandiseType < ActiveRecord::Base
 		has_many :merchandise_images
 						
 		def option_sets
-			MerchandiseOptionSet
+			sym = :merchandise_option_set_id
+			ids = merchandise_options.group(sym).select(sym).collect {|x| x.merchandise_option_set_id }
+			MerchandiseOptionSet.where(id: ids)
 		end
 		
 		def options

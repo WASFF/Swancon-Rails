@@ -1,5 +1,4 @@
-<% content_for :title do %>Swancon <%= Rails.application.config.swancon_year %> Store<% end %>
-<div class="title">Store</div>
+<h1>Store</h1>
 <%= render partial: "header" %>
 <% @ticketsets.each do |set| -%>
 <h2><%= set.name %> Tickets</h2>
