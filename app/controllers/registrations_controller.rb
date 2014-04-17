@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_filter :update_sanitized_params, if: :devise_controller?
+
   def update
     # Devise use update_with_password instead of update_attributes.
     # This is the only change we make.
@@ -11,8 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
 
 		params[resource_name].delete(:password) if params[resource_name][:password].blank?
 		params[resource_name].delete(:password_confirmation) if params[resource_name][:password_confirmation].blank?
-		byebug
-    if resource.update_attributes(allowed_params)
+    if resource.update_with_password(allowed_params)
       set_flash_message :notice, :updated
       # Line below required if using Devise >= 1.2.0
       sign_in resource_name, resource, :bypass => true
@@ -29,6 +30,10 @@ private
     params.require(resource_name).permit(
       :username, :email, :password, :password_confirmation, :current_password
     )
+  end
+
+  def update_sanitized_params
+    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:username, :email, :password, :password_confirmation)}
   end
 
 end

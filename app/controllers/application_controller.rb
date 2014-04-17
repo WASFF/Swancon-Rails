@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   layout "2015"
   before_filter :title
   helper_method :user_can?, :user_can_visit?
+  serialization_scope :view_context
 
 	def title
 		@title = "Swancon 40"
@@ -46,10 +47,6 @@ class ApplicationController < ActionController::Base
 
     policy_instance = nil
 
-    unless action.ends_with?("?")
-      action += "?"
-    end
-
     begin
       policy_class = Module.const_get("#{klass.to_s}Policy")
       if object_is_instance
@@ -62,8 +59,8 @@ class ApplicationController < ActionController::Base
       return false
     end
 
-    unless action.ends_with?("?")
-      action += "?"
+    unless action.to_s.ends_with?("?")
+      action = action.to_s + "?"
     end
 
     if policy_instance.respond_to? action

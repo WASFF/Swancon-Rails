@@ -4,6 +4,8 @@ class StoreController < ApplicationController
 	def index
 		@ticketsets = TicketSet.available(current_user).all
 		@merchsets = MerchandiseSet.available(current_user).all
+		@title = "Store"
+		render action: :index_no_store if SiteSettings.con_mode and !(user_can_visit? :seller, :index)
 	end
 	
 	def clear_cart
@@ -25,13 +27,19 @@ class StoreController < ApplicationController
 		merch = MerchandiseType.where(:id => params[:id]).first
 		if merch.available? or @store_user != nil
 			options = Array.new
-			params[:option_set].keys.each do |option|
-				options << params[:option_set][option]
+			if params.has_key? :option_set
+				params[:option_set].keys.each do |option|
+					options << params[:option_set][option]
+				end
 			end
 		
 			session[:cart][:merch] << {:id => params[:id].to_i, :options => options}
 		end
-		redirect_to :back
+		if request.env.include?("HTTP_REFERER")
+			redirect_to :back
+		else
+			redirect_to action: :merchandise, id: merch.id
+		end
 	end
 	
 	def merchandise_remove
@@ -39,10 +47,15 @@ class StoreController < ApplicationController
 		if params[:index].to_i >= 0 and params[:index].to_i < array.size
 			array.delete_at(params[:index].to_i)
 		end
-		redirect_to :back
+		if request.env.include?("HTTP_REFERER")
+			redirect_to :back
+		else
+			redirect_to action: :index
+		end
 	end
 
 	def ticket
+#		@title = 
 		@ticket = TicketType.where(:id => params[:id]).first
 		if @ticket == nil
 			redirect_to :action => :index
@@ -54,13 +67,17 @@ class StoreController < ApplicationController
 		ticket = TicketType.where(:id => params[:id]).first
 		
 		if ticket.available? or @store_user != nil
-			if params[:concession] == "true"
+			if params[:concession].present? and params[:concession][:value] == "true"
 				session[:cart][:concessions] << params[:id].to_i				
 			else
 				session[:cart][:tickets] << params[:id].to_i
 			end
 		end
-		redirect_to :back
+		if request.env.include?("HTTP_REFERER")
+			redirect_to :back
+		else
+			redirect_to action: :ticket, id: ticket.id
+		end
 	end
 	
 	def ticket_remove
@@ -73,7 +90,11 @@ class StoreController < ApplicationController
 		if params[:index].to_i >= 0 and params[:index].to_i < array.size
 			array.delete_at(params[:index].to_i)
 		end		
-		redirect_to :back
+		if request.env.include?("HTTP_REFERER")
+			redirect_to :back
+		else
+			redirect_to action: :index
+		end
 	end
 	
 	def purchase		
@@ -89,15 +110,19 @@ class StoreController < ApplicationController
 			return
 		end
 		
-		@payment_types = PaymentType.onlineTypes
+		@payment_types = PaymentType.online_types
 		@can_disable_email = false
 
-		if user_can_visit?(:index, :seller) && @store_user.present?
-			if current_user.role_symbols.include?(:committee)
-				@payment_types = PaymentType.all
+		if user_can_visit?(:seller, :index) && @store_user.present?
+			if current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin) 
+				if SiteSettings.con_mode
+					@payment_types = PaymentType.con_types
+				else
+					@payment_types = PaymentType.all
+				end
 				@can_disable_email = true
 			else
-				@payment_types = PaymentType.resellerTypes
+				@payment_types = PaymentType.reseller_types
 			end
 		end
 		

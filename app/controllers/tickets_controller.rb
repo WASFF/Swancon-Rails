@@ -114,7 +114,11 @@ class TicketsController < ApplicationController
 		else
 			flash[:alert] = "Could not find ticket."
 		end
-		redirect_to action: :index, all: params[:alltickets]
+		if user_can_visit? :tickets, :index
+			redirect_to action: :index, all: params[:alltickets]
+		else
+			redirect_to action: :my
+		end
 	end
 
 	def confirm_transfer
@@ -144,7 +148,11 @@ class TicketsController < ApplicationController
 		else
 			flash[:alert] = "Could not find ticket."
 		end
-		redirect_to action: :index, all: params[:alltickets]
+		if user_can_visit? :tickets, :index
+			redirect_to action: :index, all: params[:alltickets]
+		else
+			redirect_to action: :my
+		end
 	end
 
 	def reconfirm_transfer
@@ -164,7 +172,11 @@ class TicketsController < ApplicationController
 				flash[:alert] = "You cannot transfer this transfer"
 			end
 		end
-		redirect_to action: :index
+		if user_can_visit? :tickets, :index
+			redirect_to action: :index, all: params[:alltickets]
+		else
+			redirect_to action: :my
+		end
 	end
 
 	def cancel_transfer
@@ -187,7 +199,11 @@ class TicketsController < ApplicationController
 			end
 
 		end
-		redirect_to action: :index
+		if user_can_visit? :tickets, :index
+			redirect_to action: :index, all: params[:alltickets]
+		else
+			redirect_to action: :my
+		end
 	end	
 
 	def card_issue

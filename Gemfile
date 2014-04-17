@@ -31,12 +31,16 @@ gem 'csv_builder'
 
 gem "nested_form"
 
+gem "rails-settings-cached", "0.3.1"
+
 #gem 'MortisCMS', :require => 'mortiscms', :path => '/Users/lordmortis/Projects/MortisCMS'
 gem 'MortisCMS', require: 'mortiscms', git: 'git://github.com/lordmortis/MortisCMS.git', branch: :rails4
 
 gem "haml-rails"
 
 gem "exception_notification"
+
+gem "active_model_serializers"
 
 group :development do
 	gem 'capistrano-rails'
