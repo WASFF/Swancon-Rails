@@ -66,6 +66,11 @@ doGatherSearch = ->
 			jQuery.each(data.users, (innerindex, innervalue) ->
 				member_data[innervalue.id] = innervalue
 				elem = "<tr id='" + innervalue.id + "' class='datarow'>"				
+				if innervalue["member_detail_attributes[name_badge]"] != undefined
+					name = innervalue["member_detail_attributes[name_badge]"]
+					elem += "<td>" + name + "</td>"
+				else
+					elem += "<td></td>"
 				if innervalue["member_detail_attributes[name_first]"] != undefined
 					name = innervalue["member_detail_attributes[name_first]"] + " " +
 						innervalue["member_detail_attributes[name_last]"]
