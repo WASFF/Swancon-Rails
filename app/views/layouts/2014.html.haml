@@ -8,7 +8,10 @@
     %link{rel: "apple-touch-icon-precomposed", sizes: "72x72", href: "#{image_path("mobileicon72.png")}"}
     %link{rel: "apple-touch-icon-precomposed", sizes: "114x114", href: "#{image_path("mobileicon114.png")}"}
     %meta{name: "viewport", content: "width=device-width"}
-    %title= @title
+    - if @title.present?
+      %title= "#{@title} - Swancon 2014"
+    - else
+      %title "Swancon 2014"
     = csrf_meta_tag
     = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
     = yield :header
