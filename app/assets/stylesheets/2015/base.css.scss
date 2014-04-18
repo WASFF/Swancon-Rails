@@ -49,20 +49,22 @@ h1 {
 }
 
 h2 {
-	font-size: 5em;
+	font-size: 7em;
+	line-height:0.5em;
 }
 
 h3 {
-	font-size:2em;
+	font-size:5em;
 }
 
-h4 {
+h5 {
 	color: $link_color;
 	text-transform: uppercase;
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 11px;
 	margin-top: 10px;
 }
+
 
 p {
 	line-height:1.5em;
@@ -73,7 +75,8 @@ a {
 	color: $link-color;
 	text-decoration:none;
 	&:hover {
-		text-decoration: underline;
+		text-decoration: none;
+		color:#a90a0d;
 	}
 }
 
@@ -86,6 +89,7 @@ aside#ticketdrop {
 	position:fixed;
 	right:10px;
 	top:10px;
+	z-index:20;
 	img {
 		margin:12px auto;
 		display:block;
@@ -105,15 +109,15 @@ header {
 	margin:0 auto;
 	width:100%;
 	max-width:960px;
+	margin-top:0px;
 
 	img {
-		max-width:100px;
+		max-width:170px;
 		display:block;
-		margin:0 auto;
-		position:absolute;
 		left:30px;
 		right:30px;
-
+		height:80px;
+		float:left;
 	}
 
 	&:after {
@@ -126,22 +130,22 @@ header {
 }
 
 #login_widget {
-	float:right;
 	display:block;
-	margin:25px 0 60px 0;
-	max-width:300px;
+	margin:0;
 	width:100%;
 	font-family:Helvetica, Arial, sans-serif;
 	font-size:12px;
 	color:black;
+	position:relative;
 
 	input {
-		width:200px;
-		height:33px;
+		width:100%;
+		max-width:200px;
+		height:30px;
 		margin:0 auto;
 		display:block;
 		float:right;
-		margin-top:20px;
+		margin-top:15px;
 		border:1px solid #dedede;
 		padding-left:10px;
 		background-color:white;
@@ -149,12 +153,22 @@ header {
 		@include border-radius(20px 0px);
 	}
 
+	label:nth-child(2) {
+		margin-left:30px;
+	}
+
 	label {
 		float:right;
 		display:block;
 		text-align:center;
-		margin:33px 15px 0 0;
-		font-size:14px;		
+		margin:28px 15px 0 0;
+		font-size:14px;	
+	}
+
+	p {
+		position:absolute;
+		right:0px;
+		top:45px;
 	}
 }
 
@@ -214,7 +228,7 @@ article {
 			margin-bottom: 20px;
 		}
 
-		h1 {
+		h2 {
 			margin-bottom: 30px;
 		}
 
@@ -222,10 +236,14 @@ article {
 
 }
 
+#guests {
+	text-align:center;
+}
+
 .guests {
 	width:236px;
 
-	p, h2 {
+	p, h3 {
 		padding: 0 35px;
 		text-align: center;
 	}
@@ -233,6 +251,7 @@ article {
 	img {
 		margin: 0 auto;
 		display: block;
+		border-radius:20px 0px;
 	}
 
 	a {
@@ -250,24 +269,19 @@ article {
 	background-image:image-url("bg.png");
 	background-repeat:no-repeat;
 	background-position:right;
-	z-index:100;
+	z-index:0;
 }
 
 .dark {
 	background-color:rgba(0, 0, 0, 0.5);
 
 	article {
-		p, h1 {
+		p, h2 {
 			color:white;
 			text-align:center;
 			margin-bottom:20px;
 		}
 
-		p {
-			color: black;
-			font-size: 12px;
-			margin-top: 50px;
-		}
 
 		div {
 			width:135px;
@@ -277,6 +291,13 @@ article {
 			color:black;
 			text-align:right;
 			font-size:21px;
+
+			p {
+				color: black;
+				font-size: 12px;
+				margin-top: 50px;
+			}
+
 		}
 
 		a {
@@ -327,65 +348,65 @@ button {
 		width:20px;
 		display:inline;
 		position: absolute;
-    right: 20px;
-    bottom:6px;
+    	right: 20px;
+    	bottom:6px;
 	}
 }
 
-#eventstitle {
-	background-color:#ededed;
-	height:100px;
-	text-align:center;
-	h1 {
-		padding-top: 30px;
-	}
-}
 
 #events {
 	margin-bottom:20px;
 
-	div {
-		h2 {
-			font-family:helvetica, Arial, sans-serif;
-			font-size:1.5em;
-			margin-top:-15px;			
-		}	
-
-		p {
-			margin-right:80px;
-		}
+	h2 {
+		text-align:center;
+		margin:0px 0 40px 0;
 	}
 
-	div.info {
+	div:nth-child(2n) {
 		width:62%;
-		height:111px;
-		margin:0 20px 20px 0px;
-		@include box-sizing(border-box);
+		height:auto;
+		margin:0 20px 0px 0px;
+		box-sizing:border-box;
+	    -moz-box-sizing:border-box;
+	    -webkit-box-sizing:border-box;
 		padding:20px;
 
-		h4 {
+		h5 {
 			padding:0px;
 			margin-top:10px;
-			font-variant:small-caps;			
+			font-variant:small-caps;
 		}
+
 	}
 
-	div.image {
+	div:nth-child(2n+1) {
 		width:30%;
 		height:111px;
 		background-color:#dedede;
 		margin:0 0px 20px 20px;
 		border-radius:50px 0 50px 0;
+		overflow:hidden;
 	}
 
-	aside {
-		img {
-			height:50%;
-			width:auto;
-			position:absolute;
-			right:0px;
-			top:25%;			
+	div {
+
+		p {
+			margin-right:100px;
 		}
+
+		div h3 {
+			font-family:helvetica, Arial, sans-serif;
+			font-size:1.5em;
+			margin-top:-15px;
+		}
+	}
+
+	aside img {
+		height:70px;
+		width:auto;
+		position:absolute;
+		right:0px;
+		top:25%;
 	}
 
 	&:after {
@@ -396,8 +417,12 @@ button {
 	}
 }
 
+strong {
+	font-weight:bold;
+}
+
 #contact {
-	h1 {
+	h2 {
 		text-align:center;
 		margin-bottom:20px;
 	}
@@ -409,27 +434,21 @@ button {
 		padding:20px;
 		margin:20px;
 		margin-top:0px;
-		@include border-radius(20px 0px);
+		border-radius:20px 0px;
 		background-color:none;
 		position:relative;
 
-		&.people {
-			background-color: #cdcdcd;
-			padding: 30px;
-		}
-
-		div {
-			padding:0;
+		p {
+			padding:10px;
 			margin:0px;
 			color:black;
 			line-height:2em;
 		}
 
-		.title {
+		.bolded {
 			font-weight:bold;
 			font-size:14px;
-			color:black;			
-			padding-bottom: 10px
+			color:black;
 		}
 	}
 
@@ -440,8 +459,19 @@ button {
 	img {
 		width:60px;
 		float:left;
-		margin-right:20px;		
+		margin-right:20px;
 	}
+}
+
+#contact > div:first-of-type {
+	background:#cdcdcd;
+}
+
+#moretickets {
+	width:100%;
+	display:none;
+	margin-bottom:30px;
+	height:auto;
 }
 
 #tickets {
@@ -465,4 +495,228 @@ button {
 		padding-left:5px;
 		padding-right:5px;		
 	}
+}
+
+h6 {
+	font-size:12px;
+}
+
+
+@media only screen and (min-width:641px) and (max-width:1130px) {
+	header {
+		height:120px;
+		position:relative;
+		img {
+			position:absolute;
+			top:50%;
+			margin-top:-40px;
+		}
+	}
+	
+	article {
+		#intro {
+			margin-top:5%;
+		}
+		#ruby {
+			width:33%;
+			height:auto;
+			padding-top:4.5%;
+			padding-bottom:4.5%;
+			max-width:250px;
+		}
+	}
+	
+	#login_widget > input:first-of-type, #login_widget p {
+		margin-right:100px !important;
+	}
+	
+	#login_widget {
+		input:last-of-type {
+			clear:right;
+			margin-right:100px;
+			margin-bottom:10px;
+		}
+		p {
+			top:80px
+		}
+		input {
+			margin:5px 5px 0px 5px;
+		}
+		label {
+			margin:15px 10px 0 0 ;
+		}
+	}
+
+	#guests {
+		text-align:center;
+	}
+	
+	#contact {
+		text-align:center;
+		div a img {
+			margin-left:24px;
+			height:auto;
+		}
+	}
+	
+	#contact > div:last-of-type {
+		padding-top:0px;
+	}
+}
+
+@media only screen and (max-width:640px) {
+	body {
+		background-size:100%;
+	}
+	
+	#container {
+		background-position:top 720px right;
+		background-size:100%;
+	}
+	
+	header img {
+		float:none;
+		margin:20px auto;
+		#login_widget {
+			clear:both;
+			label {
+				margin:10px auto;
+			}
+			p {
+				text-align:center;
+				position:relative;
+				top:0px;
+			}
+			label:nth-child(2) {
+				margin:10px auto;
+			}
+		}
+	}
+	
+	header #login_widget input, #login_widget label {
+		clear:both;
+		margin:0px auto;
+		float:none;
+		position:relative;
+		text-align:center;
+	}
+	
+	h6 {
+		font-size:10px;
+	}
+	
+	article {
+		#ruby {
+			display:none;
+		}
+		#intro {
+			margin:40px 0px 20px 0;
+			width:100%;
+			p span {
+				display:none;
+			}
+		}
+	}
+	
+	section article {
+		padding:0px;
+	}
+	
+	article #intro p, article #intro h2 {
+		margin:0 30px 20px 30px;
+		text-align:center;
+	}
+	
+	article #intro p a, #intro a:first-of-type {
+		display:block;
+		height:25px;
+		margin:5px auto;
+		background:#e10f12;
+		color:white;
+		border-radius:20px 0%;
+		font-size:14px;
+		padding-top:10px;
+		max-width:300px;
+	}
+	
+	article#guests, #events, #contact {
+		padding:30px 0px;
+	}
+	
+	#guests .guests {
+		margin:0px auto 20px auto;
+		float:none;
+		width:100%;
+		img.widescreen {
+			display:none
+		}
+	}
+	
+	section.dark {
+		padding:30px 0px 20px 0;
+		p {
+			padding:0 30px;
+		}
+	}
+	
+	#events {
+		h2 {
+			margin:0 0 30px 0;
+		}
+		div:nth-child(2n+1) {
+			width:90%;
+			margin:0px auto 20px auto;
+			float:none;
+			display:block;
+		}
+		div:nth-child(2n) {
+			margin:0px auto;
+			display:block;
+			width:90%;
+			padding:20px 20px 20px 0px;
+		}
+		div p {
+			margin-bottom:15px;
+			margin-right:50px;
+		}
+		aside img {
+			height:40px;
+			margin-top:10px;
+		}
+		#events {
+			margin-bottom:0px;
+			padding-bottom:0px;
+		}
+
+	}
+	
+	#contact {
+		div {
+			margin:0 auto;
+			display:block;
+			a img {
+				margin-left:24px;
+				height:auto;
+			}
+		}
+		padding-bottom:70px;
+
+	}
+	
+	#contact > div:nth-last-child(2) p, #contact > div:nth-last-child(1) p {
+		text-align:center;	
+	}
+	
+	#contact > div:nth-last-child(2) {
+		padding-bottom:0px;	
+	}
+	
+	#contact > div:last-of-type {
+		padding-top:0px;
+	}
+	
+	#tickets p {
+		padding:0 30px;
+	}
+	
 }

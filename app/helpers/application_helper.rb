@@ -72,11 +72,16 @@ module ApplicationHelper
   end
 
   def can_show_content
+    return true
     Time.new > Time.parse(reveal_time) or user_can_visit? :index, :admin
   end
 
   def render_clock
     raw "<div class=\"countdown\" data-time=\"#{reveal_time}\">"
+  end
+
+  def show_buy_ticket_widget?
+    controller_name != "store" and can_show_content
   end
 
 end
