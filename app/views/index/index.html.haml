@@ -18,7 +18,8 @@
         %h2=item[:title]
       %p=item[:text]
       = link_to item[:path] do
-        =image_tag(item[:image], alt: item[:title])
+        - if item[:image].present?
+          =image_tag(item[:image][:small], alt: item[:title])
 
 %section{class:"dark"}
   %article
@@ -31,7 +32,8 @@
 %article{id:"events"}
   - items_for_tag("events").each do |item|
     = link_to item[:path] do
-      %div{class: "image"}= image_tag(item[:image], alt: item[:title])
+      - if item[:image].present?
+        %div{class: "image"}= image_tag(item[:image][:small], alt: item[:title])
     %div{class: "info"}
       %h2=item[:title]
       %h4 item[:date]

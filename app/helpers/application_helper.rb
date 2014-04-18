@@ -58,9 +58,12 @@ module ApplicationHelper
     tag.blocks.each do |block|
       item = {title: block.title, text: block.summary}
       item[:path] = {controller:"content_viewer", action:"content", id: block.id}
-      ## TODO: put block image here
-      item[:image] = "ruby150.png"
-
+      if block.image.present?
+        item[:image] = {original: block.image.data.url}
+        [:small, :medium, :large].each do |size|
+          item[:image][size] = block.image.data.url(size)
+        end
+      end
       items << item
     end
 
