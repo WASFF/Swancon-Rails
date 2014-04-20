@@ -25,7 +25,8 @@
             = image_tag("arrow.png", alt: "Get your ticket now")
             %p ORDER TICKETS
       %header
-        = image_tag("logo3.png", alt: "Swancon's 40th Anniversary", title: "Swancon 2015")
+        = link_to root_url do 
+          = image_tag("logo3.png", alt: "Swancon's 40th Anniversary", title: "Swancon 2015")
         = render partial: "layouts/login"
 
       - if can_show_content

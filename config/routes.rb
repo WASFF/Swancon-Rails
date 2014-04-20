@@ -29,6 +29,10 @@ DoomCon::Application.routes.draw do
 
   resources :merchandise_sets
 
+  resources :events do
+    get 'view', on: :member
+  end
+
   resources :vendors do
     post 'open_order', :on => :member
   end

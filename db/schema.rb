@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140418090140) do
+ActiveRecord::Schema.define(version: 20140419055245) do
 
   create_table "award_categories", force: true do |t|
     t.string   "name",        null: false
@@ -113,6 +113,14 @@ ActiveRecord::Schema.define(version: 20140418090140) do
 
   create_table "content_tags", force: true do |t|
     t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", force: true do |t|
+    t.datetime "start_time",       null: false
+    t.datetime "end_time"
+    t.integer  "content_block_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

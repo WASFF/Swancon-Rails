@@ -42,6 +42,7 @@
 		%li= link_to "Content Tags", content_tags_path if user_can?("see", ContentTag)
 		%li= link_to "Content Images", content_images_path if user_can?("see", ContentImage) 
 		%li= link_to "Content Files", content_files_path if user_can?("see", ContentFile)
+		%li= link_to "Events", events_path if user_can?("edit", Event)
 
 %div{id: "details", class: "hideable"}
 	%h1 Search Members

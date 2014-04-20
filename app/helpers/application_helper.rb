@@ -55,7 +55,7 @@ module ApplicationHelper
       return items
     end
     
-    tag.blocks.each do |block|
+    tag.blocks.publicly_viewable.each do |block|
       item = {title: block.title, text: block.summary}
       item[:path] = {controller:"content_viewer", action:"content", id: block.id}
       if block.image.present?
@@ -67,6 +67,28 @@ module ApplicationHelper
       items << item
     end
 
+    items
+  end
+
+  def viewable_events
+    items = []
+    Event.publicly_viewable.each do |event|
+      item = {title: event.title, text: event.summary}
+      item[:path] = view_event_path(event)
+      if event.end_time.present?
+        item[:date] = "#{render_time event.start_time} to #{render_time event.end_time}"
+      else
+        item[:date] = "#{render_time event.start_time}"
+      end
+      if event.image.present?
+        item[:image] = {original: event.image.data.url}
+        [:small, :medium, :large].each do |size|
+          item[:image][size] = event.image.data.url(size)
+        end
+      end
+      items << item
+    end
+    
     items
   end
 
