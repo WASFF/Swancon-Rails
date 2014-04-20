@@ -635,9 +635,13 @@ h6 {
 	article #intro p, article #intro h2 {
 		margin:0 30px 20px 30px;
 		text-align:center;
+		.divider {
+			display: none;
+		}
 	}
 	
-	article #intro p a, #intro a:first-of-type {
+
+	article #intro p a, article #intro a:first-of-type {
 		display:block;
 		height:25px;
 		margin:5px auto;
