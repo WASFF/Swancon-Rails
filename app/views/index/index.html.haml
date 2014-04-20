@@ -2,7 +2,7 @@
   %article
     %div{id: "ruby"}= image_tag("ruby250.png", alt: "Celebrating Swancon 40")
     %div{id: "intro"}
-      %h1 Welcome to Swancon 40
+      %h2 Welcome to Swancon 40
       %p In 2015, we're proud to announce the Ruby Anniversary (that's 40 years!) of WA's premier speculative fiction convention.
 
       %p 
@@ -14,8 +14,10 @@
 %article
   - items_for_tag("guests").each do |item|
     %div{class: "guests"}
+      %a{name: "guests"}
       = link_to item[:path] do
-        %h2=item[:title]
+        %h3=item[:title]
+      = image_tag(item[:image], alt: item[:title])
       %p=item[:text]
       = link_to item[:path] do
         - if item[:image].present?
@@ -23,45 +25,70 @@
 
 %section{class:"dark"}
   %article
-    %h1 The Program
+    %a{name: "program"}
+    %h2 The Program
     %p Whoa there, it's still early days yet! We'll be adding to and refining the program in 2014, so stay tuned for more details.
-
-%section{id: "eventstitle"}
-  %h1 Events We Host
+    %button{id: "showmore"}
+      View program online
+      = image_tag("tinyruby.png", alt: "Celebrating Swancon 40")
+    %div{id: "more"}
+      %div{class: "sq1"}
+        %h4 TIME 1
+        %p Details coming soon
+    %p 
+    &elipsis or 
+    = link_to "download"
+    the pdf.
 
 %article{id:"events"}
+  %a{name: "events"}
+  %h2 Events We Host
   - viewable_events.each do |item|
     = link_to item[:path] do
       - if item[:image].present?
         %div{class: "image"}= image_tag(item[:image][:small], alt: item[:title])
     %div{class: "info"}
-      %h2=item[:title]
-      %h4=item[:date]
+      %h3=item[:title]
+      %h5 item[:date]
       %p=item[:text]
       = link_to item[:path] do
         %aside=image_tag("ruby150-2.png", alt: item[:title])
 
 %section
   %article{id: "contact"}
-    %h1 Contact Us
+    %a{name: "contact"}
+    %h2 Contact Us
     %div.people
-      %div{class: "title"} Committee Contacts
-      %div
+      %p{class: "bolded"} Committee Contacts
+      %p
         %strong Convenor
         &dash; Kat Griffiths
-      %div
+        %br
         %strong Secretary
         &dash; Stephen Griffiths
-      %div
+        %br
         %strong Treasurer
         &dash; Helen Duffill
-      %div
+        %br
         %strong Panel Coordinator
         &dash; Sarah Parker
+    %div 
+      %p
+        %strong Contact phone: 
+        %br 555 5555 555
+        %strong Contact email: 
+        %br committee@swancon.com
+
     %div
-      %div{class: "title"} Swancon in Social Media
+      %p{class: "bolded"} Swancon in Social Media
       = link_to "https://www.facebook.com/groups/5668237047/" do 
         = image_tag("fb.png", alt: "Swancon on Facebook")
       = link_to "https://twitter.com/Swancon" do
         = image_tag("twitter.png", alt: "Swancon on Twitter")
 
+%article{id: "tickets"}
+  %a{name: "tickets"}
+  %button{id: "showmoretickets"}
+    Get tickets now!
+    = image_tag("tinyruby.png", alt: "Swancon on Facebook")
+  %div{id: "moretickets"}

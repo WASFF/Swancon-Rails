@@ -1,14 +1,16 @@
 %div#login_widget
   - unless user_signed_in?
     = form_for(:user, url: session_path(:user)) do |f|
-      = f.text_field "username", {id: "username"}
-      %label{for:"username"} Login
       = f.password_field "password", {id: "password"}
       %label{for:"username"} Password
+      = f.text_field "username", {id: "username"}
+      %label{for:"username"} Login
       = submit_tag "Log In"
+      %p
+        = link_to "Register", new_user_registration_path
   - else
     Welcome, 
     %span= current_user.display_name
     %div=link_to "My Profile", edit_user_registration_path
     %div=link_to "My Tickets", edit_user_registration_path
-    = link_to "Log Out", destroy_user_session_path, method: :delete
+    = link_to "Log Out", destroy_user_session_path

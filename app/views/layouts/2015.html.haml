@@ -18,15 +18,16 @@
   %body
     - if Rails.env == "staging"
       %div#staging You are on the Staging site. None of your changes will be reflected on the real site.
+    - if show_buy_ticket_widget?
+      %aside#ticketdrop
+        = link_to store_path(category: "convention tickets") do
+          = image_tag("arrow.png", alt: "Get your ticket now")
+          %p ORDER TICKETS
+
     %div#container
-      - if controller_name == "store" and can_show_content
-        %aside#ticketdrop
-          = link_to store_path(category: "convention tickets") do
-            = image_tag("arrow.png", alt: "Get your ticket now")
-            %p ORDER TICKETS
       %header
         = link_to root_url do 
-          = image_tag("logo3.png", alt: "Swancon's 40th Anniversary", title: "Swancon 2015")
+          = image_tag("logo-horizontal.png", alt: "Swancon's 40th Anniversary", title: "Swancon 2015")
         = render partial: "layouts/login"
 
       - if can_show_content
