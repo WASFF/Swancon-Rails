@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def menu_items
-    if @items == nil
+    if @items.blank?
       @items = []
       ContentPage.topbar.all.each do |page|
         if page.name != 'home'
@@ -39,42 +39,73 @@ module ApplicationHelper
           @items << item
         end
       end
-      @user_items = []
-      if user_signed_in?
-        @user_items << {name: "My Profile", path: edit_user_registration_path}
-        @user_items << {name: "My Tickets", path: tickets_my_path}
-        @user_items << {name: "Membership Details", path: edit_my_member_details_path}
-        @user_items << {name: "Orders", path: orders_path}
-        @user_items << {name: "Log Out", path: destroy_user_session_path}
-      else
-        @user_items << {name: "Log In", path: new_user_session_path}
-        @user_items << {name: "Register", path: new_user_registration_path}
-      end
-      
-      @items = @user_items + @items
 
       if user_signed_in? && current_user.admin_panel_visible?
         @items << {name: "Admin", path: admin_path}
       end
-
     end
+    @items[0][:first] = true if @items.length > 0
     @items
   end
 
-  def menu_left
-    if @left == nil
-      @left = []
-      size = menu_items.length / 2
-      @left = menu_items[0..size]
+  def items_for_tag(name)
+    items = []
+    tag = ContentTag.find_by_name(name)
+    if tag.blank?
+      return items
     end
-    @left
+    
+    tag.blocks.publicly_viewable.each do |block|
+      item = {title: block.title, text: block.summary}
+      item[:path] = {controller:"content_viewer", action:"content", id: block.id}
+      if block.image.present?
+        item[:image] = {original: block.image.data.url}
+        [:small, :medium, :large].each do |size|
+          item[:image][size] = block.image.data.url(size)
+        end
+      end
+      items << item
+    end
+
+    items
   end
 
-  def menu_right
-    if @right == nil
-      @right = menu_items[menu_left.length..-1]
+  def viewable_events
+    items = []
+    Event.publicly_viewable.each do |event|
+      item = {title: event.title, text: event.summary}
+      item[:path] = view_event_path(event)
+      if event.end_time.present?
+        item[:date] = "#{render_time event.start_time} to #{render_time event.end_time}"
+      else
+        item[:date] = "#{render_time event.start_time}"
+      end
+      if event.image.present?
+        item[:image] = {original: event.image.data.url}
+        [:small, :medium, :large].each do |size|
+          item[:image][size] = event.image.data.url(size)
+        end
+      end
+      items << item
     end
-
-    @right
+    
+    items
   end
+
+  def reveal_time
+    "2014-04-20T10:30Z"
+  end
+
+  def can_show_content
+    Time.new > Time.parse(reveal_time) or user_can_visit? :index, :admin
+  end
+
+  def render_clock
+    raw "<div class=\"countdown\" data-time=\"#{reveal_time}\">"
+  end
+
+  def show_buy_ticket_widget?
+    controller_name != "store" and can_show_content
+  end
+
 end

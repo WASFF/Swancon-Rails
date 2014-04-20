@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140413042342) do
+ActiveRecord::Schema.define(version: 20140419055245) do
 
   create_table "award_categories", force: true do |t|
     t.string   "name",        null: false
@@ -51,15 +51,16 @@ ActiveRecord::Schema.define(version: 20140413042342) do
     t.string   "title"
     t.text     "summary"
     t.text     "bodytext"
-    t.boolean  "autosummarize", default: false, null: false
+    t.boolean  "autosummarize",    default: false, null: false
     t.integer  "editor_id"
     t.integer  "author_id"
     t.integer  "tweet_id"
     t.string   "short_url"
-    t.boolean  "preview",       default: true,  null: false
+    t.boolean  "preview",          default: true,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "published_at"
+    t.integer  "content_image_id"
   end
 
   add_index "content_blocks", ["author_id"], name: "index_content_blocks_on_author_id"
@@ -112,6 +113,14 @@ ActiveRecord::Schema.define(version: 20140413042342) do
 
   create_table "content_tags", force: true do |t|
     t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", force: true do |t|
+    t.datetime "start_time",       null: false
+    t.datetime "end_time"
+    t.integer  "content_block_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

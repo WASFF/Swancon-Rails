@@ -1,0 +1,32 @@
+%h1=@event.title
+
+- if @event.end_time.present?
+  %h2
+    = render_time @event.start_time
+    to
+    = render_time @event.end_time
+- else
+  %h2= render_time @event.start_time
+
+- if @event.tags.any?
+  %h2
+    Tags
+    - @event.tags.each do |tag|
+      = "#{tag.name}, "
+
+- if @event.image.present?
+  = image_tag(@event.image.data.url(:small), size: @event.image.data.image_size(:small))
+
+%h2 Summary
+%p= @event.summary
+
+= redcloth_render(@event.bodytext)
+
+%p
+  = link_to "Edit", edit_event_path(@event)
+  |
+  - if user_can? :destroy, @event
+    = link_to "Destroy", @event, confirm: "Are you sure?", method: :delete
+    |
+  = link_to "List All", events_path
+  = render partial: "content_blocks/publish", locals: {block:@event.content_block}  
