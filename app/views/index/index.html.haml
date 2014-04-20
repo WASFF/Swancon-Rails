@@ -29,28 +29,29 @@
     %a{name: "program"}
     %h2 The Program
     %p Whoa there, it's still early days yet! We'll be adding to and refining the program in 2014, so stay tuned for more details.
-    %button{id: "showmore"}
-      View program online
-      = image_tag("tinyruby.png", alt: "Celebrating Swancon 40")
-    %div{id: "more"}
-      %div{class: "sq1"}
-        %h4 TIME 1
-        %p Details coming soon
-    %p 
-    &elipsis or 
-    = link_to "download"
-    the pdf.
+/    %button{id: "showmore"}
+/      View program online
+/      = image_tag("tinyruby.png", alt: "Celebrating Swancon 40")
+/    %div{id: "more"}
+/      %div{class: "sq1"}
+/        %h4 TIME 1
+/        %p Details coming soon
+/    %p 
+/    &elipsis or 
+/    = link_to "download"
+/    the pdf.
 
 %article{id:"events"}
   %a{name: "events"}
   %h2 Events We Host
   - viewable_events.each do |item|
     = link_to item[:path] do
-      - if item[:image].present?
-        %div{class: "image"}= image_tag(item[:image][:small], alt: item[:title])
+      %div{class: "image"}
+        - if item[:image].present?
+          = image_tag(item[:image][:medium], alt: item[:title], height: 111)
     %div{class: "info"}
       %h3=item[:title]
-      %h5 item[:date]
+      %h5=item[:date]
       %p=item[:text]
       = link_to item[:path] do
         %aside=image_tag("ruby150-2.png", alt: item[:title])
