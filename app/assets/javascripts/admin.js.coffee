@@ -80,7 +80,7 @@ doGatherSearch = ->
 				elem += "<td>" + innervalue.email + "</td>"
 				elem += "<td>"
 				elem += "<button class='verify'>Verify Details</button>"
-				if innervalue.tickets.length > 0
+				if innervalue.tickets? and innervalue.tickets.length > 0
 					elem += "<button class='tickets'>Show Ticket Details</button>"
 				elem += "</td>"
 				elem += "</tr>"
