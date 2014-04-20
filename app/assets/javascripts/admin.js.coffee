@@ -220,6 +220,7 @@ validateMember = ->
 	$("button#member_create_form_submit").attr("disabled", "true")
 
 jQuery ->
+	$(".hideable").hide()
 	$("button#member_create").click ->
 		showMemberForm(null)
 	$("#member_create_form input[type=text]").blur ->

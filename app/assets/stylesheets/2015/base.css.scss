@@ -523,6 +523,89 @@ h6 {
 	font-size:12px;
 }
 
+section.content {
+	background: none;
+
+	article {
+		div {
+			display: block;
+		}
+
+		h2 {
+			margin-top: 20px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			border-top: #e10f12 dotted 3px;
+		}
+
+		enbox a {
+			margin-right: 20px;
+			font-size: 14px;
+		}
+
+		button {
+			background-color: #e10f12;
+			color: white;
+			font-weight: bold;
+			font-size: 14px;
+
+		  &[type=submit] {
+				width: 200px;
+				height: 25px;
+				text-align: center;
+				margin: 20px;
+				@include border-radius(20px 0);
+				color: #E10F12;
+				border: #dedede;
+			}
+		}
+
+		ul {
+			li {
+				font-size: 14px;
+				line-height: 1.5em;
+			}
+		}
+
+		table {
+			margin-top: 20px;
+
+			th {
+				font-weight: bold;
+				font-size: 18px;
+			}
+
+			tr {
+				border-bottom: black dotted 1px;
+				&:first-of-type {
+					border-bottom: black solid 1px;
+				}
+				min-height: 20px;
+				td {
+					padding: 10px 0;
+				}
+				button {
+					margin: 5px auto;
+				}
+			}
+		}
+
+		label {
+			font-size: 14px;
+		}
+
+		h1 {
+			margin-bottom: 20px;
+		}
+
+		h6 {
+			font-size: 18px;
+			font-weight: bold;
+			margin-top: 20px;
+		}
+	}
+}
+
 
 @media only screen and (min-width:641px) and (max-width:1130px) {
 	header {

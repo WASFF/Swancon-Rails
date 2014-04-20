@@ -70,12 +70,13 @@
 			= text_field_tag "user[email]", "", id: "email", autocorrect: "off", autocapitalize: "off"
 			%span{name:"user[email]_msg"}
 		%div
-			%label{for: "name_first"}Name:
+			%label{for: "name_first"}First Name:
 			= text_field_tag "user[member_detail_attributes[name_first]]", "", id: "name_first", autocorrect: "off", autocapitalize: "off"
+			%label{for: "name_first"}Last Name:
 			= text_field_tag "user[member_detail_attributes[name_last]]", "", autocorrect: "off", autocapitalize: "off" 
 			%span{name:"user[member_detail_attributes[name_first]]_msg"}
 		%div
-			%label{for: "name_badge"}Badge Name / Nickname:
+			%label{for: "name_badge"}Name for Badge:
 			= text_field_tag "user[member_detail_attributes[name_badge]]", "", id: "name_badge", autocorrect: "off", autocapitalize: "off"
 		%div
 			%label{for: "address_1"}Address

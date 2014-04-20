@@ -31,10 +31,10 @@
         = render partial: "layouts/login"
 
       - if can_show_content
-        - if controller == :index and action == :index
+        - if controller_name == "index" and action_name == "index"
           = yield
         - else
-          %section
+          %section{class: "content"}
             %article
               = yield
 
