@@ -17,11 +17,12 @@
       %a{name: "guests"}
       = link_to item[:path] do
         %h3=item[:title]
-      = image_tag(item[:image], alt: item[:title])
-      %p=item[:text]
       = link_to item[:path] do
         - if item[:image].present?
-          =image_tag(item[:image][:small], alt: item[:title])
+          =image_tag(item[:image][:medium], alt: item[:medium])
+      %p=item[:text]
+      = link_to item[:path] do
+        =image_tag("ruby150-2.png")
 
 %section{class:"dark"}
   %article
