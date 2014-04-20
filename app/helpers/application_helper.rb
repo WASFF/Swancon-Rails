@@ -93,11 +93,10 @@ module ApplicationHelper
   end
 
   def reveal_time
-    "2014-04-20 09:30"
+    "2014-04-20T10:30Z"
   end
 
   def can_show_content
-    return true
     Time.new > Time.parse(reveal_time) or user_can_visit? :index, :admin
   end
 
