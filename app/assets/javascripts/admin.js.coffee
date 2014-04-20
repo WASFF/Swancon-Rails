@@ -34,8 +34,7 @@ doGatherSearch = ->
 		console.log("Searching Already")
 		return
 	fields = { 
-		name_search: $gather_member_search_field.val(),
-		con_mode: window.CON_MODE,	
+		name_search: $gather_member_search_field.val(),	
 		authenticity_token: AUTH_TOKEN
 	}
 
@@ -81,7 +80,7 @@ doGatherSearch = ->
 				elem += "<td>" + innervalue.email + "</td>"
 				elem += "<td>"
 				elem += "<button class='verify'>Verify Details</button>"
-				if window.CON_MODE && innervalue.tickets.length > 0
+				if innervalue.tickets.length > 0
 					elem += "<button class='tickets'>Show Ticket Details</button>"
 				elem += "</td>"
 				elem += "</tr>"
