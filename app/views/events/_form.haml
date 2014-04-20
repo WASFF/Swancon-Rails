@@ -1,0 +1,45 @@
+- if @event.errors.any?
+  %div{id: "error_explanation"}
+    %h2
+      = pluralize(@file.errors.count, "error")
+      prohibited this file from being saved:
+    %ul
+      - @event.errors.full_messages.each do |msg|
+        %li= msg
+
+= form_for(@event) do |f|
+  = f.fields_for :content_block do |builder| 
+    %p
+      = builder.label :title, "title"
+      = builder.text_field :title
+
+    %p
+      = f.label :start_time, "Start Time"
+      = f.text_field :start_time
+
+    %p
+      = f.label :end_time, "End Time"
+      = f.text_field :end_time
+
+    %p
+      = builder.label :content_image_id, "Header Image"
+      = builder.select :content_image_id, ContentImage.all.collect {|p| [ "#{p.description}", p.id ] }, {:include_blank => 'No Image'}
+    %p
+      %div= link_to("Layout Reference", "http://redcloth.org/textile/")
+      %div= builder.label :bodytext, "Body Text"
+      %div= builder.check_box :preview
+      %div= builder.check_box :autosummarize
+      %div= builder.text_area :bodytext
+
+    %p
+      %div
+        = builder.label :summary
+        &#8211
+        %span{id:"summary_count"}
+        &#47; 140 (this count includes the link)
+      = builder.text_area :summary, rows: 6
+
+  - if @event.new_record?
+    = f.submit("Create")
+  - else
+    = f.submit("Save")

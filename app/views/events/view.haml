@@ -1,0 +1,11 @@
+%h1=@event.title
+
+- if @event.end_time.present?
+  %h2
+    = render_time @event.start_time
+    to
+    = render_time @event.end_time
+- else
+  %h2= render_time @event.start_time
+
+= redcloth_render(@event.bodytext)

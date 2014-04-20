@@ -12,10 +12,13 @@ class UserOrderTicket < ActiveRecord::Base
 		joins(:user_order).where(UserOrder.unpaidarel)
 	}	
 
-	def self.valid_convention_ticket
+	def self.redeemable_convention_ticket
 		scope = where(redeemed_at: nil)
 		scope = scope.joins(:user_order).where(UserOrder.paidarel)
 		scope = scope.joins(ticket_type: :ticket_set).where(TicketSet.extended_details_arel)
+		unless SiteSettings.con_mode	
+						
+		end
 		scope
 	end
 

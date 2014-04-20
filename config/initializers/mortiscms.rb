@@ -1,6 +1,6 @@
 Mortiscms.config do |config|
 	config.content_admin_route = {:controller => "admin", :action => "content"}
-	config.site_name = "Swancon 2014"
+	config.site_name = "Swancon 2015"
 	config.show_titles_in_pages = true
 	config.show_titles_in_tags = true
 	config.routes_enabled = true

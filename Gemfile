@@ -4,7 +4,8 @@ gem 'rails', '4.0.4'
 
 # Gems used only for assets and not required
 # in production environments by default.
-gem 'sass-rails'
+gem 'sass-rails', '~> 4.0.2'
+gem 'compass-rails'
 #TODO: this should not be required when we start using sass rails 4.0.2
 gem 'sprockets', '2.11.0'
 gem 'coffee-rails'
@@ -14,6 +15,8 @@ gem 'uglifier'
 gem "execjs", git: "https://github.com/4ormat/execjs.git", ref: "fe2bde333660f4893be59fb7a4fd7f42ae5934ac"
 
 gem 'jquery-rails'
+gem 'momentjs-rails'
+
 gem 'sqlite3'
 gem 'devise'
 gem 'omniauth'

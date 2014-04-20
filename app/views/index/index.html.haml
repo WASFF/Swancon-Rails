@@ -1,15 +1,97 @@
-=content_for :header do
-	%script
-		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+%section
+  %article
+    %div{id: "ruby"}= image_tag("ruby250.png", alt: "Celebrating Swancon 40")
+    %div{id: "intro"}
+      %h2 Welcome to Swancon 40
+      %p In 2015, we're proud to announce the Ruby Anniversary (that's 40 years!) of WA's premier speculative fiction convention.
 
-%div#social
-	%span#twitter
-		%a{class: "twitter-timeline", href: "https://twitter.com/Swancon", "data-widget-id" => "302699362914549760", "data-theme" => "light", "data-link-color" => "#078C47"}
-			Tweets by @Swancon
+      %p 
+        - menu_items.each do |item|
+          - unless item[:first]
+            %span{class:"divider"}= "|"
+          = link_to item[:name].upcase, item[:path]
 
-- if @page != nil 
-	= redcloth_render(@page.block.bodytext)
+%article{id: "guests"}
+  - items_for_tag("guests").each do |item|
+    %div{class: "guests"}
+      %a{name: "guests"}
+      = link_to item[:path] do
+        %h3=item[:title]
+      = link_to item[:path] do
+        - if item[:image].present?
+          =image_tag(item[:image][:medium], alt: item[:medium])
+      %p=item[:text]
+      = link_to item[:path] do
+        =image_tag("ruby150-2.png")
+}
 
-- promoted_items.each do |item|
-	%div
-		=link_to item.summary, controller: :content_viewer, action: :content, id: item.id
+%section{class:"dark"}
+  %article
+    %a{name: "program"}
+    %h2 The Program
+    %p Whoa there, it's still early days yet! We'll be adding to and refining the program in 2014, so stay tuned for more details.
+/    %button{id: "showmore"}
+/      View program online
+/      = image_tag("tinyruby.png", alt: "Celebrating Swancon 40")
+/    %div{id: "more"}
+/      %div{class: "sq1"}
+/        %h4 TIME 1
+/        %p Details coming soon
+/    %p 
+/    &elipsis or 
+/    = link_to "download"
+/    the pdf.
+
+%article{id:"events"}
+  %a{name: "events"}
+  %h2 Events We Host
+  - viewable_events.each do |item|
+    %div
+      = link_to item[:path] do
+        %div{class: "image"}
+          - if item[:image].present?
+            = image_tag(item[:image][:medium], alt: item[:title], height: 111)
+      %div{class: "info"}
+        %h3=item[:title]
+        %h5=item[:date]
+        %p=item[:text]
+/        = link_to item[:path] do
+/         =image_tag("ruby150-2.png", alt: item[:title])
+
+%section
+  %article{id: "contact"}
+    %a{name: "contact"}
+    %h2 Contact Us
+    %div.people
+      %p{class: "bolded"} Committee Contacts
+      %p
+        %strong Convenor
+        &dash; Kat Griffiths
+        %br
+        %strong Secretary
+        &dash; Stephen Griffiths
+        %br
+        %strong Treasurer
+        &dash; Helen Duffill
+        %br
+        %strong Panel Coordinator
+        &dash; Sarah Parker
+    %div 
+      %p
+        %strong Contact email:
+        %br= link_to "secretary-2015@swancon.com", "mailto:secretary-2015@swancon.com"
+
+    %div
+      %p{class: "bolded"} Swancon in Social Media
+      = link_to "https://www.facebook.com/groups/5668237047/" do 
+        = image_tag("fb.png", alt: "Swancon on Facebook")
+      = link_to "https://twitter.com/Swancon" do
+        = image_tag("twitter.png", alt: "Swancon on Twitter")
+
+%article{id: "tickets"}
+  %a{name: "tickets"}
+  = link_to store_path(category: "convention tickets") do  
+    %button{id: "showmoretickets"}
+      Get tickets now!
+      = image_tag("tinyruby.png", alt: "Swancon on Facebook")
+//  %div{id: "moretickets"}
