@@ -371,48 +371,55 @@ button {
 		margin:0px 0 40px 0;
 	}
 
-	div:nth-child(2n) {
-		width:62%;
-		height:auto;
-		margin:0 20px 0px 0px;
-		box-sizing:border-box;
-	    -moz-box-sizing:border-box;
-	    -webkit-box-sizing:border-box;
-		padding:20px;
-
-		h3 {
-			font-family: helvetica, Arial, sans-serif;
-			font-size: 1.5em;
-			margin-top: -15px;
-		}
-
-		h5 {
-			padding:0px;
-			margin-top:10px;
-			font-variant:small-caps;
-		}
-
-	}
-
-	div:nth-child(2n+1) {
-		width:30%;
-		height:111px;
-		background-color:#dedede;
-		margin:0 0px 20px 20px;
-		border-radius:50px 0 50px 0;
-		overflow:hidden;
-	}
-
 	div {
+		width: 100%;
+		position: relative;
 
-		p {
-			margin-right:100px;
+		div:nth-child(2n) {
+			width: auto;
+			height:auto;
+			margin:0 20px 0px 0px;
+			box-sizing:border-box;
+		    -moz-box-sizing:border-box;
+		    -webkit-box-sizing:border-box;
+			padding:20px;
+
+			h3 {
+				font-family: helvetica, Arial, sans-serif;
+				font-size: 1.5em;
+				margin-top: -15px;
+			}
+
+			h5 {
+				padding:0px;
+				margin-top:10px;
+				font-variant:small-caps;
+			}
+
 		}
 
-		div h3 {
-			font-family:helvetica, Arial, sans-serif;
-			font-size:1.5em;
-			margin-top:-15px;
+		div:nth-child(2n+1) {
+			width: auto;
+			text-align: center;
+			width: 288px;
+			height: 111px;
+			background-color:#dedede;
+			margin:0 0px 20px 20px;
+			border-radius:50px 0 50px 0;
+			overflow:hidden;
+		}
+
+		div {
+
+			p {
+				margin-right:100px;
+			}
+
+			div h3 {
+				font-family:helvetica, Arial, sans-serif;
+				font-size:1.5em;
+				margin-top:-15px;
+			}
 		}
 	}
 
@@ -658,7 +665,7 @@ h6 {
 	}
 	
 	#guests .guests {
-		margin:0px auto 20px auto;
+		margin:0px auto 36px auto;
 		float:none;
 		width:100%;
 		img.widescreen {
@@ -677,29 +684,32 @@ h6 {
 		h2 {
 			margin:0 0 30px 0;
 		}
-		div:nth-child(2n+1) {
-			width:90%;
-			margin:0px auto 20px auto;
-			float:none;
-			display:block;
-		}
-		div:nth-child(2n) {
-			margin:0px auto;
-			display:block;
-			width:90%;
-			padding:20px 20px 20px 0px;
-		}
-		div p {
-			margin-bottom:15px;
-			margin-right:50px;
-		}
-		aside img {
-			height:40px;
-			margin-top:10px;
-		}
-		#events {
-			margin-bottom:0px;
-			padding-bottom:0px;
+
+		div {
+			div:nth-child(2n+1) {
+				width:240px;
+				margin:0px auto 20px auto;
+				float:none;
+				display:block;
+			}
+			div:nth-child(2n) {
+				margin:0px auto;
+				display:block;
+				width:90%;
+				padding:20px 20px 20px 0px;
+			}
+			div p {
+				margin-bottom:15px;
+				margin-right:50px;
+			}
+			aside img {
+				height:40px;
+				margin-top:10px;
+			}
+			#events {
+				margin-bottom:0px;
+				padding-bottom:0px;
+			}
 		}
 
 	}

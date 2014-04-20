@@ -11,7 +11,7 @@
             %span{class:"divider"}= "|"
           = link_to item[:name].upcase, item[:path]
 
-%article
+%article{id: "guests"}
   - items_for_tag("guests").each do |item|
     %div{class: "guests"}
       %a{name: "guests"}
@@ -23,6 +23,7 @@
       %p=item[:text]
       = link_to item[:path] do
         =image_tag("ruby150-2.png")
+}
 
 %section{class:"dark"}
   %article
@@ -45,16 +46,17 @@
   %a{name: "events"}
   %h2 Events We Host
   - viewable_events.each do |item|
-    = link_to item[:path] do
-      %div{class: "image"}
-        - if item[:image].present?
-          = image_tag(item[:image][:medium], alt: item[:title], height: 111)
-    %div{class: "info"}
-      %h3=item[:title]
-      %h5=item[:date]
-      %p=item[:text]
+    %div
       = link_to item[:path] do
-        %aside=image_tag("ruby150-2.png", alt: item[:title])
+        %div{class: "image"}
+          - if item[:image].present?
+            = image_tag(item[:image][:medium], alt: item[:title], height: 111)
+      %div{class: "info"}
+        %h3=item[:title]
+        %h5=item[:date]
+        %p=item[:text]
+/        = link_to item[:path] do
+/         =image_tag("ruby150-2.png", alt: item[:title])
 
 %section
   %article{id: "contact"}
@@ -76,10 +78,8 @@
         &dash; Sarah Parker
     %div 
       %p
-        %strong Contact phone: 
-        %br 555 5555 555
-        %strong Contact email: 
-        %br committee@swancon.com
+        %strong Contact email:
+        %br= link_to "secretary-2015@swancon.com", "mailto:secretary-2015@swancon.com"
 
     %div
       %p{class: "bolded"} Swancon in Social Media
@@ -90,7 +90,8 @@
 
 %article{id: "tickets"}
   %a{name: "tickets"}
-  %button{id: "showmoretickets"}
-    Get tickets now!
-    = image_tag("tinyruby.png", alt: "Swancon on Facebook")
-  %div{id: "moretickets"}
+  = link_to store_path(category: "convention tickets") do  
+    %button{id: "showmoretickets"}
+      Get tickets now!
+      = image_tag("tinyruby.png", alt: "Swancon on Facebook")
+//  %div{id: "moretickets"}
