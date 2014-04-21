@@ -55,7 +55,10 @@ class UserOrderMerchandise < ActiveRecord::Base
 		end
 		collectionfrag = "#{collectionfrag[0..-3]})"
 		
-		sql = "SELECT user_order_merchandises.*#{selectfrag} FROM user_order_merchandises WHERE user_order_merchandises.merchandise_type_id = #{type} AND id IN #{collectionfrag} ORDER BY #{orderfrag[0..-3]}"
+		sql = "SELECT user_order_merchandises.*#{selectfrag} FROM user_order_merchandises WHERE user_order_merchandises.merchandise_type_id = #{type} AND id IN #{collectionfrag}"
+		if orderfrag.length > 4
+			sql += "ORDER BY #{orderfrag[0..-3]}"
+		end
 		
 		self.find_by_sql(sql)
 	end
