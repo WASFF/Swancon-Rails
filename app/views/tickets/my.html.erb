@@ -1,8 +1,8 @@
-<% content_for :title do %>DoomCon 2012 - My Tickets<% end %>
-<h2>My Tickets</h2>
+<% content_for :title do %>DoomCon 2012 - My Memberships<% end %>
+<h2>My Memberships</h2>
 
 <% @sets.each do |set| %>
-<%= set.name %> Tickets (<%= set.tickets_for(current_user).count %>)
+<%= set.name %> Memberships (<%= set.tickets_for(current_user).count %>)
 <table width="100%">
 	<tr>
 		<th>Purchaser</th>

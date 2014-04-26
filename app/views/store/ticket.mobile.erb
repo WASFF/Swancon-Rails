@@ -1,4 +1,4 @@
-<div class="title"><%= @ticket.set.name %> Ticket</div>
+<div class="title"><%= @ticket.set.name %> Membership</div>
 <p class="olive"><%= @ticket.name %> - <%= render_money(@ticket.price) %></p>
 <%= render partial: "header" %>
 <%- if @ticket.available? %>

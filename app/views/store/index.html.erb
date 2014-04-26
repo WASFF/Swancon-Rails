@@ -1,7 +1,7 @@
 <h1>Store</h1>
 <%= render partial: "header" %>
 <% @ticketsets.each do |set| -%>
-<h2><%= set.name %> Tickets</h2>
+<h2><%= set.name %> Memberships</h2>
 <ul>
 <%- ticketquery = set.tickets.available(current_user) %>
 <% ticketquery.all.each do |ticket| -%>
