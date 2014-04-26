@@ -12,6 +12,6 @@
   %div{id: "logged_in_widget"}
     Welcome, 
     %span= current_user.display_name
-    %div=link_to "My Profile", edit_user_registration_path
+    %div=link_to "My Details", edit_user_registration_path
     %div=link_to "My Tickets", tickets_my_path
     = link_to "Log Out", destroy_user_session_path
