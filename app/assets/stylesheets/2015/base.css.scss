@@ -130,53 +130,6 @@ header {
 	}
 }
 
-#login_widget {
-	display:block;
-	margin:0;
-	font-family:Helvetica, Arial, sans-serif;
-	font-size:12px;
-	color:black;
-	position:relative;
-	text-align: right;
-
-	div {
-		display: inline-block;
-	}
-
-	input {
-		width: 150px;
-		height:30px;
-		margin:0 auto;
-		margin-top:15px;
-		border:1px solid #dedede;
-		padding-left:10px;
-		background-color:white;
-		color:#F7583E;
-		@include border-radius(20px 0px);
-		&[type=submit] {
-			width: 100px;
-			padding-left: 6px;
-			margin-left: 10px;
-		}
-	}
-
-	label:nth-child(2) {
-		margin-left:30px;
-	}
-
-	label {
-		text-align:center;
-		margin:28px 5px 0 15px;
-		font-size:14px;	
-	}
-
-	p {
-		position:absolute;
-		right:0px;
-		top:45px;
-	}
-}
-
 section {
 	clear:both;
 	width:100%;
@@ -628,18 +581,6 @@ section.content {
 			padding-top:4.5%;
 			padding-bottom:4.5%;
 			max-width:250px;
-		}
-	}
-
-	#login_widget {
-		margin-right: 100px;
-
-		div {
-			display: block;
-		}
-
-		input {
-			margin-top: 5px;
 		}
 	}
 
