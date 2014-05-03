@@ -66,6 +66,9 @@ h5 {
 	margin-top: 10px;
 }
 
+#intro h5 {
+	font-size:14px;
+}
 
 p {
 	line-height:1.5em;
@@ -255,12 +258,17 @@ article {
 
 	h3 {
 		line-height: 0.6em;
+		margin-bottom:20px;
 	}
 
 	img {
 		margin: 0 auto;
 		display: block;
 		border-radius:20px 0px;
+	}
+
+	img:last-of-type {
+		margin-top:30px;
 	}
 
 	a {
@@ -621,7 +629,9 @@ section.content {
 	article {
 		#intro {
 			margin-top:5%;
+
 		}
+
 		#ruby {
 			width:33%;
 			height:auto;
@@ -630,6 +640,7 @@ section.content {
 			max-width:250px;
 		}
 	}
+
 
 	#login_widget {
 		margin-right: 100px;
@@ -715,6 +726,10 @@ section.content {
 			p span {
 				display:none;
 			}
+			h5 {
+				text-align:center;
+				margin-bottom:10px;
+			}
 		}
 	}
 	
@@ -753,6 +768,10 @@ section.content {
 		width:100%;
 		img.widescreen {
 			display:none
+		}
+		img:last-of-type {
+			width:25%;
+			margin-top:10px;
 		}
 	}
 	
