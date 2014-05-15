@@ -1,12 +1,12 @@
-<% content_for :title do %>DoomCon 2012 - All Sold Tickets<% end %>
-<h2>Sold Tickets</h2>
+<% content_for :title do %>DoomCon 2012 - All Sold Memberships<% end %>
+<h2>Sold Memberships</h2>
 <% if @all %>All<% else %><%= link_to "All", multiple: false %><% end %> | 
-<% if @multiple %>Member Owns Multiple Tickets<% else %><%= link_to "Member Owns Multiple Tickets", multiple: true %> <% end %> |
+<% if @multiple %>Member Owns Multiple Memberships<% else %><%= link_to "Member Owns Multiple Memberships", multiple: true %> <% end %> |
 <% if @pending %>Transfer Pending<% else %><%= link_to "Transfer Pending", pending: true %> <% end %> |
 <% if @cards %>Card Unsent<% else %><%= link_to "Card Unsent", cards: true %> <% end %>
 <br/>
 <% @sets.each do |set| %>
-<H2><%= set.name %> Tickets</h2>
+<H2><%= set.name %> Memberships</h2>
 <% if @subquery == nil %>
 <% collection = set.sold_tickets %>
 <% else %>

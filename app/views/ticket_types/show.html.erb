@@ -2,7 +2,7 @@
 <p class="olive"><%= render_money @ticket_type.price %><% if @ticket_type.concession_price != nil %> / <%= render_money @ticket_type.concession_price %><% end %></p>
 
 <p>
-  <b>Ticket set:</b>
+  <b>Membership set:</b>
   <%= link_to @ticket_type.set.name, @ticket_type.set %><br/>
   <%- if @ticket_type.requires_extended_details %>
   Requires Extended Details

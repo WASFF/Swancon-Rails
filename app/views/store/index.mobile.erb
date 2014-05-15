@@ -2,7 +2,7 @@
 <div class="title">Store</div>
 <%= render partial: "header" %>
 <% @ticketsets.each do |set| -%>
-<h2><%= set.name %> Tickets</h2>
+<h2><%= set.name %> Memberships</h2>
 <ul>
 <%- ticketquery = set.tickets.available %>
 <%- if @store_user != nil %>
