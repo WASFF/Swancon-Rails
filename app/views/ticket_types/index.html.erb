@@ -1,7 +1,7 @@
-<h1>Listing Tickets</h1>
+<h1>Listing Memberships</h1>
 
 <%- @ticket_sets.each do |set| %>
-<%= link_to set.name, set %> Tickets<br/>
+<%= link_to set.name, set %> Memberships<br/>
 <%- if set.requires_extended_details %>
 Requires Extended Details<br/>
 <%- end %>
@@ -32,4 +32,4 @@ Requires Extended Details<br/>
 
 <%- end %>
 
-<%= link_to 'New Ticket type', new_ticket_type_path %>
+<%= link_to 'New Membership type', new_ticket_type_path %>

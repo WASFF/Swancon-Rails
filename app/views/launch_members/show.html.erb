@@ -81,7 +81,7 @@ Merchandise<br/>
 </blockquote>
 <% end %>
 
-Tickets:
+Memberships:
 <blockquote>
 <% @launch_member.purchasable_tickets.all.each do |type| %>
 <%= type.ticket_set.name %> - <%= type.name %> - <%= BigDecimal.new(type.price.to_s).round(2) %> <%= check_box_tag("buy_ticket_type[#{type.id}]", true) %><br/>
