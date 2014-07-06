@@ -44,21 +44,22 @@
 /    = link_to "download"
 /    the pdf.
 
-%article{id:"events"}
-  %a{name: "events"}
-  %h2 Events We Host
-  - viewable_events.each do |item|
-    %div
-      = link_to item[:path] do
-        %div{class: "image"}
-          - if item[:image].present?
-            = image_tag(item[:image][:medium], alt: item[:title], height: 111)
-      %div{class: "info"}
-        %h3=item[:title]
-        %h5=item[:date]
-        %p=item[:text]
-/        = link_to item[:path] do
-/         =image_tag("ruby150-2.png", alt: item[:title])
+- unless viewable_events.empty?
+  %article{id:"events"}
+    %a{name: "events"}
+    %h2 Events We Host
+    - viewable_events.each do |item|
+      %div
+        = link_to item[:path] do
+          %div{class: "image"}
+            - if item[:image].present?
+              = image_tag(item[:image][:medium], alt: item[:title], height: 111)
+        %div{class: "info"}
+          %h3=item[:title]
+          %h5=item[:date]
+          %p=item[:text]
+  /        = link_to item[:path] do
+  /         =image_tag("ruby150-2.png", alt: item[:title])
 
 %section
   %article{id: "contact"}
