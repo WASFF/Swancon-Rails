@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(version: 20140419055245) do
   create_table "events", force: true do |t|
     t.datetime "start_time",       null: false
     t.datetime "end_time"
-    t.integer  "content_block_id"
+    t.integer  "content_block_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
