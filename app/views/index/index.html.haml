@@ -3,7 +3,9 @@
     %div{id: "ruby"}= image_tag("ruby250.png", alt: "Celebrating Swancon 40")
     %div{id: "intro"}
       %h2 Welcome to Swancon 40
-      %p In 2015, we're proud to announce the Ruby Anniversary (that's 40 years!) of WA's premier speculative fiction convention.
+      %h5{id: "event-date"} 2 - 6 April, 2015
+      %p This year is something special, as this is our 40th consecutive convention - our ruby anniversary - in WA. We'd like to invite you to celebrate this milestone with us.
+      %p We are a speculative fiction convention that is invested in all kinds of media. You'll find panels and discussion about games, film, literature, and graphic novels. If you are interested in science fiction or fantasy of almost any flavour, we'll have something for you.
 
       %p 
         - menu_items.each do |item|
@@ -42,21 +44,22 @@
 /    = link_to "download"
 /    the pdf.
 
-%article{id:"events"}
-  %a{name: "events"}
-  %h2 Events We Host
-  - viewable_events.each do |item|
-    %div
-      = link_to item[:path] do
-        %div{class: "image"}
-          - if item[:image].present?
-            = image_tag(item[:image][:medium], alt: item[:title], height: 111)
-      %div{class: "info"}
-        %h3=item[:title]
-        %h5=item[:date]
-        %p=item[:text]
-/        = link_to item[:path] do
-/         =image_tag("ruby150-2.png", alt: item[:title])
+- unless viewable_events.empty?
+  %article{id:"events"}
+    %a{name: "events"}
+    %h2 Events We Host
+    - viewable_events.each do |item|
+      %div
+        = link_to item[:path] do
+          %div{class: "image"}
+            - if item[:image].present?
+              = image_tag(item[:image][:medium], alt: item[:title], height: 111)
+        %div{class: "info"}
+          %h3=item[:title]
+          %h5=item[:date]
+          %p=item[:text]
+  /        = link_to item[:path] do
+  /         =image_tag("ruby150-2.png", alt: item[:title])
 
 %section
   %article{id: "contact"}

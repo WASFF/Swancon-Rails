@@ -1,15 +1,15 @@
-%div#login_widget
-  - unless user_signed_in?
-    = form_for(:user, url: session_path(:user)) do |f|
-      %div
-        %label{for:"username"} Login
-        = f.text_field "username", {id: "username"}
-      %div
-        %label{for:"password"} Password
-        = f.password_field "password", {id: "password"}
-      %div
-        = button_to "Register", new_user_registration_path
-  - else
+- unless user_signed_in?
+  = form_for(:user, url: session_path(:user), html: {id: :login_widget}) do |f|
+    %div
+      %label{for:"username"} Login
+      = f.text_field "username", {id: "username"}
+    %div
+      %label{for:"password"} Password
+      = f.password_field "password", {id: "password"}
+    %div
+      = button_to "Register", new_user_registration_path
+- else
+  %div{id: "logged_in_widget"}
     Welcome, 
     %span= current_user.display_name
     %div=link_to "My Profile", edit_user_registration_path
