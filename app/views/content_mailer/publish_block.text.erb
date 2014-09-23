@@ -1,5 +1,3 @@
 <%= @name %>,
 
-A new DoomCon post has been published at: http://<%= Rails.application.config.swancon_year %>.swancon.com.au/<%= url_for({controller: "content_viewer", action: "content", id: @block.id}) %>
-
-If you wish to unsubscribe from this email, please email us at "tickets-2012@swancon.com.au" asking to opt out, or change your settings on the Swancon website by logging in, click on "Membership Details" on the right hand side, unchecking "Email optin" and updating your details.
+If you wish to unsubscribe from this email, please email us at "tickets-<%= Rails.application.config.swancon_year %>@swancon.com.au" asking to opt out, or change your settings on the Swancon website by logging in, click on "Membership Details" on the right hand side, unchecking "Email optin" and updating your details.
