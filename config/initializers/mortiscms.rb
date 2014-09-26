@@ -4,7 +4,7 @@ Mortiscms.config do |config|
 	config.show_titles_in_pages = true
 	config.show_titles_in_tags = true
 	config.routes_enabled = true
-	config.publish_to_email = {query: MemberDetail.email_list, name: :display_name, email: :email}
+	config.publish_to_email = {query: MemberDetail.email_list, name: :name, email: :email}
 	config.publish_from_address = "donotreply@swancon.com.au"
 	config.publish_from_friendly_address = "Swancon 2014 Auto Mailer <donotreply@swancon.com.au>"
 	config.authorization_system = :pundit
