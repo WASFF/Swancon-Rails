@@ -1,3 +1,7 @@
 <%= @name %>,
 
+If you wish to view this on the website it is here: http://<%= Rails.application.config.swancon_year %>.swancon.com.au/<%= url_for({controller: "content_viewer", action: "content", id: @block.id}) %> or you can read the unformatted text below:
+
+<%= @block.bodytext %>
+
 If you wish to unsubscribe from this email, please email us at "tickets-<%= Rails.application.config.swancon_year %>@swancon.com.au" asking to opt out, or change your settings on the Swancon website by logging in, click on "Membership Details" on the right hand side, unchecking "Email optin" and updating your details.
