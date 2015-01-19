@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20140419055245) do
     t.datetime "updated_at"
     t.datetime "published_at"
     t.integer  "content_image_id"
+    t.string   "preview_hash"
   end
 
   add_index "content_blocks", ["author_id"], name: "index_content_blocks_on_author_id"
