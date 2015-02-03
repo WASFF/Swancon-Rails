@@ -4,6 +4,9 @@
 <br/>
 <h3 class="title">Log in</h3>
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <% flash.each do |name, msg| %>
+    <div class="error"><%= msg %></div>
+  <% end %>
   <p><%= f.label :username %><br />
   <%= f.text_field :username, :autocorrect => "off", :autocapitalize=> "off" %> (case sensitive)</p>
 
