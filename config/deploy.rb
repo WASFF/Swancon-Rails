@@ -1,8 +1,9 @@
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
-set :application, 'swancon2015'
-set :repo_url, 'git@github.com:lordmortis/Swancon-Rails.git'
+set :application, 'swancon2016'
+# set :repo_url, 'git@github.com:lordmortis/Swancon-Rails.git'
+set :repo_url, 'git@github.com:thefon/Swancon-Rails.git'
 set :rvm_ruby_version, '2.1.1'
 
 # Default branch is :master
@@ -49,7 +50,7 @@ namespace :deploy do
       email = capture(:git, "config --get user.email")
       tag_msg = "Deployed by #{user} <#{email}> to #{fetch :stage} as #{fetch :release_name}"
  
-      tag_name = "deploys/2015/#{fetch :stage }"
+      tag_name = "deploys/2016/#{fetch :stage }"
       execute :git, %(push origin :refs/tags/#{tag_name})
       execute :git, %(tag -f #{tag_name} origin/#{fetch :branch} -m "#{tag_msg}")
       execute :git, "push origin #{tag_name}"
