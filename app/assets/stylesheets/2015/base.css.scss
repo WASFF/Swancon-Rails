@@ -39,7 +39,7 @@ body {
 	text-align: center;
 }
 
-.error {
+.error, #error_explanation li {
 	color: red;
 	font-size: 1.2em;
 }
