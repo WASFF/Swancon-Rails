@@ -31,7 +31,12 @@
 			width: 100px;
 			padding-left: 6px;
 			margin-left: 10px;
+			cursor: pointer;
 		}
+	}
+
+	#login {
+		display: none;
 	}
 
 	label:nth-child(2) {
