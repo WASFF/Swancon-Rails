@@ -27,6 +27,6 @@ class Event < ActiveRecord::Base
 	end
 
 	def self.publicly_viewable
-		includes(:content_block).where("content_blocks.published_at IS NOT NULL")
+		includes(:content_block).where("content_blocks.published_at IS NOT NULL").where("end_time > ?", Time.now)
 	end
 end

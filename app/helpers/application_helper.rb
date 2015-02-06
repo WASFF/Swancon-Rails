@@ -72,7 +72,7 @@ module ApplicationHelper
 
   def viewable_events
     items = []
-    Event.publicly_viewable.each do |event|
+    Event.publicly_viewable.order(:start_time).each do |event|
       item = {title: event.title, text: event.summary}
       item[:path] = view_event_path(event)
       if event.end_time.present?
