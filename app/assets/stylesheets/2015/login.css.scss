@@ -4,7 +4,7 @@
 @import 'colors';
 
 #login_widget {
-	display:block;
+	display:inline-block;
 	margin:0;
 	padding-top: 15px;
 	padding-bottom: 15px;
@@ -13,6 +13,7 @@
 	color:black;
 	position:relative;
 	text-align: right;
+	float: right;
 
 	div {
 		display: inline-block;
