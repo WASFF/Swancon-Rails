@@ -8,7 +8,7 @@
       = f.password_field "password", {id: "password"}
     %div
       = f.submit "Login", id: "login"
-      = button_to "Register", new_user_registration_path, id: "register"
+      %input{type:"submit", id: "register", value: "Register", data: {url: new_user_registration_path}}
 - else
   %div{id: "logged_in_widget"}
     Welcome, 

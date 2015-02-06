@@ -27,3 +27,9 @@ $(document).ready ->
   $register = $login_widget.find("#register")
   $login_widget.each (index, item) ->
     $(item).on 'keyup', 'input', showCorrectButtons
+    $(item).on 'click', 'input[type=submit]', (event) ->
+      $this = $(this)
+      if $this.attr("id") == "register"
+        window.location = $this.data("url")
+        event.preventDefault()
+
