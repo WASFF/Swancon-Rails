@@ -30,6 +30,9 @@
           = image_tag("logo-horizontal.png", alt: "Swancon's 40th Anniversary", title: "Swancon 2015")
         = render partial: "layouts/login"
 
+      - flash.each do |name, msg|
+        %div{class: "error"}=msg
+
       - if can_show_content
         - if controller_name == "index" and action_name == "index"
           = yield

@@ -22,10 +22,13 @@ class ApplicationController < ActionController::Base
 	end
 
 	def after_sign_in_path_for(resource_or_scope)
-		if RoutePolicy.new(current_user).visit?(:seller, :index)
-			{action: :sales, controller: "/seller"}
-		else
-			root_path
+    route_policy = RoutePolicy.new(current_user)
+		if route_policy.visit?(:index, :admin)
+			{action: :admin, controller: "/index"}
+		elsif route_policy.visit?(:seller, :index)
+      {action: :sales, controller: "/seller"}
+    else
+			{action: :index, controller: "/store"}
 		end
 	end
 
