@@ -292,6 +292,10 @@ article {
 	background-repeat:no-repeat;
 	background-position:right;
 	z-index:0;
+
+	.error {
+		text-align: center;
+	}
 }
 
 .dark {
