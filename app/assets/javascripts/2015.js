@@ -4,3 +4,4 @@
 //= require jquery_nested_form
 //= require moment
 //= require lib/clock
+//= require lib/login

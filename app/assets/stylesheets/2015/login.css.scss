@@ -4,7 +4,7 @@
 @import 'colors';
 
 #login_widget {
-	display:block;
+	display:inline-block;
 	margin:0;
 	padding-top: 15px;
 	padding-bottom: 15px;
@@ -13,6 +13,7 @@
 	color:black;
 	position:relative;
 	text-align: right;
+	float: right;
 
 	div {
 		display: inline-block;
@@ -31,7 +32,12 @@
 			width: 100px;
 			padding-left: 6px;
 			margin-left: 10px;
+			cursor: pointer;
 		}
+	}
+
+	#login {
+		display: none;
 	}
 
 	label:nth-child(2) {
@@ -58,6 +64,7 @@
 	font-size:14px;
 	position:relative;
 	text-align: right;
+	float: right;
 }
 
 @media only screen and (min-width:641px) and (max-width:1130px) {
