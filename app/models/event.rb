@@ -51,7 +51,7 @@ class Event < ActiveRecord::Base
 private
 	def parse_time(value)
 		begin
-			Time.strptime(value, "%Y-%m-%d %H:%M")
+			Time.strptime("#{value} Perth", "%Y-%m-%d %H:%M %Z")
 		rescue ArgumentError 
 			false
 		end			
