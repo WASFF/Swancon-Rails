@@ -44,7 +44,9 @@ class EventsController < ApplicationController
 
   def update
     redirect_to action: :index unless user_can? :edit?, @event
-    if @event.update_attributes(events_params)
+    update_params = events_params
+    block_attributes = update_params.delete(:content_block_attributes)
+    if @event.update_attributes(update_params) && @event.content_block.update_attributes(block_attributes)
       flash[:notice] = 'Event was successfully updated.'
       redirect_to @event
     else
@@ -65,7 +67,7 @@ private
     params.require(:event).permit(
       {content_block_attributes: [
         :title, :content_image_id, :preview, :autosummarize, :bodytext, :summary
-      ]}, :start_time, :end_time
+      ]}, :start_time_parsed, :end_time_parsed
     )
   end
 
