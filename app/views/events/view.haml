@@ -1,3 +1,9 @@
+= content_for :header do
+  %meta{property: "og:title", content: @event.title}
+  %meta{property: "og:description", content: @event.summary}
+  %meta{property: "og:type", content: "article" }
+  %meta{property: "og:url", content: view_event_path(@event, only_path: false) }
+
 %h1=@event.title
 
 - if @event.end_time.present?
