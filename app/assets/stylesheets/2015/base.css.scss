@@ -24,7 +24,6 @@ body {
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 12px;
 	background: white no-repeat bottom center;
-	padding-bottom: 80px;
 	@include image-url-2x("crystals.png")
 }
 
@@ -113,7 +112,7 @@ aside#ticketdrop {
 	}
 }
 
-header {
+header, footer {
 	display:block;
 	margin:0 auto;
 	width:100%;
@@ -135,6 +134,18 @@ header {
 		visibility:hidden;
 		display:block;
 		height:0;
+	}
+}
+
+footer {
+	padding-top: 1.0em;
+	padding-bottom: 1.0em;
+	color: white;
+	font-size: 1.1em;
+
+	.right {
+		float: right;
+		text-align: right;
 	}
 }
 
@@ -299,7 +310,7 @@ article {
 }
 
 .dark {
-	background-color:rgba(0, 0, 0, 0.5);
+	background-color:rgba(0, 0, 0, 0.6);
 
 	article {
 		p, h2 {
@@ -325,13 +336,11 @@ article {
 			}
 
 		}
+	}
 
-		a {
-			color: black;
-			text-decoration: none;
-		}
-
-
+	a {
+		color: black;
+		text-decoration: none;
 	}
 }
 
@@ -577,9 +586,17 @@ section.content {
 			}
 		}
 
+
 		ul {
+			list-style: disc;
+		}
+
+		ol {
+			list-style: decimal;
+		}
+
+		ul, ol {
 			li {
-				font-size: 14px;
 				line-height: 1.5em;
 			}
 		}
@@ -625,7 +642,7 @@ section.content {
 
 
 @media only screen and (min-width:641px) and (max-width:1130px) {
-	header {
+	header, footer {
 		height: auto;
 		position:relative;
 		img {
@@ -854,4 +871,20 @@ section.content {
 		padding:0 30px;
 	}
 	
+
+	footer {
+		padding: 0.5em 10px 0.5em 10px;
+		color: white;
+		font-size: 1.1em;
+		width: auto;
+
+		div {
+			margin-bottom: 5px;
+		}
+
+		.right {
+			float: none;
+			text-align: left;
+		}
+	}	
 }
