@@ -34,17 +34,6 @@
     - else
       %h2 The Program
       %p Whoa there, it's still early days yet! We'll be adding to and refining the program in 2014, so stay tuned for more details.
-/    %button{id: "showmore"}
-/      View program online
-/      = image_tag("tinyruby.png", alt: "Celebrating Swancon 40")
-/    %div{id: "more"}
-/      %div{class: "sq1"}
-/        %h4 TIME 1
-/        %p Details coming soon
-/    %p 
-/    &elipsis or 
-/    = link_to "download"
-/    the pdf.
 
 - unless viewable_events.empty?
   %article{id:"events"}
@@ -60,8 +49,6 @@
           %h3=item[:title]
           %h5=item[:date]
           %p=item[:text]
-  /        = link_to item[:path] do
-  /         =image_tag("ruby150-2.png", alt: item[:title])
 
 %section
   %article{id: "contact"}
@@ -74,13 +61,15 @@
         &dash; Kat Griffiths
         %br
         %strong Secretary
-        &dash; Stephen Griffiths
+        &dash; 
+        = link_to "Stephen Griffiths", "mailto:secretary-2015@swancon.com.au"
         %br
         %strong Treasurer
         &dash; Helen Duffill
         %br
-        %strong Panel Coordinator
-        &dash; Sarah Parker
+        %strong Head Programmer
+        &dash; 
+        = link_to "Sarah Parker", "mailto:programmer-2015@swancon.com.au"        
     %div 
       %p
         %strong Contact email:
