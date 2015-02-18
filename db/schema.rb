@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218132707) do
+ActiveRecord::Schema.define(version: 20150218141042) do
 
   create_table "advertising_tags", force: true do |t|
     t.string   "name",          null: false
@@ -326,8 +326,9 @@ ActiveRecord::Schema.define(version: 20150218132707) do
     t.datetime "updated_at"
     t.datetime "card_issued"
     t.datetime "arrived"
-    t.boolean  "concession",     default: false, null: false
+    t.boolean  "concession",         default: false, null: false
     t.datetime "redeemed_at"
+    t.integer  "advertising_tag_id"
   end
 
   create_table "user_orders", force: true do |t|

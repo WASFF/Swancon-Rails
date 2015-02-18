@@ -2,6 +2,7 @@ class UserOrderTicket < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :ticket_type
 	belongs_to :user_order
+	belongs_to :advertising_tag
 	has_many :user_order_ticket_transfers
 
 	scope :paid, lambda {

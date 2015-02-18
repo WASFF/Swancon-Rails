@@ -157,6 +157,10 @@ class StoreController < ApplicationController
 				else
 					 ticket.user_id = @store_user.id					
 				end
+				advertising_tag_id = session[:advertising_tag_id] || cookies[:advertising_tag_id]
+				if advertising_tag_id.present?
+					ticket.advertising_tag = AdvertisingTag.where(id: advertising_tag_id).first
+				end
 				ticket.save
 			end
 
@@ -166,6 +170,10 @@ class StoreController < ApplicationController
 					 ticket.user_id = current_user.id
 				else
 					 ticket.user_id = @store_user.id					
+				end
+				advertising_tag_id = session[:advertising_tag_id] || cookies[:advertising_tag_id]
+				if advertising_tag_id.present?
+					ticket.advertising_tag = AdvertisingTag.where(id: advertising_tag_id).first
 				end
 				ticket.save
 			end
