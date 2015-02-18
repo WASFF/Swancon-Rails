@@ -154,12 +154,12 @@ class StoreController < ApplicationController
 				ticket = UserOrderTicket.new(:ticket_type_id => ticket_id, :user_order_id => order.id)
 				if @store_user == nil
 					 ticket.user_id = current_user.id
+					 advertising_tag_id = session[:advertising_tag_id] || cookies[:advertising_tag_id]
+						if advertising_tag_id.present?
+							ticket.advertising_tag = AdvertisingTag.where(id: advertising_tag_id).first
+						end					 
 				else
 					 ticket.user_id = @store_user.id					
-				end
-				advertising_tag_id = session[:advertising_tag_id] || cookies[:advertising_tag_id]
-				if advertising_tag_id.present?
-					ticket.advertising_tag = AdvertisingTag.where(id: advertising_tag_id).first
 				end
 				ticket.save
 			end
@@ -168,12 +168,12 @@ class StoreController < ApplicationController
 				ticket = UserOrderTicket.new(:ticket_type_id => ticket_id, :user_order_id => order.id, concession: true)
 				if @store_user == nil
 					 ticket.user_id = current_user.id
+						advertising_tag_id = session[:advertising_tag_id] || cookies[:advertising_tag_id]
+						if advertising_tag_id.present?
+							ticket.advertising_tag = AdvertisingTag.where(id: advertising_tag_id).first
+						end
 				else
 					 ticket.user_id = @store_user.id					
-				end
-				advertising_tag_id = session[:advertising_tag_id] || cookies[:advertising_tag_id]
-				if advertising_tag_id.present?
-					ticket.advertising_tag = AdvertisingTag.where(id: advertising_tag_id).first
 				end
 				ticket.save
 			end
