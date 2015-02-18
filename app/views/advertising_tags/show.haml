@@ -8,6 +8,10 @@
   Code:
   = @tag.tracking_code
 
+%p 
+  Sold Tickets:
+  = @tag.tickets.count
+
 %p
   = link_to "Edit", edit_advertising_tag_path(@tag)
   |
