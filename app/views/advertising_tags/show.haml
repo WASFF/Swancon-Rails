@@ -1,0 +1,17 @@
+%h1=@tag.name
+
+%p
+  Funnel Url: 
+  = link_to "TBD", "TBD"
+
+%p 
+  Code:
+  = @tag.tracking_code
+
+%p
+  = link_to "Edit", edit_advertising_tag_path(@tag)
+  |
+  - if user_can? :destroy, @tag
+    = link_to "Destroy", @tag, confirm: "Are you sure?", method: :delete
+    |
+  = link_to "List All", advertising_tags_path

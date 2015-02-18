@@ -1,0 +1,22 @@
+%h1 Listing Advertising Tags
+
+%table
+  %tr
+    %th Name
+    %th Funnel Name
+    %th Tracking Code
+    %th Actions
+
+  - @tags.each do |tag|
+    %tr
+      %td= tag.name
+      %td= tag.funnel_name
+      %td= tag.tracking_code
+      %td
+        = link_to "Show", tag
+        - if user_can? :edit, tag
+          = link_to "Edit", edit_advertising_tag_path(tag)
+        - if user_can? :delete, tag
+          = link_to "Delete", tag, confirm: "Are you sure?", method: :delete
+
+= link_to "Add New Advertising Tag", new_advertising_tag_path

@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140419055245) do
+ActiveRecord::Schema.define(version: 20150218132707) do
+
+  create_table "advertising_tags", force: true do |t|
+    t.string   "name",          null: false
+    t.string   "funnel_name",   null: false
+    t.string   "tracking_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "award_categories", force: true do |t|
     t.string   "name",        null: false

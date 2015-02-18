@@ -21,6 +21,7 @@
 		%li= link_to "Merchandise Administration", merchandise_types_path
 		%li= link_to "Merchandise Set Administration", merchandise_sets_path
 		%li= link_to "Merchandise Option Set Administration", merchandise_option_sets_path
+		%li= link_to "Advertising Tags", advertising_tags_path
 		- if user_can_visit? :index, :set_con_mode
 			- if SiteSettings.con_mode
 				%li= link_to "Disable Con Mode", set_con_mode_path(enable: false)
