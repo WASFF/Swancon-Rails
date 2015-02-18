@@ -2,7 +2,7 @@
 
 %p
   Funnel Url: 
-  = link_to "TBD", "TBD"
+  = link_to tracking_path(id: @tag.funnel_name, only_path: false), tracking_path(id: @tag.funnel_name, only_path: false)
 
 %p 
   Code:

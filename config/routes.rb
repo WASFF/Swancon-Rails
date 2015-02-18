@@ -122,5 +122,7 @@ DoomCon::Application.routes.draw do
   match '/admin' => "index#admin", as: "admin", via: [:get]
   match '/admin/set_con_mode' => "index#set_con_mode", as: "set_con_mode", via: [:get]
 
+  match '/track/:id' => "index#start_tracking", via: [:get], as: "tracking"
+
   root :to => "index#index"
 end
