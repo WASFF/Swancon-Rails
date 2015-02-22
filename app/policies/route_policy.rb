@@ -52,7 +52,7 @@ class RoutePolicy
       member_details: [:edit_my, :update, :create]
     },
     guest: {
-      index: [:index],
+      index: [:index, :track],
       panel_suggestions: [:index, :show, :new, :create],
       award_nomination: [:index, :show, :new, :create, :edit, :update, :show]
     }
