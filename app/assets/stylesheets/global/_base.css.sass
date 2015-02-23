@@ -1,0 +1,58 @@
+*, *:before, *:after
+  +box-sizing(border-box)
+
+body
+  background-color: $app-bg-color
+  margin: 0px
+  padding: 0px
+  min-width: $site-width
+  font: $body-copy
+  color: $copy-color
+
+.bg-wrapper
+  background-color: $app-bg-color
+
+.container, %container
+  margin-left: auto
+  margin-right: auto
+  padding-left: $gutter
+  padding-right: $gutter
+  max-width: $site-width
+
+.main // IE8-9 do not support the main element
+  @extend %container
+  position: relative
+  padding-bottom: $break-space-large
+  min-height: 660px
+
+h1, h2, h3, h4, h5, h6
+  margin-top: 0px
+  font-weight: 400
+  font-family: $heading-font
+
+h1
+  font-size: 36px
+
+h2
+  font-size: 20px
+
+h3
+  font-size: 18px
+
+h4, h5, h6
+  font-size: 16px
+
+a
+  color: $link-color
+  text-decoration: none
+  font-weight: 600
+  &:hover, &:focus
+    color: $link-color
+  &:active
+    color: $link-color
+
+strong
+  font-weight: 600
+
+.hidden
+  display: none

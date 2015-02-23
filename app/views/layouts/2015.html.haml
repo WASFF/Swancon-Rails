@@ -3,7 +3,7 @@
 %html
   %head
     = stylesheet_link_tag "2015-print", :media => "print"
-    = stylesheet_link_tag "2015"
+    = stylesheet_link_tag '2015', media: 'all'
     = javascript_include_tag "2015.js"
     %meta{http_equiv: "Content-Type", content:"text/html; charset=UTF-8"}
     %title= @title
@@ -46,5 +46,4 @@
             %h1
               All will be revealed
               = render_clock
-      
      
