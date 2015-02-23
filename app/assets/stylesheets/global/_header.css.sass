@@ -3,17 +3,19 @@ body > header
   +clearfix
   .logo
     float: left
-
+    margin-top: 12px
+  nav
+    float: right
   ul
     @extend %list-reset
     +clearfix
-    float: right
   li
     float: left
-    margin-left: $gutter
+    margin: 20px 0px 20px $gutter
     &:first-child
       margin-left: 0px
   a
+    padding: 8px 2px
+    display: inline-block
     text-transform: uppercase
-    font-weight: 400
     font-size: 14px

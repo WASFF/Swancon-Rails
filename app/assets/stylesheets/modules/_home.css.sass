@@ -1,14 +1,108 @@
-.intro
-  padding: 80px 0px
+.intro, .guests, .events
+  padding: $section-padding-home 0px
   background: $section-bg-alt2
+
+.intro, .guests, .program
+  text-align: center
+
+.home
+  h2
+    font-size: 36px
+    margin: 0px
+
+.intro, .events
+  position: relative
+  &:before, &:after
+    content: ""
+    display: block
+    position: absolute
+    top: 0px
   &:before
-    content: ""
+    left: 0px
   &:after
-    content: ""
+    right: 0px  
+
+.intro
+  &:before
+
+  &:after
+
   h2
     font-size: 48px
-    color: $heading-color-alt2
-    text-align: center
     width: 500px
     margin: 0 auto
     line-height: 1.2
+    margin-bottom: 30px
+  a
+    font-size: 20px
+  strong
+    color: $copy-important-color
+    font-weight: 400
+
+.about
+  @extend %container
+  +clearfix
+  padding: $section-padding-home 0px
+  h2
+    @extend %screen-reader
+  .copy
+    max-width: 490px
+    float: left
+    font-size: 20px
+  img
+    float: right
+
+.guests
+  h2
+    @extend %screen-reader
+  img
+    margin-bottom: 10px
+  h3, p
+    margin: 0px
+  ul
+    @extend %list-reset
+    +clearfix
+    margin-left: -15px
+    margin-right: -15px
+
+  li
+    float: left
+    width: 33.33%
+    padding: 0px $gutter
+    text-align: center
+
+.program
+  @extend %container
+  padding: $section-padding-home 0px
+
+.events
+  overflow: hidden
+  max-height: 400px
+  &:before
+    width: 570px
+    height: 400px
+    background: image-url('bg-geometric-white-left.png') 0px 0px no-repeat
+  &:after
+    width: 570px
+    height: 400px
+    background: image-url('bg-geometric-white-right.png') 0px -160px no-repeat
+  .container
+    +clearfix
+
+
+#event
+  position: relative
+  z-index: 2
+  width: 50%
+  float: left
+  h3, h4
+    margin-bottom: 0px
+  h3
+    color: $copy-important-color
+    font-size: 18px
+  p
+    margin-top: 0px
+
+
+
+

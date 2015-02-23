@@ -1,36 +1,38 @@
 .intro
   .container
-    %h2 On 2 -6 April, 2015 We're celebrating 40 years of Swancon
+    %h2
+      On 2 -6 April, 2015 We're celebrating 40 years of
+      %strong Swancon
     =link_to "Get tickets now!", store_path, class: "btn btn-primary"
 
 .about
+  %h2 About us
   .copy
     %p We are a speculative fiction convention that is invested in all kinds of media. You'll find panels and discussion about games, film, literature, and graphic novels. If you are interested in science fiction or fantasy of almost any flavour, we'll have something for you.
+  =image_tag("http://placekitten.com/g/360/360")
 
 .guests
+  .container
+    %h2 Our Guests
+    %ul
+      - items_for_tag("guests").each do |item|
+        %li
+          = link_to item[:path] do
+            - if item[:image].present?
+              =image_tag(item[:image][:medium], alt: item[:medium])        
+          %a{name: "guests"}
+          = link_to item[:path] do
+            %h3=item[:title]
 
+          %p=item[:text]
 
-%article{id: "guests"}
-  - items_for_tag("guests").each do |item|
-    %div{class: "guests"}
-      %a{name: "guests"}
-      = link_to item[:path] do
-        %h3=item[:title]
-      = link_to item[:path] do
-        - if item[:image].present?
-          =image_tag(item[:image][:medium], alt: item[:medium])
-      %p=item[:text]
-      = link_to item[:path] do
-        =image_tag("ruby150-2.png")
-
-%section{class:"dark"}
-  %article
-    %a{name: "program"}
-    - if items_for_tag("programme").count > 0
-      = items_for_tag("programme").first[:rendered_text]
-    - else
-      %h2 The Program
-      %p Whoa there, it's still early days yet! We'll be adding to and refining the program in 2014, so stay tuned for more details.
+.program
+  %a{name: "program"}
+  - if items_for_tag("programme").count > 0
+    = items_for_tag("programme").first[:rendered_text]
+  - else
+    %h2 The Program
+    %p Whoa there, it's still early days yet! We'll be adding to and refining the program in 2015, so stay tuned for more details.
 /    %button{id: "showmore"}
 /      View program online
 /      = image_tag("tinyruby.png", alt: "Celebrating Swancon 40")
@@ -44,18 +46,11 @@
 /    the pdf.
 
 - unless viewable_events.empty?
-  %article{id:"events"}
-    %a{name: "events"}
-    %h2 Events We Host
-    - viewable_events.each do |item|
-      %div
-        = link_to item[:path] do
-          %div{class: "image"}
-            - if item[:image].present?
-              = image_tag(item[:image][:medium], alt: item[:title], height: 111)
-        %div{class: "info"}
+  .events
+    .container
+      %h2 Events      
+      - viewable_events.each do |item|
+        %article#event
           %h3=item[:title]
-          %h5=item[:date]
+          %h4=item[:date]
           %p=item[:text]
-  /        = link_to item[:path] do
-  /         =image_tag("ruby150-2.png", alt: item[:title])

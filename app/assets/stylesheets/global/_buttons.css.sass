@@ -13,7 +13,7 @@
   +transition(background-color 0.3s)
   background-color: $btn-default-bg
   &:hover
-    background-color: dim($btn-default-bg, 0.10)
+    background-color: dim($btn-default-bg, 0.05)
   &:focus, &:active
     background-color: whiten($btn-default-bg, 0.05)
   &.disabled
@@ -30,9 +30,9 @@ button, input[type=button]
 button
   @extend %btn
 
-.btn-primary, %btn-primary // main call to action on a page, exception: btn-trade
+.btn-primary, %btn-primary
   background: $btn-primary-bg
   &:hover
-    background: dim($btn-primary-bg, 0.10)
+    background: dim($btn-primary-bg, 0.05)
   &:focus, &:active
     background: whiten($btn-primary-bg, 0.05)
