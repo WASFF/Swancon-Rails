@@ -1,5 +1,8 @@
+.intro, .about, .guests, .program, .events
+  padding-top: $section-padding-home
+  padding-bottom: $section-padding-home
+
 .intro, .guests, .events
-  padding: $section-padding-home 0px
   background: $section-bg-alt2
 
 .intro, .guests, .program
@@ -24,10 +27,17 @@
 
 .intro
   &:before
-
+    top: -40px
+    width: 430px
+    height: 570px
+    background: image-url('bg-geometric-red-left.png') -70px 0px no-repeat
   &:after
-
+    width: 370px
+    height: 440px
+    background: image-url('bg-geometric-red-right.png') 40px 0px no-repeat
   h2
+    position: relative
+    z-index: 2
     font-size: 48px
     width: 500px
     margin: 0 auto
@@ -42,15 +52,28 @@
 .about
   @extend %container
   +clearfix
-  padding: $section-padding-home 0px
   h2
     @extend %screen-reader
   .copy
     max-width: 490px
     float: left
     font-size: 20px
+
+.year-ruby
+  position: relative
+  float: right
+  img, span
+    position: absolute
   img
-    float: right
+    top: -20px
+    right: 0px
+  span
+    top: 36px
+    right: 52px
+    font-size: 70px
+    font-family: $heading-font
+    text-align: center
+    color: #fff
 
 .guests
   h2
@@ -73,7 +96,6 @@
 
 .program
   @extend %container
-  padding: $section-padding-home 0px
 
 .events
   overflow: hidden
