@@ -22,6 +22,9 @@
     
     = render partial: 'layouts/header'
     .main
+      - flash.each do |name, msg|
+        %div{class: "error"}=msg
+
       - if can_show_content
         - if controller_name == "index" and action_name == "index"
           = yield

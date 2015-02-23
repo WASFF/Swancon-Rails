@@ -22,13 +22,15 @@
       %p=item[:text]
       = link_to item[:path] do
         =image_tag("ruby150-2.png")
-}
 
 %section{class:"dark"}
   %article
     %a{name: "program"}
-    %h2 The Program
-    %p Whoa there, it's still early days yet! We'll be adding to and refining the program in 2014, so stay tuned for more details.
+    - if items_for_tag("programme").count > 0
+      = items_for_tag("programme").first[:rendered_text]
+    - else
+      %h2 The Program
+      %p Whoa there, it's still early days yet! We'll be adding to and refining the program in 2014, so stay tuned for more details.
 /    %button{id: "showmore"}
 /      View program online
 /      = image_tag("tinyruby.png", alt: "Celebrating Swancon 40")
