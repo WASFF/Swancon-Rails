@@ -1,17 +1,14 @@
-%section
-  %article
-    %div{id: "ruby"}= image_tag("ruby250.png", alt: "Celebrating Swancon 40")
-    %div{id: "intro"}
-      %h2 Welcome to Swancon 40
-      %h5{id: "event-date"} 2 - 6 April, 2015
-      %p This year is something special, as this is our 40th consecutive convention - our ruby anniversary - in WA. We'd like to invite you to celebrate this milestone with us.
-      %p We are a speculative fiction convention that is invested in all kinds of media. You'll find panels and discussion about games, film, literature, and graphic novels. If you are interested in science fiction or fantasy of almost any flavour, we'll have something for you.
+.intro
+  .container
+    %h2 On 2 -6 April, 2015 We're celebrating 40 years of Swancon
+    =link_to "Get tickets now!", store_path, class: "btn btn-primary"
 
-      %p 
-        - menu_items.each do |item|
-          - unless item[:first]
-            %span{class:"divider"}= "|"
-          = link_to item[:name].upcase, item[:path]
+.about
+  .copy
+    %p We are a speculative fiction convention that is invested in all kinds of media. You'll find panels and discussion about games, film, literature, and graphic novels. If you are interested in science fiction or fantasy of almost any flavour, we'll have something for you.
+
+.guests
+
 
 %article{id: "guests"}
   - items_for_tag("guests").each do |item|
@@ -60,41 +57,3 @@
           %p=item[:text]
   /        = link_to item[:path] do
   /         =image_tag("ruby150-2.png", alt: item[:title])
-
-%section
-  %article{id: "contact"}
-    %a{name: "contact"}
-    %h2 Contact Us
-    %div.people
-      %p{class: "bolded"} Committee Contacts
-      %p
-        %strong Convenor
-        &dash; Kat Griffiths
-        %br
-        %strong Secretary
-        &dash; Stephen Griffiths
-        %br
-        %strong Treasurer
-        &dash; Helen Duffill
-        %br
-        %strong Panel Coordinator
-        &dash; Sarah Parker
-    %div 
-      %p
-        %strong Contact email:
-        %br= link_to "secretary-2015@swancon.com.au", "mailto:secretary-2015@swancon.com.au"
-
-    %div
-      %p{class: "bolded"} Swancon in Social Media
-      = link_to "https://www.facebook.com/groups/5668237047/" do 
-        = image_tag("fb.png", alt: "Swancon on Facebook")
-      = link_to "https://twitter.com/Swancon" do
-        = image_tag("twitter.png", alt: "Swancon on Twitter")
-
-%article{id: "tickets"}
-  %a{name: "tickets"}
-  = link_to store_path(category: "convention tickets") do  
-    %button{id: "showmoretickets"}
-      Get tickets now!
-      = image_tag("tinyruby.png", alt: "Swancon on Facebook")
-//  %div{id: "moretickets"}

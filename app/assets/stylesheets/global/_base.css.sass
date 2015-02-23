@@ -24,11 +24,16 @@ body
   position: relative
   padding-bottom: $break-space-large
   min-height: 660px
+  .home &
+    padding-left: 0px
+    padding-right: 0px
+    max-width: none
 
 h1, h2, h3, h4, h5, h6
   margin-top: 0px
   font-weight: 400
   font-family: $heading-font
+  text-transform: uppercase
 
 h1
   font-size: 36px
@@ -45,7 +50,7 @@ h4, h5, h6
 a
   color: $link-color
   text-decoration: none
-  font-weight: 600
+  font-weight: 500
   &:hover, &:focus
     color: $link-color
   &:active

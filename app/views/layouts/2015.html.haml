@@ -15,35 +15,28 @@
     = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
     = yield :header
 
-  %body
+  -# TODO if page is index add the class of home
+  %body.home 
     - if Rails.env == "staging"
       %div#staging You are on the Staging site. None of your changes will be reflected on the real site.
-    - if show_buy_ticket_widget?
-      %aside#ticketdrop
-        = link_to store_path(category: "convention tickets") do
-          = image_tag("arrow.png", alt: "Get your ticket now")
-          %p STORE
-
-    %div#container
-      %header
-        = link_to root_url do 
-          = image_tag("logo-horizontal.png", alt: "Swancon's 40th Anniversary", title: "Swancon 2015")
-        = render partial: "layouts/login"
-
+    
+    = render partial: 'layouts/header'
+    .main
       - if can_show_content
         - if controller_name == "index" and action_name == "index"
           = yield
         - else
           %section{class: "content"}
             %article
-              = yield
-
+              = yield      
+    
       - else
-        %section 
+        %section
           %article{class: "centered"}
             %h1
               Swancon 40 is currently in stealth mode
             %h1
               All will be revealed
-              = render_clock
-     
+              = render_clock  
+                 
+    = render partial: 'layouts/footer'

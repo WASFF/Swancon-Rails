@@ -1,0 +1,13 @@
+%header#header
+  .logo
+    = link_to root_url do 
+      = image_tag("http://placekitten.com/g/205/44", alt: "Swancon's 40th Anniversary", title: "Swancon 2015", width: "205", height: "44")
+  %nav
+    %ul
+      - menu_items.each do |item|
+        %li
+          = link_to item[:name].upcase, item[:path]
+      %li
+        = link_to "Login", "#"
+      %li
+        = link_to "Sign up", "#"   

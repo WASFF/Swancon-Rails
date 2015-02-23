@@ -1,0 +1,38 @@
+%btn, .btn
+  display: inline-block
+  cursor: pointer
+  padding: $btn-padding
+  border: none
+  font: $btn-text
+  line-height: 1.5
+  text-decoration: none
+  text-transform: uppercase
+  letter-spacing: 1px
+  text-align: center
+  color: #fff
+  +transition(background-color 0.3s)
+  background-color: $btn-default-bg
+  &:hover
+    background-color: dim($btn-default-bg, 0.10)
+  &:focus, &:active
+    background-color: whiten($btn-default-bg, 0.05)
+  &.disabled
+    +opacity(0.5)
+
+a.btn
+  &:hover, &:visited, &:focus
+    color: #fff
+
+button, input[type=button]
+  &[disabled]
+    +opacity(0.5)
+
+button
+  @extend %btn
+
+.btn-primary, %btn-primary // main call to action on a page, exception: btn-trade
+  background: $btn-primary-bg
+  &:hover
+    background: dim($btn-primary-bg, 0.10)
+  &:focus, &:active
+    background: whiten($btn-primary-bg, 0.05)

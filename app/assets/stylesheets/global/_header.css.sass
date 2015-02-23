@@ -1,0 +1,19 @@
+body > header
+  @extend %container
+  +clearfix
+  .logo
+    float: left
+
+  ul
+    @extend %list-reset
+    +clearfix
+    float: right
+  li
+    float: left
+    margin-left: $gutter
+    &:first-child
+      margin-left: 0px
+  a
+    text-transform: uppercase
+    font-weight: 400
+    font-size: 14px
