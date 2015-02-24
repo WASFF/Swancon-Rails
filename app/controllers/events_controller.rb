@@ -55,7 +55,9 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    redirect_to action: :index unless user_can? :destory?, @event
+    redirect_to action: :index unless user_can? :destroy?, @event
+    @event.destroy
+    redirect_to events_path
   end
 
 private
