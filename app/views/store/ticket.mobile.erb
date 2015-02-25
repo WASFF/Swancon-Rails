@@ -1,5 +1,8 @@
 <div class="title"><%= @ticket.set.name %> Membership</div>
 <p class="olive"><%= @ticket.name %> - <%= render_money(@ticket.price) %></p>
+<% if @ticket_type.description.present? %>
+	<p><%= @ticket_type.description %></p>
+<% end %>
 <%= render partial: "header" %>
 <%- if @ticket.available? %>
 	<%- if @ticket.available_to != nil %>

@@ -8,6 +8,8 @@
 	- if @ticket.concession_price.present?
 		/
 		= render_money(@ticket.concession_price)
+	- if @ticket.description.present?
+		%p= @ticket.description
 	= render partial: "header"
 	- if @ticket.available?
 		- unless @ticket.available_to.blank?

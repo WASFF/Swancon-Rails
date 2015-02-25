@@ -1,4 +1,7 @@
 <div class="title"><%= @ticket_type.name %></div>
+<% if @ticket_type.description.present? %>
+	<p><%= @ticket_type.description %></p>
+<% end %>
 <p class="olive"><%= render_money @ticket_type.price %><% if @ticket_type.concession_price != nil %> / <%= render_money @ticket_type.concession_price %><% end %></p>
 
 <p>
