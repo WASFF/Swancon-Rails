@@ -14,6 +14,9 @@
               = " / #{render_money ticket.concession_price}"
             - unless ticket.available?
               (unlisted)
+            - if ticket.description.present?
+              %ul{class: "ticket_description"}
+                %li=ticket.description
 
 - @merchsets.each do |set| 
   - unless set.merchandise.available(current_user).empty?
