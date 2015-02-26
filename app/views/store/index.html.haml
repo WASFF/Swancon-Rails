@@ -1,0 +1,30 @@
+%h1 Store
+= render partial: "header"
+
+- @ticketsets.each do |set| 
+  - unless set.tickets.available(current_user).empty?
+    %h2= "#{set.name} Memberships"
+    %ul
+      - set.tickets.available(current_user).each do |ticket|      
+        %li
+          = link_to action: :ticket, id: ticket.id do
+            = ticket.name
+            = render_money ticket.price
+            - if ticket.concession_price
+              = " / #{render_money ticket.concession_price}"
+            - unless ticket.available?
+              (unlisted)
+
+- @merchsets.each do |set| 
+  - unless set.merchandise.available(current_user).empty?
+    %h2= "#{set.name}"
+    %ul
+      - set.merchandise.available(current_user).each do |ticket|      
+        %li
+          = link_to action: :ticket, id: ticket.id do
+            = ticket.name
+            = render_money ticket.price
+            - unless ticket.available?
+              (unlisted)
+
+= render partial: "cart"
