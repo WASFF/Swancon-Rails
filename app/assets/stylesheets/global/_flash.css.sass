@@ -1,0 +1,24 @@
+main > .flash
+  padding-top: $break-space-mini
+  width: 100%
+.flash-wrapper
+  margin: 0px auto
+  text-align: center
+  .flash
+    padding: 5px
+    display: block
+    font-weight: 600
+    +border-radius($border-radius)
+    background: $section-bg
+  p
+    display: inline-block
+    margin: 0px
+
+.flash-alert
+  border: 2px solid $warning-color
+
+.flash-notice
+  border: 2px solid $positive-color
+
+.flash-error
+  border: 2px solid $negative-color
