@@ -1,0 +1,60 @@
+.membership-details
+  = form_for(@member_detail) do |f|
+    - if @member_detail.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@member_detail.errors.count, "error")
+          prohibited this member_detail from being saved:
+        %ul
+          - @member_detail.errors.full_messages.each do |msg|
+            %li= msg
+    
+    = f.hidden_field :user_id
+    .field-group
+      .field
+        = f.label :name_first
+        = f.text_field :name_first, :autocorrect => "off", :autocapitalize=> "off"
+      .field
+        = f.label :name_last
+        = f.text_field :name_last, :autocorrect => "off", :autocapitalize=> "off"
+      .field
+        = f.label :name_badge
+        = f.text_field :name_badge, :autocorrect => "off", :autocapitalize=> "off"
+    .field-group
+      .field
+        = f.label :address_1, "Address Line 1"
+        = f.text_field :address_1, :autocorrect => "off", :autocapitalize=> "off"
+      .field
+        = f.label :address_1, "Address Line 2"
+        = f.text_field :address_2, :autocorrect => "off", :autocapitalize=> "off"
+      .field
+        = f.label :address_3, "City/Suburb"
+        = f.text_field :address_3, :autocorrect => "off", :autocapitalize=> "off"
+      .field
+        = f.label :address_postcode
+        = f.text_field :address_postcode, :autocorrect => "off", :autocapitalize=> "off"
+      .field
+        = f.label :address_state
+        = f.text_field :address_state, :autocorrect => "off", :autocapitalize=> "off"
+      .field
+        = f.label :address_country
+        = f.text_field :address_country, :autocorrect => "off", :autocapitalize=> "off"
+    .field-group
+      .field
+        = f.label :phone
+        = f.text_field :phone, :autocorrect => "off", :autocapitalize=> "off"
+      .field
+        = f.label :email_optin
+        = f.check_box :email_optin
+    
+    = render :partial => "/member_details/disclaimer"
+    
+    - if @member_detail.disclaimer_signed
+      I HAVE AGREED TO THE ABOVE
+    - else
+      I AGREE TO THE ABOVE: #{f.check_box :disclaimer_signed}
+    .form-actions
+      = f.submit "Submit membership details" ,class: "btn"
+  
+  - if @member_detail.disclaimer_signed and @member_detail.user == current_user
+    = button_to "Buy Memberships", controller: "store", action: "index"

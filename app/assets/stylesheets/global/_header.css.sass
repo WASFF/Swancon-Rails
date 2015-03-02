@@ -1,6 +1,6 @@
 body > header
-  @extend %container
   +pie-clearfix
+  background: $section-bg
   h1
     @extend %screen-reader
   .logo
@@ -8,7 +8,7 @@ body > header
     z-index: 4
     float: left
     margin-top: 12px
-    margin-right: $gutter
+    margin-right: 10px
   nav
     +pie-clearfix
     float: float
@@ -21,20 +21,20 @@ body > header
     padding: 8px 2px
     display: inline-block
     text-transform: uppercase
-    font-size: 13px
+    font-size: 12px
 
 .main-nav
   margin-left: $gutter
   li
     float: left
-    margin: 20px 0px 20px $gutter
+    margin: 20px 0px 20px 13px
     &:first-child
       margin-left: 0px
 
 .user-actions
   position: relative
   float: right
-  margin-left: $gutter
+  margin-left: 10px
   h2
     @extend %screen-reader
   .dropdown

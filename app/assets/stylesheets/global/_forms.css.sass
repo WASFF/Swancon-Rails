@@ -33,8 +33,26 @@ label
   font-weight: 600
   padding-bottom: 5px
 
-.form-group
+.field-group // use when its not semantically corrent to use the elment fieldset
+  +clearfix
+  margin-left: -15px
+  margin-right: -15px
+  clear: left
+  .field
+    float: left
+    padding: 0px $gutter
+
+.field
   margin-bottom: 10px
+  width: 260px
+  input
+    width: 100%
+    display: block
 
 .form-actions
   margin-top: 20px
+
+.field_with_errors
+  border-color: $negative-color
+  label
+    color: $negative-color

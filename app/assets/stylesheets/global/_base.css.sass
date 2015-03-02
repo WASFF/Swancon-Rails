@@ -8,6 +8,8 @@ body
   min-width: $site-width
   font: $body-copy
   color: $copy-color
+  &.home, &.user-portal-page
+    background-color: $section-bg
 
 .bg-wrapper
   background-color: $app-bg-color
@@ -20,13 +22,16 @@ body
   max-width: $site-width
 
 .main // IE8-9 do not support the main element
-  @extend %container
-  position: relative
+  margin: $break-space auto
+  padding: $section-padding
+  max-width: $site-width
   min-height: 660px
+  background-color: $section-bg
   .home &, .user-portal-page &
-    padding-left: 0px
-    padding-right: 0px
+    margin: 0 auto
+    padding: 0px
     max-width: none
+    background-color: none
 
 h1, h2, h3, h4, h5, h6
   margin-top: 0px

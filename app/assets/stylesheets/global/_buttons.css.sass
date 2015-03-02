@@ -23,11 +23,11 @@ a.btn
   &:hover, &:visited, &:focus
     color: #fff
 
-button, input[type=button]
+button, input[type=submit]
   &[disabled]
     +opacity(0.5)
 
-button
+button, input[type=submit]
   @extend %btn
 
 .btn-primary, %btn-primary

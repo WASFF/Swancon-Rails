@@ -6,9 +6,9 @@
       %p Enter the email address attached to your account and we'll send you a link to reset your password.
       = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
         = devise_error_messages!
-        %div
+        .field
           = f.label :email
           = f.email_field :email, autofocus: true
-        %div
+        .form-action
           = f.submit "Send", class: "btn"
       = render "devise/shared/links"
