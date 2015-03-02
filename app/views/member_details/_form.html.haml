@@ -11,7 +11,8 @@
     
     = f.hidden_field :user_id
     .field-group
-      .field
+      .field.required
+        %span Required
         = f.label :name_first
         = f.text_field :name_first, :autocorrect => "off", :autocapitalize=> "off"
       .field
@@ -21,22 +22,28 @@
         = f.label :name_badge
         = f.text_field :name_badge, :autocorrect => "off", :autocapitalize=> "off"
     .field-group
-      .field
+      .field.required
+        %span Required
         = f.label :address_1, "Address Line 1"
         = f.text_field :address_1, :autocorrect => "off", :autocapitalize=> "off"
-      .field
+      .field.required
+        %span Required
         = f.label :address_1, "Address Line 2"
         = f.text_field :address_2, :autocorrect => "off", :autocapitalize=> "off"
-      .field
+      .field.required
+        %span Required
         = f.label :address_3, "City/Suburb"
         = f.text_field :address_3, :autocorrect => "off", :autocapitalize=> "off"
-      .field
+      .field.required
+        %span Required
         = f.label :address_postcode
         = f.text_field :address_postcode, :autocorrect => "off", :autocapitalize=> "off"
-      .field
+      .field.required
+        %span Required
         = f.label :address_state
         = f.text_field :address_state, :autocorrect => "off", :autocapitalize=> "off"
-      .field
+      .field.required
+        %span Required
         = f.label :address_country
         = f.text_field :address_country, :autocorrect => "off", :autocapitalize=> "off"
     .field-group

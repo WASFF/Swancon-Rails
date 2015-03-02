@@ -33,6 +33,21 @@ label
   font-weight: 600
   padding-bottom: 5px
 
+.required
+  position: relative
+  span
+    @extend %screen-reader
+  label
+    padding-left: 7px
+  &:before
+    content: "*"
+    display: block
+    position: absolute
+    width: 5px
+    height: 5px
+    left: 12px
+    top: 4px
+
 .field-group // use when its not semantically corrent to use the elment fieldset
   +clearfix
   margin-left: -15px
