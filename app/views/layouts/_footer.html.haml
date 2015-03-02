@@ -6,11 +6,11 @@
         %dt Convenor:
         %dd Kat Griffiths
         %dt Secretary:
-        %dd Stephen Griffiths
+        %dd= link_to "Stephen Griffiths", "mailto:secretary-2015@swancon.com.au"
         %dt Treasurer:
         %dd Helen Duffill
         %dt Panel Coordinator:
-        %dd Sarah Parker
+        %dd= link_to "Sarah Parker", "mailto:programmer-2015@swancon.com.au"      
       %p
         %strong Contact email:
         %br= link_to "secretary-2015@swancon.com.au", "mailto:secretary-2015@swancon.com.au"
@@ -25,10 +25,10 @@
             = link_to "Login", "#"
           %li
             = link_to "Sign up", "#"   
-
-      %div
+      .store
+        =link_to "Purchase tickets!", store_path, class: "btn btn-primary"
+      .social
         = link_to "https://www.facebook.com/groups/5668237047/" do 
-          = image_tag("fb.png", alt: "Swancon on Facebook")
+          = image_tag("social-fb.png", alt: "Swancon on Facebook")
         = link_to "https://twitter.com/Swancon" do
-          = image_tag("twitter.png", alt: "Swancon on Twitter")
-
+          = image_tag("social-twitter.png", alt: "Swancon on Twitter")

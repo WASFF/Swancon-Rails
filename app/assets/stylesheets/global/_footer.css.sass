@@ -5,6 +5,7 @@
 		padding-bottom: $section-padding-home
 	.container, dl, ul
 		+clearfix
+
 	ul
 		@extend %list-reset
 	dt, dd, li
@@ -25,3 +26,16 @@
 .contact, .site-map
 	float: left
 	width: 50%
+
+.site-map
+	+clearfix
+	.store, .social
+		float: left
+	.store
+		margin-right: $gutter
+
+.social
+	a
+		display: inline-block
+		&:first-child
+			margin-right: 10px
