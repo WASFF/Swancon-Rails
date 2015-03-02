@@ -1,38 +1,34 @@
 %footer#footer
   .container
-    %article{id: "contact"}
-      %a{name: "contact"}
+    .contact
       %h2 Contact Us
-      %div.people
-        %p{class: "bolded"} Committee Contacts
-        %p
-          %strong Convenor
-          &dash; Kat Griffiths
-          %br
-          %strong Secretary
-          &dash; Stephen Griffiths
-          %br
-          %strong Treasurer
-          &dash; Helen Duffill
-          %br
-          %strong Panel Coordinator
-          &dash; Sarah Parker
-      %div 
-        %p
-          %strong Contact email:
-          %br= link_to "secretary-2015@swancon.com.au", "mailto:secretary-2015@swancon.com.au"
+      %dl
+        %dt Convenor:
+        %dd Kat Griffiths
+        %dt Secretary:
+        %dd Stephen Griffiths
+        %dt Treasurer:
+        %dd Helen Duffill
+        %dt Panel Coordinator:
+        %dd Sarah Parker
+      %p
+        %strong Contact email:
+        %br= link_to "secretary-2015@swancon.com.au", "mailto:secretary-2015@swancon.com.au"
+    .site-map
+      %h2 Site Map
+      %nav
+        %ul
+          - menu_items.each do |item|
+            %li
+              = link_to item[:name].upcase, item[:path]
+          %li
+            = link_to "Login", "#"
+          %li
+            = link_to "Sign up", "#"   
 
       %div
-        %p{class: "bolded"} Swancon in Social Media
         = link_to "https://www.facebook.com/groups/5668237047/" do 
           = image_tag("fb.png", alt: "Swancon on Facebook")
         = link_to "https://twitter.com/Swancon" do
           = image_tag("twitter.png", alt: "Swancon on Twitter")
 
-  %article{id: "tickets"}
-    %a{name: "tickets"}
-    = link_to store_path(category: "convention tickets") do  
-      %button{id: "showmoretickets"}
-        Get tickets now!
-        = image_tag("tinyruby.png", alt: "Swancon on Facebook")
-  //  %div{id: "moretickets"}

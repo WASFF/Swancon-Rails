@@ -1,2 +1,27 @@
 #footer
-	
+	padding: $section-padding-home 0px
+	background: image-url('bg-footer.png') 50% 100% no-repeat
+	.container
+		padding-bottom: $section-padding-home
+	.container, dl, ul
+		+clearfix
+	ul
+		@extend %list-reset
+	dt, dd, li
+		float: left
+	dt
+		clear: left
+		font-weight: 600
+	dd
+		margin-left: 5px
+	nav
+		margin-bottom: $break-space
+	ul
+		width: 400px
+	li
+		width: 200px
+		text-transform: uppercase
+
+.contact, .site-map
+	float: left
+	width: 50%
