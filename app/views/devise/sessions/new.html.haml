@@ -4,15 +4,16 @@
     .log-in.user-portal
       %h2 Log in
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        %div.username
+        .form-group
           = f.label :username
           = f.text_field :username, autofocus: true, placeholder: "Username"
-        %div.password
+        .form-group
           = f.label :password
           = f.password_field :password, autocomplete: "off", placeholder: "Password"
         - if devise_mapping.rememberable?
-          %div
+          .form-group
             = f.check_box :remember_me
             = f.label :remember_me
-        %div= f.submit "Log me in", class: "btn"
+        .form-actions
+          = f.submit "Log me in", class: "btn"
       = render "devise/shared/links"
