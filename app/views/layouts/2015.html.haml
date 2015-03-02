@@ -31,9 +31,7 @@
         - if controller_name == "index" and action_name == "index"
           = yield
         - else
-          %section{class: "content"}
-            %article
-              = yield      
+          = yield      
     
       - else
         %section
