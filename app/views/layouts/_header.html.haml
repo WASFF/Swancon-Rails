@@ -4,7 +4,7 @@
     = link_to root_url do 
       = image_tag("swancon-logo.png", alt: "Swancon's 40th Anniversary", title: "Swancon 2015", width: "197", height: "39")
   %nav{ role: "navigation" }
-    %ul
+    %ul.main-nav
       - menu_items.each do |item|
         %li
           = link_to item[:name].upcase, item[:path]
@@ -13,10 +13,13 @@
         %h2 User navigation
         = link_to current_user.name, "#",  class: "dropdown"
         %ul
-          %li
-            = link_to "Dashboard", admin_path
+          -if user_signed_in? && current_user.admin_panel_visible?
+            %li
+              = link_to "Dashboard", admin_path
           %li
             = link_to "Edit Account", edit_user_registration_path
+          %li
+            = link_to "Sign out", destroy_user_session_path
      
     - else
       %ul
