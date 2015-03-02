@@ -39,10 +39,6 @@ module ApplicationHelper
           @items << item
         end
       end
-
-      if user_signed_in? && current_user.admin_panel_visible?
-        @items << {name: "Admin", path: admin_path}
-      end
     end
     @items[0][:first] = true if @items.length > 0
     @items

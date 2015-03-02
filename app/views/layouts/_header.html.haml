@@ -10,11 +10,11 @@
           = link_to item[:name].upcase, item[:path]
     - if user_signed_in?
       .user-actions
-        %h2 User navigationw3
-        = link_to "jane doe", "#",  class: "dropdown"
+        %h2 User navigation
+        = link_to current_user.name, "#",  class: "dropdown"
         %ul
           %li
-            = link_to "Dashboard", "#"
+            = link_to "Dashboard", admin_path
           %li
             = link_to "Edit Account", edit_user_registration_path
      
