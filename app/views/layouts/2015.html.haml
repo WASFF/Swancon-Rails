@@ -23,7 +23,9 @@
     = render partial: 'layouts/header'
     .main
       - flash.each do |name, msg|
-        %div{class: "error"}=msg
+        %div{class: "flash-wrapper"}
+          .flash.container
+            %p=msg
 
       - if can_show_content
         - if controller_name == "index" and action_name == "index"
