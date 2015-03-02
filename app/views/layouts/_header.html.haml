@@ -1,16 +1,25 @@
 %header#header
+  %h1 Swancon 2015
   .logo
     = link_to root_url do 
       = image_tag("swancon-logo.png", alt: "Swancon's 40th Anniversary", title: "Swancon 2015", width: "197", height: "39")
-  %nav
+  %nav{ role: "navigation" }
     %ul
       - menu_items.each do |item|
         %li
           = link_to item[:name].upcase, item[:path]
-      - if user_signed_in?
-        %li
-          = link_to "Edit Account", edit_user_registration_path
-      - else
+    - if user_signed_in?
+      .user-actions
+        %h2 User navigationw3
+        = link_to "jane doe", "#",  class: "dropdown"
+        %ul
+          %li
+            = link_to "Dashboard", "#"
+          %li
+            = link_to "Edit Account", edit_user_registration_path
+     
+    - else
+      %ul
         %li
           = link_to "Login", new_user_session_path
         %li

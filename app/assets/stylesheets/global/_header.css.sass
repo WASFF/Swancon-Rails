@@ -1,13 +1,18 @@
 body > header
   @extend %container
-  +clearfix
+  +pie-clearfix
+  h1
+    @extend %screen-reader
   .logo
     position: relative
     z-index: 4
     float: left
     margin-top: 12px
   nav
-    float: right
+    float: float
+    ul
+      display: inline-block
+
   ul
     @extend %list-reset
     +clearfix
@@ -21,3 +26,30 @@ body > header
     display: inline-block
     text-transform: uppercase
     font-size: 13px
+
+
+.user-actions
+  position: relative
+  display: inline-block
+  h2
+    @extend %screen-reader
+  ul
+    position: absolute
+    top: 60px
+    right: -1px
+    display: none
+    border: 1px solid $break-color
+    background-color: $section-bg
+  li
+    border-bottom: 1px solid whiten($break-color, 0.80)
+    &:hover
+      background-color: whiten($section-bg-alt2, 0.80)
+  a
+    display: block
+  &.is-visible
+    border-right: 1px solid $break-color
+    ul
+      display: block
+      width: 200px
+      a
+        padding: 9px 30px
