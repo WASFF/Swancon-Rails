@@ -123,8 +123,6 @@ module ApplicationHelper
     return @_body_classes if @_body_classes
 
     @_body_classes = Set.new()
-    @_body_classes.add('admin') if current_user && current_user.admin?
-    @_body_classes
   end
 
 end

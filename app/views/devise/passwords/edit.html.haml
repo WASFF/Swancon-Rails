@@ -12,6 +12,6 @@
         .form-group
           = f.label :password_confirmation, "Confirm new password"
           = f.password_field :password_confirmation, autocomplete: "off"
-        .form-group
+        .form-actions
           = f.submit "Change my password", class: "btn"
       = render "devise/shared/links"
