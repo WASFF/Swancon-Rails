@@ -16,7 +16,7 @@
     = yield :header
 
   -# TODO if page is index add the class of home
-  %body.home 
+  %body{ data: { controller: controller.controller_path, action: controller.action_name }, class: get_body_classes }
     - if Rails.env == "staging"
       %div#staging You are on the Staging site. None of your changes will be reflected on the real site.
     

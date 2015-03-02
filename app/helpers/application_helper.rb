@@ -107,5 +107,24 @@ module ApplicationHelper
   def show_buy_ticket_widget?
     controller_name != "store" and can_show_content
   end
+  
+  # Adds a collection of classes to the body element
+  def add_body_classes(*classes)
+    _body_classes.merge(classes)
+  end
+
+  # returns the classes that should be on the body as a string
+  def get_body_classes
+    _body_classes.to_a.join(' ').gsub('/\\/', ' ').gsub(/_/, '-')
+  end
+
+  # The internal body classes set
+  def _body_classes
+    return @_body_classes if @_body_classes
+
+    @_body_classes = Set.new()
+    @_body_classes.add('admin') if current_user && current_user.admin?
+    @_body_classes
+  end
 
 end
