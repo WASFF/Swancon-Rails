@@ -2,7 +2,7 @@
 .intro
   .container
     %h2
-      On 2 -6 April, 2015 We're celebrating 40 years of
+      On 2-6 April, 2015 We're celebrating 40 years of
       %strong Swancon
     =link_to "Get tickets now!", store_path, class: "btn btn-primary"
 
@@ -35,17 +35,6 @@
   - else
     %h2 The Program
     %p Whoa there, it's still early days yet! We'll be adding to and refining the program in 2015, so stay tuned for more details.
-/    %button{id: "showmore"}
-/      View program online
-/      = image_tag("tinyruby.png", alt: "Celebrating Swancon 40")
-/    %div{id: "more"}
-/      %div{class: "sq1"}
-/        %h4 TIME 1
-/        %p Details coming soon
-/    %p 
-/    &elipsis or 
-/    = link_to "download"
-/    the pdf.
 
 - unless viewable_events.empty?
   .events
