@@ -7,7 +7,7 @@
     %nav{ role: "navigation" }
       %ul.main-nav
         %li
-          = link_to "Purchase tickets", store_path        
+          = link_to "Buy memberships", store_path        
         - menu_items.each do |item|
           %li
             = link_to item[:name].upcase, item[:path]
