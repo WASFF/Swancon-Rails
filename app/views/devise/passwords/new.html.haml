@@ -1,0 +1,14 @@
+- add_body_classes("user-portal-page")
+.intro
+  .container
+    .user-portal.password-instructions
+      %h2 Forgot your password?
+      %p Enter the email address attached to your account and we'll send you a link to reset your password.
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        = devise_error_messages!
+        .field
+          = f.label :email
+          = f.email_field :email, autofocus: true
+        .form-action
+          = f.submit "Send", class: "btn"
+      = render "devise/shared/links"

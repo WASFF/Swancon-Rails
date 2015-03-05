@@ -1,0 +1,44 @@
+%footer#footer
+  .container
+    .contact
+      %h2 Contact Us
+      %dl
+        %dt Convenor:
+        %dd Kat Griffiths
+        %dt Secretary:
+        %dd= link_to "Stephen Griffiths", "mailto:secretary-2015@swancon.com.au"
+        %dt Treasurer:
+        %dd Helen Duffill
+        %dt Head Programmer:
+        %dd= link_to "Sarah Parker", "mailto:programmer-2015@swancon.com.au"      
+      %p
+        %strong Contact email:
+        %br= link_to "secretary-2015@swancon.com.au", "mailto:secretary-2015@swancon.com.au"
+    .site-map
+      %h2 Site Map
+      %nav
+        %ul
+          - menu_items.each do |item|
+            %li
+              = link_to item[:name].upcase, item[:path]
+          %li
+            = link_to "Login", "#"
+          %li
+            = link_to "Sign up", "#"   
+      .store
+        =link_to "Buy Memberships!", store_path, class: "btn btn-primary"
+      .social
+        = link_to "https://www.facebook.com/groups/5668237047/" do 
+          = image_tag("social-fb.png", alt: "Swancon on Facebook")
+        = link_to "https://twitter.com/Swancon" do
+          = image_tag("social-twitter.png", alt: "Swancon on Twitter")
+  .container.end-note
+    Swancon&trade; is a 
+    = link_to "WASFF", "http://wasff.sf.org.au"
+    project
+    %div
+      The Swancon 40 website and graphic design was provided by
+      = link_to "Skylark Creative", "http://skylarkcreative.net"
+    %div
+      If you encounter any errors with the website, please report them 
+      = link_to "here", "http://goo.gl/forms/QhE9pCOaq6"

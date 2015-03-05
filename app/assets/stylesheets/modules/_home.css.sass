@@ -1,0 +1,132 @@
+.intro, .about, .guests, .program, .events
+  padding-top: $section-padding-home
+  padding-bottom: $section-padding-home
+
+.intro, .guests, .events
+  background: $section-bg-alt2
+
+.home .intro, .guests, .program
+  text-align: center
+
+.home
+  h2
+    font-size: 36px
+    margin: 0px
+
+.intro, .events
+  position: relative
+  &:before, &:after
+    content: ""
+    display: block
+    position: absolute
+    top: 0px
+  &:before
+    left: 0px
+  &:after
+    right: 0px  
+
+.intro
+  &:before
+    top: -40px
+    width: 430px
+    height: 570px
+    background: image-url('bg-geometric-red-left.png') -70px 0px no-repeat
+  &:after
+    width: 370px
+    height: 440px
+    background: image-url('bg-geometric-red-right.png') 40px 0px no-repeat
+
+.home .intro  
+  h2
+    position: relative
+    z-index: 2
+    font-size: 48px
+    width: 500px
+    margin: 0 auto
+    line-height: 1.2
+    margin-bottom: 30px
+  a
+    font-size: 20px
+  strong
+    color: $copy-important-color
+    font-weight: 400
+
+.about
+  @extend %container
+  +clearfix
+  h2
+    @extend %screen-reader
+  .copy
+    max-width: 490px
+    float: left
+    font-size: 20px
+
+.year-ruby
+  position: relative
+  float: right
+  img, span
+    position: absolute
+  img
+    top: -20px
+    right: 0px
+  span
+    top: 36px
+    right: 52px
+    font-size: 70px
+    font-family: $heading-font
+    text-align: center
+    color: #fff
+
+.guests
+  h2
+    @extend %screen-reader
+  img
+    margin-bottom: 10px
+  h3, p
+    margin: 0px
+  ul
+    @extend %list-reset
+    +clearfix
+    margin-left: -15px
+    margin-right: -15px
+
+  li
+    float: left
+    width: 33.33%
+    padding: 0px $gutter
+    text-align: center
+
+.program
+  @extend %container
+
+.events
+  overflow: hidden
+  max-height: 400px
+  &:before
+    width: 570px
+    height: 400px
+    background: image-url('bg-geometric-white-left.png') 0px 0px no-repeat
+  &:after
+    width: 570px
+    height: 400px
+    background: image-url('bg-geometric-white-right.png') 0px -160px no-repeat
+  .container
+    +clearfix
+
+
+#event
+  position: relative
+  z-index: 2
+  width: 50%
+  float: left
+  h3, h4
+    margin-bottom: 0px
+  h3
+    color: $copy-important-color
+    font-size: 18px
+  p
+    margin-top: 0px
+
+
+
+
