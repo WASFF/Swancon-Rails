@@ -1,0 +1,73 @@
+input[type=text],
+input[type=password],
+input[type=number],
+input[type=date],
+input[type=url],
+input[type=email],
+input[type=tel],
+textarea,
+select
+  display: block
+  border: 1px solid $border-color
+  +border-radius($border-radius)
+  +box-shadow(inset 0 1px 1px (dark(0.05)))
+  .field_with_errors &
+    border-color: $negative-color
+
+input[type=text],
+input[type=password],
+input[type=number],
+input[type=date],
+input[type=url],
+input[type=email],
+input[type=tel],
+  line-height: 1.5
+  padding: 5px 12px  // same height as selects & buttons (36px)
+
+select
+  height: 36px // same height as an input/button (36px)
+  font-size: 14px
+
+label
+  display: inline-block
+  font-weight: 600
+  padding-bottom: 5px
+
+.required
+  position: relative
+  span
+    @extend %screen-reader
+  label
+    padding-left: 7px
+  &:before
+    content: "*"
+    display: block
+    position: absolute
+    width: 5px
+    height: 5px
+    left: 12px
+    top: 4px
+
+.field-group // use when its not semantically corrent to use the elment fieldset
+  +clearfix
+  margin-left: -15px
+  margin-right: -15px
+  clear: left
+  .field
+    float: left
+    padding: 0px $gutter
+
+.field
+  margin-bottom: 10px
+  width: 260px
+  input
+    width: 100%
+    display: block
+
+.form-actions
+  margin-top: 20px
+
+.field_with_errors
+  border-color: $negative-color
+  label
+    color: $negative-color
