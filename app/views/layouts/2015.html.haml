@@ -31,11 +31,7 @@
             %p=msg
 
       - if can_show_content
-        - if controller_name == "index" and action_name == "index"
-          = yield
-        - else
-          = yield      
-    
+        = yield    
       - else
         %section
           %article{class: "centered"}
