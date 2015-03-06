@@ -15,7 +15,7 @@
 		- unless @ticket.available_to.blank?
 			Available until: 
 			= render_time(@ticket.available_to)
-		- if (current_user.present? and current_user.member_detail and @store_user.blank?) or (@store_user.present? and @store_user.member_detail.present?) or !@ticket.requires_extended_details 
+		- if (current_user.present? and current_user.member_detail and @store_user.blank?) or (@store_user.present? and @store_user.member_detail.present?) or !@ticket.requires_extended_details? 
 			- if @ticket.concession_price.blank?
 				= button_to "add to cart", action: "ticket_add", id: @ticket.id
 			- else

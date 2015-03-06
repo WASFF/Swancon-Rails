@@ -7,7 +7,7 @@
 <p>
   <b>Membership set:</b>
   <%= link_to @ticket_type.set.name, @ticket_type.set %><br/>
-  <%- if @ticket_type.requires_extended_details %>
+  <%- if @ticket_type.requires_extended_details? %>
   Requires Extended Details
   <%- end %>
 </p>

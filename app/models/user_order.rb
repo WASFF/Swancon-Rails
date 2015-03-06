@@ -54,7 +54,7 @@ class UserOrder < ActiveRecord::Base
 
 	def requires_disclaimer
 		user_order_tickets.each do |ticket|
-			if ticket.requires_extended_details
+			if ticket.requires_extended_details?
 				return true
 			end
 		end
