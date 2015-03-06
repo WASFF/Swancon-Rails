@@ -1,7 +1,7 @@
 desc 'Reset Sales'
 
 namespace :swancon do
-  task :reset_data => :environment do
+  task :reset_sales => :environment do
     print "WARNING: this will blow away all orders and purchases\n"
     print "Okay? (y/n)"
     STDOUT.flush

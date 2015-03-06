@@ -1,0 +1,25 @@
+- add_body_classes("user-portal-page")
+.intro
+  .container
+    .user-portal
+      %h2 Edit Account
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        = devise_error_messages!
+        .form-group
+          = f.label :username
+          = f.text_field :username
+        .form-group
+          = f.label :email
+          = f.email_field :email
+        .form-group
+          = f.label :password
+          = f.password_field :password
+        .form-group  
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation
+        .form-actions
+          = f.submit "Update", class: "btn"
+
+      - if devise_mapping.omniauthable?
+        - resource_class.omniauth_providers.each do |provider|
+          = link_to "Associate with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider)
