@@ -11,6 +11,9 @@
     %meta{charset: "utf-8"}
     %meta{name: "description", content: "Come and join us as WA's premier literary speculative fiction convention celebrates it's 40th anniversary."}    
     %meta{name: "keywords", content: "swancon 2015 perth wa convention conventions club clubs meetup meetups expos science fiction fantasy speculative con scene australia"}
+    %meta{property: "og:site_name", content: "Swancon"}
+    %meta{property: "og:image", content: image_url("ruby-facebook.png", only_path: false)}
+    %meta{property: "article:publisher", content: "https://www.facebook.com/Swancon"}
     = csrf_meta_tag
     = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
     = yield :header
