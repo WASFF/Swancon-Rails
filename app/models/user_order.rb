@@ -95,11 +95,11 @@ class UserOrder < ActiveRecord::Base
 	
 	def self.paidarel
 		uoarel = UserOrder.arel_table
-		uoarel[:payment_id].eq(nil).not()
+		uoarel[:payment_id].eq(nil).not().and(uoarel[:voided_by_id].eq(nil))
 	end
 
 	def self.unpaidarel
 		uoarel = UserOrder.arel_table
-		uoarel[:payment_id].eq(nil)
+		uoarel[:payment_id].eq(nil).and(uoarel[:voided_by_id].eq(nil))
 	end
 end
