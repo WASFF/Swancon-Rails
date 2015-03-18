@@ -89,7 +89,7 @@ class TicketTypesController < ApplicationController
 private
   def ticket_type_params
     params.require(:ticket_type).permit(
-      :name, :ticket_set_id, :price, :concession_price, :target, :available_from, :available_to, :description
+      :name, :ticket_set_id, :price, :concession_price, :target, :available_from, :available_to, :description, :maximum_number
     )
   end
 end

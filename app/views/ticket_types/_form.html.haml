@@ -1,0 +1,47 @@
+= form_for @ticket_type do |f|
+  - if @ticket_type.errors.any?
+    %div{id: :error_explanation}
+      %h2
+        =pluralize(@ticket_type.errors.count, "error")
+        prohibited this ticket_type from being saved:
+      %ul
+        - @ticket_type.errors_full_messages.each do |msg|
+          %li= msg
+  %div{class: :field}
+    = f.label :name
+    = f.text_field :name
+
+  %div{class: :field}
+    = f.label :description
+    = f.text_field :description
+
+  %div{class: :field}
+    = f.label :ticket_set_id
+    = f.select(:ticket_set_id, TicketSet.order(:name).all.collect {|item| [item.name, item.id]})
+
+  %div{class: :field}
+    = f.label :price
+    = f.number_field :price
+
+  %div{class: :field}
+    = f.label :concession_price
+    = f.number_field :concession_price    
+
+  %div{class: :field}
+    = f.label :target, "Target Number"
+    = f.number_field :target    
+
+  %div{class: :field}
+    = f.label :maximum_number, "Maximum Allowed For Sale"
+    = f.number_field :maximum_number    
+
+  %div{class: :field}
+    = f.label :available_from
+    = f.text_field :available_from    
+
+  %div{class: :field}
+    = f.label :available_to
+    = f.text_field :available_to
+
+  %div{class: :actions}
+    = f.submit

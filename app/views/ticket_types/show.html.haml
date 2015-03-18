@@ -1,0 +1,66 @@
+%div{class: :title}=@ticket_type.name
+
+- if @ticket_type.description.present?
+	%div
+		%strong Description
+		@ticket_type.description
+
+%div{class: :olive}
+	= render_money @ticket_type.price
+	- if @ticket_type.concession_price != nil
+		/
+		= render_money @ticket_type.concession_price
+
+%div
+	%strong Membership Set:
+	= link_to @ticket_type.set.name, @ticket_type.set
+	- if @ticket_type.requires_extended_details?
+		%strong Requires Extended Details
+
+%div
+	Available
+	- if @ticket_type.available_from.present?
+		from 
+		= render_time(@ticket_type.available_from)
+	- if @ticket_type.available_to.present?
+		to 
+		= render_time(@ticket_type.available_to)	
+
+%div
+	= @ticket_type.sold
+	- if @ticket_type.maximum_number.present?
+		of
+		= @ticket_type.maximum_number
+	%strong Target:
+	= @ticket_type.target
+
+%div
+	%strong 
+		Unpaid Orders - 
+		= @ticket_type.orders.unpaid.count
+		- order = 1
+		%blockquote
+			- @ticket_type.orders.unpaid.each do |uot|
+				%div
+					= order
+					| .
+					= uot.user.name
+				- order += 1
+
+%div
+	%strong 
+		Paid Orders - 
+		= @ticket_type.orders.paid.count
+		- order = 1
+		%blockquote
+			- @ticket_type.orders.paid.each do |uot|
+				%div
+					= order
+					| .
+					= uot.user.name
+				- order += 1
+
+
+= link_to 'Edit', edit_ticket_type_path(@ticket_type)
+|
+= link_to 'Back', ticket_types_path
