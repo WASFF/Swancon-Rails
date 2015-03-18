@@ -1,11 +1,14 @@
 <div class="title"><%= @ticket.set.name %> Membership</div>
 <p class="olive"><%= @ticket.name %> - <%= render_money(@ticket.price) %></p>
+<% if @ticket_type.description.present? %>
+	<p><%= @ticket_type.description %></p>
+<% end %>
 <%= render partial: "header" %>
 <%- if @ticket.available? %>
 	<%- if @ticket.available_to != nil %>
 		Available until: <%= render_time(@ticket.available_to) %><br/>
 	<%- end %>
-	<%- if (current_user != nil and current_user.member_detail and @store_user == nil) or (@store_user != nil and @store_user.member_detail != nil) or !@ticket.requires_extended_details -%>
+	<%- if (current_user != nil and current_user.member_detail and @store_user == nil) or (@store_user != nil and @store_user.member_detail != nil) or !@ticket.requires_extended_details? -%>
 		<%= button_to "add to cart", :action => "ticket_add", :id => @ticket.id %>
 	<%- elsif current_user != nil and current_user.member_detail == nil and @store_user == nil -%>
 		Please fill out your <%= link_to("member details", edit_my_member_details_path) %> before buying a ticket

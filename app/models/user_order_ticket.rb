@@ -77,8 +77,8 @@ class UserOrderTicket < ActiveRecord::Base
 		end
 	end
 
-	def requires_extended_details
-		ticket_type.requires_extended_details
+	def requires_extended_details?
+		ticket_type.requires_extended_details?
 	end
 
 	def transfer(sender, newowner)
