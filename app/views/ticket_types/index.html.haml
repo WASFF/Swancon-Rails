@@ -1,0 +1,30 @@
+%h1 Listing Memberships
+-  @ticket_sets.each do |set|
+  %div 
+    = link_to set.name, set
+    Memberships
+  - if set.requires_extended_details? 
+    %div Requires Extended Details
+
+  %table
+    %tr
+      %th Name
+      %th Description
+      %th Price
+      %th Actions
+
+    - set.types.order(:price).each do |ticket_type|
+      %tr
+        %td= ticket_type.name
+        %td= ticket_type.description
+        %td
+          = render_money ticket_type.price
+          - if ticket_type.concession_price.present?
+            = "/ #{render_money(ticket_type.concession_price)}"
+        %td
+          = link_to 'Show', ticket_type
+          = link_to 'Edit', edit_ticket_type_path(ticket_type)
+          - if ticket_type.deletable?
+            = link_to 'Destroy', ticket_type, confirm: 'Are you sure?', method: :delete
+
+= link_to 'New Membership type', new_ticket_type_path

@@ -5,7 +5,7 @@
   <%= @ticket_set.name %>
 </p>
 
-<%- if @ticket_set.requires_extended_details %>
+<%- if @ticket_set.requires_extended_details? %>
 Requires Extended Details to be filled out<br/>
 <%- end %>
 

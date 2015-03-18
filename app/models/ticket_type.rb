@@ -15,7 +15,7 @@ class TicketType < ActiveRecord::Base
 		self.ticket_set = value
 	end
 
-	def requires_extended_details
+	def requires_extended_details?
 		ticket_set.requires_extended_details
 	end
 

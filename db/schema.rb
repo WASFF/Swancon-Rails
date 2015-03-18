@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218141042) do
+ActiveRecord::Schema.define(version: 20150225091636) do
 
   create_table "advertising_tags", force: true do |t|
     t.string   "name",          null: false
@@ -276,6 +276,7 @@ ActiveRecord::Schema.define(version: 20150218141042) do
     t.integer  "target",           default: 0,   null: false
     t.decimal  "concession_price"
     t.decimal  "price",            default: 0.0, null: false
+    t.string   "description"
   end
 
   create_table "user_omni_auths", force: true do |t|
