@@ -81,16 +81,29 @@ class UserOrder < ActiveRecord::Base
 	def total
 		subtotal + surcharge
 	end
+
+	def number_of_items
+		merchandise.count + tickets.count
+	end
 	
 	def voidable?
 		payment == nil && voided_by_id == nil
 	end
 
 	def isvoid?
-		voided_by_id != nil
+		void?
 	end
+	
+	def void?
+		voided_by_id.present?
+	end
+
 	def ispaid?
-		self.payment != nil
+		paid?
+	end
+
+	def paid?
+		payment.present?
 	end
 	
 	def self.paidarel
