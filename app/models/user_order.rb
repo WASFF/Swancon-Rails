@@ -115,4 +115,17 @@ class UserOrder < ActiveRecord::Base
 		uoarel = UserOrder.arel_table
 		uoarel[:payment_id].eq(nil).and(uoarel[:voided_by_id].eq(nil))
 	end
+
+	def self.unvoid
+		uoarel = UserOrder.arel_table
+		where(uoarel[:voided_by_id].eq(nil))
+	end
+
+	def self.for_user(user)
+		if user.is_a? User
+			where(user: user)
+		else
+			where(user_id: user)
+		end
+	end
 end
