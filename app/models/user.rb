@@ -189,6 +189,18 @@ class User < ActiveRecord::Base
 		roles.where(name: "admin").count == 1
 	end
 
+	def self.search_for_name(name)
+		processed_search = name.gsub(/[^([a-z]|[A-Z]|[0-9])]/, "").strip
+		if processed_search.length > 2
+			query = self.joins("LEFT OUTER JOIN member_details ON users.id = member_details.user_id").includes(:member_detail)
+			searchstring = "%#{processed_search}%"
+			emailsearch = "#{processed_search}%"			
+			wherestring = "member_details.name_first LIKE ? OR member_details.name_last LIKE ? OR member_details.name_badge LIKE ? or users.username LIKE ? or users.email LIKE ?"
+			query.where(wherestring, searchstring, searchstring, searchstring, searchstring, emailsearch)
+		else
+			self.where("1=0")
+		end
+	end
 
   def self.new_with_session(params, session)
     super.tap do |user|

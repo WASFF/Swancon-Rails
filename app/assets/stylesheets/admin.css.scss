@@ -12,3 +12,25 @@ ul.link {
 table#gather_member_search_results {
 	width: 100%;
 }
+
+#admin-app {
+  position: relative;
+}
+
+ul.operator_select {
+  list-style: none;
+  height: 100%;
+  li {
+    position: relative;
+    display: inline-block;
+    width: 40%;
+    height: 100%;
+  }
+  li:first-child {
+    background: rgb(200, 200, 200);
+    border-right: 1px solid black;
+  }
+  a {
+    color: blue;
+  }
+}

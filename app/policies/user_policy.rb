@@ -1,4 +1,14 @@
 class UserPolicy < BasePolicy
+  class Scope < Scope
+    def resolve
+      if admin?
+        scope.all
+      else
+        scope.where(user: user)
+      end
+    end
+  end
+
   attr_reader :user, :object
 
   def initialize(user, object)
