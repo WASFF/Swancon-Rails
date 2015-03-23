@@ -1,22 +1,22 @@
 Admin.Member = DS.Model.extend
-  name_badge: DS.attr('string')
-  name_first: DS.attr('string')
-  name_last: DS.attr('string')
-  name_real: (->
+  nameBadge: DS.attr('string')
+  nameFirst: DS.attr('string')
+  nameLast: DS.attr('string')
+  nameReal: (->
     string = null
-    name_first = @get("name_first")
-    name_last = @get("name_last")
-    if name_first?
-      string = "#{name_first}"
-    if name_last?
-      string += " #{name_last}" if string?
-      string = "#{name_last}" unless string?
+    nameFirst = @get("nameFirst")
+    nameLast = @get("nameLast")
+    if nameFirst?
+      string = "#{nameFirst}"
+    if nameLast?
+      string += " #{nameLast}" if string?
+      string = "#{nameLast}" unless string?
 
     if string?
       string
     else
       "No Name Entered!"
-  ).property("name_first", "name_last")
+  ).property("nameFirst", "nameLast")
   
   username: DS.attr('string')
   
@@ -26,9 +26,9 @@ Admin.Member = DS.Model.extend
   address_1: DS.attr('string')
   address_2: DS.attr('string')
   address_3: DS.attr('string')
-  address_state: DS.attr('string')
-  address_postcode: DS.attr('string')
-  address_country: DS.attr('string')
+  addressState: DS.attr('string')
+  addressPostcode: DS.attr('string')
+  addressCountry: DS.attr('string')
   
-  disclaimer_signed: DS.attr('boolean')
-  email_optin: DS.attr('boolean')
+  disclaimerSigned: DS.attr('boolean')
+  emailOptin: DS.attr('boolean')

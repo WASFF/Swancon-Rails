@@ -1,6 +1,62 @@
-<div class='back'>{{#link-to 'index'}}Back{{/link-to}}</div>
-<button>Record new Details</button>
+{{#if viewMember}}
+  {{member-detail member=viewMember close=removeModal}}
+<!--  <div id="member_details">
+    <h1>Details</h1>
+    <div>
+      <label for="username">Username</label>
+      {{input value=viewMember.username name='username'}}
+    </div>
+    <div>
+      <label for="email">Email Address</label>
+      {{input value=viewMember.email name='email'}}
+    </div>
+    <div>
+      <label for="name_first">First Name</label>
+      {{input value=viewMember.nameFirst name='name_first'}}
+    </div>
+    <div>
+      <label for="name_last">Last Name</label>
+      {{input value=viewMember.nameLast name='name_last'}}
+    </div>
+    <div>
+      <label for="name_badge">Name for Badge</label>
+      {{input value=viewMember.nameBadge name='name_badge'}}
+    </div>
+    <div>
+      <label for="address_1">Address</label>
+    </div>
+    <div>  
+      {{input value=viewMember.address_1 name='address_1'}}
+    </div>
+    <div>
+      {{input value=viewMember.address_2 name='address_2'}}
+    </div>
+    <div>
+      <label for="address_3">City / Suburb</label>
+      {{input value=viewMember.address_3 name='address_3'}}      
+    </div>
+    <div>
+      <label for="address_state">State</label>
+      {{input value=viewMember.addressState name='address_state'}}      
+    </div>
+    <div>
+      <label for="address_country">Country</label>
+      {{input value=viewMember.addressCountry name='address_country'}}      
+    </div>
+    <div>
+      <label for="address_postcode">Postcode</label>
+      {{input value=viewMember.addressPostcode name='address_postcode'}}      
+    </div>
+    <div>
+      <label for="address_postcode">Postcode</label>
+      {{input value=viewMember.addressPostcode name='address_postcode'}}      
+    </div>
+  </div>-->
+{{/if}}
 
+<button id="new_details">Create New Member</button>
+
+<div class='back'>{{#link-to 'index'}}Back{{/link-to}}</div>
 <h1>Checking Details</h1>
 <div>
   <label for='name'>Name:</label>
@@ -23,8 +79,8 @@
   </tr>
   {{#each member in model}}
     <tr>
-      <td>{{member.name_badge}}</td>
-      <td>{{member.name_real}}</td>
+      <td>{{member.nameBadge}}</td>
+      <td>{{member.nameReal}}</td>
       <td>{{member.username}}</td>
       <td>{{member.email}}</td>
       <td><button {{action 'showMember' member}}>Verify Details</button></td>

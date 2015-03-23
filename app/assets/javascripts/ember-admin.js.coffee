@@ -14,5 +14,7 @@ window.Admin = Ember.Application.create
   rootElement: '#admin-app'
   Resolver: Ember.DefaultResolver.extend
     resolveTemplate: (parsedName) ->
+      console.log("Resolving Template:")
+      console.log(parsedName)
       parsedName.fullNameWithoutType = "admin/" + parsedName.fullNameWithoutType
       return @_super(parsedName)

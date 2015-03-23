@@ -20,6 +20,8 @@ Admin.CheckDetailsController = Ember.ArrayController.extend
           searching: false
           searched: true
           model: promiseArray.content
+        if promiseArray.get("length") == 1
+          self.send('showMember', promiseArray.get("firstObject"))
       
       @setProperties
         searching: true
