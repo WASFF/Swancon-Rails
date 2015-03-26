@@ -81,25 +81,51 @@ class UserOrder < ActiveRecord::Base
 	def total
 		subtotal + surcharge
 	end
+
+	def number_of_items
+		merchandise.count + tickets.count
+	end
 	
 	def voidable?
 		payment == nil && voided_by_id == nil
 	end
 
 	def isvoid?
-		voided_by_id != nil
+		void?
 	end
+	
+	def void?
+		voided_by_id.present?
+	end
+
 	def ispaid?
-		self.payment != nil
+		paid?
+	end
+
+	def paid?
+		payment.present?
 	end
 	
 	def self.paidarel
 		uoarel = UserOrder.arel_table
-		uoarel[:payment_id].eq(nil).not()
+		uoarel[:payment_id].eq(nil).not().and(uoarel[:voided_by_id].eq(nil))
 	end
 
 	def self.unpaidarel
 		uoarel = UserOrder.arel_table
-		uoarel[:payment_id].eq(nil)
+		uoarel[:payment_id].eq(nil).and(uoarel[:voided_by_id].eq(nil))
+	end
+
+	def self.unvoid
+		uoarel = UserOrder.arel_table
+		where(uoarel[:voided_by_id].eq(nil))
+	end
+
+	def self.for_user(user)
+		if user.is_a? User
+			where(user: user)
+		else
+			where(user_id: user)
+		end
 	end
 end

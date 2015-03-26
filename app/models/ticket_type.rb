@@ -20,15 +20,7 @@ class TicketType < ActiveRecord::Base
 	end
 
 	def available?
-		if (available_from == nil) and (available_to == nil)
-			true
-		elsif (available_from == nil)
-			 Time.now <= available_to
-		elsif (available_to == nil)
-				available_from <= Time.now 
-		else
-			(available_from <= Time.now) and (Time.now <= available_to)
-		end
+		available_in_time_range && available_under_maximum
 	end
 	
 	def order_name
@@ -38,6 +30,12 @@ class TicketType < ActiveRecord::Base
 	def deletable?
 		user_order_tickets.count == 0
 	end	
+
+	def sold
+		user_order_ids = user_order_tickets.pluck(:user_order_id).uniq
+		user_order_ids = UserOrder.where(id: user_order_ids).where(voided_by_id: nil).pluck(:id)
+		user_order_tickets.where(user_order_id: user_order_ids).count
+	end
 	
 	def self.available(user = nil)
 		if (user == nil) || (!user.full_store_visible?)
@@ -55,4 +53,27 @@ class TicketType < ActiveRecord::Base
 		arelquery = arelquery.or(Arel::Nodes::Grouping.new(ticketarel[:available_from].lteq(Time.now).and(ticketarel[:available_to].gteq(Time.now))))
 		arelquery
 	end
+
+private
+	def available_under_maximum
+		if (maximum_number.blank?)
+			true
+		else
+			sold < maximum_number
+		end
+	end
+
+	def available_in_time_range
+		if (available_from.blank?) and (available_to.blank?)
+			true
+		elsif (available_from.blank?)
+			 Time.now <= available_to
+		elsif (available_to.blank?)
+				available_from <= Time.now 
+		else
+			(available_from <= Time.now) and (Time.now <= available_to)
+		end		
+	end
+
+
 end
