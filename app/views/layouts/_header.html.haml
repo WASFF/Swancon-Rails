@@ -1,0 +1,38 @@
+%header#header
+  .container
+    %h1 Swancon 2015
+    .logo
+      = link_to root_url do 
+        = image_tag("swancon-logo.png", alt: "Swancon's 40th Anniversary", title: "Swancon 2015", width: "164", height: "35")
+    %nav{ role: "navigation" }
+      %ul.main-nav
+        %li
+          = link_to "Buy memberships", store_path        
+        - menu_items.each do |item|
+          %li
+            = link_to item[:name].upcase, item[:path]
+
+      - if user_signed_in?
+        .user-actions
+          %h2 User navigation
+          = link_to current_user.name, "#",  class: "dropdown"
+          %ul
+            -if user_signed_in? && current_user.admin_panel_visible?
+              %li
+                = link_to "Dashboard", admin_path
+            %li
+              = link_to "Membership Details", edit_my_member_details_path   
+            %li
+              =link_to "My Memberships", tickets_my_path
+            %li
+              =link_to "My Purchases", orders_path
+            %li
+              = link_to "Edit Account", edit_user_registration_path          
+            %li
+              = link_to "Log out", destroy_user_session_path            
+      - else
+        %ul.main-nav
+          %li
+            = link_to "Login", new_user_session_path
+          %li
+            = link_to "Sign up", new_user_registration_path

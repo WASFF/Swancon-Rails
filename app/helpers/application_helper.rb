@@ -39,10 +39,6 @@ module ApplicationHelper
           @items << item
         end
       end
-
-      if user_signed_in? && current_user.admin_panel_visible?
-        @items << {name: "Admin", path: admin_path}
-      end
     end
     @items[0][:first] = true if @items.length > 0
     @items
@@ -56,7 +52,7 @@ module ApplicationHelper
     end
     
     tag.blocks.publicly_viewable.each do |block|
-      item = {title: block.title, text: block.summary}
+      item = {title: block.title, text: block.summary, rendered_text: redcloth_render(block.bodytext)}
       item[:path] = {controller:"content_viewer", action:"content", id: block.id}
       if block.image.present?
         item[:image] = {original: block.image.data.url}
@@ -72,7 +68,7 @@ module ApplicationHelper
 
   def viewable_events
     items = []
-    Event.publicly_viewable.each do |event|
+    Event.publicly_viewable.order(:start_time).each do |event|
       item = {title: event.title, text: event.summary}
       item[:path] = view_event_path(event)
       if event.end_time.present?
@@ -106,6 +102,23 @@ module ApplicationHelper
 
   def show_buy_ticket_widget?
     controller_name != "store" and can_show_content
+  end
+  
+  # Adds a collection of classes to the body element
+  def add_body_classes(*classes)
+    _body_classes.merge(classes)
+  end
+
+  # returns the classes that should be on the body as a string
+  def get_body_classes
+    _body_classes.to_a.join(' ').gsub('/\\/', ' ').gsub(/_/, '-')
+  end
+
+  # The internal body classes set
+  def _body_classes
+    return @_body_classes if @_body_classes
+
+    @_body_classes = Set.new()
   end
 
 end

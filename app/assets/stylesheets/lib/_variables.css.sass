@@ -1,0 +1,53 @@
+// ----- Brand -----
+$brand-2015-orange: #fb4e45
+
+// ----- Shades -----
+$brand-dark: #504455
+$brand-grey-light: #f9f9f9
+
+// ----- colours that work with the band for the app -----
+$negative-color: #b50a2d
+$positive-color: #68bbcc
+
+// -----  Layout  -----
+$grid: 15px // ideally not to be used outside the varaible file, its the basic building block.
+$site-width: 990px
+$site-third: $site-width / 3 - $grid * 2
+$site-two-thirds: ($site-third * 2) + ($grid * 2)
+$gutter: $grid // horizontal spacing between things
+$break-space-mini: $grid // smaller break space, often used to space content inside sections
+$break-space: ($grid * 2)
+$break-space-large: ($grid * 3) // larger break space, often used to seperate sections that don't relate to each other
+$section-padding: ($grid * 2) // different too $gutter, as its used for padding out the background of sections.
+$section-padding-home: ($grid * 5)
+
+// -----  Base styles  -----
+$section-bg-alt2: $brand-grey-light
+$section-bg: #fff
+$app-bg-color: $section-bg-alt2
+$break-color: lighten($brand-dark, 0.80)
+
+// -----  Typography  -----
+$fonts: "Lato", Helvetica, Arial, sans-serif
+$heading-font: "Signika", "Lato", Helvetica, Arial, sans-serif
+$body-copy: 400 16px/1.5 $fonts
+$copy-color: $brand-dark
+$copy-minor-color: lighten($copy-color, 0.3)
+$copy-important-color: $brand-2015-orange
+$link-color: #fb4e45
+
+// ----- Buttons -----
+$btn-text: 400 15px/1.5 $fonts
+$btn-default-bg: $brand-dark
+$btn-primary-bg: $brand-2015-orange
+$btn-padding: 7px 20px // same height as inputs & selects (36px)
+
+// ----- Forms and Tables -----
+$border-radius: 3px
+$border-color: lighten($brand-dark, 0.80)
+
+// ----- Screen sizes -----
+$screen-lg-min: 1200px
+$screen-md-min: 992px
+$screen-sm-min: 768px
+$screen-xs-min: 500px

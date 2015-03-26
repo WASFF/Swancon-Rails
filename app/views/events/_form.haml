@@ -1,7 +1,7 @@
 - if @event.errors.any?
   %div{id: "error_explanation"}
     %h2
-      = pluralize(@file.errors.count, "error")
+      = pluralize(@event.errors.count, "error")
       prohibited this file from being saved:
     %ul
       - @event.errors.full_messages.each do |msg|
@@ -14,12 +14,12 @@
       = builder.text_field :title
 
     %p
-      = f.label :start_time, "Start Time"
-      = f.text_field :start_time
+      = f.label :start_time_parsed, "Start Time"
+      = f.text_field :start_time_parsed
 
     %p
-      = f.label :end_time, "End Time"
-      = f.text_field :end_time
+      = f.label :end_time_parsed, "End Time"
+      = f.text_field :end_time_parsed
 
     %p
       = builder.label :content_image_id, "Header Image"

@@ -16,6 +16,10 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
     <%= f.label :ticket_set_id %><br />
     <%= f.select(:ticket_set_id, TicketSet.order(:name).all.collect {|item| [item.name, item.id]}) %>
   </div>

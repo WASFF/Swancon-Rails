@@ -1,0 +1,26 @@
+- if @tag.errors.any?
+  %div{id: "error_explanation"}
+    %h2
+      = pluralize(@tag.errors.count, "error")
+      prohibited this tag from being saved:
+    %ul
+      - @tag.errors.full_messages.each do |msg|
+        %li= msg
+
+= form_for(@tag) do |f|
+  %p
+    = f.label :name, "Name"
+    = f.text_field :name
+
+  %p
+    = f.label :funnel_name, "Funnel Name"
+    = f.text_field :funnel_name, data: {field_name: :name}, class: :shorten_field
+
+  %p
+    = f.label :tracking_code, "Tracking Code"
+    = f.text_area :tracking_code
+
+  - if @tag.new_record?
+    = f.submit("Create")
+  - else
+    = f.submit("Save")

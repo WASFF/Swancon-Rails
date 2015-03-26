@@ -61,7 +61,11 @@ DoomCon::Application.routes.draw do
     get 'viewpurchase', :on => :member
   end
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
+  devise_for :users, :controllers => {
+    omniauth_callbacks: "users/omniauth_callbacks",
+    registrations: "users/registrations", 
+    passwords: "users/passwords"
+  }
 
 
   resources :users_admin, :controller => "users" do
@@ -75,6 +79,8 @@ DoomCon::Application.routes.draw do
     post 'unvoid', on: :member
     post 'remail', :on => :member
   end
+
+  resources :advertising_tags
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
@@ -115,6 +121,8 @@ DoomCon::Application.routes.draw do
 
   match '/admin' => "index#admin", as: "admin", via: [:get]
   match '/admin/set_con_mode' => "index#set_con_mode", as: "set_con_mode", via: [:get]
+
+  match '/track/:id' => "index#start_tracking", via: [:get], as: "tracking"
 
   root :to => "index#index"
 end

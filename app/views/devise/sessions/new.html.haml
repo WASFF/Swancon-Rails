@@ -1,0 +1,19 @@
+- add_body_classes("user-portal-page")
+.intro
+  .container
+    .log-in.user-portal
+      %h2 Log in
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .field
+          = f.label :username
+          = f.text_field :username, autofocus: true, placeholder: "Username"
+        .field
+          = f.label :password
+          = f.password_field :password, autocomplete: "off", placeholder: "Password"
+        - if devise_mapping.rememberable?
+          .field
+            = f.check_box :remember_me
+            = f.label :remember_me
+        .form-actions
+          = f.submit "Log me in", class: "btn"
+      = render "devise/shared/links"

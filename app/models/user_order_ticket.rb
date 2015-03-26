@@ -2,6 +2,7 @@ class UserOrderTicket < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :ticket_type
 	belongs_to :user_order
+	belongs_to :advertising_tag
 	has_many :user_order_ticket_transfers
 
 	scope :paid, lambda {
@@ -76,8 +77,8 @@ class UserOrderTicket < ActiveRecord::Base
 		end
 	end
 
-	def requires_extended_details
-		ticket_type.requires_extended_details
+	def requires_extended_details?
+		ticket_type.requires_extended_details?
 	end
 
 	def transfer(sender, newowner)

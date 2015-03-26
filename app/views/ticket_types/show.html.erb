@@ -1,10 +1,13 @@
 <div class="title"><%= @ticket_type.name %></div>
+<% if @ticket_type.description.present? %>
+	<p><%= @ticket_type.description %></p>
+<% end %>
 <p class="olive"><%= render_money @ticket_type.price %><% if @ticket_type.concession_price != nil %> / <%= render_money @ticket_type.concession_price %><% end %></p>
 
 <p>
   <b>Membership set:</b>
   <%= link_to @ticket_type.set.name, @ticket_type.set %><br/>
-  <%- if @ticket_type.requires_extended_details %>
+  <%- if @ticket_type.requires_extended_details? %>
   Requires Extended Details
   <%- end %>
 </p>

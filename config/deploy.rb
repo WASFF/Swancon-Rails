@@ -2,8 +2,8 @@
 lock '3.1.0'
 
 set :application, 'swancon2016'
-# set :repo_url, 'git@github.com:lordmortis/Swancon-Rails.git'
-set :repo_url, 'git@github.com:thefon/Swancon-Rails.git'
+set :repo_url, 'git@github.com:WASFF/Swancon-Rails.git'
+
 set :rvm_ruby_version, '2.1.1'
 
 # Default branch is :master

@@ -1,0 +1,20 @@
+%h2 Membership Transfer
+%p 
+  You wish to transfer a "
+  = @user_order_ticket.type.order_name
+  " to someone else.
+%p In order to do this:
+%ol
+  %li The recipient must have an account on this website
+  %li The recipient must have entered all their "member details" into this website
+  %li You must have the email address they have registered with
+  %li The transfer must be completed by March 29th
+  %li You must have Javascript enabled on your browser
+
+= form_tag({action: :find_user}, remote: true, method: "get") do
+  = hidden_field_tag("id", @user_order_ticket.id)
+  Enter the User's email address: 
+  = text_field_tag("email") 
+  = submit_tag("Search")
+
+%div{id: "results"}
