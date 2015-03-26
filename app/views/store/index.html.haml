@@ -22,12 +22,12 @@
   - unless set.merchandise.available(current_user).empty?
     %h2= "#{set.name}"
     %ul
-      - set.merchandise.available(current_user).each do |ticket|      
+      - set.merchandise.available(current_user).each do |merch|      
         %li
-          = link_to action: :ticket, id: ticket.id do
-            = ticket.name
-            = render_money ticket.price
-            - unless ticket.available?
+          = link_to action: :merchandise, id: merch.id do
+            = merch.name
+            = render_money merch.price
+            - unless merch.available?
               (unlisted)
 
 = render partial: "cart"
