@@ -7,7 +7,7 @@ class UserOrdersController < ApplicationController
     @allorders = false
     @orders = UserOrder.includes(:user_order_merchandise).includes(:user_order_tickets)
     unless user_can?(:view_all, UserOrder) and params[:all] == "true"
-      @orders = @orders.where(:user_id => current_user.id)
+      @orders = @orders.for_user(current_user).unvoid
     else
       @allorders = true
     end
