@@ -1,17 +1,24 @@
 - add_body_classes("home")
 .intro
   .container
-    %h2
-      Over Easter 2016 We're celebrating 41 years of
-      %strong Swancon
+    - if items_for_tag("intro").count > 0
+      = items_for_tag("intro").first[:rendered_text]
+    - else
+      %h2
+        Over Easter 2016 We're celebrating 41 years of
+        %strong Swancon
     =link_to "Get memberships now!", store_path, class: "btn btn-primary"
 
 .about
-  %h2 About us
-  .copy
-    %p We are a speculative fiction convention that is invested in all kinds of media. You will find panels and discussion about games, film, literature, and graphic novels. If you are interested in science fiction or fantasy of almost any flavour, we will have something for you.
-  .year-ruby
-    =image_tag("gem-40.png", width: "179", height: "223")
+  - if items_for_tag("about").count > 0
+    = items_for_tag("about").first[:rendered_text]
+  - else
+    %h2 About us
+    .copy
+      %p We are a speculative fiction convention that is invested in all kinds of media. You will find panels and discussion about games, film, literature, and graphic novels. If you are interested in science fiction or fantasy of almost any flavour, we will have something for you.
+    /
+      .year-ruby
+        =image_tag("gem-40.png", width: "179", height: "223")
 
 .guests
   .container

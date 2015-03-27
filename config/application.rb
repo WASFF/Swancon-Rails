@@ -47,6 +47,6 @@ module DoomCon
 		# Version of your assets, change this if you want to expire all your assets
 		config.assets.version = '1.0' 
 
-		config.assets.precompile += [ '*.js', '2015.css', 'admin.css', '2015-print.css' ]
+		config.assets.precompile += [ '*.js', '2016.css', 'admin.css', '2016-print.css' ]
 	end
 end
