@@ -12,7 +12,7 @@ class Api::V1::MembersController < ApplicationController
 
   def show
     user = policy_scope(User).find(params[:id])
-    respond_with user
+    respond_with user, include_member_details: true
   end
 
   def create

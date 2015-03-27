@@ -1,6 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
   delegate :user_can?, to: :scope
-  self.root = "user"
+  self.root = "member"
 
   attributes :id, :username
 
