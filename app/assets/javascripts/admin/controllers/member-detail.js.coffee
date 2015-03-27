@@ -1,5 +1,6 @@
 Admin.MemberDetailController = Ember.Controller.extend
   saving: false
+  showErrors: false
 
   title: (->
     "Creating New Member" if @get("model.isNew")
@@ -20,14 +21,18 @@ Admin.MemberDetailController = Ember.Controller.extend
 
   actions:
     save: ->
-      @set("saving", true)
+      @setProperties
+        saving: true
+        showErrors: false
+
       self = this
       @get("model").save().then(->
         self.send("removeModal")
         self.set("saving", false)
       , ->
-        alert("Unable to save!")
-        self.set("saving", false)
+        self.setProperties
+          showErrors: true
+          saving: false
       )
 
     cancel: ->

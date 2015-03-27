@@ -51,6 +51,11 @@
       {{input type="checkbox" name="disclaimer" checked=model.disclaimerSigned}}
     </div>
   </fieldset>
+  {{#if showErrors}}
+    <fieldset>
+      <legend>Errors</legend>
+    </fieldset>
+  {{/if}}
   <div>
     <button {{action 'save'}} {{bind-attr disabled="saveButtonDisabled"}}>{{saveButtonName}}</button>
   </div>
