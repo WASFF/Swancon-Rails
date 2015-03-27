@@ -29,3 +29,6 @@ Admin.CheckDetailsController = Ember.ArrayController.extend
 
     showMember: (member)->
       @send 'showModal', 'member-detail', member
+
+    createMember: ->
+      @send 'showModal', 'member-detail', @store.createRecord('member')

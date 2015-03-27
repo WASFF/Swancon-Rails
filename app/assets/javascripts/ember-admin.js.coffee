@@ -3,6 +3,7 @@
 #= require ember-template-compiler
 #= require ember
 #= require ember-data
+#= require lib/ember_fastclick
 #= require_self
 #= require admin/admin
 
@@ -18,3 +19,7 @@ window.Admin = Ember.Application.create
       console.log(parsedName)
       parsedName.fullNameWithoutType = "admin/" + parsedName.fullNameWithoutType
       return @_super(parsedName)
+
+
+Ember.run.schedule 'afterRender', -> 
+  FastClick.attach(document.body)
