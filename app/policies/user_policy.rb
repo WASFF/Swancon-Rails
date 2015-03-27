@@ -19,5 +19,13 @@ class UserPolicy < BasePolicy
   def view_extended_details?
     committee_or_admin
   end
+
+  def create?
+    committee_or_admin
+  end
+
+  def update?
+    committee_or_admin
+  end
 end
 

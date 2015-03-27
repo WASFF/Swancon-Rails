@@ -1,47 +1,57 @@
-{{#modal-dialog title=title action='removeModal'}}
-  <div>
+{{#modal-dialog title=title action='cancel'}}
+  <fieldset>
+    <legend>Name</legend>
+    <div>
+      <label for="name_first">First Name</label>
+      {{input value=model.nameFirst name='name_first'}}
+      <label for="name_last">Last Name</label>
+      {{input value=model.nameLast name='name_last'}}
+    </div>
+    <div>
+      <label for="name_badge">Name for Badge</label>
+      {{input value=model.nameBadge name='name_badge'}}
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Login and Contact Details</legend>
     <label for="username">Username</label>
     {{input value=model.username name='username'}}
-  </div>
-  <div>
     <label for="email">Email Address</label>
-    {{input value=model.email name='email'}}
-  </div>
+    {{input value=model.email name='email' size='40'}}
+    <label for="phone">Phone</label>
+    {{input value=model.phone name='phone'}}
+  </fieldset>
+  <fieldset>
+    <legend>Address</legend>
+    <div>{{input value=model.address_1 name='address_1' size='40'}}</div>
+    <div>{{input value=model.address_2 name='address_2' size='40'}}</div>
+    <div>
+      <label for="address_3">City / Suburb</label>
+      {{input value=model.address_3 name='address_3'}}
+      <label for="address_state">State</label>
+      {{input value=model.addressState name='address_state'}}      
+    </div>
+    <div>
+      <label for="address_country">Country</label>
+      {{input value=model.addressCountry name='address_country'}}      
+    </div>
+    <div>
+      <label for="address_postcode">Postcode</label>
+      {{input value=model.addressPostcode name='address_postcode'}}      
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Questions</legend>
+    <div>
+      <label for="emails">Can we send you emails?</label>
+      {{input type="checkbox" name="emails" checked=model.emailOptin}}
+    </div>
+    <div>
+      <label for="disclaimer">I agree to the disclaimer</label>
+      {{input type="checkbox" name="disclaimer" checked=model.disclaimerSigned}}
+    </div>
+  </fieldset>
   <div>
-    <label for="name_first">First Name</label>
-    {{input value=model.nameFirst name='name_first'}}
-  </div>
-  <div>
-    <label for="name_last">Last Name</label>
-    {{input value=model.nameLast name='name_last'}}
-  </div>
-  <div>
-    <label for="name_badge">Name for Badge</label>
-    {{input value=model.nameBadge name='name_badge'}}
-  </div>
-  <div>
-    <label for="address_1">Address</label>
-  </div>
-  <div>  
-    {{input value=model.address_1 name='address_1'}}
-  </div>
-  <div>
-    {{input value=model.address_2 name='address_2'}}
-  </div>
-  <div>
-    <label for="address_3">City / Suburb</label>
-    {{input value=model.address_3 name='address_3'}}      
-  </div>
-  <div>
-    <label for="address_state">State</label>
-    {{input value=model.addressState name='address_state'}}      
-  </div>
-  <div>
-    <label for="address_country">Country</label>
-    {{input value=model.addressCountry name='address_country'}}      
-  </div>
-  <div>
-    <label for="address_postcode">Postcode</label>
-    {{input value=model.addressPostcode name='address_postcode'}}      
+    <button {{action 'save'}} {{bind-attr disabled="saveButtonDisabled"}}>{{saveButtonName}}</button>
   </div>
 {{/modal-dialog}}
