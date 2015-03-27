@@ -44,3 +44,49 @@ ul.operator_select {
 #new_details {
   float: right;
 }
+
+.modal {
+  content: "";
+  background: rgba(0,0,0,0.6);
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 10;
+
+  &:target {
+    &:before {
+      display: block;
+    }
+    .modal-dialog {
+      top: 20%;
+    }
+  }
+
+  .dialog {
+    background: #fefefe;
+    border: gray solid 1px;
+    border-radius: 5px;
+    z-index: 11;
+    max-width: 75%;
+    max-height: 90%;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    .title {
+      display: block;
+      padding: 5px;
+      background-color: gray;
+      color: white;
+      button {
+        float: right;
+        padding: 0 5px;
+      }
+    }
+
+    .body {
+      display: block;
+      padding: 5px;
+    }
+  }
+
+}

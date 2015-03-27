@@ -1,6 +1,6 @@
 Admin.ApplicationRoute = Ember.Route.extend
   actions:
-    showModal: (name, modal) ->
+    showModal: (name, model) ->
       @render name, 
         into: 'application'
         outlet: 'modal'

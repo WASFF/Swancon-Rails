@@ -28,4 +28,4 @@ Admin.CheckDetailsController = Ember.ArrayController.extend
         model: null
 
     showMember: (member)->
-      @set('viewMember', member)
+      @send 'showModal', 'member-detail', member
