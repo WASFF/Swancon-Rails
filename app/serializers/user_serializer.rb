@@ -3,6 +3,7 @@ class UserSerializer < ActiveModel::Serializer
   self.root = "member"
 
   attributes :id, :username
+  embed :ids, include: true
 
   def attributes
     data = super
@@ -38,5 +39,10 @@ class UserSerializer < ActiveModel::Serializer
     end
 
     data
+  end
+
+  has_many :user_order_tickets, key: :tickets
+  def include_user_order_tickets?
+    options.has_key?(:include_tickets) && options[:include_tickets]
   end
 end

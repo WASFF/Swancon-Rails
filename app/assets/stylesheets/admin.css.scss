@@ -9,7 +9,7 @@ ul.link {
 	display: none;
 }
 
-table#gather_member_search_results {
+table {
 	width: 100%;
 }
 
@@ -41,8 +41,15 @@ ul.operator_select {
   padding-left: 5px;
 }
 
-#new_details {
+#cart {
   float: right;
+  border: 1px solid;
+}
+
+button.ticket_button {
+  min-height: 40px;
+  padding: 0 7px;
+  margin: 5px 0;
 }
 
 .modal {

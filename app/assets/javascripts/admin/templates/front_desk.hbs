@@ -28,9 +28,9 @@
       <td>{{member.username}}</td>
       <td>{{member.email}}</td>
       <td>
-        <button {{action 'showMember' member}}>Verify Details</button>
-        <button {{action 'showTickets' member}}>Show Tickets</button>
-        <button {{action 'showStore' member}}>Store</button>
+        <button {{action 'showMember' member}}>Details</button>
+        {{#link-to 'member_tickets' member}}<button>Tickets</button>{{/link-to}}
+        {{#link-to 'store' member}}<button>Store</button>{{/link-to}}
       </td>
     </tr>
   {{/each}}

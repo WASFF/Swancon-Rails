@@ -14,7 +14,7 @@ Admin.FrontDeskController = Ember.ArrayController.extend
       if @get("searchDisabled")
         return
       self = this
-      promiseArray = @store.find('member', {name: @get("searchName")})
+      promiseArray = @store.find('member', {name: @get("searchName"), include_tickets: true})
       promiseArray.then ->
         self.setProperties
           searching: false

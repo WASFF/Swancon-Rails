@@ -32,3 +32,4 @@ Admin.Member = DS.Model.extend
   
   disclaimerSigned: DS.attr('boolean')
   emailOptin: DS.attr('boolean')
+  tickets: DS.hasMany('user_order_ticket')

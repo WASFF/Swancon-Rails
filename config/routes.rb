@@ -85,6 +85,8 @@ DoomCon::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :members
+      resources :user_order_tickets
+      resources :ticket_sets
     end
   end
 

@@ -1,5 +1,6 @@
 #= require jquery
 #= require jquery_ujs
+#= require lib/moment
 #= require ember-template-compiler
 #= require ember
 #= require ember-data

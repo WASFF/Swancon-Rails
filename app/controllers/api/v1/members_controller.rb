@@ -4,7 +4,8 @@ class Api::V1::MembersController < ApplicationController
   def index
     if params.has_key? :name
       users = policy_scope(User).search_for_name(params[:name])
-      respond_with users, include_member_details: true
+      include_tickets = params.has_key?(:include_tickets) && params[:include_tickets].downcase == "true" 
+      respond_with users, include_member_details: true, include_tickets: true
     else
       respond_with nil
     end
