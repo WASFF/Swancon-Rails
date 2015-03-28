@@ -3,6 +3,7 @@
 <h2>Total: {{render-currency total}}</h2>
 {{#if showAllCart}}
 <button {{action 'hideCart'}}>Hide Cart</button>
+<button {{action 'resetCart'}}>Reset Cart</button>
 <h2>Tickets</h2>
 
 <ul>
@@ -15,6 +16,8 @@
   </li>
 {{/each}}
 </ul>
+Payment Type: {{view "select" content=paymentTypes optionLabelPath='content.name' optionValuePath='content' value=currentPaymentType}}
+<button {{action 'checkOut'}}>Check Out</button>
 {{else}}
 <button {{action 'showCart'}}>Show Cart</button>
 {{/if}}

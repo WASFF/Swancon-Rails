@@ -1,10 +1,12 @@
 Admin.StoreController = Ember.ObjectController.extend
   loaded: (->
-    @get("ticketSets")?
-  ).property("ticketSets", "merchandiseSets")
+    @get("ticketSets")? && @get("paymentTypes")?
+  ).property("ticketSets", "merchandiseSets", "paymentTypes")
 
   ticketSets: null
   merchandiseSets: null
+  paymentTypes: null
+  currentPaymentType: null
 
   itemsInCart: (->
     (@get("tickets").length + @get("merchandise").length) > 0
@@ -52,4 +54,9 @@ Admin.StoreController = Ember.ObjectController.extend
       @set("showAllCart", true)
 
     hideCart: ->
-      @set("showAllCart", false)      
+      @set("showAllCart", false)
+
+    checkOut: ->
+      if @get("currentPaymentType.name") == "cash"
+        confirm("Did you take the cash")
+      alert("Woo! Checking out!")   

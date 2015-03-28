@@ -87,6 +87,7 @@ DoomCon::Application.routes.draw do
       resources :members
       resources :user_order_tickets
       resources :ticket_sets
+      resources :payment_types
     end
   end
 
