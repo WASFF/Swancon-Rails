@@ -3,9 +3,9 @@ Admin.MemberDetailController = Ember.Controller.extend
   showErrors: false
 
   title: (->
-    "Creating New Member" if @get("model.isNew")
-    "Editing: #{@get("model.nameReal")}" if @get("model")?
-    "Unknown Member"
+    return "Creating New Member" if @get("model.isNew")
+    return "Editing: #{@get("model.nameReal")}" if @get("model")?
+    return "Unknown Member"
   ).property("model", "model.nameReal", "model.isNew")
 
   saveButtonName: (->

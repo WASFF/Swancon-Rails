@@ -35,6 +35,10 @@ ul.operator_select {
   }
 }
 
+.noscroll {
+  overflow: hidden;
+}
+
 #member_details {
   float:right;
   border-left: 1px solid black;
@@ -78,6 +82,7 @@ button.ticket_button {
     margin-top: 25px;
     margin-left: auto;
     margin-right: auto;
+    overflow: scroll;
     
     .title {
       display: block;

@@ -4,6 +4,10 @@ Admin.ModalDialogComponent = Ember.Component.extend
     @$('.modal').on 'click', (e) ->
       if e.currentTarget == e.target
         self.send("close")
+    $("body").addClass("noscroll")
+
+  willDestroyElement: ->
+    $("body").removeClass("noscroll")
 
   actions:
     close: ->
