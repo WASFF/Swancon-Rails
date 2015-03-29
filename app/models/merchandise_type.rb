@@ -4,7 +4,11 @@ class MerchandiseType < ActiveRecord::Base
 		has_many :launch_member_merchandise_types
 		has_many :user_order_merchandise
 		has_many :merchandise_images
-						
+		
+		def merchandise_option_sets
+			option_sets
+		end
+
 		def option_sets
 			sym = :merchandise_option_set_id
 			ids = merchandise_options.group(sym).select(sym).collect {|x| x.merchandise_option_set_id }

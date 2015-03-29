@@ -1,6 +1,6 @@
 Admin.StoreController = Ember.ObjectController.extend
   loaded: (->
-    @get("ticketSets")? && @get("paymentTypes")?
+    @get("ticketSets")? && @get("paymentTypes")? && @get("merchandiseSets")
   ).property("ticketSets", "merchandiseSets", "paymentTypes")
 
   ticketSets: null
@@ -62,6 +62,30 @@ Admin.StoreController = Ember.ObjectController.extend
 
     removeTicket: (user_order_ticket) ->
       @get("tickets").removeObject(user_order_ticket)
+
+    removeMerchandise: (user_order_merchandise) ->
+      @get("merchandise").removeObject(user_order_merchandise)
+
+    addMerchandise: (merchandise) ->
+      if merchandise.get("options.length") > 0
+        @send 'showModal', 'select-merchandise-option', merchandise
+      else
+        @send 'addMerchandiseWithOptions', merchandise, []
+
+    addMerchandiseWithOptions: (merchandise, options) ->
+      user_order_merchandise = @store.createRecord('user_order_merchandise', {
+        type: merchandise
+      })
+      user_order_merchandise_options = []
+
+      merchandise.get("option_sets").forEach (set) =>
+        user_order_merchandise_option = @store.createRecord 'user_order_merchandise_option', 
+          option: options[set.get("id")]
+        user_order_merchandise.get("options").addRecord(user_order_merchandise_option)
+        
+#        options: user_order_merchandise_options
+
+      @get("merchandise").addObject(user_order_merchandise)
 
     showCart: ->
       @set("showAllCart", true)

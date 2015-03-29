@@ -86,8 +86,9 @@ DoomCon::Application.routes.draw do
     namespace :v1 do
       resources :members
       resources :user_order_tickets
-      resources :ticket_sets
-      resources :payment_types
+      resources :ticket_sets, only: [:index]
+      resources :merchandise_sets, only: [:index]
+      resources :payment_types, only: [:index]
     end
   end
 

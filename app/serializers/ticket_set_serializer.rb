@@ -4,7 +4,7 @@ class TicketSetSerializer < ActiveModel::Serializer
 
   embed :ids, include: true
 
-  has_many :ticket_types
+  has_many :ticket_types, key: :tickets
 
   def include_ticket_types?
     full_tree?

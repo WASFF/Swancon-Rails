@@ -23,4 +23,9 @@ Admin.StoreRoute = Ember.Route.extend
         alert("could not load tickets")
 
     unless @get("merchandiseLoaded")
-      console.log("Load Merch")
+      merchPromise = @store.find("merchandise_set")
+      merchPromise.then ->
+        self.set("merchandiseLoaded", true)
+        controller.set("merchandiseSets", merchPromise.content)
+      , ->
+        alert("could not load merchandise")
