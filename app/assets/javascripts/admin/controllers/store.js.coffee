@@ -28,6 +28,19 @@ Admin.StoreController = Ember.ObjectController.extend
 
   showAllCart: false
 
+  showTickets: false
+  showMerchandise: false
+
+  toggleTicketButtonName: (->
+    return "Hide" if @get("showTickets")
+    return "Show"
+  ).property("showTickets")
+
+  toggleMerchandiseButtonName: (->
+    return "Hide" if @get("showMerchandise")
+    return "Show"
+  ).property("showMerchandise")
+
   addTicket: (ticket, concession) ->
     user_order_ticket = @store.createRecord('user_order_ticket')
     user_order_ticket.setProperties
@@ -55,6 +68,12 @@ Admin.StoreController = Ember.ObjectController.extend
 
     hideCart: ->
       @set("showAllCart", false)
+
+    toggleTickets: ->
+      @set("showTickets", !@get("showTickets"))
+
+    toggleMerchandise: ->
+      @set("showMerchandise", !@get("showMerchandise"))
 
     checkOut: ->
       if @get("currentPaymentType.name") == "cash"

@@ -28,18 +28,26 @@ Payment Type: {{view "select" content=paymentTypes optionLabelPath='content.name
 {{#unless loaded}}
 Loading Data...
 {{else}}
-{{#each set in ticketSets}}
-  <h2>{{set.name}}</h2>
-  <ul>
-    {{#each ticket in set.tickets}}
-      <li>{{ticket.name}}
-        <button class="ticket_button" {{action 'addFullTicket' ticket}}>Full: {{render-currency ticket.price}}</button>
-        {{#if ticket.concessionPrice}}
-          <button class="ticket_button" {{action 'addConcessionTicket' ticket}}>Concession: {{render-currency ticket.concessionPrice}}</button>
-        {{/if}}
-      </li>
-    {{/each}}
-  </ul>
-{{/each}}
+<button {{action 'toggleTickets'}}>{{toggleTicketButtonName}} Tickets</button>
+<button {{action 'toggleMerchandise'}}>{{toggleMerchandiseButtonName}} Merchandise</button>
+{{#if showTickets}}
+  <h2>Tickets</h2>
+  {{#each set in ticketSets}}
+    <h2>{{set.name}}</h2>
+    <ul>
+      {{#each ticket in set.tickets}}
+        <li>{{ticket.name}}
+          <button class="ticket_button" {{action 'addFullTicket' ticket}}>Full: {{render-currency ticket.price}}</button>
+          {{#if ticket.concessionPrice}}
+            <button class="ticket_button" {{action 'addConcessionTicket' ticket}}>Concession: {{render-currency ticket.concessionPrice}}</button>
+          {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/each}}
+{{/if}}
+{{#if showMerchandise}}
+  <h2>Merchandise</h2>
+{{/if}}
 
 {{/unless}}
