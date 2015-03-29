@@ -89,6 +89,9 @@ DoomCon::Application.routes.draw do
       resources :ticket_sets, only: [:index]
       resources :merchandise_sets, only: [:index]
       resources :payment_types, only: [:index]
+      resource :store, only: [], controller: "store" do
+        post 'purchase'
+      end
     end
   end
 

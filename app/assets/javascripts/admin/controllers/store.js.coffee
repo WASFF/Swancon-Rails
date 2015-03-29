@@ -81,9 +81,7 @@ Admin.StoreController = Ember.ObjectController.extend
       merchandise.get("option_sets").forEach (set) =>
         user_order_merchandise_option = @store.createRecord 'user_order_merchandise_option', 
           option: options[set.get("id")]
-        user_order_merchandise.get("options").addRecord(user_order_merchandise_option)
-        
-#        options: user_order_merchandise_options
+        user_order_merchandise.get("options").addObject(user_order_merchandise_option)
 
       @get("merchandise").addObject(user_order_merchandise)
 
@@ -111,7 +109,23 @@ Admin.StoreController = Ember.ObjectController.extend
           concession: item.get("concession")
           ticket_type_id: parseInt(item.get("type.id"), 10)
         data.tickets.addObject(ticketData)
-      console.log(data)
-      #@send("resetCart")
-      #@send("hideCart")
-      #@transitionToRoute("front_desk")
+      @get("merchandise").forEach (item) ->
+        options_ids = []
+        item.get("options").forEach (option) ->
+          options_ids.addObject(option.get("option.id"))
+        merchData = 
+          merchandise_type_id: parseInt(item.get("type.id"), 10)
+          merchandise_option_ids: options_ids
+        data.merchandise.addObject(merchData)
+
+      p = Admin.Api.post("/store/purchase", data)
+      p.done (data) =>
+        dataObject = Ember.Object.create()
+        dataObject.set("email", data.email)
+        dataObject.set("userOrderId", data.user_order_id)
+        dataObject.set("paymentId", data.payment_id)
+        @send("resetCart")
+        @send("hideCart")
+        @send 'showModal', 'purchase-complete', dataObject
+      p.fail (jqXHR, textStatus, error) =>
+        alert("ERROR: #{error}")

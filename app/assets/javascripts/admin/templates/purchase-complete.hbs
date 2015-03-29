@@ -1,0 +1,15 @@
+{{#modal-dialog title=title action='removeModal'}}
+  <div>Order Complete.</div>
+  {{#if model.email}}
+    Email Sent to User
+  {{else}}
+    NO EMAIL SENT - User doesn't have email address.
+  {{/if}}
+  {{#if model.paymentId}}
+    <div><a {{bind-attr href=paymentUrl}}><button>Show Payment</button></a></div>
+  {{else}}
+    <div><a {{bind-attr href=orderUrl}}><button>Show Order</button></a></div>
+  {{/if}}
+  
+  <button {{action 'removeModal'}}>Close</button>
+{{/modal-dialog}}
