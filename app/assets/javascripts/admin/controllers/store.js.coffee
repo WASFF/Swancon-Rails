@@ -76,6 +76,18 @@ Admin.StoreController = Ember.ObjectController.extend
       @set("showMerchandise", !@get("showMerchandise"))
 
     checkOut: ->
-      if @get("currentPaymentType.name") == "cash"
-        confirm("Did you take the cash")
-      alert("Woo! Checking out!")   
+      return unless confirm("Take $#{@get("total")} via #{@get("currentPaymentType.name")}") 
+      data = 
+        member_id: parseInt(@get("model.id"), 10)
+        payment_type_id: parseInt(@get("currentPaymentType.id"), 10)
+        tickets: []
+        merchandise: []
+      @get("tickets").forEach (item) ->
+        ticketData =
+          concession: item.get("concession")
+          ticket_type_id: parseInt(item.get("type.id"), 10)
+        data.tickets.addObject(ticketData)
+      console.log(data)
+      #@send("resetCart")
+      #@send("hideCart")
+      #@transitionToRoute("front_desk")
