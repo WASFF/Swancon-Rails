@@ -1,5 +1,7 @@
-<% content_for :title do %>DoomCon 2012 - All Sold Memberships<% end %>
 <h2>Sold Memberships</h2>
+<div>
+  <%= link_to "All Data CSV Export", format: :csv, action: :export_all_tickets %>
+</div>
 <% if @all %>All<% else %><%= link_to "All", multiple: false %><% end %> | 
 <% if @multiple %>Member Owns Multiple Memberships<% else %><%= link_to "Member Owns Multiple Memberships", multiple: true %> <% end %> |
 <% if @pending %>Transfer Pending<% else %><%= link_to "Transfer Pending", pending: true %> <% end %> |

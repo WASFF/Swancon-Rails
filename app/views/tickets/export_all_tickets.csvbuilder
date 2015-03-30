@@ -1,0 +1,37 @@
+csv << [ 'Ticket Set', 'Ticket Type', 'Concession', 'Price',
+  'Surname', 'First Name', 'Badge Name', 'Username', 'Email Address',
+  'Street Address', 'Suburb', 'Postcode', 'State', 'Country', 'Phone Number',
+  'Emailable?', 'Signed Disclaimer?',
+  'Time Purchased', 'Time Purchase Verified', 'Time Redeemed']
+
+@tickets.each do |ticket| 
+  data = Hash.new
+  output = Array.new
+
+  details = ticket.user.member_detail
+
+  output << ticket.type.set.name
+  output << ticket.type.name
+  output << ticket.concession
+  output << ticket.type.price
+  output << details.try(:name_last)
+  output << details.try(:name_first)
+  output << details.try(:name)
+  output << ticket.user.username
+  output << ticket.user.email
+  output << details.try(:address_1) if details.try(:address_2).blank?
+  output << details.try(:address_1) + " " + details.try(:address_2) if details.try(:address_2).present?
+  output << details.try(:address_suburb)
+  output << details.try(:address_postcode)
+  output << details.try(:address_state)
+  output << details.try(:address_country)
+  output << details.try(:phone)
+  output << details.try(:email_optin)
+  output << details.try(:disclaimer_signed)
+  output << ticket.created_at.to_s
+  output << ticket.order.payment.created_at.to_s if ticket.order.payment.present?
+  output << "" unless ticket.order.payment.present? 
+  output << ticket.redeemed_at.try(:to_s)
+
+  csv << output
+end
