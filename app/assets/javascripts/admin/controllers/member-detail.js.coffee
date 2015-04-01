@@ -15,8 +15,12 @@ Admin.MemberDetailController = Ember.Controller.extend
   ).property("model", "saving", "model.isNew")
 
   saveButtonDisabled: (->
-    !@get("model.isDirty") || @get("saving")
-  ).property("model.isDirty", "saving")
+    return true if @get("saving")
+    return true unless @get("model.isDirty")
+    return true unless @get("model.errors.length") == 0
+    return true unless @get("model.disclaimerSigned")
+    return false
+  ).property("model.isDirty", "saving", "model.errors.length", "model.disclaimerSigned")
 
   actions:
     save: ->

@@ -6,8 +6,8 @@
       {{input value=model.nameFirst name='name_first'}}
       {{#if model.errors.nameFirst.length}}
         <div class="error">
-        {{#each model.errors.nameFirst}}
-          {{message}}{{#unless last}},{{/unless}}
+        {{#each error in model.errors.nameFirst}}
+          {{error.message}}{{#unless last}},{{/unless}}
         {{/each}}
         </div>
       {{/if}}
