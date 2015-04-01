@@ -31,8 +31,9 @@ class User < ActiveRecord::Base
 	end
 
 	def role_symbols
+
 		roles.map do |role|
-			role.name.underscore.to_sym
+			role.name.gsub(' ', '_').to_sym
 		end
 	end
 

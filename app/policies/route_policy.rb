@@ -41,6 +41,7 @@ class RoutePolicy
       seller: true
     },
     ticket_seller: {
+      index: :adminapp,
       user_orders: :show,
       seller: true,
       member_details: [:new, :create]
