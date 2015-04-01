@@ -37,7 +37,7 @@ class Api::V1::MembersController < ApplicationController
     if user.errors.any?
       error_response(user)
     else
-      respond_with user, include_member_details: true
+      render json: user
     end
   end
 
