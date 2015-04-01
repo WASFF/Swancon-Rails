@@ -1,6 +1,5 @@
 Admin.MemberDetailController = Ember.Controller.extend
   saving: false
-  showErrors: false
 
   title: (->
     return "Creating New Member" if @get("model.isNew")
@@ -31,7 +30,6 @@ Admin.MemberDetailController = Ember.Controller.extend
         self.set("saving", false)
       , ->
         self.setProperties
-          showErrors: true
           saving: false
       )
 

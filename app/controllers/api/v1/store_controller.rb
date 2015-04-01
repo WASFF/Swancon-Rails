@@ -48,7 +48,7 @@ class Api::V1::StoreController < ApplicationController
       )
       uom.save
       merch_data[:options].each do |option|
-        uom.options << UserOrderMerchandise.new(merchandise_option: option)
+        uom.options << UserOrderMerchandiseOption.new(merchandise_option: option)
       end
     end
 
