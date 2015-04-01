@@ -13,14 +13,14 @@ class Api::V1::StoreController < ApplicationController
     user_merchandise = []
     if params.has_key? :merchandise
       params[:merchandise].each do |junk, merch_data|
-        merch_type = MerchandiseType.find(merch_data[:merchandise_type_id])
+        merch_type = MerchandiseType.available.find(merch_data[:merchandise_type_id])
         merch_options = merch_type.options.where(id: merch_data[:merchandise_option_ids])
         user_merchandise << {type: merch_type, options: merch_options}
       end
     end
     if params.has_key? :tickets
       params[:tickets].each do |junk, ticket_data|
-        ticket_type = TicketType.find(ticket_data[:ticket_type_id])
+        ticket_type = TicketType.available.find(ticket_data[:ticket_type_id])
         user_tickets << {type: ticket_type, concession: ticket_data[:concession]}
       end
     end
