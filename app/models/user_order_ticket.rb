@@ -23,6 +23,10 @@ class UserOrderTicket < ActiveRecord::Base
 		scope
 	end
 
+	def order
+		user_order
+	end
+
 	def type
 		ticket_type
 	end

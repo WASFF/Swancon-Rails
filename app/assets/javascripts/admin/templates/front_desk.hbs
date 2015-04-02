@@ -1,0 +1,42 @@
+<button id="new_details" {{action 'createMember'}}>Create New Member</button>
+
+<div class='back'>{{#link-to 'index'}}Back{{/link-to}}</div>
+<h1>Search for Member</h1>
+<div>
+  <label for='name'>Name:</label>
+  {{input value=searchName insert-newline='search' name='name'}}
+  <button {{action 'search'}} {{bind-attr disabled='searchDisabled'}}>Search</button>
+  {{#if search_message}}
+    <span>{{search_message}}</span>
+  {{/if}}
+</div>
+
+{{#if model}}
+<h1>Results</h1>
+<table class='member_results'>
+  <tr>
+    <th>Badge Name</th>
+    <th>Real Name</th>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Actions</th>
+  </tr>
+  {{#each member in model}}
+    <tr>
+      <td>{{member.nameBadge}}</td>
+      <td>{{member.nameReal}}</td>
+      <td>{{member.username}}</td>
+      <td>{{member.email}}</td>
+      <td>
+        <button {{action 'showMember' member}}>Details</button>
+        {{#link-to 'member_tickets' member}}<button>Tickets</button>{{/link-to}}
+        {{#link-to 'store' member}}<button>Store</button>{{/link-to}}
+      </td>
+    </tr>
+  {{/each}}
+</table>
+{{else if searched}}
+<h2>No Results Found</h2>
+{{else if searching}}
+<h2>Searching...</h2>
+{{/if}}

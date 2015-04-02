@@ -82,6 +82,19 @@ DoomCon::Application.routes.draw do
 
   resources :advertising_tags
 
+  namespace :api do
+    namespace :v1 do
+      resources :members
+      resources :user_order_tickets
+      resources :ticket_sets, only: [:index]
+      resources :merchandise_sets, only: [:index]
+      resources :payment_types, only: [:index]
+      resource :store, only: [], controller: "store" do
+        post 'purchase'
+      end
+    end
+  end
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
@@ -120,6 +133,7 @@ DoomCon::Application.routes.draw do
   match 'promoted_items/:action/:id' => 'promoted_items', via: [:get]
 
   match '/admin' => "index#admin", as: "admin", via: [:get]
+  match '/adminapp' => "index#adminapp", as: "adminapp", via: [:get]
   match '/admin/set_con_mode' => "index#set_con_mode", as: "set_con_mode", via: [:get]
 
   match '/track/:id' => "index#start_tracking", via: [:get], as: "tracking"

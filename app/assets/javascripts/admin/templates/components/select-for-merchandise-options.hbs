@@ -1,0 +1,10 @@
+{{#if canDisplay}}
+<select>
+  <option>None</option>
+  {{#each option in setOptions}}
+    <option {{bind-attr id=option.id}}>{{option.name}}</option>
+  {{/each}}
+</select>
+{{else}}
+Merchandise Type and Merchandise Option Set not provided
+{{/if}}
