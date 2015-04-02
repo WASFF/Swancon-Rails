@@ -55,6 +55,7 @@ class Api::V1::StoreController < ApplicationController
 
     data = {
       user_order_id: order.id,
+      invoice_number: order.invoice_number,
       con_mode: SiteSettings.con_mode
     }
 
@@ -75,6 +76,7 @@ class Api::V1::StoreController < ApplicationController
         verification_string: "Point Of Sale"
       )
       data[:payment_id] = payment.id
+      data[:receipt_number] = paynent.receipt
       if order.user.email_valid
         StoreMailer.receipt(payment, current_user).deliver
         data[:email] = true
