@@ -53,7 +53,10 @@ class Api::V1::StoreController < ApplicationController
       end
     end
 
-    data = {user_order_id: order.id}
+    data = {
+      user_order_id: order.id,
+      con_mode: SiteSettings.con_mode
+    }
 
     if payment_type.requires_reconciliation
       if order.user.email_valid
