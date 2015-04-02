@@ -13,14 +13,14 @@ class Api::V1::StoreController < ApplicationController
     user_merchandise = []
     if params.has_key? :merchandise
       params[:merchandise].each do |junk, merch_data|
-        merch_type = MerchandiseType.available.find(merch_data[:merchandise_type_id])
+        merch_type = MerchandiseType.available(current_user).find(merch_data[:merchandise_type_id])
         merch_options = merch_type.options.where(id: merch_data[:merchandise_option_ids])
         user_merchandise << {type: merch_type, options: merch_options}
       end
     end
     if params.has_key? :tickets
       params[:tickets].each do |junk, ticket_data|
-        ticket_type = TicketType.available.find(ticket_data[:ticket_type_id])
+        ticket_type = TicketType.available(current_user).find(ticket_data[:ticket_type_id])
         user_tickets << {type: ticket_type, concession: ticket_data[:concession]}
       end
     end
@@ -38,6 +38,7 @@ class Api::V1::StoreController < ApplicationController
         user_order: order,
         user: purchaser
       )
+      uot.redeemed_at = DateTime.now if SiteSettings.con_mode
       uot.save
     end
 
@@ -52,7 +53,11 @@ class Api::V1::StoreController < ApplicationController
       end
     end
 
-    data = {user_order_id: order.id}
+    data = {
+      user_order_id: order.id,
+      invoice_number: order.invoice_number,
+      con_mode: SiteSettings.con_mode
+    }
 
     if payment_type.requires_reconciliation
       if order.user.email_valid
@@ -71,6 +76,7 @@ class Api::V1::StoreController < ApplicationController
         verification_string: "Point Of Sale"
       )
       data[:payment_id] = payment.id
+      data[:receipt_number] = payment.receipt
       if order.user.email_valid
         StoreMailer.receipt(payment, current_user).deliver
         data[:email] = true
