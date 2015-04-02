@@ -11,7 +11,7 @@ class TicketSetSerializer < ActiveModel::Serializer
   end
 
   def ticket_types
-    object.ticket_types.available
+    object.ticket_types.available(view_context.current_user)
   end
 
 private 

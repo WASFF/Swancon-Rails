@@ -123,7 +123,10 @@ Admin.StoreController = Ember.ObjectController.extend
         dataObject = Ember.Object.create()
         dataObject.set("email", data.email)
         dataObject.set("userOrderId", data.user_order_id)
+        dataObject.set("invoiceNumber", data.invoice_number)
+        dataObject.set("conMode", data.con_mode)
         dataObject.set("paymentId", data.payment_id)
+        dataObject.set("receiptNumber", data.receipt_number)
         @send("resetCart")
         @send("hideCart")
         @send 'showModal', 'purchase-complete', dataObject

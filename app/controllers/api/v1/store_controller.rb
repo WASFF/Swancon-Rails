@@ -76,7 +76,7 @@ class Api::V1::StoreController < ApplicationController
         verification_string: "Point Of Sale"
       )
       data[:payment_id] = payment.id
-      data[:receipt_number] = paynent.receipt
+      data[:receipt_number] = payment.receipt
       if order.user.email_valid
         StoreMailer.receipt(payment, current_user).deliver
         data[:email] = true
