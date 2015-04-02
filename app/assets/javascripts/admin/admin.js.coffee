@@ -9,4 +9,5 @@
 #= require_tree ./routes
 #= require ./router
 #= require ./store
+#= require ./validators
 #= require_self

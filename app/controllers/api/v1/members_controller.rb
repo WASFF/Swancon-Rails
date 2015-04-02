@@ -34,7 +34,11 @@ class Api::V1::MembersController < ApplicationController
     end
 
     user.save
-    respond_with user, include_member_details: true
+    if user.errors.any?
+      error_response(user)
+    else
+      render json: user
+    end
   end
 
   def update
@@ -46,7 +50,11 @@ class Api::V1::MembersController < ApplicationController
 
     user.update_attributes(combined_params)
     user.save
-    respond_with user, include_member_details: true
+    if user.errors.any?
+      error_response(user)
+    else
+      respond_with user, include_member_details: true
+    end
   end
 
 private
@@ -64,5 +72,19 @@ private
     combined_params = user_params
     combined_params[:member_detail_attributes] = member_params
     combined_params
+  end
+
+  def error_response(user)
+    errors = {}
+    user.errors.each do |key, val|
+      key = key
+      key = key.to_s[14..-1] if key.to_s.starts_with?("member_detail")
+      if errors.has_key? key
+        errors[key] << val
+      else
+        errors[key] = [val]
+      end
+    end
+    render json: {errors: errors}, status: :unprocessable_entity
   end
 end

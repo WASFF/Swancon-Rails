@@ -10,6 +10,10 @@ class TicketSetSerializer < ActiveModel::Serializer
     full_tree?
   end
 
+  def ticket_types
+    object.ticket_types.available
+  end
+
 private 
   def full_tree?
     options.has_key?(:full_tree) && options[:full_tree]
