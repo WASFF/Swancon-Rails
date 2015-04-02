@@ -38,6 +38,7 @@ class Api::V1::StoreController < ApplicationController
         user_order: order,
         user: purchaser
       )
+      uot.redeemed_at = DateTime.now if SiteSettings.con_mode
       uot.save
     end
 
