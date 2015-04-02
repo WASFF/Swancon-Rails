@@ -25,8 +25,8 @@ class ApplicationController < ActionController::Base
     route_policy = RoutePolicy.new(current_user)
 		if route_policy.visit?(:index, :admin)
 			{action: :admin, controller: "/index"}
-		elsif route_policy.visit?(:seller, :index)
-      {action: :sales, controller: "/seller"}
+		elsif route_policy.visit?(:index, :adminapp)
+      {action: :adminapp, controller: "/index"}
     else
 			{action: :index, controller: "/store"}
 		end

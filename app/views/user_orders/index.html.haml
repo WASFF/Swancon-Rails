@@ -20,7 +20,10 @@
     %tr{class: ("void" if order.void?)}
       %td= link_to order.invoice_number, order_path(order)
       - if @allorders
-        %td= link_to order.user.order_name, users_admin_path(order.user)
+        -if order.user.present?
+          %td= link_to order.user.try(:order_name), users_admin_path(order.user)
+        -else
+          %td N/A
       %td= order.number_of_items
       %td{class: "date"}= order.created_at.strftime("%d/%m/%Y %H:%M")
       %td{class: "currency"}= render_money(order.total)

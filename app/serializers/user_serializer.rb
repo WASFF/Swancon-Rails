@@ -1,8 +1,9 @@
 class UserSerializer < ActiveModel::Serializer
   delegate :user_can?, to: :scope
-  self.root = "user"
+  self.root = "member"
 
   attributes :id, :username
+  embed :ids, include: true
 
   def attributes
     data = super
@@ -15,31 +16,19 @@ class UserSerializer < ActiveModel::Serializer
 
     if @options[:include_member_details] and user_can?(:view_extended_details?, object) and object.member_detail.present?
       data.merge!({
-        "member_detail_attributes[name_first]" =>
-          object.member_detail.name_first,
-        "member_detail_attributes[name_last]" =>
-          object.member_detail.name_last,
-        "member_detail_attributes[name_badge]" =>
-          object.member_detail.name_badge,
-        "member_detail_attributes[address_1]" =>
-          object.member_detail.address_1,
-        "member_detail_attributes[address_2]" =>
-          object.member_detail.address_2,
-        "member_detail_attributes[address_3]" =>
-          object.member_detail.address_3,               
-        "member_detail_attributes[address_postcode]" =>
-          object.member_detail.address_postcode,
-        "member_detail_attributes[address_state]" =>
-          object.member_detail.address_state,
-        "member_detail_attributes[address_country]" =>
-          object.member_detail.address_country,
-        "member_detail_attributes[phone]" =>
-          object.member_detail.phone,
-        "member_detail_attributes[email_optin]" =>
-          object.member_detail.email_optin,
-        "member_detail_attributes[disclaimer_signed]" =>
-          object.member_detail.disclaimer_signed
-        })
+        name_first: object.member_detail.name_first,
+        name_last: object.member_detail.name_last,
+        name_badge: object.member_detail.name_badge,
+        address_1: object.member_detail.address_1,
+        address_2: object.member_detail.address_2,
+        address_3: object.member_detail.address_3,
+        address_postcode: object.member_detail.address_postcode,
+        address_state: object.member_detail.address_country,
+        address_country: object.member_detail.address_country,
+        phone: object.member_detail.phone,
+        email_optin: object.member_detail.email_optin,
+        disclaimer_signed: object.member_detail.disclaimer_signed
+      })
     end
 
     if user_can?(:view_extended_details, object) and @options[:include_ticket_details]
@@ -50,5 +39,10 @@ class UserSerializer < ActiveModel::Serializer
     end
 
     data
+  end
+
+  has_many :user_order_tickets, key: :tickets
+  def include_user_order_tickets?
+    options.has_key?(:include_tickets) && options[:include_tickets]
   end
 end
