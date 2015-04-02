@@ -17,7 +17,6 @@ class UserPolicy < BasePolicy
           roles.include?(:ticket_seller) || roles.include?(:admin) || roles.include?(:committee)
         end
       end
-
   end
 
   attr_reader :user, :object
