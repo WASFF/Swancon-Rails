@@ -10,3 +10,8 @@ Admin.PurchaseCompleteController = Ember.Controller.extend
   orderUrl: (->
     "/orders/#{@get("model.userOrderId")}"
   ).property("model.userOrderId")
+
+  actions:
+    complete: ->
+      @transitionToRoute('front_desk')
+      @send('removeModal')
