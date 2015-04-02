@@ -78,8 +78,8 @@ Admin.Member = DS.Model.extend
     addressState = @get("addressState")
     errors = @get("errors") 
     errors.remove("addressState")
-    unless addressState.length > 2
-      errors.add("addressState", "must have at more than two characters")
+    unless addressState.length > 1
+      errors.add("addressState", "must have at more than one character")
 
   ).observes("addressState")
 
