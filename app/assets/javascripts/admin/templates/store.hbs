@@ -1,0 +1,75 @@
+<div id="cart">
+<h1>Cart</h1>
+<h2>Total: {{render-currency total}}</h2>
+{{#if showAllCart}}
+<button {{action 'hideCart'}}>Hide Cart</button>
+<button {{action 'resetCart'}}>Reset Cart</button>
+{{#if tickets.length}}
+  <h2>Tickets</h2>
+
+  <ul>
+  {{#each ticket in tickets}}
+    <li>
+      {{ticket.name}}
+      {{#if ticket.concession}} - concession{{/if}}
+      - {{render-currency ticket.price}}
+      <button class="ticket_button" {{action 'removeTicket' ticket}}>Remove</button>
+    </li>
+  {{/each}}
+  </ul>
+{{/if}}
+{{#if merchandise.length}}
+  <h2>Merchandise</h2>
+  <ul>
+  {{#each merch in merchandise}}
+    <li>
+      {{merch.name}}{{merch.optionsString}}
+      - {{render-currency merch.price}}
+      <button class="ticket_button" {{action 'removeMerchandise' merch}}>Remove</button>
+    </li>
+  {{/each}}
+  </ul>
+{{/if}}
+Payment Type: {{view "select" content=paymentTypes optionLabelPath='content.name' optionValuePath='content' value=currentPaymentType}}
+<button {{action 'checkOut'}}>Check Out</button>
+{{else}}
+<button {{action 'showCart'}}>Show Cart</button>
+{{/if}}
+</div>
+<h1>Store for {{model.nameReal}}</h1>
+<h2>Badge Name: {{model.nameBadge}}</h2>
+
+{{#unless loaded}}
+Loading Data...
+{{else}}
+<button {{action 'toggleTickets'}}>{{toggleTicketButtonName}} Tickets</button>
+<button {{action 'toggleMerchandise'}}>{{toggleMerchandiseButtonName}} Merchandise</button>
+{{#if showTickets}}
+  <h2>Tickets</h2>
+  {{#each set in ticketSets}}
+    <h3>{{set.name}}</h3>
+    <ul>
+      {{#each ticket in set.tickets}}
+        <li>{{ticket.name}}
+          <button class="ticket_button" {{action 'addFullTicket' ticket}}>Full: {{render-currency ticket.price}}</button>
+          {{#if ticket.concessionPrice}}
+            <button class="ticket_button" {{action 'addConcessionTicket' ticket}}>Concession: {{render-currency ticket.concessionPrice}}</button>
+          {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/each}}
+{{/if}}
+{{#if showMerchandise}}
+  <h2>Merchandise</h2>
+  {{#each set in merchandiseSets}}
+    <h3>{{set.name}}</h3>
+    {{#each merch in set.merchandise}}
+      <li>{{merch.name}}
+        <button class="ticket_button" {{action 'addMerchandise' merch}}>{{render-currency merch.price}}</button>
+      </li>    
+    {{/each}}
+  {{/each}}
+{{/if}}
+
+{{/unless}}

@@ -29,13 +29,22 @@ class UserOrderPolicy < BasePolicy
   end
 
   def void?
-    if admin
-      true
-    elsif object.is_a? UserOrder
-      object.user == user || object.operator == user
+    if owns_order?
+      object.voidable?
     else
       false
     end
   end
+
+  def unvoid?
+    owns_order?
+  end
+
+private
+
+  def owns_order?
+    admin || ((object.is_a? UserOrder) && (object.user == user || object.operator == user)) 
+  end
+
 end
 

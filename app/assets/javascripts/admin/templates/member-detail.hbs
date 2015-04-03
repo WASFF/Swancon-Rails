@@ -1,0 +1,157 @@
+{{#modal-dialog title=title action='cancel'}}
+  <fieldset>
+    <legend>Name</legend>
+    <div class="input">
+      <label for="name_first">First Name</label>
+      {{input value=model.nameFirst name='name_first'}}
+      {{#if model.errors.nameFirst.length}}
+        <div class="error">
+        {{#each error in model.errors.nameFirst}}
+          {{error.message}}{{#unless last}},{{/unless}}
+        {{/each}}
+        </div>
+      {{/if}}
+    </div>
+    <div class="input">
+      <label for="name_last">Last Name</label>
+      {{input value=model.nameLast name='name_last'}}
+      {{#if model.errors.nameLast.length}}
+        <div class="error">
+        {{#each model.errors.nameLast}}
+          {{message}}{{#unless last}},{{/unless}}
+        {{/each}}
+        </div>
+      {{/if}}
+    </div>
+    <div>
+      <label for="name_badge">Name for Badge</label>
+      {{input value=model.nameBadge name='name_badge'}}
+      {{#if model.errors.nameBadge.length}}
+        <span class="error">
+        {{#each model.errors.nameBadge}}
+          {{message}}{{#unless last}},{{/unless}}
+        {{/each}}
+        </span>
+      {{/if}}
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Login and Contact Details</legend>
+    <div class="input">
+      <label for="username">Username</label>
+      {{input value=model.username name='username'}}
+      {{#if model.errors.username.length}}
+        <div class="error">
+        {{#each model.errors.username}}
+          {{message}}{{#unless last}},{{/unless}}
+        {{/each}}
+        </div>
+      {{/if}}
+    </div>
+    <div class="input">
+      <label for="email">Email Address</label>
+      {{input value=model.email name='email' size='40'}}
+      {{#if model.errors.email.length}}
+        <div class="error">
+        {{#each model.errors.email}}
+          {{message}}{{#unless last}},{{/unless}}
+        {{/each}}
+        </div>
+      {{/if}}
+    </div>
+    <div class="input">
+      <label for="phone">Phone</label>
+      {{input value=model.phone name='phone'}}
+      {{#if model.errors.phone.length}}
+        <div class="error">
+        {{#each model.errors.phone}}
+          {{message}}{{#unless last}},{{/unless}}
+        {{/each}}
+        </div>
+      {{/if}}
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Address</legend>
+    <div>
+      {{input value=model.address_1 name='address_1' size='40'}}
+      {{#if model.errors.address_1.length}}
+        <span class="error">
+        {{#each model.errors.address_1}}
+          {{message}}{{#unless last}},{{/unless}}
+        {{/each}}
+        </span>
+      {{/if}}
+    </div>
+    <div>
+      {{input value=model.address_2 name='address_2' size='40'}}
+      {{#if model.errors.address_2.length}}
+        <span class="error">
+        {{#each model.errors.address_2}}
+          {{message}}{{#unless last}},{{/unless}}
+        {{/each}}
+        </span>
+      {{/if}}      
+    </div>
+    <div>
+      <div class="input">
+        <label for="address_3">City / Suburb</label>
+        {{input value=model.address_3 name='address_3'}}
+        {{#if model.errors.address_3.length}}
+          <div class="error">
+          {{#each model.errors.address_3}}
+            {{message}}{{#unless last}},{{/unless}}
+          {{/each}}
+          </div>
+        {{/if}}
+      </div>
+      <div class="input">
+        <label for="address_state">State</label>
+        {{input value=model.addressState name='address_state'}}      
+        {{#if model.errors.addressState.length}}
+          <div class="error">
+          {{#each model.errors.addressState}}
+            {{message}}{{#unless last}},{{/unless}}
+          {{/each}}
+          </div>
+        {{/if}}
+      </div>
+    </div>
+    <div>
+      <label for="address_country">Country</label>
+      {{input value=model.addressCountry name='address_country'}}      
+      {{#if model.errors.addressCountry.length}}
+        <span class="error">
+        {{#each model.errors.addressCountry}}
+          {{message}}{{#unless last}},{{/unless}}
+        {{/each}}
+        </span>
+      {{/if}}
+    </div>
+    <div>
+      <label for="address_postcode">Postcode</label>
+      {{input value=model.addressPostcode name='address_postcode'}}      
+      {{#if model.errors.addressPostcode.length}}
+        <span class="error">
+        {{#each model.errors.addressPostcode}}
+          {{message}}{{#unless last}},{{/unless}}
+        {{/each}}
+        </span>
+      {{/if}}
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Questions</legend>
+    <div>
+      <label for="emails">Can we send you emails?</label>
+      {{input type="checkbox" name="emails" checked=model.emailOptin}}
+    </div>
+    <div>
+      <label for="disclaimer">I agree to the disclaimer</label>
+      {{input type="checkbox" name="disclaimer" checked=model.disclaimerSigned}}
+    </div>
+  </fieldset>
+  <div>
+    <button {{action 'save'}} {{bind-attr disabled="saveButtonDisabled"}}>{{saveButtonName}}</button>
+  </div>
+{{/modal-dialog}}

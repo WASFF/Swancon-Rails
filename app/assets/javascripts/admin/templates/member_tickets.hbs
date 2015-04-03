@@ -1,0 +1,46 @@
+<h1>Tickets for {{member.nameReal}}</h1>
+<h2>Badge Name: {{member.nameBadge}}</h2>
+<div class='back'>{{#link-to 'front_desk'}}Back{{/link-to}}</div>
+{{#if error}}
+Error Loading Tickets
+{{else}}
+<h1>Tickets</h1>
+<table class='ticket_results'>
+  <tr>
+    <th>Ticket Set</th>
+    <th>Ticket Name</th>
+    <th>Concession</th>
+    <th>Sold At</th>
+    <th>Paid At</th>
+    <th>Redeemed At</th>
+    <th>Actions</th>
+  </tr>
+  {{#each ticket in model}}
+    <tr {{bind-attr class="ticket.redeemable:redeemable:redeemed"}}>
+      <td>{{ticket.type.set.name}}</td>
+      <td>{{ticket.type.name}}</td>
+      <td>{{render-boolean ticket.concession}}</td>
+      <td>{{render-date ticket.createdAt}}</td>
+      <td>{{render-date ticket.paidAt}}</td>
+      <td>{{render-date ticket.redeemedAt}}</td>
+
+      <td>
+        {{#unless ticket.working}}
+          {{#if ticket.redeemable}}
+            <button {{action 'redeemTicket' ticket}}>Redeem</button>
+          {{/if}}
+          {{#if ticket.paidAt}}
+            <button {{action 'unRedeemTicket' ticket}}>Un Redeem</button>
+          {{else}}
+            Not Paid.
+          {{/if}}
+        {{else}}
+          Working...
+        {{/unless}}
+      </td>
+    </tr>
+  {{/each}}
+</table>
+{{/if}}
+
+{{#link-to 'store' member}}<button>Store</button>{{/link-to}}

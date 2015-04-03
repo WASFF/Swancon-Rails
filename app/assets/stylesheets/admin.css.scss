@@ -9,6 +9,119 @@ ul.link {
 	display: none;
 }
 
-table#gather_member_search_results {
+table {
 	width: 100%;
+}
+
+#admin-app {
+  position: relative;
+}
+
+ul.operator_select {
+  list-style: none;
+  height: 100%;
+  li {
+    position: relative;
+    display: inline-block;
+    width: 40%;
+    height: 100%;
+  }
+  li:first-child {
+    background: rgb(200, 200, 200);
+    border-right: 1px solid black;
+  }
+  a {
+    color: blue;
+  }
+}
+
+.noscroll {
+  overflow: hidden;
+}
+
+#member_details {
+  float:right;
+  border-left: 1px solid black;
+  padding-left: 5px;
+}
+
+#cart {
+  float: right;
+  border: 1px solid;
+}
+
+button.ticket_button {
+  min-height: 40px;
+  padding: 0 7px;
+  margin: 5px 0;
+}
+
+.modal {
+  content: "";
+  background: rgba(0,0,0,0.6);
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 10;
+
+  &:target {
+    &:before {
+      display: block;
+    }
+    .modal-dialog {
+      top: 20%;
+    }
+  }
+
+  .dialog {
+    background: #fefefe;
+    border: gray solid 1px;
+    border-radius: 5px;
+    z-index: 11;
+    max-width: 75%;
+    max-height: 90%;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: scroll;
+    
+    .title {
+      display: block;
+      padding: 5px;
+      background-color: gray;
+      color: white;
+      button {
+        float: right;
+        padding: 0 5px;
+      }
+    }
+
+    .body {
+      display: block;
+      padding: 5px;
+    }
+  }
+
+  fieldset {
+    display: inline-block;
+  }
+
+  input[type=text],
+  input[type=password],
+  input[type=number],
+  input[type=date],
+  input[type=url],
+  input[type=email],
+  input[type=tel],
+  textarea,
+  select {
+    display: inline-block;
+  }
+
+  .input {
+    display: inline-block;
+  }
+}
+
+.error {
+  color: red;
 }

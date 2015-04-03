@@ -1,0 +1,39 @@
+- if @allorders
+  %h1 Listing Orders
+- else
+  %h1 Your Orders
+
+%div (click on column headings to sort, or order number for more detail)
+
+%table{class: "sortable orders"}
+  %tr
+    %th Order/Invoice No.
+    - if @allorders
+      %th User
+    %th Items
+    %th Placed
+    %th Amount
+    %th Status
+    %th Void?
+
+  - @orders.each do |order|
+    %tr{class: ("void" if order.void?)}
+      %td= link_to order.invoice_number, order_path(order)
+      - if @allorders
+        -if order.user.present?
+          %td= link_to order.user.try(:order_name), users_admin_path(order.user)
+        -else
+          %td N/A
+      %td= order.number_of_items
+      %td{class: "date"}= order.created_at.strftime("%d/%m/%Y %H:%M")
+      %td{class: "currency"}= render_money(order.total)
+      %td
+        - if order.paid?
+          paid
+        - else
+          unpaid
+      %td
+        - if order.void?
+          = link_to_if policy(order).unvoid?, 'Yes', unvoid_order_path(order), method: :post, confirm: "Unvoid this order?"
+        - else
+          = link_to_if policy(order).void?, 'No', void_order_path(order), method: :post, confirm: "Void this order?"

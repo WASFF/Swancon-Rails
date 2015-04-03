@@ -2,6 +2,7 @@ class TicketsController < ApplicationController
 	before_filter :authorize_path!
 	
 	def index
+		@title = "Membership List"
 		@all = true
 		@multiple = false
 		@pending = false
@@ -21,6 +22,19 @@ class TicketsController < ApplicationController
 			@cards = true
 			@subquery = :cards_unsent
 		end
+	end
+
+	def export_all_tickets
+		user_order_ids = UserOrder.unvoid.pluck(:id)
+		@tickets = UserOrderTicket.where(user_order_id: user_order_ids).
+			includes(ticket_type: :ticket_set).includes(user: :member_detail).
+			order("ticket_sets.name, ticket_types.name, member_details.name_first").
+			all
+		headers.merge!({
+			'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+			'Content-Type' => 'text/csv',
+			'Content-Transfer-Encoding' => 'binary'
+		})		
 	end
 
 	def export

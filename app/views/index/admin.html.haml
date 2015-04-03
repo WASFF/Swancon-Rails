@@ -6,7 +6,8 @@
 	%h1 CON MODE IS ENABLED
 
 %ul{class: "link"}
-	%li= link_to "Front Desk", controller: "seller", action: "select"
+	%li= link_to "New Front Desk", action: "adminapp"
+	%li= link_to "Old Front Desk", controller: "seller", action: "select"
 	%li{id: "details"} Member Administration
 	%li{id: "content_admin"} Content Administration
 	%li{id: "treas_admin"} Treasury Administration

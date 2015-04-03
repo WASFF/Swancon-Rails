@@ -1,0 +1,7 @@
+{{#modal-dialog title=title action='cancel'}}
+  <h1>Select Options</h1>
+  {{#each set in model.option_sets}}
+    {{set.name}} {{select-for-merchandise-options type=model set=set action='updateOptionForSet'}}
+  {{/each}}
+  <button {{bind-attr disabled="disableAddCart"}} {{action "addToCart"}}>Add To Cart</button>
+{{/modal-dialog}}

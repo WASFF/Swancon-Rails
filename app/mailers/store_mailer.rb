@@ -21,12 +21,22 @@ class StoreMailer < BaseMailer
 		)
 	end
 
+	def ticket_sold(payment, current_user = nil)
+		@payment = payment
+		@email = true
+		mail(
+			to: "memberships-#{Rails.application.config.swancon_year}@swancon.com.au",
+			subject: "New Payment Recieved: #{payment.receipt_number} for Order: #{order.invoice_number}",
+			current_user: current_user
+		)
+	end
+
 	def confirmation_required(order, current_user = nil)
 		@order = order
 		@email = true
 		mail(
 			to: "memberships-#{Rails.application.config.swancon_year}@swancon.com.au",
-			subject: "New Order Recieved: #{order.invoice_number}",
+			subject: "New Order Recieved: #{order.invoice_number} - requires Confirmation",
 			current_user: current_user
 		)
 	end
