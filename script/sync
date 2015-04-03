@@ -1,4 +1,4 @@
 #!/bin/sh
 
-scp sc2015@swancon-mel1.swancon.com.au:/home/sc2015/SwanconRails/production/shared/db/production.sqlite3 db/development.sqlite3
-rsync -avz --delete sc2015@swancon-mel1.swancon.com.au:/home/sc2015/SwanconRails/production/shared/public/system/attachments/production/ public/system/attachments/development
+scp sc2016@swancon-mel1.swancon.com.au:/home/sc2016/SwanconRails/staging/shared/db/staging.sqlite3 db/development.sqlite3
+rsync -avz --delete sc2016@swancon-mel1.swancon.com.au:/home/sc2016/SwanconRails/staging/shared/public/system/attachments/staging/ public/system/attachments/development
