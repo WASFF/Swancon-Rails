@@ -1,6 +1,6 @@
 Admin.StoreController = Ember.ObjectController.extend
   loaded: (->
-    @get("ticketSets")? && @get("paymentTypes")? && @get("merchandiseSets")
+    @get("ticketSets")? && @get("paymentTypes")? && @get("merchandiseSets")?
   ).property("ticketSets", "merchandiseSets", "paymentTypes")
 
   ticketSets: null
