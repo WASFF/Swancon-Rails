@@ -9,7 +9,9 @@ Error Loading Tickets
   <tr>
     <th>Ticket Set</th>
     <th>Ticket Name</th>
+    <th>Concession</th>
     <th>Sold At</th>
+    <th>Paid At</th>
     <th>Redeemed At</th>
     <th>Actions</th>
   </tr>
@@ -17,14 +19,20 @@ Error Loading Tickets
     <tr {{bind-attr class="ticket.redeemable:redeemable:redeemed"}}>
       <td>{{ticket.type.set.name}}</td>
       <td>{{ticket.type.name}}</td>
+      <td>{{render-boolean ticket.concession}}</td>
       <td>{{render-date ticket.createdAt}}</td>
+      <td>{{render-date ticket.paidAt}}</td>
       <td>{{render-date ticket.redeemedAt}}</td>
+
       <td>
         {{#unless ticket.working}}
           {{#if ticket.redeemable}}
             <button {{action 'redeemTicket' ticket}}>Redeem</button>
-          {{else}}
+          {{/if}}
+          {{#if ticket.paidAt}}
             <button {{action 'unRedeemTicket' ticket}}>Un Redeem</button>
+          {{else}}
+            Not Paid.
           {{/if}}
         {{else}}
           Working...
