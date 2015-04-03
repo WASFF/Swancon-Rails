@@ -1,4 +1,5 @@
 class Api::V1::MembersController < ApplicationController
+  skip_before_action :verify_authenticity_token
   respond_to :json
 
   def index
