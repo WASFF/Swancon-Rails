@@ -41,7 +41,7 @@ class PaymentTypesController < ApplicationController
   # POST /payment_types
   # POST /payment_types.xml
   def create
-    @payment_type = PaymentType.new(params[:payment_type])
+    @payment_type = PaymentType.new(payment_type_params)
 
     respond_to do |format|
       if @payment_type.save
@@ -60,7 +60,7 @@ class PaymentTypesController < ApplicationController
     @payment_type = PaymentType.find(params[:id])
 
     respond_to do |format|
-      if @payment_type.update_attributes(params[:payment_type])
+      if @payment_type.update_attributes(payment_type_params)
         format.html { redirect_to(@payment_type, :notice => 'Payment type was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -81,4 +81,12 @@ class PaymentTypesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+private
+  def payment_type_params
+    params.require(:payment_type).permit :name, :requires_reconciliation, 
+      :available_online, :available_to_ticket_seller, :surcharge_percent,
+      :surcharge_value
+  end
 end
+

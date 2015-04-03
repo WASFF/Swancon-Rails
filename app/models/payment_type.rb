@@ -40,5 +40,4 @@ class PaymentType < ActiveRecord::Base
 	def self.reseller_types
 		return PaymentType.where(available_to_ticket_seller: true)
 	end
-
 end

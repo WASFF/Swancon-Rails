@@ -1,6 +1,6 @@
 Admin.StoreController = Ember.ObjectController.extend
   loaded: (->
-    @get("ticketSets")? && @get("paymentTypes")? && @get("merchandiseSets")
+    @get("ticketSets")? && @get("paymentTypes")? && @get("merchandiseSets")?
   ).property("ticketSets", "merchandiseSets", "paymentTypes")
 
   ticketSets: null
@@ -45,7 +45,7 @@ Admin.StoreController = Ember.ObjectController.extend
     user_order_ticket = @store.createRecord('user_order_ticket')
     user_order_ticket.setProperties
       type: ticket
-      concession: ticket.get("concessionPrice") && concession 
+      concession: ticket.get("concessionPrice")? && concession 
     @get("tickets").addObject(user_order_ticket)
 
   actions: 

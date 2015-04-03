@@ -2,6 +2,7 @@ Admin.Member = DS.Model.extend
   nameBadge: DS.attr('string')
   nameFirst: DS.attr('string')
   nameFirstValidator: ( ->
+    return unless @get("isDirty")
     nameFirst = @get("nameFirst")
     errors = @get("errors") 
     errors.remove("nameFirst")
@@ -31,6 +32,7 @@ Admin.Member = DS.Model.extend
   
   username: DS.attr('string')
   usernameValidator: ( ->
+    return unless @get("isDirty")
     username = @get("username")
     errors = @get("errors") 
     errors.remove("username")
@@ -42,6 +44,7 @@ Admin.Member = DS.Model.extend
   
   email: DS.attr('string')
   emailValidator: ( ->
+    return unless @get("isDirty")
     email = @get("email")
     errors = @get("errors") 
     errors.remove("email")
@@ -56,6 +59,7 @@ Admin.Member = DS.Model.extend
   
   address_1: DS.attr('string')
   address_1Validator: ( ->
+    return unless @get("isDirty")
     address_1 = @get("address_1")
     errors = @get("errors") 
     errors.remove("address_1")
@@ -66,6 +70,7 @@ Admin.Member = DS.Model.extend
   address_2: DS.attr('string')
   address_3: DS.attr('string')
   address_3Validator: ( ->
+    return unless @get("isDirty")
     address_3 = @get("address_3")
     errors = @get("errors") 
     errors.remove("address_3")
@@ -75,6 +80,7 @@ Admin.Member = DS.Model.extend
 
   addressState: DS.attr('string')
   stateValidator: ( ->
+    return unless @get("isDirty")
     addressState = @get("addressState")
     errors = @get("errors") 
     errors.remove("addressState")
@@ -85,6 +91,7 @@ Admin.Member = DS.Model.extend
 
   addressPostcode: DS.attr('string')
   postcodeValidator: ( ->
+    return unless @get("isDirty")
     addressPostcode = @get("addressPostcode")
     errors = @get("errors") 
     errors.remove("addressPostcode")
