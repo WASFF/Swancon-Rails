@@ -1,4 +1,4 @@
-csv << [ 'Ticket Set', 'Ticket Type', 'Concession', 'Price',
+csv << [ 'Ticket Set', 'Ticket Type', 'Payment Type', 'Concession', 'Price',
   'Surname', 'First Name', 'Badge Name', 'Username', 'Email Address',
   'Street Address', 'Suburb', 'Postcode', 'State', 'Country', 'Phone Number',
   'Emailable?', 'Signed Disclaimer?',
@@ -12,6 +12,7 @@ csv << [ 'Ticket Set', 'Ticket Type', 'Concession', 'Price',
 
   output << ticket.type.set.name
   output << ticket.type.name
+  output << ticket.order.payment_type.name
   output << ticket.concession
   output << ticket.type.price
   output << details.try(:name_last)
