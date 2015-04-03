@@ -3,12 +3,13 @@ Admin.UserOrderTicket = DS.Model.extend
   createdAt: DS.attr('date')
   updatedAt: DS.attr('date')
   redeemedAt: DS.attr('date')
+  paidAt: DS.attr('date')
   userOrderId: DS.attr('number')
   member: DS.belongsTo('member', {inverse: 'tickets'})
   type: DS.belongsTo('ticket_type')
 
   redeemable: (->
-    !@get("redeemedAt")
+    !@get("redeemedAt")? && @get("paidAt")?
   ).property("redeemedAt")
 
   redeemed: (->
