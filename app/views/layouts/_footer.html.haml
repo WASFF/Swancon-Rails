@@ -20,15 +20,17 @@
       %h2 Site Map
       %nav
         %ul
-          - menu_items.each do |item|
-            %li
-              = link_to item[:name].upcase, item[:path]
+          - if can_show_content
+            - menu_items.each do |item|
+              %li
+                = link_to item[:name].upcase, item[:path]
           %li
             = link_to "Login", "#"
           %li
             = link_to "Sign up", "#"   
-      .store
-        =link_to "Buy Memberships!", store_path, class: "btn btn-primary"
+      - if can_show_content
+        .store
+          =link_to "Buy Memberships!", store_path, class: "btn btn-primary"
       .social
         = link_to "https://www.facebook.com/groups/5668237047/" do 
           = image_tag("facebooklogo.svg", alt: "Swancon on Facebook", width: 96)
