@@ -93,6 +93,7 @@ module ApplicationHelper
   end
 
   def can_show_content
+    return true if controller_name == "sessions"
     Time.new > Time.parse(reveal_time) or user_can_visit? :index, :admin
   end
 
