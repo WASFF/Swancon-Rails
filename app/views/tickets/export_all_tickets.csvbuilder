@@ -14,7 +14,11 @@ csv << [ 'Ticket Set', 'Ticket Type', 'Payment Type', 'Concession', 'Price',
   output << ticket.type.name
   output << ticket.order.payment_type.name
   output << ticket.concession
-  output << ticket.type.price
+  if ticket.concession
+    output << ticket.type.concession_price
+  else
+    output << ticket.type.price
+  end
   output << details.try(:name_last)
   output << details.try(:name_first)
   output << details.try(:name)
