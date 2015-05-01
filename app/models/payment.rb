@@ -7,19 +7,19 @@ class Payment < ActiveRecord::Base
 	belongs_to :voiding_user, :class_name => "User"
 	
 	def receipt_number
-		sprintf "2015-%05d", id
+		sprintf "2016-%05d", id
 	end
 	
 	def reciept_number
-		sprintf "2015-%05d", id
+		sprintf "2016-%05d", id
 	end
 	
 	def receipt
-		sprintf "2015-%05d", id
+		sprintf "2016-%05d", id
 	end
 	
 	def receipt
-		sprintf "2015-%05d", id		
+		sprintf "2016-%05d", id		
 	end
 	
 	def order

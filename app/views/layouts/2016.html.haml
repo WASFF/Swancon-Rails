@@ -1,0 +1,44 @@
+!!! 5
+!!!
+%html
+  %head
+    = stylesheet_link_tag "2016-print", :media => "print"
+    = stylesheet_link_tag '2016', media: 'all'
+    = javascript_include_tag "2016.js"
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300,400italic,600,600italic' rel='stylesheet' type='text/css'>
+    %meta{http_equiv: "Content-Type", content:"text/html; charset=UTF-8"}
+    %title= @title
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
+    %meta{charset: "utf-8"}
+    %meta{name: "description", content: "Come and join us as WA's premier literary speculative fiction convention celebrates it's 41st anniversary."}    
+    %meta{name: "keywords", content: "swancon 2016 perth wa convention conventions club clubs meetup meetups expos science fiction fantasy speculative con scene australia"}
+    %meta{property: "og:site_name", content: "Swancon"}
+    %meta{property: "og:image", content: image_url("ruby-facebook.png", only_path: false)}
+    %meta{property: "article:publisher", content: "https://www.facebook.com/Swancon"}
+    = csrf_meta_tag
+    = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
+    = yield :header
+
+  %body{ data: { controller: controller.controller_path, action: controller.action_name }, class: get_body_classes }
+    - if Rails.env == "staging"
+      %div#staging You are on the Staging site. None of your changes will be reflected on the real site.
+    
+    = render partial: 'layouts/header'
+    .main
+      - flash.each do |name, msg|
+        %div{class: "flash-wrapper"}
+          .flash.container
+            %p=msg
+
+      - if can_show_content
+        = yield    
+      - else
+        %section
+          %article{class: "centered"}
+            %h1
+              Swancon 41 is currently in stealth mode
+            %h1
+              All will be revealed
+              = render_clock  
+                 
+    = render partial: 'layouts/footer'

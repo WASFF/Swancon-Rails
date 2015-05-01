@@ -1,16 +1,17 @@
 %header#header
   .container
-    %h1 Swancon 2015
+    %h1 Swancon 2016
     .logo
       = link_to root_url do 
-        = image_tag("swancon-logo.png", alt: "Swancon's 40th Anniversary", title: "Swancon 2015", width: "164", height: "35")
+        = image_tag("SwanconLogo-stacked.svg", alt: "Swancon's 41st Anniversary", height: 110, title: "Swancon 2016")
     %nav{ role: "navigation" }
-      %ul.main-nav
-        %li
-          = link_to "Buy memberships", store_path        
-        - menu_items.each do |item|
+      - if can_show_content
+        %ul.main-nav
           %li
-            = link_to item[:name].upcase, item[:path]
+            = link_to "Buy memberships", store_path        
+          - menu_items.each do |item|
+            %li
+              = link_to item[:name].upcase, item[:path]
 
       - if user_signed_in?
         .user-actions
