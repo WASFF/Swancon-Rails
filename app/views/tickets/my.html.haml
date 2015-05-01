@@ -1,0 +1,18 @@
+%h2 My Memberships
+
+- @sets.each do |set|
+  = set.name
+  Memberships (
+  = set.tickets_for(current_user).count
+  )
+
+  %table{width:"100%"}
+    %tr
+      %th Purchaser
+      %th Payment Verified
+      %th Card Issued
+      %th Type
+      %th Actions
+
+    - set.tickets_for(current_user).each do |ticket|
+      = render partial: "ticket", locals: {all: false, ticket: ticket}
