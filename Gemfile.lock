@@ -292,3 +292,6 @@ DEPENDENCIES
   sqlite3
   squeel
   uglifier
+
+BUNDLED WITH
+   1.10.3
