@@ -199,7 +199,7 @@ class StoreController < ApplicationController
 							StoreMailer.confirmation_required(order, current_user).deliver
 							flash[:notice] += ", Email Sent"
 						else
-							flash[:notice] += ", User has no email address. Ensure they take their reciept print out (print this page)!"
+							flash[:notice] += ", User has no email address. Ensure they take their receipt print out (print this page)!"
 						end
 					end
 				else

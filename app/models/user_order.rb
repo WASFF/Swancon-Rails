@@ -12,19 +12,19 @@ class UserOrder < ActiveRecord::Base
 	}
 
 	def invoice_number
-		sprintf "2016-ORDER-%05d", id
+		sprintf "2017-ORDER-%05d", id
 	end
 	
 	def invoice
-		sprintf "2016-ORDER-%05d", id		
+		sprintf "2017-ORDER-%05d", id		
 	end
 	
 	def short_invoice
-		sprintf "2016%05d", id		
+		sprintf "2017%05d", id		
 	end
 	
 	def short_invoice_number
-		sprintf "2016%05d", id
+		sprintf "2017%05d", id
 	end
 
 	def merchandise

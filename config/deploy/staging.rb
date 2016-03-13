@@ -4,13 +4,13 @@
 # server in each group is considered to be the first
 # unless any hosts have the primary property set.
 # Don't declare `role :all`, it's a meta role
-role :app, %w{sc2016@swancon-mel1.swancon.com.au}
-role :web, %w{sc2016@swancon-mel1.swancon.com.au}
-role :db,  %w{sc2016@swancon-mel1.swancon.com.au}
+role :app, %w{sc2017@swancon-mel1.swancon.com.au}
+role :web, %w{sc2017@swancon-mel1.swancon.com.au}
+role :db,  %w{sc2017@swancon-mel1.swancon.com.au}
 
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :deploy_to, '/home/sc2016/SwanconRails/staging'
+set :deploy_to, '/home/sc2017/SwanconRails/staging'
 
 set :linked_files, fetch(:base_linked_files) + ["db/staging.sqlite3"]
 set :linked_dirs, fetch(:base_linked_dirs)

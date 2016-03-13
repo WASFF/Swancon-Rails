@@ -1,8 +1,8 @@
-csv << [ 'Reciept Number', 'Price', 'sold_at', 'Member ID', 'First Name', 'Surname',
+csv << [ 'Receipt Number', 'Price', 'sold_at', 'Member ID', 'First Name', 'Surname',
 			"Badge Name", "Username", "Email Address", "Street Addresss",
 			"Suburb", "Postcode", "State", "Country", "Phone Number",
 			"Can Be Emailed?", "Has Signed Disclaimer?", "Membership Card Send Date?"]
-outputorder = ['reciept', 'price', 'soldat', 'memberid', 'firstname', 'surname', 
+outputorder = ['receipt', 'price', 'soldat', 'memberid', 'firstname', 'surname', 
 			'badgename', "username", "email", "address", "suburb",
 			"postcode", "state", "country", "phone", "emailoptin", "emailoptin", "disclaimer", "card_issue"]
 
@@ -10,11 +10,11 @@ outputorder = ['reciept', 'price', 'soldat', 'memberid', 'firstname', 'surname',
 	data = Hash.new
 	output = Array.new
 
-	if outputorder.include? 'reciept'
+	if outputorder.include? 'receipt'
 		if ticket.user_order.payment != nil
-			data["reciept"] = ticket.user_order.payment.receipt_number
+			data["receipt"] = ticket.user_order.payment.receipt_number
 		else
-			data["reciept"] = "No Payment"
+			data["receipt"] = "No Payment"
 		end
 	end
 

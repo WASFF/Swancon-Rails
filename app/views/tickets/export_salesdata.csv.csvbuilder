@@ -1,4 +1,4 @@
-csv << [ 'Reciept Number' ,'Price', 'sold_at' ]
+csv << [ 'Receipt Number' ,'Price', 'sold_at' ]
 
 @tickets.each do |user_order_ticket| 
 	if user_order_ticket.user_order.payment != nil

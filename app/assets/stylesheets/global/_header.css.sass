@@ -1,14 +1,58 @@
 body > header
   +pie-clearfix
-  background: $section-bg
+  display: block
+  //background: $section-bg
   h1
     @extend %screen-reader
   .logo
     position: relative
     z-index: 4
-    float: left
+    //float: left
     margin-top: 12px
     margin-right: 10px
+  .container
+    background-color: #000000
+    background-image: url("Swancon42Background-body.jpg")
+    background-repeat: repeat
+    margin-left: auto
+    margin-right: auto
+    padding-left: $gutter
+    padding-right: $gutter
+    max-width: $site-width
+
+  .logo1d
+    display: inline
+    display: table-cell
+    z-index: 4
+  .logo2d
+    display: inline
+    display: table-cell
+    z-index: 4
+    text-align: right
+    width: 0% //please script this variable to change from 0 at launch to 100% at open
+  .logo3d
+    display: inline
+    display: table-cell
+    z-index: 4
+    text-align: right
+    width: 100%
+
+  .logo1i
+    max-width: 120px
+    max-height: 80px
+    padding-left: 0px
+    padding-right: 0px
+  .logo2i
+    max-width: 120px
+    max-height: 80px
+    padding-left: 0px
+    padding-right: 0px
+  .logo3i
+    max-width: 120px
+    max-height: 80px
+    padding-left: 0px
+    padding-right: 0px
+
   nav
     +pie-clearfix
     float: float
@@ -48,11 +92,15 @@ body > header
     top: 74px
     right: 0
     display: none
-    border: 1px solid $break-color
-    background-color: $section-bg
-    background: whiten($section-bg-alt2, 0.75)
+    //border: 1px solid $break-color
+    border: 1px solid whiten($brand-backgroundui, 0.50)
+    //background-color: $section-bg
+    background-color: $brand-backgroundui
+    //background: whiten($section-bg-alt2, 0.75)
+    background: $brand-backgroundui
   li
-    border-top: 1px solid whiten($break-color, 0.5)
+    //border-top: 1px solid whiten($break-color, 0.5)
+    border-top: 1px solid whiten($brand-backgroundui, 0.50)
     &:first-child
       border-top: none
   a
@@ -60,9 +108,11 @@ body > header
   &.is-visible
     .dropdown
       border: 1px solid $break-color
+      border: 1px solid whiten($brand-backgroundui, 0.50)
       border-bottom: none
       padding-bottom: 28px
-      background: whiten($section-bg-alt2, 0.75)
+      //background: whiten($section-bg-alt2, 0.75)
+      background: $brand-backgroundui
     ul
       display: block
       width: 200px

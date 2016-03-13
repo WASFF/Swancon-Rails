@@ -51,7 +51,7 @@ class StoreMailer < BaseMailer
 		subject = "Swancon T-Shirt Order"
 		@orders.each do |order|
 			if order.payment != nil
-				subject += " [#{order.payment.reciept_number}]"
+				subject += " [#{order.payment.receipt_number}]"
 			end
 		end
 		mail(

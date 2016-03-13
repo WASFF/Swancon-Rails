@@ -1,22 +1,36 @@
 %footer#footer
-  .container
+  .containerfoot
     .contact
-      %h2 Contact Us
-      %dl
-        %dt Convenor:
-        %dd Izzy
-        %dt Secretary:
-        %dd= link_to "Evan", "mailto:secretary-2016@swancon.com.au"
-        %dt Treasurer:
-        %dd Jack
-        %dt Programmer:
-        %dd= link_to "Frames", "mailto:programmer-2016@swancon.com.au"      
-        %dt Gaming:
-        %dd Adrian
-      %p
-        %strong Contact email:
-        %br= link_to "secretary-2016@swancon.com.au", "mailto:secretary-2016@swancon.com.au"
-    .site-map
+      %center
+        %h2 Contact Us
+        %table
+          %tbody
+            %tr
+              %td
+                %dl
+                  %dt Convenors:
+                  %dd= link_to "Chris and Brian", "mailto:convenor-2017@swancon.com.au"
+                  %dt Secretary:
+                  %dd= link_to "Secretary", "mailto:secretary-2017@swancon.com.au"
+                  %dt Treasurer:
+                  %dd= link_to "Kim", "mailto:treasurer-2017@swancon.com.au"
+              %td
+                %dl
+                  %dt
+                    %strong Contact email:
+                  %dd
+                    = link_to "secretary-2017@swancon.com.au", "mailto:secretary-2017@swancon.com.au"
+                  %dt Programmer:
+                  %dd= link_to "Michael", "mailto:programmer-2017@swancon.com.au"      
+                  -#%dt Gaming:
+                  -#%dd Michael
+              %td
+                .social
+                  = link_to "https://www.facebook.com/groups/5668237047/" do 
+                    = image_tag("facebooklogo.svg", alt: "Swancon on Facebook", width: 96)
+                  = link_to "https://twitter.com/Swancon" do
+                    = image_tag("twitterlogo.svg", alt: "Swancon on Twitter", width: 96)
+    -#.site-map
       %h2 Site Map
       %nav
         %ul
@@ -41,7 +55,7 @@
     = link_to "WASFF", "http://wasff.sf.org.au"
     project
     %div
-      The Swancon 41 website is based upon the Swancon 40 design by 
+      The Swancon 42 website is based upon the Swancon 40 design by 
       = link_to "Julia Alison", "http://julia-alison.com"
     %div
       If you encounter any errors with the website, please report them 

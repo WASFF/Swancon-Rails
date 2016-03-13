@@ -1,9 +1,21 @@
 // ----- Brand -----
 // $brand-2015-orange: #fb4e45
-$brand-2016-blue: #091382
+// $brand-2016-blue: #091382
+
+// ----- Colour theme 2017 ----- //
+$brand-background1:     #000000 // background base
+$brand-background2:     #101010 // background for sections
+$brand-backgroundui:    #303030 // background for usermenu
+$brand-text:            #fff    //
+$brand-text-special:    #ff0000 //
+$brand-links:           #e0e000 //
+$brand-btn-text:        #000    //
+$brand-btn-bg:          #e65000 //
+$brand-user-borders:    #fff    //
 
 // ----- Shades -----
-$brand-dark: #504455
+//$brand-dark: #504455
+$brand-dark: $brand-text
 $brand-grey-light: #f9f9f9
 
 // ----- colours that work with the band for the app -----
@@ -25,10 +37,14 @@ $section-padding: ($grid * 2) // different too $gutter, as its used for padding 
 $section-padding-home: ($grid * 5)
 
 // -----  Base styles  -----
-$section-bg-alt2: $brand-grey-light
-$section-bg: #fff
+//$section-bg-alt2: $brand-grey-light
+//$section-bg: #fff
+//$app-bg-color: $section-bg-alt2
+//$break-color: lighten($brand-dark, 0.80)
+$section-bg-alt2: $brand-background2
+$section-bg: $brand-background1
 $app-bg-color: $section-bg-alt2
-$break-color: lighten($brand-dark, 0.80)
+$break-color: $brand-user-borders // lighten($brand-dark, 0.80)
 
 // -----  Typography  -----
 $fonts: "Open Sans", sans-serif
@@ -36,13 +52,18 @@ $heading-font: "Open Sans", sans-serif
 $body-copy: 400 16px/1.5 $fonts
 $copy-color: $brand-dark
 $copy-minor-color: lighten($copy-color, 0.3)
-$copy-important-color: $brand-2016-blue
-$link-color: $brand-2016-blue
+$copy-important-color: $brand-text-special
+$link-color: $brand-links
+//$copy-important-color: $brand-2016-blue
+//$link-color: $brand-2016-blue
 
 // ----- Buttons -----
 $btn-text: 400 15px/1.5 $fonts
-$btn-default-bg: $brand-dark
-$btn-primary-bg: $brand-2016-blue
+$btn-default-bg: $brand-btn-text
+$btn-primary: $brand-btn-text
+$btn-primary-bg: $brand-btn-bg
+//$btn-default-bg: $brand-dark
+//$btn-primary-bg: $brand-2016-blue
 $btn-padding: 7px 20px // same height as inputs & selects (36px)
 
 // ----- Forms and Tables -----

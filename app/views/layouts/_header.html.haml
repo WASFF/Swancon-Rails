@@ -1,9 +1,15 @@
 %header#header
   .container
-    %h1 Swancon 2016
-    .logo
-      = link_to root_url do 
-        = image_tag("SwanconLogo-stacked.svg", alt: "Swancon's 41st Anniversary", height: 110, title: "Swancon 2016")
+    %h1 Swancon 2017
+    .logo1d
+      = link_to root_url do
+        = image_tag("Swancon42DisasterArea.png", alt: "Swancon 42 Launch", title: "Swancon 42 Launch", class: "logo1i")
+    .logo2d
+      = link_to root_url do
+        = image_tag("Swancon42Marvin.png", alt: "Progress", title: "Swancon 42 Progress", class: "logo2i")
+    .logo3d
+      = link_to root_url do
+        = image_tag("Swancon42HeaderLogo.png", alt: "Swancon 42", title: "Swancon 42", class: "logo3i")
     %nav{ role: "navigation" }
       - if can_show_content
         %ul.main-nav

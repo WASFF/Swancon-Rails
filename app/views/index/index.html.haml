@@ -5,8 +5,9 @@
       = items_for_tag("intro").first[:rendered_text]
     - else
       %h2
-        Over Easter 2016 We're celebrating 41 years of
-        %strong Swancon
+        %strong Swancon 42<br>
+        13-17 April, 2017<br>
+        (Easter)
     =link_to "Get memberships now!", store_path, class: "btn btn-primary"
 
 .about
@@ -16,9 +17,8 @@
     %h2 About us
     .copy
       %p We are a speculative fiction convention that is invested in all kinds of media. You will find panels and discussion about games, film, literature, and graphic novels. If you are interested in science fiction or fantasy of almost any flavour, we will have something for you.
-    /
-      .year-ruby
-        =image_tag("gem-40.png", width: "179", height: "223")
+    .year-logo-
+      =image_tag("Swancon42HeaderLogo.png", alt: "Swancon42 Logo", align: "right", width: "200", height: "200", title: "Swancon 42 Logo")
 
 .guests
   .container
@@ -41,7 +41,7 @@
     = items_for_tag("programme").first[:rendered_text]
   - else
     %h2 The Program
-    %p Whoa there, it's still early days yet! We'll be adding to and refining the program in 2015, so stay tuned for more details.
+    %p Whoa there, it's still early days yet! We'll be adding to and refining the program in late 2016, so stay tuned for more details.
 
 - unless viewable_events.empty?
   .events
