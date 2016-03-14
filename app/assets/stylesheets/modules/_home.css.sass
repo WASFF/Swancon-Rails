@@ -35,8 +35,8 @@
     height: 440px
 
 .home .intro  
-  background-image: url("Swancon42Background-body.jpg")
-  background-repeat: repeat
+  //background-image: url("Swancon42Background-body.jpg")
+  //background-repeat: repeat
   h2
     position: relative
     z-index: 2
@@ -52,8 +52,8 @@
     font-weight: 400
 
 .about
-  background-image: url("Swancon42Background-body.jpg")
-  background-repeat: repeat
+  //background-image: url("Swancon42Background-body.jpg")
+  //background-repeat: repeat
   @extend %container
   +clearfix
   h2
@@ -80,8 +80,8 @@
     color: #fff
 
 .guests
-  background-image: url("Swancon42Background-body.jpg")
-  background-repeat: repeat
+  //background-image: url("Swancon42Background-body.jpg")
+  //background-repeat: repeat
   h2
     @extend %screen-reader
   img
@@ -130,6 +130,45 @@
   p
     margin-top: 0px
 
-
+.intronarrow
+  padding-top: $section-padding-home
+  padding-bottom: $section-padding-home
+  background: $section-bg-alt2
+  text-align: center
+  position: relative
+  &:before, &:after
+    content: ""
+    display: block
+    position: absolute
+    top: 0px
+  &:before
+    left: 0px
+  &:after
+    right: 0px
+  &:before
+    top: -40px
+    width: 430px
+    height: 570px
+  &:after
+    width: 370px
+    height: 440px
+  h2
+    position: relative
+    z-index: 2
+    font-size: 48px
+    width: 500px
+    margin: 0 auto
+    line-height: 1.2
+    margin-bottom: 30px
+  a
+    font-size: 20px
+  strong
+    color: $copy-important-color
+    font-weight: 400
+  max-width: $site-width
+  margin-left: auto
+  margin-right: auto
+  padding-left: $gutter
+  padding-right: $gutter
 
 
