@@ -1,18 +1,20 @@
 GIT
-  remote: https://github.com/4ormat/execjs.git
-  revision: fe2bde333660f4893be59fb7a4fd7f42ae5934ac
-  ref: fe2bde333660f4893be59fb7a4fd7f42ae5934ac
-  specs:
-    execjs (2.0.2)
-
-PATH
-  remote: /Users/lordmortis/Projects/MortisCMS
+  remote: git://github.com/lordmortis/MortisCMS.git
+  revision: fffd23b7b9684082995c0751bd4ce9427db2f7a5
+  branch: rails4
   specs:
     MortisCMS (0.2.0)
       RedCloth (>= 4.2)
       haml-rails (>= 0.5.3)
       paperclip (~> 4.1)
       paperclip-meta
+
+GIT
+  remote: https://github.com/4ormat/execjs.git
+  revision: fe2bde333660f4893be59fb7a4fd7f42ae5934ac
+  ref: fe2bde333660f4893be59fb7a4fd7f42ae5934ac
+  specs:
+    execjs (2.0.2)
 
 GEM
   remote: http://rubygems.org/
