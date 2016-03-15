@@ -20,12 +20,14 @@ module DoomCon
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-		config.filter_parameters += [:password]
+	config.filter_parameters += [:password]
 
-		config.site_name = Mortiscms.config.site_name
+	config.site_name = Mortiscms.config.site_name
 
-		config.swancon_year = "2016"
+	config.swancon_year = "2016"
 
-		config.assets.precompile += [ '*.js', '2016.css', 'admin.css', '2016-print.css' ]
+	config.assets.precompile += [ '*.js', '2016.css', 'admin.css', '2016-print.css' ]
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
