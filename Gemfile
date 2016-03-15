@@ -1,13 +1,12 @@
 source 'http://rubygems.org'
 
-gem 'rails', '4.0.4'
+gem 'rails', '4.0.13'
 
 # Gems used only for assets and not required
 # in production environments by default.
-gem 'sass-rails', '~> 4.0.2'
+gem 'sass-rails'
 gem 'compass-rails'
-#TODO: this should not be required when we start using sass rails 4.0.2
-gem 'sprockets', '2.11.0'
+gem 'sprockets'
 gem 'coffee-rails'
 gem 'uglifier'
 
@@ -31,7 +30,7 @@ gem 'csv_builder'
 
 gem "nested_form"
 
-gem "rails-settings-cached", "0.3.1"
+gem "rails-settings-cached"
 
 gem 'ember-rails'
 gem 'ember-source', '~> 1.10.0'
