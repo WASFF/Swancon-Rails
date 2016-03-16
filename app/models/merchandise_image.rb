@@ -1,6 +1,7 @@
 class MerchandiseImage < ActiveRecord::Base
 	belongs_to :merchandise_type
 	has_attached_file :image
+	validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 	
 	before_save :set_dimensions
 	
