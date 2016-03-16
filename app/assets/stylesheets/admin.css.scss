@@ -99,6 +99,9 @@ button.ticket_button {
     .body {
       display: block;
       padding: 5px;
+        legend {
+          color: white;
+        }
     }
   }
 
@@ -116,6 +119,8 @@ button.ticket_button {
   textarea,
   select {
     display: inline-block;
+    border: 1px solid #000000;
+    margin: 2px;
   }
 
   .input {
