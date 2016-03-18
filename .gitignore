@@ -7,3 +7,4 @@ public/system/
 public/assets/
 .sass-cache/
 .DS_Store
+condata.json
