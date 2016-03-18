@@ -1,5 +1,5 @@
 #!/bin/sh
 
-scp sc2016@swancon-mel1.swancon.com.au:/home/sc2016/SwanconRails/production/shared/db/production.sqlite3 db/development.sqlite3
+scp sc2017@swancon-mel1.swancon.com.au:/home/sc2017/SwanconRails/production/shared/db/production.sqlite3 db/development.sqlite3
 /bin/mkdir -p public/system/attachments/development
-rsync -avz --delete sc2016@swancon-mel1.swancon.com.au:/home/sc2016/SwanconRails/production/shared/public/system/attachments/production/ public/system/attachments/development
+rsync -avz --delete sc2017@swancon-mel1.swancon.com.au:/home/sc2017/SwanconRails/production/shared/public/system/attachments/production/ public/system/attachments/development

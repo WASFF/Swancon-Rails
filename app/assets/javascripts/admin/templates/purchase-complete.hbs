@@ -11,7 +11,7 @@
     <div>Tickets have already been redeemed</div>
   {{/if}}
   {{#if model.paymentId}}
-    <h2>Reciept Number: {{model.receiptNumber}}</h2>
+    <h2>Receipt Number: {{model.receiptNumber}}</h2>
     <div><a {{bind-attr href=paymentUrl}}><button>Show Payment</button></a></div>
   {{else}}
     <h2>Invoice Number: {{model.invoiceNumber}}</h2>

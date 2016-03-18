@@ -1,13 +1,13 @@
 class ApplicationController < ActionController::Base
 	include Pundit
   protect_from_forgery
-  layout "2016"
+  layout "2017"
   before_filter :title
   helper_method :user_can?, :user_can_visit?
   serialization_scope :view_context
 
 	def title
-		@title = "Swancon 41"
+		@title = "Swancon 42"
 	end
 
 	private

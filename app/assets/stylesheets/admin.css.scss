@@ -31,7 +31,7 @@ ul.operator_select {
     border-right: 1px solid black;
   }
   a {
-    color: blue;
+    color: red;
   }
 }
 
@@ -73,7 +73,8 @@ button.ticket_button {
   }
 
   .dialog {
-    background: #fefefe;
+    //background: #fefefe;
+    background: #202020;
     border: gray solid 1px;
     border-radius: 5px;
     z-index: 11;
@@ -98,6 +99,9 @@ button.ticket_button {
     .body {
       display: block;
       padding: 5px;
+        legend {
+          color: white;
+        }
     }
   }
 
@@ -115,6 +119,8 @@ button.ticket_button {
   textarea,
   select {
     display: inline-block;
+    border: 1px solid #000000;
+    margin: 2px;
   }
 
   .input {

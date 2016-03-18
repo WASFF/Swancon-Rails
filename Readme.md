@@ -9,6 +9,7 @@ You will need the following things properly installed on your computer.
 * [Git](http://git-scm.com/)
 * [RVM](http://rvm.io)
 * [NodsJS](https://nodejs.org)
+* [ImageMagick](https://imagemagick.org/)
 
 ## Installation
 

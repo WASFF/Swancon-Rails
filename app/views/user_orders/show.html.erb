@@ -63,7 +63,7 @@ Verification String: <%= f.text_field :verification_string, :value => "" %><br/>
 <% elsif @order.isvoid? %>
 This order was voided by: <%= @order.voided_by.display_name %><br/>
 <% else %>
-Payment: <%= link_to @order.payment.reciept_number, @order.payment %> <%= button_to "Void", void_payment_url(@order.payment) %><br/>
+Payment: <%= link_to @order.payment.receipt_number, @order.payment %> <%= button_to "Void", void_payment_url(@order.payment) %><br/>
 <% end %>
 <% end %>
 
