@@ -10,6 +10,7 @@ class DataImporter
     data = JSON.parse(stream).with_indifferent_access
     print "Parsing data for convention: #{data[:year]}\n"
     UserImporter.import(data[:users])
+    print "\n"
   end
 
 end
