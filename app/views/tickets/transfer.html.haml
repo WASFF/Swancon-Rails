@@ -1,5 +1,5 @@
 %h2 Membership Transfer
-%p 
+%p
   You wish to transfer a "
   = @user_order_ticket.type.order_name
   " to someone else.
@@ -13,8 +13,8 @@
 
 = form_tag({action: :find_user}, remote: true, method: "get") do
   = hidden_field_tag("id", @user_order_ticket.id)
-  Enter the User's email address: 
-  = text_field_tag("email") 
+  Enter the User's email address:
+  = text_field_tag("email")
   = submit_tag("Search")
 
 %div{id: "results"}
