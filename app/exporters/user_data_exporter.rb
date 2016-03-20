@@ -2,7 +2,7 @@ class UserDataExporter
 
   def self.export(user_record)
     data = Hash.new
-    [:id, :username, :email, :password].each do |attribute|
+    [:id, :username, :email, :encrypted_password].each do |attribute|
       value = user_record.send(attribute)
       data[attribute] = value
     end
@@ -26,7 +26,7 @@ class UserDataExporter
 
       [:created_at, :updated_at].each do |attribute|
         value = user_record.member_detail.send(attribute)
-        data[attribute] = user_record.member_detail.send(attribute).iso8601 if value.present?
+        data["details_#{attribute}"] = user_record.member_detail.send(attribute).iso8601 if value.present?
       end
     end
     data
