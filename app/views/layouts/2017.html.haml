@@ -10,7 +10,7 @@
     %title= @title
     %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
     %meta{charset: "utf-8"}
-    %meta{name: "description", content: "Come and join us as WA's premier literary speculative fiction convention celebrates it's 42nd anniversary."}    
+    %meta{name: "description", content: "Come and join us as WA's premier literary speculative fiction convention celebrates it's 42nd anniversary."}
     %meta{name: "keywords", content: "swancon 2017 perth wa convention conventions club clubs meetup meetups expos science fiction fantasy speculative con scene australia"}
     %meta{property: "og:site_name", content: "Swancon"}
     %meta{property: "og:image", content: image_url("Swancon42Facebook.png", only_path: false)}
@@ -22,7 +22,7 @@
   %body{ data: { controller: controller.controller_path, action: controller.action_name }, class: get_body_classes }
     - if Rails.env == "staging"
       %div#staging You are on the Staging site. None of your changes will be reflected on the real site.
-    
+
     = render partial: 'layouts/header'
     .main
       - flash.each do |name, msg|
@@ -31,14 +31,14 @@
             %p=msg
 
       - if can_show_content
-        = yield    
+        = yield
       - else
         %section
-          %article{class: "centered"}
+          %article{class: 'countdown-wrapper'}
             %h1
               Swancon 42 is currently in stealth mode
             %h1
               All will be revealed
-              = render_clock  
-                 
+              = render_clock
+
     = render partial: 'layouts/footer'
