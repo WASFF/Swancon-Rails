@@ -28,13 +28,13 @@
               %li
                 = link_to "Dashboard", admin_path
             %li
+              = link_to "Edit Account", edit_user_registration_path          
+            %li
               = link_to "Membership Details", edit_my_member_details_path   
             %li
               =link_to "My Memberships", tickets_my_path
             %li
               =link_to "My Purchases", orders_path
-            %li
-              = link_to "Edit Account", edit_user_registration_path          
             %li
               = link_to "Log out", destroy_user_session_path            
       - else
