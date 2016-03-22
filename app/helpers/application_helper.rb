@@ -1,7 +1,7 @@
 module ApplicationHelper
   def render_time(time)
     if time != nil
-      time.strftime("%d/%m/%Y %H:%M %Z") 
+      time.strftime("%d/%m/%Y %H:%M %Z")
     else
       "Null"
     end
@@ -50,7 +50,7 @@ module ApplicationHelper
     if tag.blank?
       return items
     end
-    
+
     tag.blocks.publicly_viewable.each do |block|
       item = {title: block.title, text: block.summary, rendered_text: redcloth_render(block.bodytext)}
       item[:path] = {controller:"content_viewer", action:"content", id: block.id}
@@ -84,7 +84,7 @@ module ApplicationHelper
       end
       items << item
     end
-    
+
     items
   end
 
@@ -104,7 +104,7 @@ module ApplicationHelper
   def show_buy_ticket_widget?
     controller_name != "store" and can_show_content
   end
-  
+
   # Adds a collection of classes to the body element
   def add_body_classes(*classes)
     _body_classes.merge(classes)

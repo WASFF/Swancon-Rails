@@ -23,7 +23,7 @@ class Event < ActiveRecord::Base
 	def summary
 		content_block.try(:summary)
 	end
-	
+
 	def bodytext
 		content_block.try(:bodytext)
 	end
@@ -45,22 +45,22 @@ class Event < ActiveRecord::Base
 	end
 
 	def self.publicly_viewable
-		includes(:content_block).where("content_blocks.published_at IS NOT NULL").where("end_time > ?", Time.now)
+		includes(:content_block).where.not(content_blocks: {published_at: nil}).where("end_time > ?", Time.now)
 	end
 
 private
 	def parse_time(value)
 		begin
 			Time.strptime("#{value} +0800", "%Y-%m-%d %H:%M %Z")
-		rescue ArgumentError 
+		rescue ArgumentError
 			false
-		end			
+		end
 	end
 
 	def format_time(time)
 		return Time.now.strftime("%Y-%m-%d %H:%M") if time.blank?
 		return nil unless time
-		time.strftime("%Y-%m-%d %H:%M") 
+		time.strftime("%Y-%m-%d %H:%M")
 	end
 
 	def times_must_be_valid
