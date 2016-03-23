@@ -12,6 +12,15 @@ Admin.StoreController = Ember.ObjectController.extend
     (@get("tickets").length + @get("merchandise").length) > 0
   ).property("tickets.length", "merchandise.length")
 
+  checkOutDisabled: (->
+    properties = @getProperties('itemsInCart', 'currentPaymentType')
+    unless properties.itemsInCart
+      return true
+    unless properties.currentPaymentType? && properties.currentPaymentType.get('id')?
+      return true
+    false
+  ).property("itemsInCart", "currentPaymentType")
+
   total: (->
     total = 0
     @get("tickets").forEach (item, index, enumerable) ->
@@ -45,10 +54,10 @@ Admin.StoreController = Ember.ObjectController.extend
     user_order_ticket = @store.createRecord('user_order_ticket')
     user_order_ticket.setProperties
       type: ticket
-      concession: ticket.get("concessionPrice")? && concession 
+      concession: ticket.get("concessionPrice")? && concession
     @get("tickets").addObject(user_order_ticket)
 
-  actions: 
+  actions:
     resetCart: ->
       @setProperties
         tickets: []
@@ -79,7 +88,7 @@ Admin.StoreController = Ember.ObjectController.extend
       user_order_merchandise_options = []
 
       merchandise.get("option_sets").forEach (set) =>
-        user_order_merchandise_option = @store.createRecord 'user_order_merchandise_option', 
+        user_order_merchandise_option = @store.createRecord 'user_order_merchandise_option',
           option: options[set.get("id")]
         user_order_merchandise.get("options").addObject(user_order_merchandise_option)
 
@@ -98,8 +107,8 @@ Admin.StoreController = Ember.ObjectController.extend
       @set("showMerchandise", !@get("showMerchandise"))
 
     checkOut: ->
-      return unless confirm("Take $#{@get("total")} via #{@get("currentPaymentType.name")}") 
-      data = 
+      return unless confirm("Take $#{@get("total")} via #{@get("currentPaymentType.name")}")
+      data =
         member_id: parseInt(@get("model.id"), 10)
         payment_type_id: parseInt(@get("currentPaymentType.id"), 10)
         tickets: []
@@ -113,7 +122,7 @@ Admin.StoreController = Ember.ObjectController.extend
         options_ids = []
         item.get("options").forEach (option) ->
           options_ids.addObject(option.get("option.id"))
-        merchData = 
+        merchData =
           merchandise_type_id: parseInt(item.get("type.id"), 10)
           merchandise_option_ids: options_ids
         data.merchandise.addObject(merchData)

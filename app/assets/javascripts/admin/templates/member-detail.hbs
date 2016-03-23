@@ -91,7 +91,7 @@
           {{message}}{{#unless last}},{{/unless}}
         {{/each}}
         </span>
-      {{/if}}      
+      {{/if}}
     </div>
     <div>
       <div class="input">
@@ -107,7 +107,7 @@
       </div>
       <div class="input">
         <label for="address_state">State</label>
-        {{input value=model.addressState name='address_state'}}      
+        {{input value=model.addressState name='address_state'}}
         {{#if model.errors.addressState.length}}
           <div class="error">
           {{#each model.errors.addressState}}
@@ -119,7 +119,7 @@
     </div>
     <div>
       <label for="address_country">Country</label>
-      {{input value=model.addressCountry name='address_country'}}      
+      {{input value=model.addressCountry name='address_country'}}
       {{#if model.errors.addressCountry.length}}
         <span class="error">
         {{#each model.errors.addressCountry}}
@@ -130,7 +130,7 @@
     </div>
     <div>
       <label for="address_postcode">Postcode</label>
-      {{input value=model.addressPostcode name='address_postcode'}}      
+      {{input value=model.addressPostcode name='address_postcode'}}
       {{#if model.errors.addressPostcode.length}}
         <span class="error">
         {{#each model.errors.addressPostcode}}

@@ -31,7 +31,7 @@
   </ul>
 {{/if}}
 Payment Type: {{view "select" content=paymentTypes optionLabelPath='content.name' optionValuePath='content' value=currentPaymentType}}
-<button {{action 'checkOut'}}>Check Out</button>
+<button {{action 'checkOut'}} {{bind-attr disabled="checkOutDisabled"}} >Check Out</button>
 {{else}}
 <button {{action 'showCart'}}>Show Cart</button>
 {{/if}}
@@ -67,7 +67,7 @@ Loading Data...
     {{#each merch in set.merchandise}}
       <li>{{merch.name}}
         <button class="ticket_button" {{action 'addMerchandise' merch}}>{{render-currency merch.price}}</button>
-      </li>    
+      </li>
     {{/each}}
   {{/each}}
 {{/if}}

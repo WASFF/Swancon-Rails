@@ -11,12 +11,14 @@
     <div>Tickets have already been redeemed</div>
   {{/if}}
   {{#if model.paymentId}}
-    <h2>Receipt Number: {{model.receiptNumber}}</h2>
+    <h2>Order Number: {{model.invoiceNumber}}</h2>
+    <h2>Order is Paid!</h2>
+    <div><a {{bind-attr href=orderUrl}}><button>Show Order</button></a></div>
     <div><a {{bind-attr href=paymentUrl}}><button>Show Payment</button></a></div>
   {{else}}
-    <h2>Invoice Number: {{model.invoiceNumber}}</h2>
+    <h2>Order Number: {{model.invoiceNumber}}</h2>
     <div><a {{bind-attr href=orderUrl}}><button>Show Order</button></a></div>
   {{/if}}
-  
+
   <button {{action 'complete'}}>Return to Member Search</button>
 {{/modal-dialog}}
