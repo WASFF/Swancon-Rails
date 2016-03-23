@@ -1,3 +1,5 @@
+require "pp"
+
 class StoreController < ApplicationController
 	before_filter :init_cart, :init_user, :prepare_backlink
 
@@ -9,8 +11,11 @@ class StoreController < ApplicationController
 	end
 
 	def clear_cart
-		session[:cart] = nil
-		@cart = nil
+		session[:shopping_cart] = JSON.dump({
+			merch: [],
+			tickets: [],
+			concessions: []
+		})
 
 		redirect_to :action => :index
 	end
@@ -32,8 +37,9 @@ class StoreController < ApplicationController
 					options << params[:option_set][option]
 				end
 			end
+			@cart[:merch] << {:id => params[:id].to_i, :options => options}
 
-			session[:cart][:merch] << {:id => params[:id].to_i, :options => options}
+			serialize_cart
 		end
 		if request.env.include?("HTTP_REFERER")
 			redirect_to :back
@@ -43,10 +49,13 @@ class StoreController < ApplicationController
 	end
 
 	def merchandise_remove
-		array = session[:cart][:merch]
+		array = @cart[:merch]
 		if params[:index].to_i >= 0 and params[:index].to_i < array.size
 			array.delete_at(params[:index].to_i)
 		end
+
+		serialize_cart
+
 		if request.env.include?("HTTP_REFERER")
 			redirect_to :back
 		else
@@ -55,7 +64,6 @@ class StoreController < ApplicationController
 	end
 
 	def ticket
-#		@title =
 		@ticket = TicketType.where(:id => params[:id]).first
 		if @ticket == nil
 			redirect_to :action => :index
@@ -68,11 +76,17 @@ class StoreController < ApplicationController
 
 		if ticket.available? or @store_user != nil
 			if params[:concession].present? and params[:concession][:value] == "true"
-				session[:cart][:concessions] << params[:id].to_i
+				@cart[:concessions] << params[:id].to_i
 			else
-				session[:cart][:tickets] << params[:id].to_i
+				@cart[:tickets] << params[:id].to_i
 			end
 		end
+
+		serialize_cart
+
+		print "ticket add: "
+		pp @cart
+
 		if request.env.include?("HTTP_REFERER")
 			redirect_to :back
 		else
@@ -83,13 +97,16 @@ class StoreController < ApplicationController
 	def ticket_remove
 		array = []
 		if params[:concessions] == "true"
-			array = session[:cart][:concessions]
+			array = @cart[:concessions]
 		else
-			array = session[:cart][:tickets]
+			array = @cart[:tickets]
 		end
 		if params[:index].to_i >= 0 and params[:index].to_i < array.size
 			array.delete_at(params[:index].to_i)
 		end
+
+		serialize_cart
+
 		if request.env.include?("HTTP_REFERER")
 			redirect_to :back
 		else
@@ -187,7 +204,11 @@ class StoreController < ApplicationController
 				merch.save
 			end
 
-			session[:cart] = nil
+			session[:shopping_cart] = JSON.dump({
+				merch: [],
+				tickets: [],
+				concessions: []
+			})
 			session[:store_user_id] = nil
 			@cart = nil
 			flash[:notice] = "Order Placed"
@@ -199,7 +220,7 @@ class StoreController < ApplicationController
 							StoreMailer.confirmation_required(order, current_user).deliver
 							flash[:notice] += ", Email Sent"
 						else
-							flash[:notice] += ", User has no email address. Ensure they take their receipt print out (print this page)!"
+							flash[:notice] += ", User has no email address. Ensure they take their reciept print out (print this page)!"
 						end
 					end
 				else
@@ -227,21 +248,21 @@ class StoreController < ApplicationController
 	private
 
 	def init_cart
-		unless session.has_key?(:cart)&& session[:cart].is_a?(Hash)
-			session[:cart] = Hash.new
-		end
-		unless session[:cart].has_key?(:merch) && session[:cart][:merch].is_a?(Array)
-			session[:cart][:merch] = Array.new
-		end
-		unless session[:cart].has_key?(:tickets) && session[:cart][:tickets].is_a?(Array)
-			session[:cart][:tickets] = Array.new
-		end
-		unless session[:cart].has_key?(:concessions) && session[:cart][:concessions].is_a?(Array)
-			session[:cart][:concessions] = Array.new
+		if session.has_key?(:shopping_cart)
+			@cart = JSON.parse(session[:shopping_cart]).with_indifferent_access
+		else
+			@cart = {
+				merch: [],
+				tickets: [],
+				concessions: []
+			}.with_indifferent_access
 		end
 
-		@cart = session[:cart]
 		true
+	end
+
+	def serialize_cart
+		session[:shopping_cart] = JSON.dump(@cart)
 	end
 
 	def init_user
