@@ -9,18 +9,18 @@ namespace :swancon do
       STDOUT.flush
       password = STDIN.gets.chomp!
       break if gotpass
-    
+
       if (password.empty?)
         password = `apg -M NC -n 1`.chomp!
       end
-    
+
       print "Password will be: '#{password}'\n"
       print "Okay? (y/n)"
       STDOUT.flush
       confirm = STDIN.gets.chomp!
       break if confirm.downcase == 'y'
     end
-    
+
     user = User.where(:username => "user").first
     if (user == nil)
       user = User.new
