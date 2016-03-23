@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
 	has_one :member_detail, dependent: :destroy
 	accepts_nested_attributes_for :member_detail
-	
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
 	devise	:database_authenticatable, :registerable, :confirmable,
@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 	validates :username, :presence => true, :length => {:minimum => 3}, :uniqueness => { :case_sensitive => false }
 
 # TODO: Fixme
-#	attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :role_ids, :member_detail_attributes 
+#	attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :role_ids, :member_detail_attributes
 
 	after_create :add_user_role
 
@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 		roles.each do |role|
 			output += role.name + ", "
 		end
-		
+
 		output[0..-3]
 	end
 
@@ -37,10 +37,10 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	def email_required? 
-		false 
-	end 
-	
+	def email_required?
+		false
+	end
+
 	def add_user_role
 		self.roles << Role.where(:name => "user").first
 	end
@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
 	def details=(value)
 		self.member_detail = value
 	end
-	
+
 	def order_name
 		if member_detail != nil
 			member_detail.name_real
@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
 	def display_name
 		order_name
 	end
-	
+
 	def orders
 		user_orders
 	end
@@ -92,15 +92,15 @@ class User < ActiveRecord::Base
 		symbols = role_symbols
 		return symbols.include?(:admin) || symbols.include?(:committee)
 	end
-	
+
 	# Class Functions
   def self.find_by_username_or_email(username, email)
 		userarel = User.arel_table
 		arelquery = userarel[:username].eq(username)
 		arelquery = arelquery.or(userarel[:email].eq(email))
 		User.where(arelquery).first
-  end	
-	
+  end
+
 	def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
 		data = access_token['extra']['user_hash']
 		user = User.find_by_omniauth("facebook",data["id"].to_i)
@@ -120,10 +120,10 @@ class User < ActiveRecord::Base
 				user.save
 
 				if user.save
-					temp = UserOmniAuth.create!(:authtype => "facebook", :idvalue => data["id"].to_i, :user_id => user.id)			
+					temp = UserOmniAuth.create!(:authtype => "facebook", :idvalue => data["id"].to_i, :user_id => user.id)
 				end
 			end
-		
+
 			user
 		else
 			if user == signed_in_resource
@@ -162,7 +162,7 @@ class User < ActiveRecord::Base
 					temp = UserOmniAuth.create!(:authtype => "twitter", :idvalue => data["id"].to_i, :user_id => user.id)
 				end
 			end
-		
+
 			user
 		else
 			if user == signed_in_resource
@@ -195,7 +195,7 @@ class User < ActiveRecord::Base
 		if processed_search.length > 2
 			query = self.joins("LEFT OUTER JOIN member_details ON users.id = member_details.user_id").includes(:member_detail)
 			searchstring = "%#{processed_search}%"
-			emailsearch = "#{processed_search}%"			
+			emailsearch = "#{processed_search}%"
 			wherestring = "member_details.name_first LIKE ? OR member_details.name_last LIKE ? OR member_details.name_badge LIKE ? or users.username LIKE ? or users.email LIKE ?"
 			query.where(wherestring, searchstring, searchstring, searchstring, searchstring, emailsearch)
 		else
@@ -218,7 +218,7 @@ class User < ActiveRecord::Base
 		if omniauth == nil
 			return nil
 		end
-		omniauth.user		
+		omniauth.user
 	end
 
 	def owned_ticket_sets

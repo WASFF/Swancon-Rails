@@ -10,7 +10,8 @@ Admin.StoreRoute = Ember.Route.extend
       paymentTypePromise = @store.find("payment_type")
       paymentTypePromise.then ->
         self.set("paymentTypesLoaded", true)
-        controller.set("paymentTypes", paymentTypePromise.content)
+        paymentTypeList = [Ember.Object.create()].concat(paymentTypePromise.content.content)
+        controller.set("paymentTypes", paymentTypeList)
       , ->
         alert("could not load payment types")
 
