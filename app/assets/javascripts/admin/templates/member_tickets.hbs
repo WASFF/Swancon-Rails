@@ -29,11 +29,12 @@ Error Loading Tickets
           {{#if ticket.redeemable}}
             <button {{action 'redeemTicket' ticket}}>Redeem</button>
           {{/if}}
-          {{#if ticket.paidAt}}
+          {{#if ticket.redeemed}}
             <button {{action 'unRedeemTicket' ticket}}>Un Redeem</button>
-          {{else}}
-            Not Paid.
           {{/if}}
+          {{#unless ticket.paidAt}}
+            Not Paid.
+          {{/unless}}
         {{else}}
           Working...
         {{/unless}}
