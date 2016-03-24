@@ -1,3 +1,5 @@
+require "pp"
+
 class StoreController < ApplicationController
 	before_filter :init_cart, :init_user, :prepare_backlink
 
@@ -7,14 +9,17 @@ class StoreController < ApplicationController
 		@title = "Store"
 		render action: :index_no_store if SiteSettings.con_mode and !(user_can_visit? :seller, :index)
 	end
-	
+
 	def clear_cart
-		session[:cart] = nil
-		@cart = nil
-		
+		session[:shopping_cart] = JSON.dump({
+			merch: [],
+			tickets: [],
+			concessions: []
+		})
+
 		redirect_to :action => :index
 	end
-		
+
 	def merchandise
 		@merch = MerchandiseType.where(:id => params[:id]).first
 		if @merch == nil
@@ -22,7 +27,7 @@ class StoreController < ApplicationController
 			return
 		end
 	end
-	
+
 	def merchandise_add
 		merch = MerchandiseType.where(:id => params[:id]).first
 		if merch.available? or @store_user != nil
@@ -32,8 +37,9 @@ class StoreController < ApplicationController
 					options << params[:option_set][option]
 				end
 			end
-		
-			session[:cart][:merch] << {:id => params[:id].to_i, :options => options}
+			@cart[:merch] << {:id => params[:id].to_i, :options => options}
+
+			serialize_cart
 		end
 		if request.env.include?("HTTP_REFERER")
 			redirect_to :back
@@ -41,12 +47,15 @@ class StoreController < ApplicationController
 			redirect_to action: :merchandise, id: merch.id
 		end
 	end
-	
+
 	def merchandise_remove
-		array = session[:cart][:merch]
+		array = @cart[:merch]
 		if params[:index].to_i >= 0 and params[:index].to_i < array.size
 			array.delete_at(params[:index].to_i)
 		end
+
+		serialize_cart
+
 		if request.env.include?("HTTP_REFERER")
 			redirect_to :back
 		else
@@ -55,66 +64,74 @@ class StoreController < ApplicationController
 	end
 
 	def ticket
-#		@title = 
 		@ticket = TicketType.where(:id => params[:id]).first
 		if @ticket == nil
 			redirect_to :action => :index
 			return
 		end
 	end
-	
+
 	def ticket_add
 		ticket = TicketType.where(:id => params[:id]).first
-		
+
 		if ticket.available? or @store_user != nil
 			if params[:concession].present? and params[:concession][:value] == "true"
-				session[:cart][:concessions] << params[:id].to_i				
+				@cart[:concessions] << params[:id].to_i
 			else
-				session[:cart][:tickets] << params[:id].to_i
+				@cart[:tickets] << params[:id].to_i
 			end
 		end
+
+		serialize_cart
+
+		print "ticket add: "
+		pp @cart
+
 		if request.env.include?("HTTP_REFERER")
 			redirect_to :back
 		else
 			redirect_to action: :ticket, id: ticket.id
 		end
 	end
-	
+
 	def ticket_remove
 		array = []
 		if params[:concessions] == "true"
-			array = session[:cart][:concessions]
+			array = @cart[:concessions]
 		else
-			array = session[:cart][:tickets]
+			array = @cart[:tickets]
 		end
 		if params[:index].to_i >= 0 and params[:index].to_i < array.size
 			array.delete_at(params[:index].to_i)
-		end		
+		end
+
+		serialize_cart
+
 		if request.env.include?("HTTP_REFERER")
 			redirect_to :back
 		else
 			redirect_to action: :index
 		end
 	end
-	
-	def purchase		
+
+	def purchase
 		if @cart[:merch].size == 0 and @cart[:tickets].size == 0 and @cart[:concessions].size == 0
 			flash[:notice] = "Please add items to your cart"
 			redirect_to :action => :index
 			return
 		end
-		
+
 		if current_user == nil
 			flash[:notice] = "Please log in to complete your purchase"
 			redirect_to new_user_session_path
 			return
 		end
-		
+
 		@payment_types = PaymentType.online_types
 		@can_disable_email = false
 
 		if user_can_visit?(:seller, :index) && @store_user.present?
-			if current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin) 
+			if current_user.role_symbols.include?(:committee) or current_user.role_symbols.include?(:admin)
 				if SiteSettings.con_mode
 					@payment_types = PaymentType.con_types
 				else
@@ -125,9 +142,9 @@ class StoreController < ApplicationController
 				@payment_types = PaymentType.reseller_types
 			end
 		end
-		
+
 		if params[:confirm] == "true"
-			if params[:purchase][:payment_type_id].strip == "" 
+			if params[:purchase][:payment_type_id].strip == ""
 				flash[:notice] = "Please select how you'd like to pay."
 				return
 			end
@@ -144,11 +161,11 @@ class StoreController < ApplicationController
 			else
 				order.user = current_user
 			end
-			
+
 			if @store_user != nil
 				order.operator = current_user
 			end
-			
+
 			order.save
 			@cart[:tickets].each do |ticket_id|
 				ticket = UserOrderTicket.new(:ticket_type_id => ticket_id, :user_order_id => order.id)
@@ -157,9 +174,9 @@ class StoreController < ApplicationController
 					 advertising_tag_id = session[:advertising_tag_id] || cookies[:advertising_tag_id]
 						if advertising_tag_id.present?
 							ticket.advertising_tag = AdvertisingTag.where(id: advertising_tag_id).first
-						end					 
+						end
 				else
-					 ticket.user_id = @store_user.id					
+					 ticket.user_id = @store_user.id
 				end
 				ticket.save
 			end
@@ -173,21 +190,25 @@ class StoreController < ApplicationController
 							ticket.advertising_tag = AdvertisingTag.where(id: advertising_tag_id).first
 						end
 				else
-					 ticket.user_id = @store_user.id					
+					 ticket.user_id = @store_user.id
 				end
 				ticket.save
 			end
-			
+
 			@cart[:merch].each do |merch_hash|
 				merch = UserOrderMerchandise.new(:merchandise_type_id => merch_hash[:id], :user_order_id => order.id)
 				merch_hash[:options].each do |option_id|
 					merch.options << UserOrderMerchandiseOption.new(:merchandise_option_id => option_id)
 				end
-				
+
 				merch.save
 			end
-			
-			session[:cart] = nil
+
+			session[:shopping_cart] = JSON.dump({
+				merch: [],
+				tickets: [],
+				concessions: []
+			})
 			session[:store_user_id] = nil
 			@cart = nil
 			flash[:notice] = "Order Placed"
@@ -219,30 +240,36 @@ class StoreController < ApplicationController
 				StoreMailer.invoice(order, current_user).deliver
 				StoreMailer.confirmation_required(order, current_user).deliver
 			end
-			
+
 			redirect_to order_path(order)
 		end
 	end
-	
+
 	private
-	
+
 	def init_cart
-		if session[:cart] == nil
-			session[:cart] = Hash.new
-			session[:cart][:merch] = Array.new
-			session[:cart][:tickets] = Array.new
-			session[:cart][:concessions] = Array.new
+		if session.has_key?(:shopping_cart)
+			@cart = JSON.parse(session[:shopping_cart]).with_indifferent_access
+		else
+			@cart = {
+				merch: [],
+				tickets: [],
+				concessions: []
+			}.with_indifferent_access
 		end
-		
-		@cart = session[:cart]	
-		true		
+
+		true
 	end
-	
+
+	def serialize_cart
+		session[:shopping_cart] = JSON.dump(@cart)
+	end
+
 	def init_user
 		if session[:store_user_id] != nil
 			@store_user = User.find(session[:store_user_id])
 		end
 		true
 	end
-	
+
 end

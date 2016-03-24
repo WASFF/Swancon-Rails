@@ -2,13 +2,13 @@
   .container
     %h1 Swancon 2016
     .logo
-      = link_to root_url do 
+      = link_to root_url do
         = image_tag("SwanconLogo-stacked.svg", alt: "Swancon's 41st Anniversary", height: 110, title: "Swancon 2016")
     %nav{ role: "navigation" }
       - if can_show_content
         %ul.main-nav
           %li
-            = link_to "Buy memberships", store_path        
+            = link_to "Buy memberships", store_path
           - menu_items.each do |item|
             %li
               = link_to item[:name].upcase, item[:path]
@@ -21,16 +21,19 @@
             -if user_signed_in? && current_user.admin_panel_visible?
               %li
                 = link_to "Dashboard", admin_path
+            -elsif user_signed_in? && RoutePolicy.new(current_user).visit?(:index, :adminapp)
+              %li
+                = link_to "Cashier Dashboard", adminapp_path
             %li
-              = link_to "Membership Details", edit_my_member_details_path   
+              = link_to "Edit Account", edit_user_registration_path
+            %li
+              = link_to "Membership Details", edit_my_member_details_path
             %li
               =link_to "My Memberships", tickets_my_path
             %li
               =link_to "My Purchases", orders_path
             %li
-              = link_to "Edit Account", edit_user_registration_path          
-            %li
-              = link_to "Log out", destroy_user_session_path            
+              = link_to "Log out", destroy_user_session_path
       - else
         %ul.main-nav
           %li

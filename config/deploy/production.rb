@@ -4,7 +4,7 @@ role :db,  %w{sc2016@swancon-mel1.swancon.com.au}
 
 set :deploy_to, '/home/sc2016/SwanconRails/production'
 
-ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+set :branch, "master"
 
 set :deploy_to, '/home/sc2016/SwanconRails/production'
 set :linked_files, fetch(:base_linked_files) + ["db/production.sqlite3"]

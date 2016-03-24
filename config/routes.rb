@@ -22,9 +22,9 @@ DoomCon::Application.routes.draw do
     post 'mark_shipped', :on => :member
     post 'add_image', :on => :member
     post 'remove_image', :on => :member
-    post 'update_image_description', :on => :member   
+    post 'update_image_description', :on => :member
     resources :merchandise_options do
-    end 
+    end
   end
 
   resources :merchandise_sets
@@ -37,7 +37,7 @@ DoomCon::Application.routes.draw do
     post 'open_order', :on => :member
   end
 
-  resources :vendor_orders do 
+  resources :vendor_orders do
     put 'mark_arrivals', :on => :member
     post 'close', :on => :member
   end
@@ -63,7 +63,7 @@ DoomCon::Application.routes.draw do
 
   devise_for :users, :controllers => {
     omniauth_callbacks: "users/omniauth_callbacks",
-    registrations: "users/registrations", 
+    registrations: "users/registrations",
     passwords: "users/passwords"
   }
 
@@ -72,7 +72,7 @@ DoomCon::Application.routes.draw do
     get 'purchase_for', :on => :member
     get 'edit_member_details', :on => :member
   end
-  
+
   resources :orders, :controller => "user_orders" do
     put 'mark_paid', :on => :member
     post 'void', on: :member
@@ -98,20 +98,20 @@ DoomCon::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
-  
+
   match 'tickets/my' => 'tickets#my', via: [:get]
   match 'tickets/all' => 'tickets#index', :defaults => { all: 'true' }, via: [:get]
-  match 'tickets/card_issue/:id' => 'tickets#card_issue', via: :post, as: "ticket_card_issue", via: [:get]
-  match 'tickets/card_unissue/:id' => 'tickets#card_unissue', via: :post, as: "ticket_card_unissue", via: [:get]
+  match 'tickets/card_issue/:id' => 'tickets#card_issue', via: :post, as: "ticket_card_issue"
+  match 'tickets/card_unissue/:id' => 'tickets#card_unissue', via: :post, as: "ticket_card_unissue"
   match 'tickets/:action' => 'tickets', via: [:get, :post]
   match 'tickets/:action/:id' => 'tickets', via: [:get, :post]
 
   match 'seller' => 'seller#index', via: [:get]
   match 'seller/:action' => 'seller', via: [:get, :post]
   match 'seller/:action/:id' => 'seller', via: [:get, :post]
-  
+
   match 'store' => 'store#index', via: [:get, :post]
-  
+
   match 'store/empty_cart' => 'store#clear_cart', via: [:post]
 
   match 'store/ticket/:id' => 'store#ticket', via: [:get]

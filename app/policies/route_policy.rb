@@ -1,4 +1,4 @@
-class RoutePolicy 
+class RoutePolicy
   attr_reader :user, :path
 
   ROLE_PATHS = {
@@ -82,7 +82,15 @@ class RoutePolicy
     unless allowed_paths.has_key? controller
       return false
     end
-    allowed_paths[controller] == true or allowed_paths[controller].include?(action)
+    if allowed_paths[controller].is_a? TrueClass
+      true
+    elsif allowed_paths[controller].is_a? Symbol
+      allowed_paths[controller] == action
+    elsif allowed_paths[controller].is_a? Array
+      allowed_paths[controller].include?(action)
+    else
+      false
+    end
   end
 
 private
@@ -91,10 +99,10 @@ private
     to_merge.each do |key, val|
       unless merged.has_key? key
         merged[key] = val
-      else 
+      else
         merged_val_class = merged[key].class
         if merged_val_class != TrueClass
-          merged_val = merged[key] 
+          merged_val = merged[key]
           merged_val = [merged[key]] unless merged_val_class == Array
           val_class = val.class
           if val_class == TrueClass
