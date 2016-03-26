@@ -27,16 +27,21 @@ class UserImporter
   end
 
   def self.create_user(user_hash)
-    user = User.create(parsed_user_data(user_hash))
+    user = User.new(parsed_user_data(user_hash))
+    user.password = SecureRandom.hex
+    user.password_confirmation = user.password
+    user.confirm!
+    user.encrypted_password = user_hash[:encrypted_password]
     if member_details_exist? (user_hash)
       user.member_detail = MemberDetail.create(parsed_member_details(user_hash))
     end
+    user.save
     print "c"
   end
 
   def self.parsed_user_data(user_hash)
     data = Hash.new
-    [:id, :username, :email, :encrypted_password].each do |attribute|
+    [:id, :username, :email].each do |attribute|
       data[attribute] = user_hash[attribute]
     end
     [:confirmed_at, :confirmation_sent_at, :created_at, :updated_at].each do |attribute|
