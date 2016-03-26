@@ -89,7 +89,7 @@ module ApplicationHelper
   end
 
   def reveal_time
-    "2016-03-26T10:00Z"
+    "2016-03-26T09:30Z"
   end
 
   def can_show_content
