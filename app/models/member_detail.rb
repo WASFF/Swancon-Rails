@@ -42,6 +42,6 @@ class MemberDetail < ActiveRecord::Base
 	end
 
 	def self.email_list
-		MemberDetail.includes(:user).where.not(users: {email: ''}).where.not(users: {email: nil})
+		MemberDetail.includes(:user).where(email_optin: true).where.not(users: {email: ''}).where.not(users: {email: nil})
 	end
 end
